@@ -1,0 +1,50 @@
+{
+  "pages":[
+    "pages/home/home",
+    "pages/mine/mine",
+    "pages/subtitles/subtitles",
+    "pages/mylike/mylike",
+    "pages/ranking/ranking",
+    "pages/bookshelf/bookshelf",
+    "pages/auth/auth"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "enablePullDownRefresh": true,
+    "navigationBarBackgroundColor": "white",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#4C556E",
+    "borderStyle": "#4C556E",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "text": "主页",
+        "pagePath": "pages/home/home",
+        "iconPath": "images/icons/home-a.png",
+        "selectedIconPath": "images/icons/home.png"
+      },
+      {
+        "text": "书架",
+        "pagePath": "pages/bookshelf/bookshelf",
+        "iconPath": "images/icons/book-a.png",
+        "selectedIconPath": "images/icons/book.png"
+      },
+      {
+        "text": "排名",
+        "pagePath": "pages/ranking/ranking",
+        "iconPath": "images/icons/paiming-a.png",
+        "selectedIconPath": "images/icons/paiming.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/mine/mine",
+        "iconPath": "images/icons/mine-a.png",
+        "selectedIconPath": "images/icons/mine.png"
+      }
+      
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+.to-white{
+  color:#1EA296;
+  border-bottom: 4rpx  solid #1EA296;
+}
+
+/* .top{
+ border-bottom: 4rpx solid white;
+} */
+/* .catitem{
+  width: 250rpx;
+}
+
+.catitem .m{
+  color:#A9A6AB;
+  padding-top:22rpx;
+  padding-bottom: 18rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  border-bottom: 4rpx;
+}
+
+.catitem .ma{
+  color:#4C556E;
+  border-bottom: 4rpx solid #4C556E;
+} */

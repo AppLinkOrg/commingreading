@@ -1,0 +1,16 @@
+<!--pages/subtitles/subtitles.wxml-->
+<view class='flex-row flex-center padding-40' style='border-bottom:1rpx solid #A5E8D0'>
+<view class='flex-1 txt-black'>字幕开关</view>
+<view class="body-view">
+  <switch color='#009688' checked bindchange="switch1Change" />
+</view>
+</view>
+
+<view class=' padding-40' style='border-bottom:1rpx solid #A5E8D0'>
+<view class=" ">
+  <text class="section__title txt-black">字幕速度</text>
+  <view class="body-view">
+    <slider bindchange="slider4change"  activeColor='#009688' block-size='12' block-color='#009688' min="1" max="6" show-value />
+  </view>
+</view>
+</view>

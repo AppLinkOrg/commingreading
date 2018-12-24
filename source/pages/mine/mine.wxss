@@ -1,0 +1,13 @@
+/* pages/mine/mine.wxss */
+Page {
+  background: #e5e5e5;
+}
+
+.border_bottom{
+border-bottom: 1rpx solid #e5e5e5;
+}
+.set_icon{
+position: fixed;
+top: 40rpx;
+right: 40rpx;
+}

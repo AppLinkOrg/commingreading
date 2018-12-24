@@ -1,0 +1,26 @@
+<!--pages/mylike/mylike.wxml-->
+<view class='flex-row flex-center padding-30'>
+<view class=''><image class='icon-50' src='{{UserInfo.avatarUrl}}'></image></view>
+
+<view class='margin-left-20  flex-1'>
+<view class=' margin-bottom-20'>卖火柴的小女孩</view>
+
+
+<view class='flex-row flex-center '>
+
+<view class='flex-1 flex-row flex-center'>
+<image class='icon-20' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
+<view class='margin-left-10'>23</view>
+</view>
+
+<view class='flex-1 flex-row flex-center'>
+<image class='icon-20' src='{{uploadpath}}resource/{{res.shouting}}'></image>
+<view class='margin-left-10'>12</view>
+</view>
+
+<view class='flex-1 txt-gray'>2018-12-25</view>
+
+</view>
+</view>
+
+</view>

@@ -1,0 +1,4 @@
+/* pages/bookshelf/bookshelf.wxss */
+Page{
+  background: #E8E8E8;
+}

@@ -1,0 +1,44 @@
+<!--pages/mine/mine.wxml-->
+<view class='bg-primary flex-row flex-column padding-bottom-20' style='height:200rpx;width:100%'>
+  <image class='icon-50 radius-50 margin-top ' src='{{UserInfo.avatarUrl}}'></image>
+  <view class='txt-white margin-left-5'>{{UserInfo.nickName}}</view>
+</view>
+
+<view class='set_icon'>
+<image class='icon-20' src='{{uploadpath}}resource/{{res.set_icon}}'></image>
+</view>
+
+<navigator url='/pages/mylike/mylike' class='flex-row flex-center padding-30 bg-white border_bottom' >
+<image class='icon-20' src='{{uploadpath}}resource/{{res.mylike}}'></image>
+<view class='margin-left-20'>我的点赞</view>
+</navigator>
+
+<view class='flex-row flex-center padding-30 bg-white border_bottom'>
+<image class='icon-20' src='{{uploadpath}}resource/{{res.mytalk}}'></image>
+<view class='margin-left-20'>我的评论</view>
+</view>
+
+<navigator url='/pages/subtitles/subtitles' class='flex-row flex-center padding-30 bg-white border_bottom'>
+<image class='icon-20' src='{{uploadpath}}resource/{{res.subtitles}}'></image>
+<view class='margin-left-20'>字幕设置</view>
+</navigator>
+
+<view class='flex-row flex-center padding-30 bg-white ' style=''>
+<image class='icon-20' src='{{uploadpath}}resource/{{res.tlakcount}}'></image>
+<view class='margin-left-20'>朗读统计</view>
+</view>
+
+<view style='height:8rpx;width:100%'>
+</view>
+
+<view class='flex-row flex-center padding-30 bg-white border_bottom'>
+<image class='icon-20' src='{{uploadpath}}resource/{{res.aboutus}}'></image>
+<view class='margin-left-20'>关于我们</view>
+</view>
+
+<view class='flex-row flex-center padding-30 bg-white '>
+<image class='icon-20' src='{{uploadpath}}resource/{{res.contactcs}}'></image>
+<view class='margin-left-20'>联系客服</view>
+</view>
+
+
