@@ -14,14 +14,14 @@
 
 <view wx:if='{{ctt==1}}'>
 
-  <view class='padding-30'>
-    <view style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
+  <view  class='padding-30'>
+    <navigator url='/pages/others/others' style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
       <view class='txt-black'>《海燕》</view>
       <view class='flex-row flex-center margin-left-10 margin-top-10'>
         <view class='flex-1 h5'>作者：高尔基</view>
         <view class='flex-1 h5  text-right'>阅读：110</view>
       </view>
-    </view>
+    </navigator>
   </view>
 
 </view>

@@ -16,7 +16,7 @@
 
 
 <view>
-  <swiper indicator-dots='true' autoplay='false' interval='1000' duration='500' circular='true' style='width:750rpx;height:320rpx;'>
+  <swiper indicator-dots='true' autoplay='false' interval='2000' duration='200' circular='true' style='width:750rpx;height:320rpx;'>
     <swiper-item wx:for="{{indexbanner}}" wx:key="k">
       <view>
         <!-- mode="aspectFill" -->
@@ -25,7 +25,6 @@
     </swiper-item>
   </swiper>
 </view>
-
 
 
 <view wx:if='{{ctt==1}}'>

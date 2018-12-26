@@ -1,0 +1,93 @@
+<!--pages/others/others.wxml-->
+<image class='img' mode='scaleToFill' src='{{uploadpath}}resource/{{res.bg_1}}'></image>
+<view class='flex-row flex-column padding-40' style='border-bottom:1rpx solid #F3F3F3'>
+  <view class='txt-black h4'>标题</view>
+  <view class='txt-gray'>作者：作者</view>
+  <view class='txt-gray'>朗读者:xxx</view>
+  <text class='content txt-black'>
+就整个《新唐书》的纂修而言，应当说：新修唐史前后17个年头，前10年宋祁主持编修，后7年欧、宋共同“刊修”。草稿初成，呈宋仁宗审阅。仁宗看后，发现这部史书出于二人之手，体例与文采均不尽相同，于是令欧阳修删改修饰为一体。欧阳修此时却拒不修改，他说：“宋公于我为前辈，且人所见不同，岂可悉如已意？”最后仅校阅过一遍，一无所易 [6]。
+</text>
+</view>
+
+
+<view class='padding-30 flex-row flex-center' style='border-bottom:1rpx solid #F3F3F3'>
+  <image class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
+  <view class='margin-left-10'>00:00</view>
+  <view class="body-view flex-1">
+    <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="1" max="100" />
+  </view>
+  <view>03:00</view>
+</view>
+
+<view class=' padding-30   flex-row flex-center' style='border-bottom:4rpx solid #E8E8E8'>
+
+  <view class='flex-row flex-column flex-1 '>
+    <view class='flex-row flex-center ' bindtap=''>
+      <image class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
+      <view class=' margin-left-10'>点赞</view>
+    </view>
+  </view>
+
+
+  <view class='flex-row flex-column flex-1 '>
+    <navigator class='flex-row flex-center' url=''>
+      <image class='icon-25' src='{{uploadpath}}resource/{{res.shouting}}'></image>
+      <view class=' margin-left-10'>收听</view>
+    </navigator>
+  </view>
+
+
+  <view class='flex-row flex-column flex-1 ' bindtap=''>
+    <view class='flex-row flex-center'>
+      <image class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
+      <view class=' margin-left-10'>分享</view>
+    </view>
+  </view>
+
+</view>
+
+
+<view class='padding-30 txt-black txt-bold'>
+  评论(3)：
+</view>
+
+
+<view class='flex-row   padding-30'>
+  <view class=''>
+    <image class='icon-50 radius-10' src='{{UserInfo.avatarUrl}}'></image>
+  </view>
+  <view class='margin-left-20  flex-1'>
+    <view class='flex-row column'>
+      <view class='flex-1 txt-black'>卖火柴的小女孩</view>
+      <view class='flex-row flex-center margin-top-10'>
+        <view class='txt-gary h5 margin-right-20'>2018-12-24</view>
+        <view class='txt-gary h5'>12:00</view>
+      </view>
+    </view>
+    <view class='h5 txt-black margin-top-10'>
+      评论：五代时期就曾有《唐书》（即《旧唐书》）编成，但宋仁宗认为《唐书》“纪次无法，详略失中，文采不明，事实零落”，庆历四年（公元1044年）下诏重修 [1] 。至和元年（公元1054年）七月，仁宗催促“速上所修《唐书》”。前后参预其事的有宋敏求、范镇、欧阳修、宋祁、吕夏卿、梅尧臣，《新唐书》所依据的唐人文献及唐史著作均审慎选择，删除当中的谶纬怪诞内容，裁减旧史本纪十分之七 。
+    </view>
+  </view>
+</view>
+
+
+<!-- <view class='flex-row flex-column ' style='background-color:#F8F8F8'>
+  <view class='padding-20 flex-row flex-center' style=''>
+    <image class='icon-30' src='{{uploadpath}}resource/{{res.woyaolangdu}}'></image>
+    <view class='txt-bold'>我要朗读</view>
+  </view>
+</view> -->
+
+<view class='fixedbottom bg-gray flex-row flex-center padding-left-20'>
+
+  <image class='icon-30' src='{{uploadpath}}resource/{{res.luyin}}' bindtap=''> </image>
+
+
+  <view class='h5 margin-left-10' style='width:60rpx;'>我也试试</view>
+
+  <view class='padding-comment flex-1 margin-left-10'>
+    <view>
+      <textarea class='h5 white-block pdg txt-white' style='border-radius:40rpx;background:#A5E8D0' auto-height='{{true}}' placeholder-class='txt-white' placeholder='发表评论' fixed="{{true}}" value='' bindinput='' bindconfirm='sendComment'></textarea>
+    </view>
+  </view>
+</view>

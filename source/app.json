@@ -1,6 +1,9 @@
 {
   "pages":[
     "pages/home/home",
+    "pages/readingcompletion/readingcompletion",
+    "pages/readaloud/readaloud",
+    "pages/others/others",
     "pages/mytalkdetails/mytalkdetails",
     "pages/mytalk/mytalk",
     "pages/mine/mine",

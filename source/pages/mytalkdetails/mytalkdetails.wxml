@@ -46,9 +46,9 @@
 </view>
 
 
-<view class='flex-row flex-column mid' style='background-color:#F8F8F8'>
+<navigator url='/pages/readaloud/readaloud' class='flex-row flex-column mid' style='background-color:#F8F8F8'>
   <view class='padding-20 flex-row flex-center' style=''>
     <image class='icon-30' src='{{uploadpath}}resource/{{res.woyaolangdu}}'></image>
     <view class='txt-bold'>我要朗读</view>
   </view>
-</view>
+</navigator>

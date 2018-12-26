@@ -1,0 +1,33 @@
+<!--pages/readaloud/readaloud.wxml-->
+<image class='img' mode='scaleToFill' src='{{uploadpath}}resource/{{res.bg_1}}'></image>
+<view class='flex-row flex-column padding-40' >
+  <view class='txt-black h4'>标题</view>
+  <view class='txt-gray'>作者：作者</view>
+  <view class='txt-gray'>朗读者:xxx</view>
+  <scroll-view >
+  <text class='content txt-black'>
+就整个《新唐书》的纂修而言，应当说：新修唐史前后17个年头，前10年宋祁主持编修，后7年欧、宋共同“刊修”。草稿初成，呈宋仁宗审阅。仁宗看后，发现这部史书出于二人之手，体例与文采均不尽相同，于是令欧阳修删改修饰为一体。欧阳修此时却拒不修改，他说：“宋公于我为前辈，且人所见不同，岂可悉如已意？”最后仅校阅过一遍，一无所易 [6]。
+</text>
+
+</scroll-view>
+</view>
+
+
+<view class='flex-row flex-column mid padding-top-20' style='border-top:1rpx solid #E8E8E8'>
+  <view>00'00"</view>
+
+
+  <view class='flex-row flex-center'>
+    <view class='text-center ' hover-class='bg-primary txt-white' style='width:120rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>重录</view>
+
+    <view class='text-center' style='width:300rpx;'>
+      <image class='icon-40' src='{{uploadpath}}resource/{{res.luyin}}'></image>
+    </view>
+
+    <navigator url='/pages/readingcompletion/readingcompletion' class='text-center ' hover-class='bg-primary txt-white' style='width:120rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>提交</navigator>
+  </view>
+
+
+  <view class='h5'>点击开始录音</view>
+
+</view>

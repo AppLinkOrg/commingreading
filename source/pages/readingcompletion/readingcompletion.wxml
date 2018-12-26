@@ -1,0 +1,15 @@
+<!--pages/readingcompletion/readingcompletion.wxml-->
+<view class='flex-row flex-column'>
+<image></image>
+<view>《卖炭翁》</view>
+<view>朗读者：《小白兔》</view>
+</view>
+
+<view class='padding-30 flex-row flex-center' style='border-bottom:1rpx solid #F3F3F3'>
+  <image class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
+  <view class='margin-left-10'>00:00</view>
+  <view class="body-view flex-1">
+    <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="1" max="100" />
+  </view>
+  <view>03:00</view>
+</view>
