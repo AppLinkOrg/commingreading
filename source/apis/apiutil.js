@@ -21,6 +21,29 @@ export class ApiUtil {
     return s;
   }
 
+
+
+  static updatetime(str) {
+    var timestamp = Date.parse(str);
+
+    //返回当前时间毫秒数
+    timestamp = timestamp / 1000;
+    //获取当前时间
+    var n = timestamp *
+      1000;
+    var date = new Date(n);
+    //年
+    var Y =
+      date.getFullYear();
+    //月
+    var M = (date.getMonth()
+      + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    //日
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+
+    return (Y + "." + M + "." + D)
+  }
+
   static fixRename(ret){
     var renamelist = ApiUtil.renamelist;
     console.log("rename a");

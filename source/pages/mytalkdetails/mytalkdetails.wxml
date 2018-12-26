@@ -1,0 +1,54 @@
+<!--pages/mytalkdetails/mytalkdetails.wxml-->
+
+<image class='img' mode='scaleToFill' src='{{uploadpath}}resource/{{res.bg_1}}'></image>
+<view class='flex-row flex-column padding-40' style='border-bottom:1rpx solid #F3F3F3'>
+  <view class='txt-black h4'>标题</view>
+  <view class='txt-gray'>作者：作者</view>
+  <view class='txt-gray'>朗读者:xxx</view>
+  <text class='content txt-black'>
+就整个《新唐书》的纂修而言，应当说：新修唐史前后17个年头，前10年宋祁主持编修，后7年欧、宋共同“刊修”。草稿初成，呈宋仁宗审阅。仁宗看后，发现这部史书出于二人之手，体例与文采均不尽相同，于是令欧阳修删改修饰为一体。欧阳修此时却拒不修改，他说：“宋公于我为前辈，且人所见不同，岂可悉如已意？”最后仅校阅过一遍，一无所易 [6]。
+</text>
+</view>
+
+<view class='padding-30 txt-black txt-bold'>
+  朗读者(3)：
+</view>
+
+
+
+<view class='flex-row flex-center padding-30 ' style='border-bottom:1rpx solid #F3F3F3'>
+  <view class=''>
+    <image class='icon-30 take' src='{{uploadpath}}resource/{{res.touxiangluyin}}'></image>
+    <image class='icon-50' src='{{UserInfo.avatarUrl}}'></image>
+  </view>
+
+  <view class='margin-left-20  flex-1'>
+    <view class=' margin-bottom-20'>卖火柴的小女孩</view>
+
+
+    <view class='flex-row flex-center '>
+
+      <view class='flex-1 flex-row flex-center'>
+        <image class='icon-20' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
+        <view class='margin-left-10'>23</view>
+      </view>
+
+      <view class='flex-1 flex-row flex-center'>
+        <image class='icon-20' src='{{uploadpath}}resource/{{res.shouting}}'></image>
+        <view class='margin-left-10'>12</view>
+      </view>
+
+      <view class='flex-1 txt-gray'>{{date}}</view>
+
+    </view>
+  </view>
+
+</view>
+
+
+<view class='flex-row flex-column mid' style='background-color:#F8F8F8'>
+  <view class='padding-20 flex-row flex-center' style=''>
+    <image class='icon-30' src='{{uploadpath}}resource/{{res.woyaolangdu}}'></image>
+    <view class='txt-bold'>我要朗读</view>
+  </view>
+</view>

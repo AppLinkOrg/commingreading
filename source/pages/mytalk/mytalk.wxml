@@ -1,0 +1,43 @@
+<!--pages/mytalk/mytalk.wxml-->
+<view class='flex-row   padding-30'>
+  <view class=''>
+    <image class='icon-50 radius-10' src='{{UserInfo.avatarUrl}}'></image>
+  </view>
+
+  <view class='margin-left-20  flex-1'>
+
+    <view class='flex-row flex-center'>
+      <view class='flex-1 txt-black'>卖火柴的小女孩</view>
+      <view class='txt-gary h5 margin-right-10'>2018-12-24</view>
+      <view class='txt-gary h5'>12:00</view>
+    </view>
+
+    <view class='h5 txt-black margin-top-10 '>
+      评论：《新唐书》对〈志〉十分重视，新增《仪卫志》《选举志》和《兵志》。《兵志》附以马政，原有的《天文志》和《历志》篇幅超过《旧唐书》三倍，新〈志〉载有文武百官的俸禄制度，为旧〈志〉所无 [3]  。又有屯田、边镇、和籴等，皆旧〈志〉所无。《新唐书》也恢复立〈表〉，立了《宰相表》《方镇表》《宗室世系表》、《宰相世系表》，历代官修正史〈表〉多缺略。清代学者王鸣盛在《十七史商榷》中说：“新书最佳者志、表，列传次之，本纪最下” [4]  ，王鸣盛同时还指出《新唐书》史表的设置有一些不足，“窃谓史之无表者，固宜补矣，有有表而尤不可以不补者……禁军以宦官掌之，不但朝政尽为所挠，并废立皆出其手，则左右神策中尉亦当表” [5]  。
+    </view>
+
+  </view>
+
+</view>
+
+
+<view class='flex-row   padding-30'>
+  <view class=''>
+    <image class='icon-50 radius-10' src='{{UserInfo.avatarUrl}}'></image>
+  </view>
+
+  <view class='margin-left-20  flex-1'>
+
+    <view class='flex-row flex-center'>
+      <view class='flex-1 txt-black'>卖火柴的小女孩</view>
+      <view class='txt-gary h5 margin-right-10'>2018-12-24</view>
+      <view class='txt-gary h5'>12:00</view>
+    </view>
+
+    <view class='h5 txt-black margin-top-10'>
+      评论：五代时期就曾有《唐书》（即《旧唐书》）编成，但宋仁宗认为《唐书》“纪次无法，详略失中，文采不明，事实零落”，庆历四年（公元1044年）下诏重修 [1]  。至和元年（公元1054年）七月，仁宗催促“速上所修《唐书》”。前后参预其事的有宋敏求、范镇、欧阳修、宋祁、吕夏卿、梅尧臣，《新唐书》所依据的唐人文献及唐史著作均审慎选择，删除当中的谶纬怪诞内容，裁减旧史本纪十分之七 。
+    </view>
+
+  </view>
+
+</view>

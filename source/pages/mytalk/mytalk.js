@@ -1,4 +1,4 @@
-// pages/bookshelf/bookshelf.js
+// pages/mytalk/mytalk.js
 import { AppBase } from "../../appbase";
 import { ApiConfig } from "../../apis/apiconfig";
 import { InstApi } from "../../apis/inst.api.js";
@@ -15,7 +15,6 @@ class Content extends AppBase {
   onMyShow() {
     var that = this;
   }
-  
 }
 var content = new Content();
 var body = content.generateBodyJson();

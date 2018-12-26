@@ -1,6 +1,8 @@
 {
   "pages":[
     "pages/home/home",
+    "pages/mytalkdetails/mytalkdetails",
+    "pages/mytalk/mytalk",
     "pages/mine/mine",
     "pages/subtitles/subtitles",
     "pages/mylike/mylike",
