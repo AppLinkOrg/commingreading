@@ -1,15 +1,16 @@
 /* pages/others/others.wxss */
-/* Page{
+ Page{
   padding-bottom: 100rpx;
-} */
+} 
 .content{
   padding-left:70rpx;
-  padding-right: 70rpx;
 }
 .img{
-  position: absolute;
+  position: fixed;
   width: 100%;
-  height: 780rpx;
+  top: 0;
+  bottom: 0;
+  height: 100%;
   z-index: -1;
 
 }
@@ -39,4 +40,11 @@
   padding-top: 10rpx;
   padding-right: 20rpx;
   padding-bottom: 10rpx;
+}
+.fixedbottom{
+  position: fixed;
+  width: 100%;
+  
+  bottom:0;
+  z-index: 100;
 }

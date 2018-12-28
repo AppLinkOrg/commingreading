@@ -8,14 +8,15 @@
       <view>
         <image class='icon-75' src='{{uploadpath}}resource/{{res.book_icon}}'></image>
       </view>
-      <view class='txt-black h4'>{{bookinfo.book_name}}《将进酒》</view>
+      <view class='txt-black h4'>《{{bookinfo.book_name}}》</view>
 
-      <view class='txt-black margin-top-10'>朗读者：xxxsss</view>
+      <view class='txt-black margin-top-10'>朗读者：{{memberinfo.nickName}}</view>
     </view>
 
 
     <view class='padding-30 flex-row flex-center' style=''>
-      <image class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
+      <image wx:if='{{status=="play"}}' bindtap='Play' class='icon-25' src='{{uploadpath}}resource/{{res.zanting}}'></image>
+      <image wx:if='{{status=="stop"}}' bindtap='Stop' class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
       <view class='margin-left-10 txt-black'>00:00</view>
       <view class="body-view flex-1">
         <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="1" max="100" />
@@ -24,7 +25,6 @@
     </view>
 
     <view class=' padding-30   flex-row flex-center' style=''>
-
       <view class='flex-row  flex-1 '>
         <view class='flex-row flex-center ' bindtap=''>
           <image class='icon-25' src='{{uploadpath}}resource/{{res.fenxiang}}'></image>

@@ -2,6 +2,7 @@
 import { AppBase } from "../../appbase";
 import { ApiConfig } from "../../apis/apiconfig";
 import { InstApi } from "../../apis/inst.api.js";
+import { BookApi } from "../../apis/book.api.js";
 
 class Content extends AppBase {
   constructor() {
@@ -15,6 +16,10 @@ class Content extends AppBase {
   }
   onMyShow() {
     var that = this;
+    var bookapi = new BookApi();
+    bookapi.bookinfo({ id: this.Base.options.id }, (bookinfo) => {
+      this.Base.setMyData({ bookinfo });
+    });
   }
   begin(e){
     wx.startRecord({
@@ -27,6 +32,7 @@ class Content extends AppBase {
     //}, 10000)
   }
   submit(e){
+    var id = e.currentTarget.id;
     wx.showModal({
       title: '提交',
       content: '确认提交并保存录音？',
@@ -38,7 +44,7 @@ class Content extends AppBase {
       success: function (res) {
         if (res.confirm) {
           wx.navigateTo({
-            url: '/pages/endreading/endreading',
+            url: '/pages/endreading/endreading?id='+id,
           }),
 
           wx.showToast({
@@ -50,6 +56,10 @@ class Content extends AppBase {
     });
   }
 
+  cutmusic(e){
+
+  }
+
 }
 var content = new Content();
 var body = content.generateBodyJson();
@@ -57,4 +67,5 @@ body.onLoad = content.onLoad;
 body.onMyShow = content.onMyShow; 
 body.begin = content.begin; 
 body.submit = content.submit;
+body.cutmusic = content.cutmusic;
 Page(body)

@@ -2,6 +2,7 @@
 import { AppBase } from "../../appbase";
 import { ApiConfig } from "../../apis/apiconfig";
 import { InstApi } from "../../apis/inst.api.js";
+import { BookApi } from "../../apis/book.api.js";
 
 class Content extends AppBase {
   constructor() {
@@ -15,6 +16,13 @@ class Content extends AppBase {
   }
   onMyShow() {
     var that = this;
+    var bookapi = new BookApi();
+    bookapi.booklist({ orderby: 'r_main.id desc'}, (monthlist) => {
+      this.Base.setMyData({ monthlist });
+    });
+    bookapi.booklist({ orderby: 'r_main.id'}, (alllist) => {
+      this.Base.setMyData({ alllist });
+    });
   }
   
   bindwaitcompleted(e) {

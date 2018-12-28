@@ -127,7 +127,7 @@ view,navigator,input,text,textarea{
   
 }
 .txt-primary{
-  color:#2699EC;
+  color:#1EA296;
 }
 .txt-black{
   color: black;

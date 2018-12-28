@@ -1,5 +1,6 @@
 <!--pages/others/others.wxml-->
 <image class='img' mode='scaleToFill' src='{{uploadpath}}resource/{{res.bg_1}}'></image>
+
 <view class='flex-row flex-column padding-40' style=''>
   <view class='txt-black h4'>{{bookinfo.book_name}}</view>
   <view class='txt-black margin-top-10'>作者：{{bookinfo.author}}</view>
@@ -13,9 +14,10 @@
 
 </view>
 
-
-<view class='padding-30 flex-row flex-center' style='border-bottom:1rpx solid #F3F3F3'>
-  <image class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
+<view class='bg-white'>
+<view class='padding-30 flex-row flex-center ' style='border-bottom:1rpx solid #F3F3F3'>
+  <image wx:if='{{status=="play"}}' bindtap='Play' class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
+  <image wx:if='{{status=="stop"}}' bindtap='Stop' class='icon-25' src='{{uploadpath}}resource/{{res.zanting}}'></image>
   <view class='margin-left-10'>00:00</view>
   <view class="body-view flex-1">
     <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="1" max="100" />
@@ -52,9 +54,8 @@
 
 
 <view class='padding-30 txt-black txt-bold'>
-  评论(3)：
+  评论(1)：
 </view>
-
 
 <view class='flex-row   padding-30'>
   <view class=''>
@@ -73,7 +74,7 @@
     </view>
   </view>
 </view>
-
+</view>
 
 <!-- <view class='flex-row flex-column ' style='background-color:#F8F8F8'>
   <view class='padding-20 flex-row flex-center' style=''>

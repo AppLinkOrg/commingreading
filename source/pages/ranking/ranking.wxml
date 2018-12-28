@@ -1,43 +1,48 @@
 <!--pages/ranking/ranking.wxml-->
-<view class='flex-row flex-center'>
+<view class=''>
+<image class='bg_img' src='{{uploadpath}}resource/{{res.bg_2}}'></image>
+</view>
 
-  <view class='catitem flex-1 ' wx:key="k" bindtap='bindcontact'>
-    <view class=' text-center padding-20 txt-gray {{ctt==1?"to-white":"" }} top text-center h5' bindtap='bindcontact'>月排行</view>
+
+ <view class='flex-row flex-center bg-white top_title'>
+
+  <view class='catitem flex-1 flex-row flex-column padding-20' wx:key="k" bindtap='bindcontact'>
+    <view class=' text-center  txt-gray {{ctt==1?"txt-primary":"" }} top text-center h5' bindtap='bindcontact'>月排行</view>
+    <view wx:if='{{ctt!=1}}' style='height:4rpx;width:120rpx;' class=''></view>
+    <view wx:if='{{ctt==1}}' style='height:4rpx;width:120rpx;' class='bg-primary'></view>
   </view>
 
-  <view class='catitem flex-1 ' wx:key="k" bindtap='bindwaitcompleted'>
-    <view class=' text-center padding-20 txt-gray {{ctt==2?"to-white":""}} top text-center h5' bindtap='bindwaitcompleted'>总排行</view>
+  <view class='catitem flex-1 flex-row flex-column  padding-20' wx:key="k" bindtap='bindwaitcompleted'>
+    <view class=' text-center  txt-gray {{ctt==2?"txt-primary":""}} top text-center h5' bindtap='bindwaitcompleted'>总排行</view>
+    <view wx:if='{{ctt!=2}}' style='height:4rpx;width:120rpx;' class=''></view>
+    <view wx:if='{{ctt==2}}' style='height:4rpx;width:120rpx;' class='bg-primary'></view>
   </view>
-
 
 </view>
 
-<view wx:if='{{ctt==1}}'>
+
+<view wx:if='{{ctt==1}}' wx:for='{{monthlist}}' wx:key='k'>
 
   <view  class='padding-30'>
-    <navigator url='/pages/others/others' style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
-      <view class='txt-black'>《海燕》</view>
+    <navigator url='/pages/others/others?id={{item.id}}' style='border-bottom:1rpx solid white' class='padding-bottom-20'>
+      <view class='txt-black'>《{{item.book_name}}》</view>
       <view class='flex-row flex-center margin-left-10 margin-top-10'>
-        <view class='flex-1 h5'>作者：高尔基</view>
+        <view class='flex-1 h5'>作者：{{item.author}}</view>
         <view class='flex-1 h5  text-right'>阅读：110</view>
       </view>
     </navigator>
   </view>
-
 </view>
 
-<view wx:if='{{ctt==2}}'>
 
+<view wx:if='{{ctt==2}}' wx:for='{{alllist}}' wx:key='k'>
   <view class='padding-30'>
-    <view style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
-      <view class='txt-black'>《新华字典》</view>
+    <navigator url='/pages/others/others?id={{item.id}}' style='border-bottom:1rpx solid white' class='padding-bottom-20'>
+      <view class='txt-black'>《{{item.book_name}}》</view>
       <view class='flex-row flex-center margin-left-10 margin-top-10'>
-        <view class='flex-1 h5'>作者：不清楚</view>
-        <view class='flex-1 h5  text-right'>阅读：1000000000</view>
+        <view class='flex-1 h5'>作者：{{item.author}}</view>
+        <view class='flex-1 h5  text-right'>阅读：2110</view>
       </view>
-    </view>
+    </navigator>
   </view>
-
 </view>
-
-<view wx:if='{{ctt==3}}'>3</view>

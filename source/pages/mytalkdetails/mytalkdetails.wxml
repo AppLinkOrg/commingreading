@@ -1,9 +1,9 @@
 <!--pages/mytalkdetails/mytalkdetails.wxml-->
 
 <image class='img' mode='scaleToFill' src='{{uploadpath}}resource/{{res.bg_2}}'></image>
-<view style='padding-bottom:100rpx;'>
+<view >
 <view class='flex-row flex-column padding-40' style=''>
-  <view class='txt-black h4'>{{bookinfo.book_name}}</view>
+  <view class='txt-black h4'>《{{bookinfo.book_name}}》</view>
   <view class='txt-black margin-top-10'>作者：{{bookinfo.author}}</view>
   <view  class='txt-black margin-top-10'>朗读者:xxx</view>
 
@@ -49,65 +49,7 @@
 </view>
 
 
-<view class='flex-row flex-center pinlun  bg-white' style='border-bottom:1rpx solid #F3F3F3;'>
-  <navigator url='/pages/others/others?id={{bookinfo.id}}' class=''>
-    <image class='icon-30 take' src='{{uploadpath}}resource/{{res.touxiangluyin}}'></image>
-    <image class='icon-50' src='{{UserInfo.avatarUrl}}'></image>
-  </navigator>
-
-  <view class='margin-left-20  flex-1'>
-    <view class=' margin-bottom-20'>卖火柴的小女孩</view>
-
-    <view class='flex-row flex-center '>
-
-      <view class='flex-1 flex-row flex-center'>
-        <image class='icon-20' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
-        <view class='margin-left-10'>23</view>
-      </view>
-
-      <view class='flex-1 flex-row flex-center'>
-        <image class='icon-20' src='{{uploadpath}}resource/{{res.shouting}}'></image>
-        <view class='margin-left-10'>12</view>
-      </view>
-
-      <view class='flex-1 txt-gray'>{{date}}</view>
-
-    </view>
-  </view>
-
-</view>
-
-
-<view class='flex-row flex-center pinlun  bg-white' style='border-bottom:1rpx solid #F3F3F3;'>
-  <navigator url='/pages/others/others?id={{bookinfo.id}}' class=''>
-    <image class='icon-30 take' src='{{uploadpath}}resource/{{res.touxiangluyin}}'></image>
-    <image class='icon-50' src='{{UserInfo.avatarUrl}}'></image>
-  </navigator>
-
-  <view class='margin-left-20  flex-1'>
-    <view class=' margin-bottom-20'>卖火柴的小女孩</view>
-
-    <view class='flex-row flex-center '>
-
-      <view class='flex-1 flex-row flex-center'>
-        <image class='icon-20' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
-        <view class='margin-left-10'>23</view>
-      </view>
-
-      <view class='flex-1 flex-row flex-center'>
-        <image class='icon-20' src='{{uploadpath}}resource/{{res.shouting}}'></image>
-        <view class='margin-left-10'>12</view>
-      </view>
-
-      <view class='flex-1 txt-gray'>{{date}}</view>
-
-    </view>
-  </view>
-
-</view>
-
-
-<navigator url='/pages/readaloud/readaloud' class='flex-row flex-column mid' style='background-color:#F8F8F8'>
+<navigator url='/pages/readaloud/readaloud?id={{bookinfo.id}}'  class='flex-row flex-column mid' style='background-color:#F8F8F8'>
   <view class='padding-20 flex-row flex-center' style=''>
     <image class='icon-30' src='{{uploadpath}}resource/{{res.woyaolangdu}}'></image>
     <view class='txt-bold'>我要朗读</view>

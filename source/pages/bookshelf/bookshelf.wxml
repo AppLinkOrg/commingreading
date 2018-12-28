@@ -3,7 +3,7 @@
 <image class='bg_img' src='{{uploadpath}}resource/{{res.bg_1}}'></image>
 </view>
 
-<navigator url='/pages/mytalkdetails/mytalkdetails' wx:for='{{booklist}}' wx:key='k' style='' class='radius-10 bg-white padding-20 margin-20'>
+<navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}' wx:for='{{booklist}}' wx:key='k' style='' class='radius-10 bg-white padding-20 margin-20'>
 <view class='txt-black'>《{{item.book_name}}》</view>
 <view class='flex-row flex-center  margin-top-10'>
 <view class='h5 flex-1 margin-left-10'>作者：{{item.author}}</view>

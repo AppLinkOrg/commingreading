@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/home/home",
+    "pages/ranking/ranking",
     "pages/endreading/endreading",
     "pages/auth/auth",
     "pages/readingcompletion/readingcompletion",
@@ -11,7 +12,6 @@
     "pages/mine/mine",
     "pages/subtitles/subtitles",
     "pages/mylike/mylike",
-    "pages/ranking/ranking",
     "pages/bookshelf/bookshelf"
   ],
   "window":{

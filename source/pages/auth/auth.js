@@ -16,7 +16,8 @@ class Content extends AppBase {
     this.Base.Page = this;
     //options.id=5;
     super.onLoad(options);
-    this.Base.needauth = false;
+    this.Base.needauth = true;
+    
   }
   onMyShow() {
     var that = this;
@@ -30,6 +31,7 @@ class Content extends AppBase {
     wx.switchTab({
       url: '/pages/home/home',
     });
+    //this.Base.setMyData({ isgrantuser: true });
     //open-type="getUserInfo" bindgetuserinfo="getUserInfo"
   }
 }
