@@ -1,21 +1,27 @@
-<view class='flex-row flex-center'>
+<view class='flex-row flex-center top_title'>
 
-  <view class='catitem flex-1 ' wx:key="k" bindtap='bindcontact'>
-    <view class=' text-center padding-20 txt-gray {{ctt==1?"to-white":"" }} top text-center h5' bindtap='bindcontact'>热门诗词</view>
+  <view class='catitem flex-1 bg-white flex-row flex-column padding-20' wx:key="k" bindtap='bindcontact'>
+    <view class=' text-center  txt-gray {{ctt==1?"to-white":"" }} top  h5' bindtap='bindcontact'>热门诗词</view>
+    <view wx:if='{{ctt!=1}}' style='height:4rpx;width:120rpx;' class=''></view>
+    <view wx:if='{{ctt==1}}' style='height:4rpx;width:120rpx;' class='bg-primary'></view>
   </view>
 
-  <view class='catitem flex-1 ' wx:key="k" bindtap='bindwaitcompleted'>
-    <view class=' text-center padding-20 txt-gray {{ctt==2?"to-white":""}} top text-center h5' bindtap='bindwaitcompleted'>每日必读</view>
+  <view class='catitem flex-1 bg-white flex-row flex-column padding-20' wx:key="k" bindtap='bindwaitcompleted'>
+    <view class=' text-center  txt-gray {{ctt==2?"to-white":""}} top  h5' bindtap='bindwaitcompleted'>每日必读</view>
+    <view wx:if='{{ctt!=2}}' style='height:4rpx;width:120rpx;' class=''></view>
+    <view wx:if='{{ctt==2}}' style='height:4rpx;width:120rpx;' class='bg-primary'></view>
   </view>
 
-  <view class='catitem flex-1 ' wx:key="k" bindtap='bindcompleted'>
-    <view class=' text-center padding-20 txt-gray {{ctt==3?"to-white":""}} top text-center h5' bindtap='bindcompleted'>最新录入</view>
+  <view class='catitem flex-1 bg-white flex-row flex-column padding-20' wx:key="k" bindtap='bindcompleted'>
+    <view class=' text-center  txt-gray {{ctt==3?"to-white":""}} top  h5' bindtap='bindcompleted'>最新录入</view>
+    <view wx:if='{{ctt!=3}}' style='height:4rpx;width:120rpx;' class=''></view>
+    <view wx:if='{{ctt==3}}' style='height:4rpx;width:120rpx;' class='bg-primary'></view>
   </view>
 
 </view>
 
 
-<view>
+<view style='margin-top:85rpx;'>
   <swiper indicator-dots='true' autoplay='false' interval='2000' duration='200' circular='true' style='width:750rpx;height:320rpx;'>
     <swiper-item wx:for="{{indexbanner}}" wx:key="k">
       <view>
@@ -26,105 +32,51 @@
   </swiper>
 </view>
 
+<view class=''>
+  <image class='bg_img' src='{{uploadpath}}resource/{{res.bg_2}}'></image>
+</view>
 
-<view wx:if='{{ctt==1}}'>
 
-  <view class='padding-30'>
+
+<view wx:if='{{ctt==1}}' wx:for='{{booklist}}' wx:key='k'>
+
+  <navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}&type=A' class='padding-30'>
     <view style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
-      <view class='txt-black'>《海燕》</view>
+      <view class='txt-black'>{{item.book_name}}</view>
       <view class='flex-row flex-center margin-left-10 margin-top-10'>
-        <view class='flex-1 h5'>作者：高尔基</view>
-        <view class='flex-1 h5  text-right'>阅读：110</view>
+        <view class='flex-1 txt-black h5'>作者：{{item.author}}</view>
+        <view class='flex-1 txt-black h5  text-right'>阅读：110</view>
       </view>
     </view>
-  </view>
-
-  <view class='padding-30'>
-    <view style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
-      <view class='txt-black'>《雷雨》</view>
-      <view class='flex-row flex-center margin-left-10 margin-top-10'>
-        <view class='flex-1 h5'>作者：曹禺</view>
-        <view class='flex-1 h5  text-right'>阅读：65110</view>
-      </view>
-    </view>
-  </view>
-
-  <view class='padding-30'>
-    <view style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
-      <view class='txt-black'>《解放了的普罗米修斯》</view>
-      <view class='flex-row flex-center margin-left-10 margin-top-10'>
-        <view class='flex-1 h5'>作者：雪莱</view>
-        <view class='flex-1 h5  text-right'>阅读：21110</view>
-      </view>
-    </view>
-  </view>
-
-  <view class='padding-30'>
-    <view style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
-      <view class='txt-black'>《西风颂》</view>
-      <view class='flex-row flex-center margin-left-10 margin-top-10'>
-        <view class='flex-1 h5'>作者：雪莱</view>
-        <view class='flex-1 h5  text-right'>阅读：871110</view>
-      </view>
-    </view>
-  </view>
-
-  <view class='padding-30'>
-    <view style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
-      <view class='txt-black'>《蜀道难》</view>
-      <view class='flex-row flex-center margin-left-10 margin-top-10'>
-        <view class='flex-1 h5'>作者：李白</view>
-        <view class='flex-1 h5  text-right'>阅读：2165650</view>
-      </view>
-    </view>
-  </view>
-
-  <view class='padding-30'>
-    <view style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
-      <view class='txt-black'>《茅屋为秋风所破歌》</view>
-      <view class='flex-row flex-center margin-left-10 margin-top-10'>
-        <view class='flex-1 h5'>作者：杜甫</view>
-        <view class='flex-1 h5  text-right'>阅读：31110</view>
-      </view>
-    </view>
-  </view>
-
-  <view class='padding-30'>
-    <view style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
-      <view class='txt-black'>《江城子·密州出猎》</view>
-      <view class='flex-row flex-center margin-left-10 margin-top-10'>
-        <view class='flex-1 h5'>作者：苏轼</view>
-        <view class='flex-1 h5  text-right'>阅读：11110</view>
-      </view>
-    </view>
-  </view>
+  </navigator>
 
 </view>
 
-<view wx:if='{{ctt==2}}'>
 
-  <view class='padding-30'>
+
+<view wx:if='{{ctt==2}}' wx:for='{{everydaylist}}' wx:key='k'>
+
+  <navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}&type=A' class='padding-30'>
     <view style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
-      <view class='txt-black'>《新华字典》</view>
+      <view class='txt-black'>{{item.book_name}}</view>
       <view class='flex-row flex-center margin-left-10 margin-top-10'>
-        <view class='flex-1 h5'>作者：不清楚</view>
-        <view class='flex-1 h5  text-right'>阅读：1000000000</view>
+        <view class='flex-1 txt-black h5'>作者：{{item.author}}</view>
+        <view class='flex-1 txt-black h5  text-right'>阅读：1000000000</view>
       </view>
     </view>
-  </view>
+  </navigator>
 
 </view>
 
-<view wx:if='{{ctt==3}}'>
-<view class='padding-30'>
+
+<view wx:if='{{ctt==3}}' wx:for='{{newlist}}' wx:key='k'>
+  <navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}&type=A' class='padding-30'>
     <view style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
-      <view class='txt-black'>《飞鸟集》</view>
+      <view class='txt-black'>{{item.book_name}}</view>
       <view class='flex-row flex-center margin-left-10 margin-top-10'>
-        <view class='flex-1 h5'>作者：泰戈尔</view>
-        <view class='flex-1 h5  text-right'>阅读：12110</view>
+        <view class='flex-1 txt-black h5'>作者：{{item.author}}</view>
+        <view class='flex-1 txt-black h5  text-right'>阅读：12110</view>
       </view>
     </view>
-  </view>
-
-
+  </navigator>
 </view>

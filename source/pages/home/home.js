@@ -2,7 +2,7 @@
 import { AppBase } from "../../appbase";
 import { ApiConfig } from "../../apis/apiconfig";
 import { InstApi } from "../../apis/inst.api.js";
-
+import { BookApi } from "../../apis/book.api.js";
 class Content extends AppBase {
   constructor() {
     super();
@@ -20,7 +20,21 @@ class Content extends AppBase {
     var instapi = new InstApi();
     instapi.indexbanner({}, (indexbanner) => {
       this.Base.setMyData({ indexbanner });
+    }); 
+    var bookapi = new BookApi();
+    bookapi.booklist({}, (booklist) => {
+      this.Base.setMyData({ booklist });
     });
+
+    bookapi.booklist({}, (everydaylist) => {
+      this.Base.setMyData({ everydaylist });
+    });
+
+    bookapi.booklist({}, (newlist) => {
+      this.Base.setMyData({ newlist });
+    });
+
+
   }
 
   bindcompleted(e) {

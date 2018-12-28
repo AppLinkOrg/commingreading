@@ -1,0 +1,55 @@
+<!--pages/endreading/endreading.wxml-->
+<view class='flex-row flex-center' style='height:1200rpx;'>
+
+  <view class='flex-1'>
+    <image class='img' mode='scaleToFill' src='{{uploadpath}}resource/{{res.bg_2}}'></image>
+    <view class='flex-row flex-column padding-40' style=''>
+
+      <view>
+        <image class='icon-75' src='{{uploadpath}}resource/{{res.book_icon}}'></image>
+      </view>
+      <view class='txt-black h4'>{{bookinfo.book_name}}《将进酒》</view>
+
+      <view class='txt-black margin-top-10'>朗读者：xxxsss</view>
+    </view>
+
+
+    <view class='padding-30 flex-row flex-center' style=''>
+      <image class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
+      <view class='margin-left-10 txt-black'>00:00</view>
+      <view class="body-view flex-1">
+        <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="1" max="100" />
+      </view>
+      <view class='txt-black'>03:00</view>
+    </view>
+
+    <view class=' padding-30   flex-row flex-center' style=''>
+
+      <view class='flex-row  flex-1 '>
+        <view class='flex-row flex-center ' bindtap=''>
+          <image class='icon-25' src='{{uploadpath}}resource/{{res.fenxiang}}'></image>
+          <view class=' margin-left-10 txt-black'>分享</view>
+        </view>
+      </view>
+
+
+      <view class='flex-row  flex-1 '>
+        <navigator class='flex-row flex-center' bindtap='tobookshelf'>
+          <image class='icon-25' src='{{uploadpath}}resource/{{res.fanhuishujia}}'></image>
+          <view class=' margin-left-10 txt-black'>返回书架</view>
+        </navigator>
+      </view>
+
+
+      <view class='flex-row  flex-1 ' bindtap=''>
+        <view class='flex-row flex-center'>
+          <image class='icon-25' src='{{uploadpath}}resource/{{res.chongxinluzhi}}'></image>
+          <view class=' margin-left-10 txt-black'>重新录制</view>
+        </view>
+      </view>
+
+    </view>
+
+  </view>
+
+</view>

@@ -1,4 +1,4 @@
-// pages/bookshelf/bookshelf.js
+// pages/endreading/endreading.js
 import { AppBase } from "../../appbase";
 import { ApiConfig } from "../../apis/apiconfig";
 import { InstApi } from "../../apis/inst.api.js";
@@ -12,18 +12,25 @@ class Content extends AppBase {
     this.Base.Page = this;
     //options.id=5;
     super.onLoad(options);
+    this.Base.setMyData({})
   }
   onMyShow() {
     var that = this;
     var bookapi = new BookApi();
-    bookapi.booklist({}, (booklist) => {
-      this.Base.setMyData({ booklist });
+    bookapi.bookinfo({ id: this.Base.options.id }, (bookinfo) => {
+      this.Base.setMyData({ bookinfo });
     });
   }
-  
+  tobookshelf(e){
+    wx.reLaunch({
+      url: '/pages/bookshelf/bookshelf',
+    })
+  }
+
 }
 var content = new Content();
 var body = content.generateBodyJson();
 body.onLoad = content.onLoad;
-body.onMyShow = content.onMyShow;
+body.onMyShow = content.onMyShow; 
+body.tobookshelf = content.tobookshelf;
 Page(body)

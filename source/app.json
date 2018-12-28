@@ -1,6 +1,8 @@
 {
   "pages":[
     "pages/home/home",
+    "pages/endreading/endreading",
+    "pages/auth/auth",
     "pages/readingcompletion/readingcompletion",
     "pages/readaloud/readaloud",
     "pages/others/others",
@@ -10,8 +12,7 @@
     "pages/subtitles/subtitles",
     "pages/mylike/mylike",
     "pages/ranking/ranking",
-    "pages/bookshelf/bookshelf",
-    "pages/auth/auth"
+    "pages/bookshelf/bookshelf"
   ],
   "window":{
     "backgroundTextStyle":"light",

@@ -544,4 +544,8 @@ button[disabled][type=primary] {
 .maintab-item{
   height: 100%;
 }
+.to-white{
+  color:#1EA296;
+  border-bottom: 4rpx solid #1EA296;
+}
 

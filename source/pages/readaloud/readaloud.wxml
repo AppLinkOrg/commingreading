@@ -21,13 +21,13 @@
     <view class='text-center ' hover-class='bg-primary txt-white' style='width:120rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>重录</view>
 
     <view class='text-center' style='width:300rpx;'>
-      <image class='icon-40' src='{{uploadpath}}resource/{{res.luyin}}'></image>
+      <image class='icon-40' bindtap='begin' src='{{uploadpath}}resource/{{res.luyin}}'></image>
     </view>
 
-    <navigator url='/pages/readingcompletion/readingcompletion' class='text-center ' hover-class='bg-primary txt-white' style='width:120rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>提交</navigator>
+    <navigator  bindtap='submit' class='text-center ' hover-class='bg-primary txt-white' style='width:120rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>提交</navigator>
   </view>
 
 
-  <view class='h5'>点击开始录音</view>
+  <view class='h5' >点击开始录音</view>
 
 </view>

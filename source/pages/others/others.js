@@ -2,6 +2,7 @@
 import { AppBase } from "../../appbase";
 import { ApiConfig } from "../../apis/apiconfig";
 import { InstApi } from "../../apis/inst.api.js";
+import { BookApi } from "../../apis/book.api.js";
 
 class Content extends AppBase {
   constructor() {
@@ -15,6 +16,10 @@ class Content extends AppBase {
   }
   onMyShow() {
     var that = this;
+    var bookapi = new BookApi();
+    bookapi.bookinfo({ id: this.Base.options.id }, (bookinfo) => {
+      this.Base.setMyData({ bookinfo });
+    });
   }
 
 }

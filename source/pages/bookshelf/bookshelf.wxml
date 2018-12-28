@@ -1,8 +1,14 @@
 <!--pages/bookshelf/bookshelf.wxml-->
-<navigator url='/pages/mytalkdetails/mytalkdetails' style='' class='radius-10 bg-white padding-20 margin-20'>
-<view class='txt-black'>《海燕》</view>
-<view class='flex-row flex-center margin-left-20 margin-top-10'>
-<view class='h5'>作者：高尔基</view>
+<view class=''>
+<image class='bg_img' src='{{uploadpath}}resource/{{res.bg_1}}'></image>
+</view>
+
+<navigator url='/pages/mytalkdetails/mytalkdetails' wx:for='{{booklist}}' wx:key='k' style='' class='radius-10 bg-white padding-20 margin-20'>
+<view class='txt-black'>《{{item.book_name}}》</view>
+<view class='flex-row flex-center  margin-top-10'>
+<view class='h5 flex-1 margin-left-10'>作者：{{item.author}}</view>
 <view class='h5'>2018-01-02</view>
 </view>
 </navigator>
+
+
