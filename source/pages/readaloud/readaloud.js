@@ -60,6 +60,11 @@ class Content extends AppBase {
 
   }
 
+  Choice(e){
+
+  }
+
+
 }
 var content = new Content();
 var body = content.generateBodyJson();
@@ -68,4 +73,5 @@ body.onMyShow = content.onMyShow;
 body.begin = content.begin; 
 body.submit = content.submit;
 body.cutmusic = content.cutmusic;
+body.Choice = content.Choice;
 Page(body)

@@ -1,15 +1,15 @@
 /*******使用方法，下面两句复制到page的js文件的头部
 
 import { ApiConfig } from '../../apis/apiconfig';
-import { InstApi } from '../../apis/book.api';
+import { InstApi } from '../../apis/talk.api';
 
-var bookApi=new BookApi();
+var talkApi=new TalkApi();
 *******/
 import { ApiConfig } from 'apiconfig';
-export class BookApi{
+export class TalkApi{
 
 
-    bookinfo(json, callback, showLoading = true) {
+    addreadlike(json, callback, showLoading = true) {
 
         if (showLoading)
             ApiConfig.ShowLoading();
@@ -18,7 +18,7 @@ export class BookApi{
         console.log(header);
         console.log(json);
         wx.request({
-            url: ApiConfig.GetApiUrl() + 'book/bookinfo',
+            url: ApiConfig.GetApiUrl() + 'talk/addreadlike',
             data: json,
             method: 'POST',
             dataType: 'json',
@@ -41,7 +41,7 @@ export class BookApi{
         })
     }
 
-    booklist(json, callback, showLoading = true) {
+    addtalk(json, callback, showLoading = true) {
 
         if (showLoading)
             ApiConfig.ShowLoading();
@@ -50,7 +50,7 @@ export class BookApi{
         console.log(header);
         console.log(json);
         wx.request({
-            url: ApiConfig.GetApiUrl() + 'book/booklist',
+            url: ApiConfig.GetApiUrl() + 'talk/addtalk',
             data: json,
             method: 'POST',
             dataType: 'json',
@@ -73,7 +73,7 @@ export class BookApi{
         })
     }
 
-    readlist(json, callback, showLoading = true) {
+    messagelist(json, callback, showLoading = true) {
 
         if (showLoading)
             ApiConfig.ShowLoading();
@@ -82,7 +82,39 @@ export class BookApi{
         console.log(header);
         console.log(json);
         wx.request({
-            url: ApiConfig.GetApiUrl() + 'book/readlist',
+            url: ApiConfig.GetApiUrl() + 'talk/messagelist',
+            data: json,
+            method: 'POST',
+            dataType: 'json',
+            header: header,
+            success: function (res) {
+                if (callback != null) {
+                    callback(res.data);
+                }
+            },
+            fail: function (res) {
+                console.log(res);
+                callback(false);
+            },
+            complete: function (res) {
+                console.log(res);
+            
+                if (showLoading)
+                    ApiConfig.CloseLoading();
+            }
+        })
+    }
+
+    likelist(json, callback, showLoading = true) {
+
+        if (showLoading)
+            ApiConfig.ShowLoading();
+
+        var header = ApiConfig.GetHeader();
+        console.log(header);
+        console.log(json);
+        wx.request({
+            url: ApiConfig.GetApiUrl() + 'talk/likelist',
             data: json,
             method: 'POST',
             dataType: 'json',

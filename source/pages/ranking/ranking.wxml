@@ -22,9 +22,8 @@
 
 
 <view wx:if='{{ctt==1}}' wx:for='{{monthlist}}' wx:key='k'>
-
   <view  class='padding-30'>
-    <navigator url='/pages/others/others?id={{item.id}}' style='border-bottom:1rpx solid white' class='padding-bottom-20'>
+    <navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}' style='border-bottom:1rpx solid white' class='padding-bottom-20'>
       <view class='txt-black'>《{{item.book_name}}》</view>
       <view class='flex-row flex-center margin-left-10 margin-top-10'>
         <view class='flex-1 h5'>作者：{{item.author}}</view>
@@ -34,10 +33,9 @@
   </view>
 </view>
 
-
 <view wx:if='{{ctt==2}}' wx:for='{{alllist}}' wx:key='k'>
   <view class='padding-30'>
-    <navigator url='/pages/others/others?id={{item.id}}' style='border-bottom:1rpx solid white' class='padding-bottom-20'>
+    <navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}' style='border-bottom:1rpx solid white' class='padding-bottom-20'>
       <view class='txt-black'>《{{item.book_name}}》</view>
       <view class='flex-row flex-center margin-left-10 margin-top-10'>
         <view class='flex-1 h5'>作者：{{item.author}}</view>

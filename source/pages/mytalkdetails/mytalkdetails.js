@@ -3,7 +3,8 @@ import { AppBase } from "../../appbase";
 import { ApiConfig } from "../../apis/apiconfig";
 import { InstApi } from "../../apis/inst.api.js";
 import { ApiUtil } from "../../apis/apiutil.js";
-import { BookApi } from "../../apis/book.api.js";
+import { BookApi } from "../../apis/book.api.js"; 
+import { TalkApi } from "../../apis/talk.api.js";
 
 class Content extends AppBase {
   constructor() {
@@ -20,7 +21,18 @@ class Content extends AppBase {
     var bookapi = new BookApi();
     bookapi.bookinfo({id:this.Base.options.id}, (bookinfo) => {
       this.Base.setMyData({ bookinfo });
+      var talkapi = new TalkApi();
+      
+      talkapi.messagelist({ company_id:bookinfo.id }, (messagelist) => {
+        this.Base.setMyData({ messagelist });
+      });
+    }); 
+    
+    
+    bookapi.readlist({book_id:this.Base.options.id}, (readlist) => {
+      this.Base.setMyData({ readlist });
     });
+    
   }
   setPageTitle(instinfo) {
     wx.setNavigationBarTitle({

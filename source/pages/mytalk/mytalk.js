@@ -2,6 +2,8 @@
 import { AppBase } from "../../appbase";
 import { ApiConfig } from "../../apis/apiconfig";
 import { InstApi } from "../../apis/inst.api.js";
+import { BookApi } from "../../apis/book.api.js"; 
+import { TalkApi } from "../../apis/talk.api.js";
 
 class Content extends AppBase {
   constructor() {
@@ -14,6 +16,10 @@ class Content extends AppBase {
   }
   onMyShow() {
     var that = this;
+    var talkapi = new TalkApi();
+    talkapi.messagelist({  }, (messagelist) => {
+      this.Base.setMyData({ messagelist });
+    });
   }
 }
 var content = new Content();

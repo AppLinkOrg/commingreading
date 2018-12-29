@@ -1,9 +1,9 @@
 {
   "pages":[
     "pages/home/home",
+    "pages/auth/auth",
     "pages/ranking/ranking",
     "pages/endreading/endreading",
-    "pages/auth/auth",
     "pages/readingcompletion/readingcompletion",
     "pages/readaloud/readaloud",
     "pages/others/others",

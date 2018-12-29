@@ -16,21 +16,21 @@
 </view>
 
 <view class='padding-30 txt-black txt-bold margin-top bg-white'>
-  朗读者(3)：
+  朗读者({{readlist.length}})：
 </view>
 
 
-<view class='flex-row flex-center pinlun  bg-white' style='border-bottom:1rpx solid #F3F3F3;'>
+<view class='flex-row flex-center pinlun  bg-white' wx:for='{{readlist}}' wx:key='k' style='border-bottom:1rpx solid #F3F3F3;'>
   <navigator url='/pages/others/others?id={{bookinfo.id}}' class=''>
     <image class='icon-30 take' src='{{uploadpath}}resource/{{res.touxiangluyin}}'></image>
-    <image class='icon-50' src='{{UserInfo.avatarUrl}}'></image>
+    <image class='icon-50' src='{{item.member_avatarUrl}}'></image>
   </navigator>
 
   <view class='margin-left-20  flex-1'>
-    <view class=' margin-bottom-20'>卖火柴的小女孩</view>
+    <view class=' margin-bottom-20'>{{item.member_id_name}}</view>
 
     <view class='flex-row flex-center '>
-
+    
       <view class='flex-1 flex-row flex-center'>
         <image class='icon-20' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
         <view class='margin-left-10'>23</view>
