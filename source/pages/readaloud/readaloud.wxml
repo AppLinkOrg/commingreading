@@ -29,12 +29,33 @@
     <navigator  bindtap='submit' class='text-center ' id='{{bookinfo.id}}' hover-class='bg-primary txt-white' style='width:120rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>提交</navigator>
   </view>
 
-
-  <view class='h5' >点击开始录音</view>
+  <view class='h5 flex-row flex-center' >
+  <!-- <button style='width:150rpx;height:50rpx;' bindtap='SayPassword' class='h5'>开始录音</button> -->
+  <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5'  bindtap="start" >开始录音</button>
+  <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="stop" >暂停录音</button>
+    <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5'  bindtap="play" >开始播放</button>
+  <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5'  bindtap='stopVoice' >暂停播放</button>
+  </view>
 
 </view>
 
-<view class='bgm' bindtap='cutmusic'>
+<view class='bgm' bindtap='btnopendetails'>
 <image class='icon-30' src='{{uploadpath}}resource/{{res.xuanzeyinyue}}'></image>
 </view>
+
+</view>
+
+
+<view class='' animation='{{animationData}}' hidden='{{open!=1||activitieslist.length==0}}'>
+  <view class='bg' bindtap='bindclosedetails' style='height:100%'>
+  </view>
+
+  <!-- <image class='under' src='{{uploadpath}}indexbanner/{{indexbanner[0].img}}'> -->
+  <view class='under' bindtap='toactivitydetails'>
+    <!-- <view  bindtap='bindclosedetails' class='margin-top-20  text-center' style='width:100%'>取消</view> -->
+
+  </view>
+
+  <!-- <image class='refuse icon-25 ' bindtap='bindclosedetails' src='{{uploadpath}}resource/{{res.refuse}}'></image> -->
+
 </view>

@@ -30,3 +30,20 @@
   height: 200rpx;
   z-index: 100;
 }
+.bg {
+  background: rgb(8, 8, 8);
+  opacity: 0;
+  position: fixed;
+  bottom: 0px;
+  z-index: 100;
+  width: 100%;
+}
+.under {
+  position: fixed;
+  z-index: 101;
+  width: 100%;
+  background: black;
+  opacity: 0.5;
+  height: 55%;
+  bottom: 0;
+}

@@ -15,6 +15,7 @@ class Content extends AppBase {
     super.onLoad(options);
     this.Base.setMyData({ status:"play" })
   }
+  
   onMyShow() {
     var that = this;
     var bookapi = new BookApi();

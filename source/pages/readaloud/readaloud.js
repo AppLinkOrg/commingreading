@@ -10,9 +10,15 @@ class Content extends AppBase {
   }
   onLoad(options) {
     this.Base.Page = this;
-    //options.id=5;
+    options.id=2;
     super.onLoad(options);
-    this.Base.setMyData({  })
+    this.Base.setMyData({ open: 2 })
+    const app = getApp()
+    const recorderManager = wx.getRecorderManager()
+    const innerAudioContext = wx.createInnerAudioContext()
+    var tempFilePath;
+    
+
   }
   onMyShow() {
     var that = this;
@@ -64,6 +70,69 @@ class Content extends AppBase {
 
   }
 
+  bindclosedetails(e) {
+    this.Base.setMyData({
+      open: 2
+    })
+
+  }
+  btnopendetails() {
+    this.Base.setMyData({
+      open: 1
+    })
+  }
+ 
+
+  start(e) {
+    const recorderManager = wx.getRecorderManager()
+    const innerAudioContext = wx.createInnerAudioContext()
+    const options = {
+    duration: 600000,//指定录音的时长，单位 ms
+    sampleRate: 16000,//采样率
+    
+    numberOfChannels: 1,//录音通道数
+    encodeBitRate: 96000,//编码码率
+    format: 'mp3',//音频格式，有效值 aac/mp3
+    frameSize: 50,//指定帧大小，单位 KB
+  }
+  //开始录音
+  recorderManager.start(options);
+  recorderManager.onStart(() => {
+    console.log('recorder start')
+  });
+  //错误回调
+  recorderManager.onError((res) => {
+    console.log(res);
+  })
+}
+
+  stop () {
+    const recorderManager = wx.getRecorderManager()
+    const innerAudioContext = wx.createInnerAudioContext()
+  recorderManager.stop();
+  recorderManager.onStop((res) => {
+    this.tempFilePath = res.tempFilePath;
+    console.log('停止录音', res.tempFilePath)
+    const { tempFilePath } = res
+  })
+}
+
+  play () {
+    const recorderManager = wx.getRecorderManager()
+    const innerAudioContext = wx.createInnerAudioContext()
+  innerAudioContext.autoplay = true
+  innerAudioContext.src = this.tempFilePath,
+    innerAudioContext.onPlay(() => {
+      console.log('开始播放')
+    })
+  innerAudioContext.onError((res) => {
+    console.log(res.errMsg)
+    console.log(res.errCode)
+  })
+
+}
+
+
 
 }
 var content = new Content();
@@ -74,4 +143,12 @@ body.begin = content.begin;
 body.submit = content.submit;
 body.cutmusic = content.cutmusic;
 body.Choice = content.Choice;
+body.btnopendetails = content.btnopendetails;
+body.bindclosedetails = content.bindclosedetails; 
+
+body.playVoice = content.playVoice;
+
+body.play = content.play;
+body.start = content.start; 
+body.stop = content.stop; 
 Page(body)

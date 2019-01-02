@@ -61,7 +61,7 @@
 
 <view class='flex-row   padding-30' wx:for='{{messagelist}}' wx:key='k'>
   <view class=''>
-    <image class='icon-50 radius-10' src='{{UserInfo.avatarUrl}}'></image>
+    <image class='icon-50 radius-10' src='{{item.member_avatarUrl}}'></image>
   </view>
   <view class='margin-left-20  flex-1'>
     <view class='flex-row column'>

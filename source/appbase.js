@@ -101,7 +101,8 @@ export class AppBase {
       contactkefu: base.contactkefu,
       contactweixin: base.contactweixin, 
       download: base.download,
-      checkPermission: base.checkPermission
+      checkPermission: base.checkPermission,
+      recorderManager: base.recorderManager
 
 
       
@@ -118,7 +119,10 @@ export class AppBase {
     this.Base.setMyData({options:options});
 
     ApiConfig.SetUnicode(this.Base.unicode);
+
+    
   }
+  
   gotoOpenUserInfoSetting() {
     var that = this;
     wx.showModal({
@@ -136,6 +140,7 @@ export class AppBase {
       }
     })
   }
+ 
   setBasicInfo() {
     var that = this;
   }

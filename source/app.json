@@ -1,11 +1,11 @@
 {
   "pages":[
+    "pages/readaloud/readaloud",
     "pages/home/home",
     "pages/auth/auth",
     "pages/ranking/ranking",
     "pages/endreading/endreading",
     "pages/readingcompletion/readingcompletion",
-    "pages/readaloud/readaloud",
     "pages/others/others",
     "pages/mytalkdetails/mytalkdetails",
     "pages/mytalk/mytalk",
