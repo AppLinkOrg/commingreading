@@ -2,58 +2,63 @@
 <image class='img' mode='scaleToFill' bindtap='Choice' src='{{uploadpath}}resource/{{res.bg_2}}'></image>
 
 <view >
-<view class='flex-row flex-column padding-40' style=''>
-  <view class='txt-black h4'>《{{bookinfo.book_name}}》</view>
-  <view class='txt-black margin-top-10'>作者：{{bookinfo.author}}</view>
-  <view  class='txt-black margin-top-10'>朗读者:xxx</view>
-<scroll-view scroll-y class='text-center '	 style='height:550rpx;'>
-  <text class='content txt-black text-center margin-bottom-40'>
-{{bookinfo.book_content}}
-</text>
+  <view class='flex-row flex-column padding-40' style=''>
+    <view class='txt-black h4'>《{{bookinfo.book_name}}》</view>
+    <view class='txt-black margin-top-10'>作者：{{bookinfo.author}}</view>
+    <view class='txt-black margin-top-10'>朗读者:xxx</view>
+    <scroll-view scroll-y class='text-center ' style='height:550rpx;'>
+      <text class='content txt-black text-center margin-bottom-40'>
+   {{bookinfo.book_content}}
+    </text>
 
-</scroll-view>
+    </scroll-view>
 
-</view>
+  </view>
 
-<view class='flex-row flex-column mid padding-top-20 bg-white' style='border-top:1rpx solid #E8E8E8'>
-  <view>00'00"</view>
+  <view class='flex-row flex-column mid padding-top-20 bg-white' style='border-top:1rpx solid #E8E8E8'>
+    <view>00'00"</view>
 
 
-  <view class='flex-row flex-center'>
-    <view class='text-center ' hover-class='bg-primary txt-white' style='width:120rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>重录</view>
+    <view class='flex-row flex-center'>
+      <view class='text-center ' hover-class='bg-primary txt-white' style='width:120rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>重录</view>
 
-    <view class='text-center' style='width:300rpx;'>
-      <image class='icon-40' bindtap='begin' src='{{uploadpath}}resource/{{res.luyin}}'></image>
+      <view class='text-center' style='width:300rpx;'>
+        <image class='icon-40' bindtap='begin' src='{{uploadpath}}resource/{{res.luyin}}'></image>
+      </view>
+
+      <navigator bindtap='submit' class='text-center ' id='{{bookinfo.id}}' hover-class='bg-primary txt-white' style='width:120rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>提交</navigator>
     </view>
 
-    <navigator  bindtap='submit' class='text-center ' id='{{bookinfo.id}}' hover-class='bg-primary txt-white' style='width:120rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>提交</navigator>
+
+    <view class='h5 flex-row flex-center'>
+      <!-- <button style='width:150rpx;height:50rpx;' bindtap='SayPassword' class='h5'>开始录音</button> -->
+      <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="start">开始录音</button>
+      <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="stop">暂停录音</button>
+      <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="play">开始播放</button>
+      <button style='width:150rpx;height:50rpx;line-height:50rpx;'  class='h5'>播bgm</button>
+      <button style='width:150rpx;height:50rpx;line-height:50rpx;'  class='h5' >暂停</button>
+    </view>
+
   </view>
 
-  <view class='h5 flex-row flex-center' >
-  <!-- <button style='width:150rpx;height:50rpx;' bindtap='SayPassword' class='h5'>开始录音</button> -->
-  <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5'  bindtap="start" >开始录音</button>
-  <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="stop" >暂停录音</button>
-    <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5'  bindtap="play" >开始播放</button>
-  <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5'  bindtap='stopVoice' >暂停播放</button>
+  <view class='bgm' bindtap='btnopendetails'>
+    <image class='icon-30' src='{{uploadpath}}resource/{{res.xuanzeyinyue}}'></image>
   </view>
-
-</view>
-
-<view class='bgm' bindtap='btnopendetails'>
-<image class='icon-30' src='{{uploadpath}}resource/{{res.xuanzeyinyue}}'></image>
-</view>
 
 </view>
 
 
 <view class='' animation='{{animationData}}' hidden='{{open!=1||activitieslist.length==0}}'>
   <view class='bg' bindtap='bindclosedetails' style='height:100%'>
+  
   </view>
 
-  <!-- <image class='under' src='{{uploadpath}}indexbanner/{{indexbanner[0].img}}'> -->
-  <view class='under' bindtap='toactivitydetails'>
-    <!-- <view  bindtap='bindclosedetails' class='margin-top-20  text-center' style='width:100%'>取消</view> -->
-
+  <!-- <image class='under ' src='{{uploadpath}}indexbanner/{{indexbanner[0].img}}'> -->
+  <view class='under padding-20' bindtap=''>
+  <view bindtap='zt' class='txt-white'>暂停</view>
+    <navigator wx:for='{{bgmlist}}' wx:key='k' class='margin-20 '  wx:for-index="idx" data-index='{{idx}}'  bindtap='bgm' data-src='{{item.music}}' data-id='{{item.id}}' style=''>
+      <view class=' txt-white txt-bold flex-row flex-center '  style='height:80rpx;'>{{item.music_name}}</view>
+    </navigator>
   </view>
 
   <!-- <image class='refuse icon-25 ' bindtap='bindclosedetails' src='{{uploadpath}}resource/{{res.refuse}}'></image> -->

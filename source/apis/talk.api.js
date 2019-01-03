@@ -73,7 +73,7 @@ export class TalkApi{
         })
     }
 
-    messagelist(json, callback, showLoading = true) {
+    likelist(json, callback, showLoading = true) {
 
         if (showLoading)
             ApiConfig.ShowLoading();
@@ -82,7 +82,7 @@ export class TalkApi{
         console.log(header);
         console.log(json);
         wx.request({
-            url: ApiConfig.GetApiUrl() + 'talk/messagelist',
+            url: ApiConfig.GetApiUrl() + 'talk/likelist',
             data: json,
             method: 'POST',
             dataType: 'json',
@@ -105,7 +105,7 @@ export class TalkApi{
         })
     }
 
-    likelist(json, callback, showLoading = true) {
+    messagelist(json, callback, showLoading = true) {
 
         if (showLoading)
             ApiConfig.ShowLoading();
@@ -114,7 +114,7 @@ export class TalkApi{
         console.log(header);
         console.log(json);
         wx.request({
-            url: ApiConfig.GetApiUrl() + 'talk/likelist',
+            url: ApiConfig.GetApiUrl() + 'talk/messagelist',
             data: json,
             method: 'POST',
             dataType: 'json',
