@@ -1,7 +1,8 @@
 <!--pages/readaloud/readaloud.wxml-->
 <image class='img' mode='scaleToFill' bindtap='Choice' src='{{uploadpath}}resource/{{res.bg_2}}'></image>
 
-<view >
+<form bindsubmit="confirm" bindreset="formReset" report-submit="{{true}}">
+<view>
   <view class='flex-row flex-column padding-40' style=''>
     <view class='txt-black h4'>《{{bookinfo.book_name}}》</view>
     <view class='txt-black margin-top-10'>作者：{{bookinfo.author}}</view>
@@ -18,26 +19,27 @@
   <view class='flex-row flex-column mid padding-top-20 bg-white' style='border-top:1rpx solid #E8E8E8'>
     <view>00'00"</view>
 
-
     <view class='flex-row flex-center'>
-      <view class='text-center ' hover-class='bg-primary txt-white' style='width:120rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>重录</view>
+      <button class='text-center h5 flex-row flex-center' hover-class='bg-primary txt-white ' style='width:120rpx;height:50rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>重录</button>
 
       <view class='text-center' style='width:300rpx;'>
         <image class='icon-40' bindtap='begin' src='{{uploadpath}}resource/{{res.luyin}}'></image>
       </view>
 
-      <navigator bindtap='submit' class='text-center ' id='{{bookinfo.id}}' hover-class='bg-primary txt-white' style='width:120rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>提交</navigator>
-    </view>
+      <button  form-type='submit' class='text-center h5 flex-row flex-center' id='{{bookinfo.id}}' hover-class='bg-primary txt-white' style='width:120rpx;height:50rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>提交</button>
 
+    </view>
 
     <view class='h5 flex-row flex-center'>
       <!-- <button style='width:150rpx;height:50rpx;' bindtap='SayPassword' class='h5'>开始录音</button> -->
-      <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="start">开始录音</button>
-      <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="stop">暂停录音</button>
-      <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="play">开始播放</button>
-      <button style='width:150rpx;height:50rpx;line-height:50rpx;'  class='h5'>播bgm</button>
-      <button style='width:150rpx;height:50rpx;line-height:50rpx;'  class='h5' >暂停</button>
+      <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="start">录音</button>
+      <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="stop">暂停</button>
+      <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="play">播放</button>
+      
     </view>
+
+<view></view>
+
 
   </view>
 
@@ -56,7 +58,7 @@
   <!-- <image class='under ' src='{{uploadpath}}indexbanner/{{indexbanner[0].img}}'> -->
   <view class='under padding-20' bindtap=''>
   <view bindtap='zt' class='txt-white'>暂停</view>
-    <navigator wx:for='{{bgmlist}}' wx:key='k' class='margin-20 '  wx:for-index="idx" data-index='{{idx}}'  bindtap='bgm' data-src='{{item.music}}' data-id='{{item.id}}' style=''>
+    <navigator wx:for='{{bgmlist}}' wx:key='k' class='margin-20 '  wx:for-index="idx" data-index='{{idx}}'  bindtap='playbgm' data-src='{{item.music}}' data-id='{{item.id}}' style=''>
       <view class=' txt-white txt-bold flex-row flex-center '  style='height:80rpx;'>{{item.music_name}}</view>
     </navigator>
   </view>
@@ -64,3 +66,5 @@
   <!-- <image class='refuse icon-25 ' bindtap='bindclosedetails' src='{{uploadpath}}resource/{{res.refuse}}'></image> -->
 
 </view>
+
+</form>

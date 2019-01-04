@@ -9,6 +9,38 @@ import { ApiConfig } from 'apiconfig';
 export class BookApi{
 
 
+    bgmlist(json, callback, showLoading = true) {
+
+        if (showLoading)
+            ApiConfig.ShowLoading();
+
+        var header = ApiConfig.GetHeader();
+        console.log(header);
+        console.log(json);
+        wx.request({
+            url: ApiConfig.GetApiUrl() + 'book/bgmlist',
+            data: json,
+            method: 'POST',
+            dataType: 'json',
+            header: header,
+            success: function (res) {
+                if (callback != null) {
+                    callback(res.data);
+                }
+            },
+            fail: function (res) {
+                console.log(res);
+                callback(false);
+            },
+            complete: function (res) {
+                console.log(res);
+            
+                if (showLoading)
+                    ApiConfig.CloseLoading();
+            }
+        })
+    }
+
     bookinfo(json, callback, showLoading = true) {
 
         if (showLoading)
@@ -105,7 +137,7 @@ export class BookApi{
         })
     }
 
-    bgmlist(json, callback, showLoading = true) {
+    addlangdu(json, callback, showLoading = true) {
 
         if (showLoading)
             ApiConfig.ShowLoading();
@@ -114,7 +146,7 @@ export class BookApi{
         console.log(header);
         console.log(json);
         wx.request({
-            url: ApiConfig.GetApiUrl() + 'book/bgmlist',
+            url: ApiConfig.GetApiUrl() + 'book/addlangdu',
             data: json,
             method: 'POST',
             dataType: 'json',

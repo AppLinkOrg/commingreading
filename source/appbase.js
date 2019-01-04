@@ -436,17 +436,22 @@ export class AppBase {
       }
     });
   }
-  uploadFile(modul, filename, callback) {
-
+  uploadFile(modul, filename,lujin,callback) {
+   //console.log(8888888888);
+  
     var tempFilePaths = filename
+    var lujin = lujin;
+    console.log("ssssssssssss"+tempFilePaths);
+    console.log(lujin);
     wx.uploadFile({
       url: ApiConfig.GetFileUploadAPI(), //仅为示例，非真实的接口地址
-      filePath: tempFilePaths,
+      filePath: lujin,
       name: 'file',
       formData: {
         'module': modul,
         "field": "file"
       },
+      
       success: function (res) {
         console.log(res);
         var data = res.data
@@ -465,6 +470,7 @@ export class AppBase {
       }
     });
   }
+
   uploadImage(modul, callback,count=1, completecallback) {
     wx.chooseImage({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有

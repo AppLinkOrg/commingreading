@@ -21,11 +21,14 @@ class Content extends AppBase {
     options.id = 2;
     super.onLoad(options);
     this.Base.setMyData({
-      open: 1,
+      open: 2,
       isplay: false
     })
 
     var tempFilePath;
+    
+    
+    
 
 
 
@@ -48,7 +51,6 @@ class Content extends AppBase {
         bgmlist
       });
     });
-
   }
 
   begin(e) {
@@ -124,6 +126,7 @@ class Content extends AppBase {
     recorderManager.onError((res) => {
       console.log(res);
     })
+
   }
 
   stop() {
@@ -135,10 +138,12 @@ class Content extends AppBase {
     recorderManager.onStop((res) => {
       this.tempFilePath = res.tempFilePath;
       console.log('停止录音', res.tempFilePath)
-      const {
-        tempFilePath
-      } = res
-    })
+      const {tempFilePath} = res
+      
+      })
+  }
+  shangchuan(e) {
+    
   }
 
   play() {
@@ -158,7 +163,7 @@ class Content extends AppBase {
 
   }
 
-  bgm(e) {
+  playbgm(e) {
     var that = this;
     var src = e.currentTarget.dataset.src;
     var uploadpath = that.Base.getMyData().uploadpath;
@@ -215,6 +220,7 @@ class Content extends AppBase {
 
 
   }
+
   zt(e) {
     var that = this;
     const innerAudioContext = wx.createInnerAudioContext()
@@ -222,26 +228,52 @@ class Content extends AppBase {
 
   }
 
-  shangchuan(e) {
-    wx.uploadFile({
+  confirm(e) {
+    console.log(e);
+    var that=this;
+    var api = new BookApi();
 
-      url: '这里填写路径地址',
-      filePath: tempFilePath,
-      name: temp,
-      header: {
-        contentType: "multipart/form-data", //按需求增加
-      },
-      formData: {
-        file: tempFilePath,
-        //看后台需要什么传什么过去，这里我传两个，一个是临时路径，一个是录音时长
-        time: TimeIng,
-      },
-      success: function(res) {
-        //这里你可以根据后台传过来的res进行任性的操作，是的。。任性！！！
-      }
-    })
+    //var vonice = this.tempFilePath;
+    var ve = this.tempFilePath;
+    var talker=this.Base.getMyData().memberinfo.id;
+    var book_id=this.Base.getMyData().bookinfo.id;
+    var name = this.Base.getMyData().bookinfo.book_name;
+    if (ve==null){
+      this.Base.info("请录音再上传");
+      return;
+    }
+    console.log(ve);
+
+    //return;this.Base.uploadImage("post",(ret)=>{
+    this.Base.uploadFile("readfile", "录音文件《"+name+"》",  ve,(ret) => {
+      var vonice = this.Base.getMyData().ve;
+      console.log("rrrrrrrrrr" + vonice)
+      
+      that.Base.setMyData({ vonice: ret });
+      api.addlangdu({
+        status: "A",
+        book_id: book_id,
+        member_id: talker,
+        read_file: this.Base.getMyData().vonice
+      }, (ret) => {
+        console.log(666666666666666);
+        console.log(this.Base.getMyData().vonice);
+        if (ret.code == 0) {
+          console.log('提交成功');
+          this.onMyShow();
+        } else {
+          this.Base.info(ret.result);
+        }
+      });
+      
+    });
+
+    var vice = this.Base.getMyData().vonice;
+
+    console.log("上传的文件" + vice);
+
   }
-
+  
 }
 //var innerAudioContext = null;
 var content = new Content();
@@ -254,11 +286,13 @@ body.cutmusic = content.cutmusic;
 body.Choice = content.Choice;
 body.btnopendetails = content.btnopendetails;
 body.bindclosedetails = content.bindclosedetails;
-
 body.playVoice = content.playVoice;
-body.bgm = content.bgm;
+body.playbgm = content.playbgm;
 body.play = content.play;
 body.start = content.start;
 body.stop = content.stop;
-body.zt = content.zt;
+body.zt = content.zt; 
+body.shangchuan = content.shangchuan; 
+body.confirm = content.confirm; 
+body.uploadvonice = content.uploadvonice;
 Page(body)
