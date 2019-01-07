@@ -20,8 +20,8 @@
 </view>
 
 
-<view class='flex-row flex-center pinlun  bg-white' wx:for='{{readlist}}' wx:key='k' style='border-bottom:1rpx solid #F3F3F3;'>
-  <navigator url='/pages/others/others?id={{bookinfo.id}}' class=''>
+<view class='flex-row flex-center pinlun  bg-white' wx:for='{{readlist}}' wx:key='k' wx:for-index='idx' style='border-bottom:1rpx solid #F3F3F3;'>
+  <navigator url='/pages/others/others?readid={{item.id}}' class=''>
     <image class='icon-30 take' src='{{uploadpath}}resource/{{res.touxiangluyin}}'></image>
     <image class='icon-50' src='{{item.member_avatarUrl}}'></image>
   </navigator>
@@ -41,7 +41,7 @@
         <view class='margin-left-10'>12</view>
       </view>
 
-      <view class='flex-1 txt-gray'>{{date}}</view>
+      <view class='flex-1 txt-gray'>{{formattime[idx]}}</view>
 
     </view>
   </view>

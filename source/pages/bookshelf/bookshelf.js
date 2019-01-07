@@ -16,9 +16,18 @@ class Content extends AppBase {
   onMyShow() {
     var that = this;
     var bookapi = new BookApi();
-    bookapi.booklist({}, (booklist) => {
-      this.Base.setMyData({ booklist });
+    var memberinfo = this.Base.getMyData().memberinfo;
+    bookapi.readlist({ member_id: memberinfo.id}, (readlist) => {
+      this.Base.setMyData({ readlist });
+
+      for (var i = 0; i < readlist.length; i++) {
+        bookapi.booklist({ id: 2}, (booklist) => {
+          this.Base.setMyData({ booklist });
+        });
+      }
+
     });
+    
   }
   
 }

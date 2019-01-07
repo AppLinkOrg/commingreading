@@ -1,3 +1,4 @@
+// pages/recordagain/recordagain.js
 // pages/readaloud/readaloud.js
 import {
   AppBase
@@ -20,12 +21,13 @@ class Content extends AppBase {
 
   onLoad(options) {
     this.Base.Page = this;
-    //options.id = 2;
+    //options.bookid = 2;
+    //options.id=25;
     super.onLoad(options);
     this.Base.setMyData({
       open: 2,
       isplay: false,
-      play:"begin"
+      play: "begin"
     })
 
     var tempFilePath;
@@ -39,7 +41,6 @@ class Content extends AppBase {
       innerAudioContext.destroy()
     })
     innerAudioContext.onEnded(() => {
-      var bgmlist = this.Base.getMyData().bgmlist;
       console.log('播放结束')
       bgmlist[index].audioStatus = false;
       this.Base.setMyData({
@@ -48,7 +49,6 @@ class Content extends AppBase {
       //播放结束，销毁该实例
       innerAudioContext.destroy()
     })
-    
 
     innerAudioContext.onError((res) => {
       console.log(res.errMsg)
@@ -56,21 +56,9 @@ class Content extends AppBase {
       //播放错误，销毁该实例
       innerAudioContext.destroy()
     })
-    innerAudioContext.onTimeUpdate((res) => {
-
-      var that = this;
-      that.Base.setMyData({
-        audio_duration: innerAudioContext.duration,
-        audio_duration_str: dtime(innerAudioContext.duration),
-        audio_value: innerAudioContext.currentTime,
-        audio_value_str: dtime(innerAudioContext.currentTime)
-
-      });
-      
-      
-    })
 
     this.Base.innerAudioContext = innerAudioContext;
+
 
   }
 
@@ -85,7 +73,7 @@ class Content extends AppBase {
     var bookapi = new BookApi();
     //const myaudio = wx.createInnerAudioContext();
     bookapi.bookinfo({
-      id: this.Base.options.id
+      id: this.Base.options.bookid
     }, (bookinfo) => {
       this.Base.setMyData({
         bookinfo
@@ -100,7 +88,7 @@ class Content extends AppBase {
     });
   }
 
-  begin(e){
+  begin(e) {
 
     this.Base.setMyData({ play: "suspend" })
     wx.showToast({
@@ -110,7 +98,7 @@ class Content extends AppBase {
     })
 
     var that = this;
-    
+
     var uploadpath = that.Base.getMyData().uploadpath;
     var bgmlist = this.Base.getMyData().bgmlist;
     for (var i = 0; i < bgmlist.length; i++) {
@@ -119,7 +107,6 @@ class Content extends AppBase {
     var index = e.currentTarget.dataset.index;
     var innerAudioContext = this.Base.innerAudioContext;
 
-    innerAudioContext.loop = true
     console.log("111111")
     innerAudioContext.obeyMuteSwitch = false;
     innerAudioContext.src = uploadpath + "bgm_file/" + src;
@@ -128,6 +115,7 @@ class Content extends AppBase {
     for (var i = 0; i < bgmlist.length; i++) {
       bgmlist[i].audioStatus = false
     }
+
     bgmlist[0].audioStatus = true;
     console.log("序号" + index)
 
@@ -194,8 +182,7 @@ class Content extends AppBase {
     const recorderManager = wx.getRecorderManager()
     var innerAudioContext = this.Base.innerAudioContext;
     innerAudioContext.autoplay = true
-    innerAudioContext.loop = true
-    
+
     innerAudioContext.src = this.tempFilePath,
       innerAudioContext.onPlay(() => {
         console.log('开始播放')
@@ -205,37 +192,36 @@ class Content extends AppBase {
       console.log(res.errCode)
     })
   }
-  luyinstop(e){
+  luyinstop(e) {
     this.Base.setMyData({ play: "play" })
     var innerAudioContext = this.Base.innerAudioContext;
     innerAudioContext.pause();
     console.log("暂停")
   }
-  againrecord(e){
-    var that=this;
+  againrecord(e) {
+    var that = this;
     wx.showModal({
       title: '',
       content: '确认重新录制？',
       showCancel: true,
-      
+
       cancelText: '取消',
       cancelColor: '#EE2222',
       confirmText: '确定',
       confirmColor: '#2699EC',
       success: function (res) {
         if (res.confirm) {
-          that.Base.setMyData({ play: "begin" }) 
-          wx.showToast({
-            title: '请点击重新录制',
-            mask: false,
-            icon: 'none',
-          })
+          that.Base.setMyData({ play: "begin" })
           that.onMyShow();
         }
-        
+        wx.showToast({
+          title: '请点击重新录制',
+          mask: false,
+          icon: 'none',
+        })
       }
     });
-    
+
   }
 
   submit(e) {
@@ -248,11 +234,11 @@ class Content extends AppBase {
       cancelColor: '#EE2222',
       confirmText: '确定',
       confirmColor: '#2699EC',
-      success: function(res) {
+      success: function (res) {
         if (res.confirm) {
           wx.navigateTo({
-              url: '/pages/endreading/endreading?id=' + id,
-            }),
+            url: '/pages/endreading/endreading?id=' + id,
+          }),
 
             wx.showToast({
               title: '保存成功',
@@ -280,7 +266,7 @@ class Content extends AppBase {
 
   }
 
-  
+
 
 
 
@@ -322,7 +308,7 @@ class Content extends AppBase {
 
     //var vonice = this.tempFilePath;
     var ve = this.tempFilePath;
-    
+    var talker = this.Base.getMyData().memberinfo.id;
     var book_id = this.Base.getMyData().bookinfo.id;
     var name = this.Base.getMyData().bookinfo.book_name;
     if (ve == null) {
@@ -346,30 +332,24 @@ class Content extends AppBase {
 
           that.Base.uploadFile("readfile", "录音文件《" + name + "》", ve, (ret) => {
             var vonice = that.Base.getMyData().ve;
-            
+
 
             that.Base.setMyData({
               vonice: ret
             });
-            
-            var talker = that.Base.getMyData().memberinfo;
-
-            //console.log("wwwwwwwwww" + talker)
-
+            var book_id = that.Base.getMyData().bookinfo.id;
+            //console.log("MMMMMMMMMMMMMMMMM" + book_id)
             //return;
-
-            api.addlangdu({
-              status: "A",
-              book_id: book_id,
-              member_id: talker.id,
+            api.recordagain({
+              id: that.Base.options.id,
               read_file: that.Base.getMyData().vonice
             }, (ret) => {
               console.log(666666666666666);
               var book_id = that.Base.getMyData().bookinfo.id;
-              console.log("辣椒炒肉"+that.Base.getMyData().vonice);
+              console.log("辣椒炒肉" + that.Base.getMyData().vonice);
               if (ret.code == 0) {
                 console.log('提交成功');
-                
+
                 wx.reLaunch({
                   url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return,
                 })
@@ -387,7 +367,7 @@ class Content extends AppBase {
 
           });
 
-          
+
         }
       }
     });
@@ -395,31 +375,21 @@ class Content extends AppBase {
 
 
     //return;this.Base.uploadImage("post",(ret)=>{
-    
+
 
   }
 
 }
 //var innerAudioContext = null;
-function dtime(t) {
-  var t = parseInt(t);
-  var minute = parseInt(t / 60);
-  var second = parseInt(t % 60);
-  minute = minute <= 9 ? "0" + minute.toString() : minute.toString();
-  second = second <= 9 ? "0" + second.toString() : second.toString();
-
-  return minute + ":" + second;
-}
-
 var content = new Content();
 var body = content.generateBodyJson();
 body.onLoad = content.onLoad;
 body.onMyShow = content.onMyShow;
-body.begin = content.begin; 
+body.begin = content.begin;
 body.suspend = content.suspend;
-body.playrecord = content.playrecord; 
+body.playrecord = content.playrecord;
 body.luyinstop = content.luyinstop;
-body.againrecord = content.againrecord; 
+body.againrecord = content.againrecord;
 
 body.submit = content.submit;
 body.cutmusic = content.cutmusic;

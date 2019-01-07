@@ -15,12 +15,14 @@
 
 
     <view class='padding-30 flex-row flex-center' style=''>
-      <image wx:if='{{status=="play"}}' bindtap='Play' class='icon-25' src='{{uploadpath}}resource/{{res.zanting}}'></image>
-      <image wx:if='{{status=="stop"}}' bindtap='Stop' class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
+      <image wx:if='{{status=="play"}}' bindtap='Play' class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
+      <image wx:if='{{status=="stop"}}' bindtap='Stop'Play class='icon-25' src='{{uploadpath}}resource/{{res.zanting}}'></image>
       <view class='margin-left-10 txt-black'>00:00</view>
+      
       <view class="body-view flex-1">
         <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="1" max="100" />
       </view>
+
       <view class='txt-black'>03:00</view>
     </view>
 
@@ -42,11 +44,14 @@
 
 
       <view class='flex-row  flex-1 ' bindtap=''>
-        <view class='flex-row flex-center'>
+        <navigator bindtap='recordagain' class='flex-row flex-center'>
           <image class='icon-25' src='{{uploadpath}}resource/{{res.chongxinluzhi}}'></image>
           <view class=' margin-left-10 txt-black'>重新录制</view>
-        </view>
+        </navigator>
       </view>
+
+
+
 
     </view>
 

@@ -1,0 +1,50 @@
+/* pages/recordagain/recordagain.wxss */
+/* pages/readaloud/readaloud.wxss */
+.bgm{
+  position: fixed;
+  left: 20rpx;
+  top: 30rpx;
+  z-index: 10;
+}
+.content{
+  padding-left:70rpx;
+}
+.img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+
+}
+.take{
+  position: absolute;
+  margin-left: 20rpx;
+  margin-top:20rpx;
+  z-index: 2;
+}
+.mid{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 200rpx;
+  z-index: 100;
+}
+.bg {
+  background: rgb(8, 8, 8);
+  opacity: 0;
+  position: fixed;
+  bottom: 0px;
+  z-index: 100;
+  width: 100%;
+}
+.under {
+  position: fixed;
+  z-index: 101;
+  width: 100%;
+  background: rgb(95, 94, 94);
+  opacity: 0.8;
+  height: 55%;
+  bottom: 0;
+}

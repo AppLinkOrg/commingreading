@@ -1,3 +1,4 @@
+<!--pages/recordagain/recordagain.wxml-->
 <!--pages/readaloud/readaloud.wxml-->
 <image class='img' mode='scaleToFill' bindtap='Choice' src='{{uploadpath}}resource/{{res.bg_2}}'></image>
 

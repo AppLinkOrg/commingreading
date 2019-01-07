@@ -18,6 +18,7 @@ class Content extends AppBase {
   }
   onMyShow() {
     var that = this;
+    var formattime = [];
     var bookapi = new BookApi();
     bookapi.bookinfo({id:this.Base.options.id}, (bookinfo) => {
       this.Base.setMyData({ bookinfo });
@@ -25,12 +26,20 @@ class Content extends AppBase {
       
       talkapi.messagelist({ company_id:bookinfo.id }, (messagelist) => {
         this.Base.setMyData({ messagelist });
+        
       });
     }); 
     
     
     bookapi.readlist({book_id:this.Base.options.id}, (readlist) => {
       this.Base.setMyData({ readlist });
+      for (var i = 0; i < readlist.length; i++) {
+        formattime.push(ApiUtil.updatetime(readlist[i].created_date));
+
+      }
+      this.Base.setMyData({
+        formattime
+      });
     });
     
   }
