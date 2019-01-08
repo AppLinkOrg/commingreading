@@ -17,7 +17,8 @@ class Content extends AppBase {
   onMyShow() {
     var that = this;
     var talkapi = new TalkApi();
-    talkapi.messagelist({  }, (messagelist) => {
+    var memberinfo=this.Base.getMyData().memberinfo;
+    talkapi.messagelist({ member_id: memberinfo.id }, (messagelist) => {
       this.Base.setMyData({ messagelist });
     });
   }

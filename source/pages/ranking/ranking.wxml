@@ -27,7 +27,7 @@
       <view class='txt-black'>《{{item.book_name}}》</view>
       <view class='flex-row flex-center margin-left-10 margin-top-10'>
         <view class='flex-1 h5'>作者：{{item.author}}</view>
-        <view class='flex-1 h5  text-right'>阅读：110</view>
+        <view class='flex-1 h5  text-right'>阅读：0</view>
       </view>
     </navigator>
   </view>
@@ -39,7 +39,7 @@
       <view class='txt-black'>《{{item.book_name}}》</view>
       <view class='flex-row flex-center margin-left-10 margin-top-10'>
         <view class='flex-1 h5'>作者：{{item.author}}</view>
-        <view class='flex-1 h5  text-right'>阅读：2110</view>
+        <view class='flex-1 h5  text-right'>阅读：0</view>
       </view>
     </navigator>
   </view>

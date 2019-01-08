@@ -1,5 +1,10 @@
 <!--pages/mylike/mylike.wxml-->
-<view class='flex-row flex-center padding-30'>
+<view class='bg-white  flex-row flex-column' >
+<image class='icon-100' style='opacity:0.6' src='{{uploadpath}}resource/{{res.nolike_icon}}'></image>
+<view class='h5 txt-gray txt-bold margin-top-10 padding-bottom-30'>您还没有任何点赞哦，快给作品点赞吧！</view>
+</view>
+
+<!-- <view class='flex-row flex-center padding-30'>
   <view class=''>
     <image class='icon-50' src='{{UserInfo.avatarUrl}}'></image>
   </view>
@@ -25,4 +30,4 @@
     </view>
   </view>
 
-</view>
+</view> -->

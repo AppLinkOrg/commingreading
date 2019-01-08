@@ -17,7 +17,8 @@
   </view>
 
   <view class='flex-row flex-column mid padding-top-20 bg-white' style='border-top:1rpx solid #E8E8E8'>
-    <view>00'00"</view>
+    <view wx:if='{{audio_value_str==null}}'>00:00</view>
+    <view wx:if='{{audio_value_str!=null}}'>{{audio_value_str}}</view>
 
     <view class='flex-row flex-center'>
       <button class='text-center h5 flex-row flex-center' hover-class='bg-primary txt-white ' bindtap='againrecord' style='width:120rpx;height:50rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>重录</button>
@@ -37,7 +38,13 @@
     </view>
 
     <view class='h5 flex-row flex-center'>
-      <view   class='h5 txt-primary'>点击开始录音</view>
+    
+      <view wx:if='{{play=="begin"}}'   class='h5 txt-primary'>点击开始录音</view>
+      <view wx:if='{{play=="suspend"}}'   class='h5 txt-primary'>正在录音</view>
+      <view wx:if='{{play=="play"}}'   class='h5 txt-primary'>点击播放录音</view>
+      <view wx:if='{{play=="stop"}}'   class='h5 txt-primary'>暂停播放录音</view>
+
+
       <!-- <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="start">录音</button>
       <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="stop">暂停</button>
       <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="play">播放</button> -->

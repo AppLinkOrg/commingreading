@@ -1,35 +1,60 @@
 /* pages/mytalkdetails/mytalkdetails.wxss */
-Page{
-  padding-bottom: 100rpx;
+
+Page {
+   padding-bottom: 100rpx; 
 }
-.content{
-  padding-left:70rpx;
+
+.content {
+  padding-left: 70rpx;
   /* padding-right: 70rpx; */
 }
-.img{
+
+.img {
   position: absolute;
   width: 100%;
-  height: 90%;
+  height: 75%;
   top: 0;
   bottom: 0;
   z-index: -1;
 }
-.take{
+
+.take {
   position: absolute;
   margin-left: 20rpx;
-  margin-top:20rpx;
+  margin-top: 20rpx;
   z-index: 2;
 }
-.mid{
+
+ .mid{
   position: fixed;
   bottom: 0;
   width: 100%;
   z-index: 100;
-}
-.pinlun{
+} 
+
+.pinlun {
   padding-left: 30rpx;
   padding-right: 30rpx;
-  padding-top: 10rpx;
+  padding-top: 40rpx;
   padding-bottom: 40rpx;
   margin-bottom: 0rpx;
+}
+
+.reader {
+  /* position: absolute;
+  bottom: 100rpx;
+  width: 95%; */
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  bottom: 0;
+}
+.ld{
+  position: fixed;
+  bottom: 100rpx;
+  width: 100%;
+}
+
+.hid {
+  max-height: 550rpx;
 }

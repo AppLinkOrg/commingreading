@@ -73,7 +73,15 @@ class Content extends AppBase {
     this.Base.innerAudioContext = innerAudioContext;
 
   }
+ 
+  onUnload(){
+    var innerAudioContext = this.Base.innerAudioContext;
 
+    innerAudioContext.stop();
+    console.log("暂停播放")
+    console.log("88888888888888888888888");
+
+  }
   bgmOnPlay() {
 
     console.log('开始播放')

@@ -11,18 +11,20 @@
 {{bookinfo.book_content}}
 </text>
 </scroll-view>
-
 </view>
 
 <view class='bg-white'>
 <view class='padding-30 flex-row flex-center ' style='border-bottom:1rpx solid #F3F3F3'>
   <image wx:if='{{status=="play"}}' bindtap='Play' class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
   <image wx:if='{{status=="stop"}}' bindtap='Stop' class='icon-25' src='{{uploadpath}}resource/{{res.zanting}}'></image>
-  <view class='margin-left-10'>00:00</view>
+
+  <view wx:if='{{audio_value_str==null}}' class='margin-left-10'>00:00</view>
+<view wx:if='{{audio_value_str!=null}}' class='margin-left-10'>{{audio_value_str}}</view>
   <view class="body-view flex-1">
     <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="1" max="100" />
   </view>
-  <view>03:00</view>
+  <view wx:if='{{audio_duration_str==null}}' class='margin-left-10'>00:00</view>
+<view wx:if='{{audio_duration_str!=null}}' class='margin-left-10'>{{audio_duration_str}}</view>
 </view>
 
 <view class=' padding-30   flex-row flex-center' style='border-bottom:4rpx solid #E8E8E8'>
@@ -30,26 +32,29 @@
   <view class='flex-row flex-column flex-1 '>
     <view class='flex-row flex-center ' bindtap=''>
       <!-- <image  bindtap='dianzan' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image> -->
-     <image bindtap='dianzan' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
-      <view class=' margin-left-10'>点赞{{likelist.length}}</view>
-      
+     <image bindtap='dianzan' wx:if='{{readinfo.qwe==""}}' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
+<image wx:if='{{readinfo.qwe!=""}}' bindtap='dianzan' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzancolor}}'></image>
+      <view class=' margin-left-10' id='' bindtap='dianzan'>点赞{{readinfo.count1}}</view>
     </view>
   </view>
-
 
   <view class='flex-row flex-column flex-1 '>
     <navigator class='flex-row flex-center' url=''>
       <image class='icon-25' src='{{uploadpath}}resource/{{res.shouting}}'></image>
-      <view class=' margin-left-10'>收听</view>
+      <view class=' margin-left-10'>收听{{readinfo.lstcount}}</view>
     </navigator>
   </view>
 
+<!-- <button open-type="share" class='clear-button margin-10' style='width:55rpx;height:55rpx'>
+        <image class='icon-25' src='{{uploadpath}}resource/{{res.share}}' bindtap='share'> </image>
+        
+      </button> -->
 
   <view class='flex-row flex-column flex-1 ' bindtap=''>
-    <view class='flex-row flex-center'>
-      <image class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
+    <button open-type="share" class='flex-row flex-center clear-button' style='border:0rpx;'>
+      <image class='icon-25' src='{{uploadpath}}resource/{{res.bierenfenxiang}}'></image>
       <view class=' margin-left-10'>分享</view>
-    </view>
+    </button>
   </view>
 
 </view>
@@ -89,9 +94,8 @@
 
 <view class='fixedbottom bg-gray flex-row flex-center padding-left-20'>
 
-  <image class='icon-30' src='{{uploadpath}}resource/{{res.luyin}}' bindtap=''> </image>
-
-  <view class='h5 margin-left-10' style='width:60rpx;'>我也试试</view>
+  <image class='icon-30' src='{{uploadpath}}resource/{{res.luyin}}' bindtap='toread'> </image>
+  <view class='h5 margin-left-10' style='width:60rpx;' bindtap='toread'>我也试试</view>
 
   <view class='padding-comment flex-1 margin-left-10'>
     <view>

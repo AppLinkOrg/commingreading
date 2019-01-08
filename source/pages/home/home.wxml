@@ -45,7 +45,7 @@
       <view class='txt-black'>{{item.book_name}}</view>
       <view class='flex-row flex-center margin-left-10 margin-top-10'>
         <view class='flex-1 txt-black h5'>作者：{{item.author}}</view>
-        <view class='flex-1 txt-black h5  text-right'>阅读：110</view>
+        <view class='flex-1 txt-black h5  text-right'>阅读：0</view>
       </view>
     </view>
   </navigator>
@@ -61,7 +61,7 @@
       <view class='txt-black'>{{item.book_name}}</view>
       <view class='flex-row flex-center margin-left-10 margin-top-10'>
         <view class='flex-1 txt-black h5'>作者：{{item.author}}</view>
-        <view class='flex-1 txt-black h5  text-right'>阅读：1000000000</view>
+        <view class='flex-1 txt-black h5  text-right'>阅读：0</view>
       </view>
     </view>
   </navigator>
@@ -75,7 +75,7 @@
       <view class='txt-black'>{{item.book_name}}</view>
       <view class='flex-row flex-center margin-left-10 margin-top-10'>
         <view class='flex-1 txt-black h5'>作者：{{item.author}}</view>
-        <view class='flex-1 txt-black h5  text-right'>阅读：12110</view>
+        <view class='flex-1 txt-black h5  text-right'>阅读：0</view>
       </view>
     </view>
   </navigator>

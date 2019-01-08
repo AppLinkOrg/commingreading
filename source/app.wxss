@@ -257,6 +257,9 @@ button[disabled][type=primary] {
 .padding-40{
   padding:40rpx;
 }
+.padding-60{
+  padding:60rpx;
+}
 .padding{
   padding:30rpx;
 }
@@ -554,4 +557,15 @@ button[disabled][type=primary] {
   color:#1EA296;
   border-bottom: 4rpx solid #1EA296;
 }
-
+.clear-button{ 
+  padding: 0rpx;
+  font-size: unset;
+  text-align: unset;
+  line-height: unset;
+  background-color: transparent;
+  border: 0rpx red solid;
+  border-color:red;
+}
+.clear-button::after {
+  border: 0;
+}

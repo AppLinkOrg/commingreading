@@ -28,10 +28,15 @@
 
     <view class=' padding-30   flex-row flex-center' style=''>
       <view class='flex-row  flex-1 '>
-        <view class='flex-row flex-center ' bindtap=''>
+
+
+        <button open-type="share" class='flex-row flex-center clear-button' bindtap=''>
           <image class='icon-25' src='{{uploadpath}}resource/{{res.fenxiang}}'></image>
           <view class=' margin-left-10 txt-black'>分享</view>
-        </view>
+        </button>
+
+
+
       </view>
 
 

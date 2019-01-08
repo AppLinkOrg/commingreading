@@ -22,15 +22,15 @@ class Content extends AppBase {
       this.Base.setMyData({ indexbanner });
     }); 
     var bookapi = new BookApi();
-    bookapi.booklist({}, (booklist) => {
+    bookapi.booklist({ booktype:1 }, (booklist) => {
       this.Base.setMyData({ booklist });
     });
 
-    bookapi.booklist({}, (everydaylist) => {
+    bookapi.booklist({ booktype: 2}, (everydaylist) => {
       this.Base.setMyData({ everydaylist });
     });
 
-    bookapi.booklist({}, (newlist) => {
+    bookapi.booklist({ booktype: 3 }, (newlist) => {
       this.Base.setMyData({ newlist });
     });
 
