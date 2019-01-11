@@ -78,6 +78,16 @@ class Content extends AppBase {
 
   }
 
+  onUnload() {
+    var innerAudioContext = this.Base.innerAudioContext;
+
+    innerAudioContext.stop();
+    console.log("暂停播放")
+    console.log("88888888888888888888888");
+
+  }
+
+
   bgmOnPlay() {
 
     console.log('开始播放')
@@ -99,11 +109,9 @@ class Content extends AppBase {
     //var expertsfavid = this.Base.getMyData().info.id;
     talkapi.addlisten({ listen: readinfo.id }, (ret) => {
 
-      if (ret.return == "deleted") {
+      if (ret.return != "deleted") {
         this.Base.toast("收听成功");
-      } else {
-        this.Base.toast("");
-      }
+      } 
       
       // var talkapi = new TalkApi();
       // talkapi.likelist({ readlike: readinfo.id }, (likelist) => {

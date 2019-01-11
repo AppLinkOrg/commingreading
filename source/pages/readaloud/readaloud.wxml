@@ -57,8 +57,8 @@
   </view>
 
   <view class='bgm' bindtap='btnopendetails'>
-    <image class='icon-30' src='{{uploadpath}}resource/{{res.xuanzeyinyue}}'></image>
-
+    <!-- <image class='icon-30' src='{{uploadpath}}resource/{{res.xuanzeyinyue}}'></image> -->
+    <image class='icon-30' bindtap='qweqwe' id="{{uploadpath}}resource/{{res.gif}}"  src='{{uploadpath}}resource/{{res.gif}}'></image>
   </view>
 
 </view>

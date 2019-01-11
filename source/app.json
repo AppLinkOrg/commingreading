@@ -1,6 +1,8 @@
 {
   "pages":[
     "pages/home/home",
+    "pages/search/search",
+    "pages/bookshelf/bookshelf",
     "pages/readaloud/readaloud",
     "pages/auth/auth",
     "pages/endreading/endreading",
@@ -12,8 +14,7 @@
     "pages/mytalk/mytalk",
     "pages/mine/mine",
     "pages/subtitles/subtitles",
-    "pages/mylike/mylike",
-    "pages/bookshelf/bookshelf"
+    "pages/mylike/mylike"
   ],
   "window":{
     "backgroundTextStyle":"light",

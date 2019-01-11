@@ -10,3 +10,8 @@ Page{
   bottom: 0;
   z-index: -1;
 }
+.search{
+  width:100%;
+  border-radius: 7rpx;
+  background-color: white;
+}

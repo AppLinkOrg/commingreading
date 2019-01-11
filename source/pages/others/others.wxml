@@ -34,14 +34,16 @@
       <!-- <image  bindtap='dianzan' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image> -->
      <image bindtap='dianzan' wx:if='{{readinfo.qwe==""}}' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
 <image wx:if='{{readinfo.qwe!=""}}' bindtap='dianzan' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzancolor}}'></image>
-      <view class=' margin-left-10' id='' bindtap='dianzan'>点赞{{readinfo.count1}}</view>
+      <view wx:if='{{readinfo.count1>0}}' class=' margin-left-10' id='' bindtap='dianzan'>点赞{{readinfo.count1}}</view>
+      <view wx:if='{{readinfo.count1==0}}' class=' margin-left-10' id='' bindtap='dianzan'>点赞</view>
     </view>
   </view>
 
   <view class='flex-row flex-column flex-1 '>
     <navigator class='flex-row flex-center' url=''>
       <image class='icon-25' src='{{uploadpath}}resource/{{res.shouting}}'></image>
-      <view class=' margin-left-10'>收听{{readinfo.lstcount}}</view>
+      <view wx:if='{{readinfo.lstcount>0}}' class=' margin-left-10'>收听{{readinfo.lstcount}}</view>
+      <view wx:if='{{readinfo.lstcount==0}}' class=' margin-left-10'>收听</view>
     </navigator>
   </view>
 
