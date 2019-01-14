@@ -1,35 +1,51 @@
 /* pages/readaloud/readaloud.wxss */
-.bgm{
-  position: fixed;
+
+.bgm {
+  /* position: fixed;
   left: 20rpx;
   top: 30rpx;
-  z-index: 10;
+  z-index: 10; */
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  margin-top: 40rpx;
+  padding-bottom: 10rpx;
 }
-.content{
-  padding-left:70rpx;
+
+.content {
+  padding-left: 70rpx;
 }
-.img{
+
+.style {
+  width: 400rpx;
+  height: 60rpx;
+  line-height: 60rpx; 
+  white-space: nowrap;
+}
+
+.img {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   bottom: 0;
   z-index: -1;
-
 }
-.take{
+
+.take {
   position: absolute;
   margin-left: 20rpx;
-  margin-top:20rpx;
+  margin-top: 20rpx;
   z-index: 2;
 }
-.mid{
+
+.mid {
   position: fixed;
   bottom: 0;
   width: 100%;
   height: 200rpx;
   z-index: 100;
 }
+
 .bg {
   background: rgb(8, 8, 8);
   opacity: 0;
@@ -38,6 +54,7 @@
   z-index: 100;
   width: 100%;
 }
+
 .under {
   position: fixed;
   z-index: 101;

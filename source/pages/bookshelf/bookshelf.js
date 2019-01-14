@@ -26,6 +26,9 @@ class Content extends AppBase {
         });
       }
 
+    }); 
+    bookapi.booktypelist({ }, (booktypelist) => {
+      this.Base.setMyData({ booktypelist });
     });
     
   }

@@ -1,15 +1,15 @@
 {
   "pages":[
-    "pages/home/home",
-    "pages/search/search",
     "pages/bookshelf/bookshelf",
+    "pages/home/home",
     "pages/readaloud/readaloud",
+    "pages/others/others",
+    "pages/search/search",
     "pages/auth/auth",
     "pages/endreading/endreading",
     "pages/recordagain/recordagain",
     "pages/ranking/ranking",
     "pages/readingcompletion/readingcompletion",
-    "pages/others/others",
     "pages/mytalkdetails/mytalkdetails",
     "pages/mytalk/mytalk",
     "pages/mine/mine",

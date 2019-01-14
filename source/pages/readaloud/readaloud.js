@@ -11,6 +11,7 @@ import {
 import {
   BookApi
 } from "../../apis/book.api.js";
+import { ApiUtil } from "../../apis/apiutil.js";
 
 class Content extends AppBase {
   constructor() {
@@ -18,16 +19,22 @@ class Content extends AppBase {
   }
   innerAudioContext = null;
   recorderManager=null;
+  timer= '';
   onLoad(options) {
     this.Base.Page = this;
     //options.id = 2;
     super.onLoad(options);
+
+
     this.Base.setMyData({
       open: 2,
       isplay: false,
-      play:"begin"
+      play:"begin",
+      bg1: 2, 
+      date: ApiUtil.updatetime(new Date()),
+      precord:"N"
     })
-   
+    
     var tempFilePath;
     var recorderManager = wx.getRecorderManager()
     var myaudio = wx.createInnerAudioContext();
@@ -39,18 +46,15 @@ class Content extends AppBase {
       console.log('播放停止')
       innerAudioContext.stop()
       //播放结束，销毁该实例
-      innerAudioContext.destroy()
+      //innerAudioContext.destroy()
     })
 
+
+
     innerAudioContext.onEnded(() => {
-      var bgmlist = this.Base.getMyData().bgmlist;
       console.log('播放结束')
-      bgmlist[index].audioStatus = false;
-      this.Base.setMyData({
-        bgmlist: bgmlist,
-      })
       //播放结束，销毁该实例
-      innerAudioContext.destroy()
+      //innerAudioContext.destroy()
     })
     
 
@@ -65,20 +69,11 @@ class Content extends AppBase {
       var that = this;
       that.Base.setMyData({
         audio_duration: innerAudioContext.duration,
-
         audio_duration_str: dtime(innerAudioContext.duration),
-
-
-
-        //xxxxxxxxxxaaaa: createInnerAudioContext.currentTime,
-        //yyyyyyyyyyaaaa: dtime(createInnerAudioContext),
-
         audio_value: innerAudioContext.currentTime,
-
         audio_value_str: dtime(innerAudioContext.currentTime)
 
       });
-      
       
     })
 
@@ -99,6 +94,7 @@ class Content extends AppBase {
     console.log('开始播放')
 
   }
+
   qweqwe(e){
     console.log(e.currentTarget.id);
    
@@ -133,6 +129,14 @@ class Content extends AppBase {
 
   begin(e){
     this.Base.setMyData({ play: "suspend" })
+
+     var that = this;
+      
+    
+
+    //return;
+
+
     wx.showToast({
       title: '录音开始',
       mask: false,
@@ -151,16 +155,30 @@ class Content extends AppBase {
       frameSize: 50, //指定帧大小，单位 KB
     }
     //开始录音
-    recorderManager.start(options);
+    var countDownNum = 0;
+    //var now = dtime();
+    recorderManager.start(
+
+    that.setData({
+      timer: setInterval(function () {
+        countDownNum++;
+        that.setData({ countDownNum: countDownNum })
+        console.log(countDownNum);
+
+      }, 1000)
+    })
+
+
+
+    );
     
     recorderManager.onStart(() => {
-      
       console.log('录音开始')
+
+      
+
+      
     });
-
-    
-
-
 
     //错误回调
     recorderManager.onError((res) => {
@@ -170,8 +188,8 @@ class Content extends AppBase {
   }
 
   suspend(e) {
-    this.Base.setMyData({ play: "play" })
-
+    this.Base.setMyData({ play: "play" ,bg1:2})
+var that=this;
     wx.showToast({
       title: '录音结束',
       mask: false,
@@ -185,10 +203,15 @@ class Content extends AppBase {
 
     var innerAudioContext = this.Base.innerAudioContext;
 
-    innerAudioContext.pause();
+    innerAudioContext.stop(this.Base.setMyData({ bg1: 2, music_name: null, precord: "S"}));
     console.log("暂停播放")
 
-    recorderManager.stop();
+    recorderManager.stop(
+      //录音停止清除计时器
+
+      clearInterval(that.data.timer)
+      
+    );
     recorderManager.onStop((res) => {
       this.tempFilePath = res.tempFilePath;
       console.log('停止录音', res.tempFilePath)
@@ -206,28 +229,29 @@ class Content extends AppBase {
       mask: false,
       icon: 'none',
     })
-    const recorderManager = wx.getRecorderManager()
+    //const recorderManager = wx.getRecorderManager()
     var innerAudioContext = this.Base.innerAudioContext;
     innerAudioContext.autoplay = true
     innerAudioContext.loop = true
-    
     innerAudioContext.src = this.tempFilePath,
-      innerAudioContext.onPlay(() => {
-        console.log('开始播放')
-      })
-    innerAudioContext.onError((res) => {
-      console.log(res.errMsg)
-      console.log(res.errCode)
-    })
+      innerAudioContext.play(this.Base.setMyData({ precord: "Y"}));
+      
   }
+
+
+
   luyinstop(e){
     this.Base.setMyData({ play: "play" })
     var innerAudioContext = this.Base.innerAudioContext;
     innerAudioContext.pause();
     console.log("暂停")
   }
+
   againrecord(e){
     var that=this;
+    
+    //innerAudioContext.destroy();
+
     wx.showModal({
       title: '',
       content: '确认重新录制？',
@@ -239,9 +263,13 @@ class Content extends AppBase {
       confirmColor: '#2699EC',
       success: function (res) {
         if (res.confirm) {
-          that.Base.setMyData({ play: "begin" }) 
+          that.Base.setMyData({ play: "begin", bg1: 2, music_name: null, precord: "N" })
+
+          var innerAudioContext = that.Base.innerAudioContext;
+          innerAudioContext.stop();
+
           wx.showToast({
-            title: '请点击重新录制',
+            title: '请点击录音重新录制',
             mask: false,
             icon: 'none',
           })
@@ -285,9 +313,27 @@ class Content extends AppBase {
 
   }
   btnopendetails() {
-    this.Base.setMyData({
-      open: 1
+    var precord = this.Base.getMyData().precord;
+    if (precord == "Y"  ){
+    wx.showToast({
+    title: '播放录音中',
+    icon:'none'
     })
+    return;
+    }
+    if (precord == "S"){
+      wx.showToast({
+        title: '录音已完成',
+        icon: 'none'
+      })
+      return;
+    }
+    else{
+      this.Base.setMyData({
+        open: 1
+      })
+    }
+    
   }
 
 
@@ -306,18 +352,22 @@ class Content extends AppBase {
     var uploadpath = that.Base.getMyData().uploadpath;
     var bgmlist = this.Base.getMyData().bgmlist;
     var index = e.currentTarget.dataset.index;
+    var name = e.currentTarget.dataset.music_name;
     var innerAudioContext = this.Base.innerAudioContext;
-
+    
     innerAudioContext.pause();
     console.log("暂停")
-    console.log("111111")
     innerAudioContext.obeyMuteSwitch = false;
     innerAudioContext.src = uploadpath + "bgm_file/" + src;
-    innerAudioContext.play();
+    innerAudioContext.play(this.Base.setMyData({ bg1: 1 }));
+
     console.log(innerAudioContext.src);
+    this.Base.setMyData({ music_name: name });
+
     for (var i = 0; i < bgmlist.length; i++) {
       bgmlist[i].audioStatus = false
     }
+
     bgmlist[index].audioStatus = true;
     console.log("序号" + index)
 
@@ -326,7 +376,7 @@ class Content extends AppBase {
   zt(e) {
     var that = this;
     var innerAudioContext = this.Base.innerAudioContext;
-    innerAudioContext.pause();
+    innerAudioContext.pause(this.Base.setMyData({ bg1: 2 }));
 
   }
 

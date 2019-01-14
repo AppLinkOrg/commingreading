@@ -14,8 +14,14 @@
   </navigator>
 </view>
 
+<view class=' flex-row' >
+<view class='all txt-primary'>全部</view>
 
+<view class='flex-row flex-center flex-wrap flex-1 ' >
+<view class='margin-left-10 padding-10' wx:for='{{booktypelist}}' wx:key='k'>{{item.name}}</view>
+</view>
 
+</view>
 
 <navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}' wx:for='{{booklist}}' wx:key='k' style='' class='radius-10 bg-white padding-20 margin-20'>
   <view class='txt-black'>《{{item.book_name}}》</view>

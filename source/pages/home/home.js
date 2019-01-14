@@ -15,6 +15,7 @@ class Content extends AppBase {
       ctt:1
     })
   }
+  
   onMyShow() {
     var that = this;
     var instapi = new InstApi();

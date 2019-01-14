@@ -4,14 +4,15 @@
 <view class='flex-row flex-column padding-40' style=''>
   <view class='txt-black h4'>{{bookinfo.book_name}}</view>
   <view class='txt-black margin-top-10'>作者：{{bookinfo.author}}</view>
-  <view  class='txt-black margin-top-10'>朗读者:xxx</view>
+  <view  class='txt-black margin-top-10'>朗读者:{{readinfo.member_id_name}}</view>
 
-<scroll-view scroll-y class='text-center '	 style='height:530rpx;'>
+<scroll-view scroll-y class='text-center margin-top-20'	 style='height:530rpx;'>
   <text class='content txt-black text-center margin-bottom-40'>
 {{bookinfo.book_content}}
 </text>
 </scroll-view>
 </view>
+
 
 <view class='bg-white'>
 <view class='padding-30 flex-row flex-center ' style='border-bottom:1rpx solid #F3F3F3'>
@@ -40,16 +41,15 @@
   </view>
 
   <view class='flex-row flex-column flex-1 '>
-    <navigator class='flex-row flex-center' url=''>
+    <view class='flex-row flex-center' url=''>
       <image class='icon-25' src='{{uploadpath}}resource/{{res.shouting}}'></image>
       <view wx:if='{{readinfo.lstcount>0}}' class=' margin-left-10'>收听{{readinfo.lstcount}}</view>
       <view wx:if='{{readinfo.lstcount==0}}' class=' margin-left-10'>收听</view>
-    </navigator>
+    </view>
   </view>
 
 <!-- <button open-type="share" class='clear-button margin-10' style='width:55rpx;height:55rpx'>
         <image class='icon-25' src='{{uploadpath}}resource/{{res.share}}' bindtap='share'> </image>
-        
       </button> -->
 
   <view class='flex-row flex-column flex-1 ' bindtap=''>
@@ -66,7 +66,13 @@
   评论({{messagelist.length}})：
 </view>
 
-<view class='flex-row   padding-30' wx:for='{{messagelist}}' wx:key='k'>
+
+<view class='padding-30 flex-row flex-column' wx:if='{{messagelist.length==0}}'>
+<image src='{{uploadpath}}resource/{{res.talknull_icon}}' class='icon-50'></image>
+<view class='h5 margin-top-10'>还没有人评论，快去评论吧</view>
+</view>
+
+<view class='flex-row   padding-30' wx:for='{{messagelist}}' wx:key='k' wx:if='{{messagelist.length>0}}'>
   <view class=''>
     <image class='icon-50 radius-10' src='{{item.member_avatarUrl}}'></image>
   </view>
@@ -105,3 +111,4 @@
     </view>
   </view>
 </view>
+

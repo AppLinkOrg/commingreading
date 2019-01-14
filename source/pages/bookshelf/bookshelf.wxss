@@ -15,3 +15,7 @@ Page{
   border-radius: 7rpx;
   background-color: white;
 }
+.all{
+  padding-left:20rpx;
+  padding-top: 10rpx;
+}

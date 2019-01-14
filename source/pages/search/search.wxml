@@ -7,8 +7,8 @@
   </view>
   <navigator class='padding-left-20 h5 txt-primary' bindtap='bindFocus'>取消</navigator>
 </view>
-<navigator url='/pages/problem/problem' class='h5 padding-20 margin-left-40 flex-row flex-center' wx:for="{{result}}" wx:key="k" wx:for-index='idx'>
-  <view>{{item.model_name}}</view> 
 
-  <view class='h6 txt-red margin-left-20'>最高价：{{options.new=='Y'?item.pricenew:item.priceold}}</view>
+<navigator url='/pages/problem/problem' class='h5 padding-20 margin-left-40 flex-row flex-center' wx:for="{{result}}" wx:key="k" wx:for-index='idx'>
+  <view>{{item.model_name}}</view>
+  <view class='h6 txt-red margin-left-20'></view>
 </navigator>

@@ -11,7 +11,7 @@ class Content extends AppBase {
   }
   onLoad(options) {
     this.Base.Page = this;
-    //options.id=5;
+    //options.readid=2;
     super.onLoad(options);
     this.Base.setMyData({ status:"play" })
 
