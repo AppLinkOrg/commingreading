@@ -20,3 +20,9 @@ top: 0;
 width: 100%;
 z-index: 100;
 }
+.bg{
+  background-color: #F2F2F2;
+}
+.ico{
+  width: 110rpx;
+}

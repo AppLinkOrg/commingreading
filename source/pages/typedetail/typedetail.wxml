@@ -1,0 +1,21 @@
+<!--pages/typedetail/typedetail.wxml-->
+
+<view class=''>
+  <image class='bg_img' src='{{uploadpath}}resource/{{res.bg_1}}'></image>
+</view>
+
+
+<view class='flex-row flex-column ' style='margin-top:50rpx;' hidden='{{booklist.length>0}}'>
+<image class='icon-100' src='{{uploadpath}}resource/{{res.book_null}}'></image>
+<view class='txt-black h5 margin-top-20'>还未添加该类书籍哦，去看看其他的吧~</view>
+</view>
+
+
+
+<navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}' wx:for='{{booklist}}' wx:key='k' style='' class='radius-10  bg-white padding-20 margin-20' wx:if='{{booklist.length>0}}'>
+  <view class='txt-black'>《{{item.book_name}}》</view>
+  <view class='flex-row flex-center  margin-top-10'>
+    <view class='h5 flex-1 margin-left-10'>作者：{{item.author}}</view>
+    <view class='h5'>2018-01-02</view>
+  </view>
+</navigator>

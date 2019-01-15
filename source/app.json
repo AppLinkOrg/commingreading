@@ -2,19 +2,21 @@
   "pages":[
     "pages/bookshelf/bookshelf",
     "pages/home/home",
+    "pages/typedetail/typedetail",
+    "pages/ranking/ranking",
+    "pages/myreading/myreading",
+    "pages/mine/mine",
+    "pages/mylike/mylike",
+    "pages/mytalkdetails/mytalkdetails",
     "pages/readaloud/readaloud",
     "pages/others/others",
     "pages/search/search",
     "pages/auth/auth",
     "pages/endreading/endreading",
     "pages/recordagain/recordagain",
-    "pages/ranking/ranking",
     "pages/readingcompletion/readingcompletion",
-    "pages/mytalkdetails/mytalkdetails",
     "pages/mytalk/mytalk",
-    "pages/mine/mine",
-    "pages/subtitles/subtitles",
-    "pages/mylike/mylike"
+    "pages/subtitles/subtitles"
   ],
   "window":{
     "backgroundTextStyle":"light",

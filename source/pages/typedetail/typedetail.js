@@ -1,9 +1,8 @@
-// pages/mylike/mylike.js
+// pages/typedetail/typedetail.js
 import { AppBase } from "../../appbase";
 import { ApiConfig } from "../../apis/apiconfig";
 import { InstApi } from "../../apis/inst.api.js";
 import { BookApi } from "../../apis/book.api.js";
-import { TalkApi } from "../../apis/talk.api.js";
 
 class Content extends AppBase {
   constructor() {
@@ -11,27 +10,29 @@ class Content extends AppBase {
   }
   onLoad(options) {
     this.Base.Page = this;
-    //options.id=5;
+    //options.type=7;
     super.onLoad(options);
   }
   onMyShow() {
     var that = this;
-
-    var talkapi = new TalkApi();
-    var bookapi=new BookApi();
-    var memberinfo=this.Base.getMyData().memberinfo;
-    talkapi.likelist({ member_id: memberinfo.id}, (likelist) => {
-      this.Base.setMyData({ likelist });
-
-        
-    });
-    
-    bookapi.readlist({ }, (readlist) => {
-      this.Base.setMyData({ readlist });
+    var bookapi = new BookApi();
+    var memberinfo = this.Base.getMyData().memberinfo;
+    bookapi.booklist({
+      booktype: this.Base.options.type
+    }, (booklist) => {
+      this.Base.setMyData({
+        booklist
+      });
     });
 
+    bookapi.booktypelist({  }, (booktypelist) => {
+      this.Base.setMyData({
+        booktypelist
+      });
+    });
 
   }
+
 }
 var content = new Content();
 var body = content.generateBodyJson();

@@ -12,7 +12,7 @@ Page {
 .img {
   position: absolute;
   width: 100%;
-  height: 75%;
+  height: 90%;
   top: 0;
   bottom: 0;
   z-index: -1;
@@ -35,9 +35,8 @@ Page {
 .pinlun {
   padding-left: 30rpx;
   padding-right: 30rpx;
-  padding-top: 40rpx;
-  padding-bottom: 40rpx;
-  margin-bottom: 0rpx;
+  padding-top: 50rpx;
+  padding-bottom: 50rpx;
 }
 
 .reader {
@@ -57,4 +56,7 @@ Page {
 
 .hid {
   max-height: 550rpx;
+}
+.border_bottom{
+  border-top: 1rpx solid #D7D5D5;
 }

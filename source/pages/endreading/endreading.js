@@ -13,21 +13,16 @@ class Content extends AppBase {
     //options.id=2;
     //options.retid=25;
     super.onLoad(options);
-    this.Base.setMyData({status:"play"})
+    this.Base.setMyData({status:"play",time:this.Base.options.time});
+
     var innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.onPlay(this.bgmOnPlay)
     innerAudioContext.onStop(() => {
-      console.log('播放暂停')
-      innerAudioContext.stop()
-      //播放结束，销毁该实例
-      innerAudioContext.destroy()
+     
     })
     innerAudioContext.onEnded(() => {
       console.log('播放结束')
-      bgmlist[index].audioStatus = false;
-      this.Base.setMyData({
-        bgmlist: bgmlist,
-      })
+      
       //播放结束，销毁该实例
       innerAudioContext.destroy()
     })
@@ -37,6 +32,17 @@ class Content extends AppBase {
       console.log(res.errCode)
       //播放错误，销毁该实例
       innerAudioContext.destroy()
+    })
+
+
+    innerAudioContext.onTimeUpdate((res) => {
+      var that = this;
+      that.Base.setMyData({
+        audio_duration: innerAudioContext.duration,
+        audio_duration_str: dtime(innerAudioContext.duration),
+        audio_value: innerAudioContext.currentTime,
+        audio_value_str: dtime(innerAudioContext.currentTime)
+      });
     })
 
     this.Base.innerAudioContext = innerAudioContext;
@@ -78,7 +84,7 @@ class Content extends AppBase {
      //setTimeout(()=>{
      //innerAudioContext.autoplay = true;
      console.log("111111")
-
+     innerAudioContext.loop = true
      innerAudioContext.obeyMuteSwitch = false;
 
      innerAudioContext.src = uploadpath + "readfile/" + readinfo.read_file;
@@ -105,7 +111,19 @@ class Content extends AppBase {
 
   }
 
+  
+
 }
+
+function dtime(t) {
+  var t = parseInt(t);
+  var minute = parseInt(t / 60);
+  var second = parseInt(t % 60);
+  minute = minute <= 9 ? "0" + minute.toString() : minute.toString();
+  second = second <= 9 ? "0" + second.toString() : second.toString();
+  return minute + ":" + second;
+}
+
 var content = new Content();
 var body = content.generateBodyJson();
 body.onLoad = content.onLoad;

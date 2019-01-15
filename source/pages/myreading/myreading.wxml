@@ -1,0 +1,10 @@
+<!--pages/myreading/myreading.wxml-->
+
+<view class='padding-40'>
+<view class='txt-black h4'>唐诗</view>
+<view class='margin-top-10'>《麦田》</view>
+<view class='flex-row flex-center'>
+<view class='flex-1 margin-top-5'>作者：上陇路</view>
+<view>0215445</view>
+</view>
+</view>

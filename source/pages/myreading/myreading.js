@@ -1,4 +1,4 @@
-// pages/mylike/mylike.js
+// pages/myreading/myreading.js
 import { AppBase } from "../../appbase";
 import { ApiConfig } from "../../apis/apiconfig";
 import { InstApi } from "../../apis/inst.api.js";
@@ -16,21 +16,11 @@ class Content extends AppBase {
   }
   onMyShow() {
     var that = this;
-
     var talkapi = new TalkApi();
-    var bookapi=new BookApi();
-    var memberinfo=this.Base.getMyData().memberinfo;
-    talkapi.likelist({ member_id: memberinfo.id}, (likelist) => {
-      this.Base.setMyData({ likelist });
-
-        
+    var memberinfo = this.Base.getMyData().memberinfo;
+    talkapi.messagelist({ member_id: memberinfo.id }, (messagelist) => {
+      this.Base.setMyData({ messagelist });
     });
-    
-    bookapi.readlist({ }, (readlist) => {
-      this.Base.setMyData({ readlist });
-    });
-
-
   }
 }
 var content = new Content();

@@ -1,46 +1,71 @@
 <!--pages/mine/mine.wxml-->
-<view class='bg-primary'>
+<view class=''>
+<image class='bg' src='{{uploadpath}}resource/{{res.bg_2}}'></image>
+    <!-- <view class='text-right set_icon' style=''>
+      <image class='icon-25' src='{{uploadpath}}resource/{{res.set_icon}}'></image>
+    </view> -->
 
-  <view class='text-right set_icon' style=''>
-    <image class='icon-25' src='{{uploadpath}}resource/{{res.set_icon}}'></image>
-  </view>
 
-  <view class=' flex-row flex-column padding-bottom-20' style='height:200rpx;width:100%'>
-    <image class='icon-50 radius-50 margin-top ' src='{{UserInfo.avatarUrl}}'></image>
-    <view class='txt-white margin-left-5'>{{UserInfo.nickName}}</view>
+
+  <view class=' flex-row flex-column  margin-top ' style='height:170rpx;width:100%'>
+    <image class='icon-60 radius-50  ' style='border:4rpx solid #CECFCE' src='{{UserInfo.avatarUrl}}'></image>
+    <view class='txt-black margin-left-5'>{{UserInfo.nickName}}</view>
   </view>
 
 </view>
 
-<navigator url='/pages/mylike/mylike' class='flex-row flex-center padding-30 bg-white border_bottom'>
-  <image class='icon-25' src='{{uploadpath}}resource/{{res.mylike}}'></image>
-  <view class='margin-left-20'>我的点赞</view>
-</navigator>
+<view class='mid  margin-20 flex-row flex-center padding-40'>
 
-<navigator url='/pages/mytalk/mytalk' class='flex-row flex-center padding-30 bg-white border_bottom'>
-  <image class='icon-25' src='{{uploadpath}}resource/{{res.mytalk}}'></image>
-  <view class='margin-left-20'>我的评论</view>
-</navigator>
+<view class='flex-row flex-column flex-1'>
+<view class='txt-black txt-bold h2'>0</view>
+<view class='txt-bold h5 margin-top-10'>累计朗读篇数</view>
+</view>
 
-<navigator url='/pages/subtitles/subtitles' class='flex-row flex-center padding-30 bg-white border_bottom'>
-  <image class='icon-25' src='{{uploadpath}}resource/{{res.subtitles}}'></image>
-  <view class='margin-left-20'>字幕设置</view>
-</navigator>
+<view style='height:50rpx;width:4rpx' class='bg-white'></view>
 
-<view class='flex-row flex-center padding-30 bg-white ' style=''>
+<view class='flex-row flex-column flex-1'>
+<view class='txt-black txt-bold h2'>0</view>
+<view class='txt-bold h5 margin-top-10'>当日朗读字数</view>
+</view>
+
+<view style='height:50rpx;width:4rpx' class='bg-white'></view>
+
+<view class='flex-row flex-column flex-1'>
+<view class='txt-black txt-bold h2'>0</view>
+<view class='txt-bold h5 margin-top-10'>累计朗读字数</view>
+</view>
+
+</view>
+
+
+
+
+<navigator url='/pages/myreading/myreading' class='flex-row flex-center margin-30 bg-white border_bottom padding-bottom-20' style=''>
   <image class='icon-25' src='{{uploadpath}}resource/{{res.tlakcount}}'></image>
-  <view class='margin-left-20'>朗读统计</view>
-</view>
+  <view class='margin-left-20 txt-bold txt-black h5'>我的朗读</view>
+</navigator>
 
-<view style='height:8rpx;width:100%'>
-</view>
+<navigator url='/pages/mylike/mylike' class='flex-row flex-center margin-30 bg-white border_bottom padding-bottom-20'>
+  <image class='icon-25' src='{{uploadpath}}resource/{{res.mylike}}'></image>
+  <view class='margin-left-20 txt-bold txt-black h5'>我的点赞</view>
+</navigator>
 
-<view class='flex-row flex-center padding-30 bg-white border_bottom'>
+<navigator url='/pages/mytalk/mytalk' class='flex-row flex-center margin-30 bg-white border_bottom padding-bottom-20'>
+  <image class='icon-25' src='{{uploadpath}}resource/{{res.mytalk}}'></image>
+  <view class='margin-left-20 txt-bold txt-black h5'>我的评论</view>
+</navigator>
+
+<navigator url='/pages/subtitles/subtitles' class='flex-row flex-center margin-30 bg-white border_bottom padding-bottom-20'>
+  <image class='icon-25' src='{{uploadpath}}resource/{{res.subtitles}}'></image>
+  <view class='margin-left-20 txt-bold txt-black h5'>字幕设置</view>
+</navigator>
+
+<view class='flex-row flex-center margin-30 bg-white border_bottom padding-bottom-20'>
   <image class='icon-25' src='{{uploadpath}}resource/{{res.aboutus}}'></image>
-  <view class='margin-left-20'>关于我们</view>
+  <view class='margin-left-20 txt-bold txt-black h5'>关于我们</view>
 </view>
 
-<view class='flex-row flex-center padding-30 bg-white '>
+<view class='flex-row flex-center margin-30 bg-white '>
   <image class='icon-25' src='{{uploadpath}}resource/{{res.contactcs}}'></image>
-  <view class='margin-left-20'>联系客服</view>
+  <view class='margin-left-20 txt-bold txt-black h5'>联系客服</view>
 </view>

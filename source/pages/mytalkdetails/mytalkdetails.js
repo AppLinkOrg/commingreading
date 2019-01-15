@@ -12,7 +12,7 @@ class Content extends AppBase {
   }
   onLoad(options) {
     this.Base.Page = this;
-    //options.id=5;
+    //options.id=2;
     super.onLoad(options);
     this.Base.setMyData({ date: ApiUtil.updatetime(new Date()),type:this.options.type});
 

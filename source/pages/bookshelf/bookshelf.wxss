@@ -17,5 +17,7 @@ Page{
 }
 .all{
   padding-left:20rpx;
-  padding-top: 10rpx;
+}
+.bg{
+  background: #ABDFC6;
 }

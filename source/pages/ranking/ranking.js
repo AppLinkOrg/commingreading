@@ -3,6 +3,7 @@ import { AppBase } from "../../appbase";
 import { ApiConfig } from "../../apis/apiconfig";
 import { InstApi } from "../../apis/inst.api.js";
 import { BookApi } from "../../apis/book.api.js";
+import { MemberApi } from '../../apis/member.api';
 
 class Content extends AppBase {
   constructor() {
@@ -17,11 +18,18 @@ class Content extends AppBase {
   onMyShow() {
     var that = this;
     var bookapi = new BookApi();
+    var memberapi = new MemberApi();
     bookapi.booklist({ orderby: 'r_main.id desc'}, (monthlist) => {
       this.Base.setMyData({ monthlist });
     });
     bookapi.booklist({ orderby: 'r_main.id'}, (alllist) => {
       this.Base.setMyData({ alllist });
+    });
+    memberapi.getall({ }, (todaygetall) => {
+      this.Base.setMyData({ todaygetall });
+    });
+    memberapi.getall({ orderby: 'r_main.id desc' }, (weekgetall) => {
+      this.Base.setMyData({ weekgetall });
     });
   }
   

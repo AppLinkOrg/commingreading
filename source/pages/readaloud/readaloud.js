@@ -44,12 +44,10 @@ class Content extends AppBase {
     innerAudioContext.onPlay(this.bgmOnPlay)
     innerAudioContext.onStop(() => {
       console.log('播放停止')
-      innerAudioContext.stop()
+      //innerAudioContext.stop()
       //播放结束，销毁该实例
       //innerAudioContext.destroy()
     })
-
-
 
     innerAudioContext.onEnded(() => {
       console.log('播放结束')
@@ -357,6 +355,7 @@ var that=this;
     
     innerAudioContext.pause();
     console.log("暂停")
+
     innerAudioContext.obeyMuteSwitch = false;
     innerAudioContext.src = uploadpath + "bgm_file/" + src;
     innerAudioContext.play(this.Base.setMyData({ bg1: 1 }));
@@ -431,12 +430,15 @@ var that=this;
             }, (ret) => {
               console.log(666666666666666);
               var book_id = that.Base.getMyData().bookinfo.id;
+              var time = that.Base.getMyData().audio_duration_str;
+              console.log(time+'666666666666666');
+              //return
               console.log("辣椒炒肉"+that.Base.getMyData().vonice);
               if (ret.code == 0) {
                 console.log('提交成功');
                 
                 wx.reLaunch({
-                  url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return,
+                  url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return + '&time=' + time,
                 })
 
                 wx.showToast({
