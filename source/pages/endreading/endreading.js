@@ -13,6 +13,10 @@ class Content extends AppBase {
     //options.id=2;
     //options.retid=25;
     super.onLoad(options);
+    wx.showToast({
+      title: '保存成功',
+      mask: false
+    })
     this.Base.setMyData({status:"play",time:this.Base.options.time});
 
     var innerAudioContext = wx.createInnerAudioContext()
@@ -104,7 +108,9 @@ class Content extends AppBase {
    }
   recordagain(e){
     var bookinfo = this.Base.getMyData().bookinfo;
-    console.log(bookinfo.id);
+    console.log(bookinfo.id+"第一");
+    console.log(this.Base.options.retid+"第二");
+    //return;
     wx.reLaunch({
       url: '/pages/recordagain/recordagain?id=' + this.Base.options.retid + '&bookid=' + bookinfo.id,
     })

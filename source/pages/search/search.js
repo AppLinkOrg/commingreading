@@ -18,21 +18,29 @@ class Content extends AppBase {
   }
   onLoad(options) {
     this.Base.Page = this;
-    //options.id=5;
+    options.new=1;
     super.onLoad(options);
     var json = {
-      searchrecomm: "Y"
+      searchrecomm: ""
     };
     
-    if (options.new != undefined) {
-      json.newphone = "Y";
-    }
-    // var api = new PhoneApi();
-    // api.model(json, (result) => {
+    // if (options.new != undefined) {
+      // json.newphone = "Y";
+     //}
+
+
+    // var bookapi = new BookApi();
+    // bookapi.booklist(json, (result) => {
     //   this.Base.setMyData({
     //     result
     //   });
     // });
+
+    var bookapi = new BookApi();
+    bookapi.booklist(json, (result) => {
+      this.Base.setMyData({ result });
+    });
+    
   }
   onMyShow() {
     var that = this;
@@ -45,26 +53,23 @@ class Content extends AppBase {
   search(e) {
     console.log(e.detail.value);
 
-    var json = {
-    };
-    if (e.detail.value == "") {
+    var json = { };
+     //if (e.detail.value == "") {
 
-      json.searchrecomm = "Y";
-    } else {
+       //json.searchrecomm = "Y";
+    // } else {
       json.searchkeyword = e.detail.value;
-    }
+    //}
 
-    if (this.Base.options.new != undefined) {
-      json.newphone = "Y";
-    }
+    //if (this.Base.options.new != undefined) {
+      //json.newphone = "Y";
+    //}
 
 
-    var api = new PhoneApi();
-    // api.model(json, (result) => {
-    //   this.Base.setMyData({
-    //     result
-    //   });
-    // });
+    var bookapi = new BookApi();
+    bookapi.booklist(json, (result) => {
+      this.Base.setMyData({ result });
+    });
 
   }
 }

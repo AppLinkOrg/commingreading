@@ -60,12 +60,21 @@
   <view class='margin-left-20 txt-bold txt-black h5'>字幕设置</view>
 </navigator>
 
-<view class='flex-row flex-center margin-30 bg-white border_bottom padding-bottom-20'>
+<navigator url='/pages/aboutus/aboutus' class='flex-row flex-center margin-30 bg-white border_bottom padding-bottom-20'>
   <image class='icon-25' src='{{uploadpath}}resource/{{res.aboutus}}'></image>
   <view class='margin-left-20 txt-bold txt-black h5'>关于我们</view>
-</view>
+</navigator>
 
-<view class='flex-row flex-center margin-30 bg-white '>
+<!-- <view class='flex-row flex-center margin-30 bg-white '>
   <image class='icon-25' src='{{uploadpath}}resource/{{res.contactcs}}'></image>
   <view class='margin-left-20 txt-bold txt-black h5'>联系客服</view>
+</view> -->
+
+<view class=' margin-30 bg-white '>
+<button  class='bg-white clear-button' open-type='contact' style='border-radius:0;border:0;'>
+<view class='flex-row flex-center '>
+<image class='icon-25' src='{{uploadpath}}resource/{{res.contactcs}}'></image>
+<view class='txt-bold txt-black h5  padding-left-20'>联系我们</view>
+</view>
+</button>
 </view>

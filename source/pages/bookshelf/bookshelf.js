@@ -13,10 +13,19 @@ class Content extends AppBase {
     //options.id=5;
     super.onLoad(options);
     this.Base.setMyData({ty:0})
+    
   }
   onMyShow() {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var that = this;
     var bookapi = new BookApi();
+    
+    // setTimeout(function () {
+     
+    // }, 500)
     this.Base.setMyData({ ty: 0 })
     var memberinfo = this.Base.getMyData().memberinfo;
     // bookapi.readlist({ member_id: memberinfo.id}, (readlist) => {
@@ -30,6 +39,8 @@ class Content extends AppBase {
 
     bookapi.booktypelist({ }, (booktypelist) => {
       this.Base.setMyData({ booktypelist });
+      wx.hideLoading(
+      )
     });
     
   }
@@ -38,10 +49,19 @@ class Content extends AppBase {
     var type=e.currentTarget.dataset.type;
     var ty=this.Base.getMyData().ty;
     
-      this.Base.setMyData({ ty: type });
-
+    this.Base.setMyData({ ty: type });
+    wx.showLoading({
+      title: '加载中',
+      mask:true
+    })
+    // setTimeout(function () {
+    //   wx.hideLoading(
+    //   )
+    // }, 500)
       bookapi.booklist({ booktype: type }, (booklist) => {
         this.Base.setMyData({ booklist });
+        wx.hideLoading(
+        )
       });
     
     
@@ -55,11 +75,23 @@ class Content extends AppBase {
 
   }
   bindall(e){
+    var that = this;
     var bookapi = new BookApi();
     this.Base.setMyData({ ty: 0 });
-    bookapi.booklist({  }, (booklist) => {
+    wx.showLoading({
+      title: '加载中', 
+      mask: true
+    })
+
+    // setTimeout(function () {
+      
+    // }, 500)
+    
+    bookapi.booklist({}, (booklist) => {
       this.Base.setMyData({ booklist });
-    });
+      wx.hideLoading(
+      )
+    })
   }
   
 }

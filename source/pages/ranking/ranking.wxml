@@ -30,10 +30,9 @@
     <view class='flex-1 margin-left-20 txt-black'>我</view>
     <view class='flex-row flex-column'>
       <view class='txt-black'>0</view>
-      <view class='h5'>今日朗读次数</view>
+      <view class='h5'>今日朗读字数</view>
     </view>
   </view>
-
 
   <view wx:for='{{todaygetall}}' wx:key='k' wx:for-index='idx' class='{{idx%2==0?"bg":""}}'>
     <view class='padding-30 flex-row flex-center'>

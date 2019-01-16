@@ -16,11 +16,23 @@ class Content extends AppBase {
   }
   onMyShow() {
     var that = this;
-    var talkapi = new TalkApi();
+    var bookapi = new BookApi();
     var memberinfo = this.Base.getMyData().memberinfo;
-    talkapi.messagelist({ member_id: memberinfo.id }, (messagelist) => {
-      this.Base.setMyData({ messagelist });
+
+      
+
+    bookapi.readlist({ member_id: memberinfo.id }, (readlist) => {
+      this.Base.setMyData({ readlist });
+      //for (var i = 0; i < readlist.length; i++) {
+
+        bookapi.booktypelist({ id: 6}, (booktypelist) => {
+        this.Base.setMyData({ booktypelist });
+        
+      });
+      //}
+
     });
+
   }
 }
 var content = new Content();

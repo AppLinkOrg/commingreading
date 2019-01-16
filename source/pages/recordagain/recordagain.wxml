@@ -1,78 +1,103 @@
 <!--pages/recordagain/recordagain.wxml-->
-<!--pages/readaloud/readaloud.wxml-->
 <image class='img' mode='scaleToFill' bindtap='Choice' src='{{uploadpath}}resource/{{res.bg_2}}'></image>
 
+<view class='bgm flex-row flex-center ' bindtap='btnopendetails' style='border-bottom:1rpx solid #009688;height:100rpx'>
+ <!-- <view class='flex-row flex-center'>-->
+
+<view style='' class=''>
+    <image class='icon-30' wx:if='{{bg1==2}}' src='{{uploadpath}}resource/{{res.xuanzeyinyue}}'></image>
+    <image class='icon-30' wx:if='{{bg1==1}}' bindtap='qweqwe' id="{{uploadpath}}resource/{{res.gif}}" src='{{uploadpath}}resource/{{res.gif}}'></image>
+</view>
+
+<view class='flex-1' style='width: 430rpx;'>
+    <scroll-view scroll-x  wx:if='{{music_name==null&&bg1==2}}' class='txt-black margin-left-20   style'  ><view style='display:inline-block;' class='h5'>选择背景音乐</view></scroll-view>
+
+    <scroll-view scroll-x  wx:if='{{music_name!=null&&bg1==1}}' class='txt-black margin-left-20   style'  ><view style='display:inline-block;' class='h5'>正在播放—《{{music_name}}》</view></scroll-view>
+
+    <scroll-view scroll-x  wx:if='{{music_name!=null&&bg1==2}}' class='txt-black margin-left-20   style' ><view style='display:inline-block;' class='h5'>暂停播放—《{{music_name}}》</view></scroll-view>
+</view>
+    <!-- <view wx:if='{{music_name!=null&&bg1==1}}' class='txt-black margin-left-20 flex-1'>正在播放—《{{music_name}}》</view>
+    <view wx:if='{{music_name!=null&&bg1==2}}' class='txt-black margin-left-20 flex-1'>暂停播放—《{{music_name}}》</view> -->
+
+    <view class='margin-left-20 h5' wx:if='{{music_name!=null}}'>({{audio_value_str}}/{{audio_duration_str}})</view>
+  <!--</view>-->
+</view>
+
+
 <form bindsubmit="confirm" bindreset="formReset" report-submit="{{true}}">
-<view >
-  <view class='flex-row flex-column padding-40' style=''>
-    <view class='txt-black h4'>《{{bookinfo.book_name}}》</view>
-    <view class='txt-black margin-top-10'>作者：{{bookinfo.author}}</view>
-    <view class='txt-black margin-top-10'>朗读者:xxx</view>
-    <scroll-view scroll-y class='text-center ' style='height:550rpx;'>
-      <text class='content txt-black text-center margin-bottom-40'>
+  <view>
+    <view class='flex-row flex-column padding-40' style=''>
+      <view class='txt-black h4'>《{{bookinfo.book_name}}》</view>
+      <view class='txt-black margin-top-10'>作者：{{bookinfo.author}}</view>
+      <!-- <view class='txt-black margin-top-10'>朗读者:xxx</view> -->
+      <scroll-view scroll-y class='text-center margin-top-20' style='height:650rpx;'>
+        <text class='content txt-black text-center margin-bottom-40'>
    {{bookinfo.book_content}}
     </text>
+      </scroll-view>
+    </view>
 
-    </scroll-view>
+    <view class='flex-row flex-column mid padding-top-20 bg-white' style='border-top:1rpx solid #E8E8E8'>
 
-  </view>
+      <view wx:if='{{audio_value_str==null||precord=="N"||precord=="S"}}' class='flex-1'></view>
 
-  <view class='flex-row flex-column mid padding-top-20 bg-white' style='border-top:1rpx solid #E8E8E8'>
-    <view>00'00"</view>
+      <!-- <view wx:if='{{countDownNum!=null}}' class='h5'>录音中：{{countDownNum}} s</view> -->
+       <view hidden='{{precord!="Y"}}'>{{audio_value_str}}/{{audio_duration_str}}</view>
 
-    <view class='flex-row flex-center'>
-      <button class='text-center h5 flex-row flex-center' hover-class='bg-primary txt-white ' bindtap='againrecord' style='width:120rpx;height:50rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>重录</button>
+      <view class='flex-row flex-center'>
+        <button class='text-center h5 flex-row flex-center' hover-class='bg-primary txt-white ' bindtap='againrecord' style='width:120rpx;height:50rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>重录</button>
 
-      <view class='text-center' style='width:300rpx;' >
-        <image wx:if='{{play=="begin"}}' class='icon-40'  bindtap='begin' src='{{uploadpath}}resource/{{res.luyin}}'></image>
+        <view class='text-center' style='width:300rpx;'>
+          <image wx:if='{{play=="begin"}}' class='icon-40' bindtap='begin' src='{{uploadpath}}resource/{{res.luyin}}'></image>
 
-        <image wx:if='{{play=="suspend"}}' class='icon-40' bindtap='suspend' src='{{uploadpath}}resource/{{res.zanting}}'></image>
+          <image wx:if='{{play=="suspend"}}' class='icon-40' bindtap='suspend' src='{{uploadpath}}resource/{{res.zanting}}'></image>
 
-        <image wx:if='{{play=="play"}}' class='icon-40' bindtap='playrecord'  src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
+          <image wx:if='{{play=="play"}}' class='icon-40' bindtap='playrecord' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
 
-        <image wx:if='{{play=="stop"}}' class='icon-40' bindtap='luyinstop' src='{{uploadpath}}resource/{{res.zanting}}'></image>
+          <image wx:if='{{play=="stop"}}' class='icon-40' bindtap='luyinstop' src='{{uploadpath}}resource/{{res.zanting}}'></image>
+        </view>
+
+        <button form-type='submit' class='text-center h5 flex-row flex-center' id='{{bookinfo.id}}' hover-class='bg-primary txt-white' style='width:120rpx;height:50rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>提交</button>
       </view>
 
-      <button  form-type='submit' class='text-center h5 flex-row flex-center' id='{{bookinfo.id}}' hover-class='bg-primary txt-white' style='width:120rpx;height:50rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>提交</button>
+      <view class='h5 flex-row flex-center'>
+        <view wx:if='{{play=="begin"}}' class='h5 txt-primary'>点击开始录音</view>
+        <view wx:if='{{play=="suspend"&&countDownNum!=null}}' class='h5 txt-primary'>录音中：{{countDownNum}}s</view>
+        <view wx:if='{{play=="suspend"&&countDownNum==null}}' class='h5 txt-primary'>录音中：0s</view>
+        <view wx:if='{{play=="play"}}' class='h5 txt-primary'>播放录音</view>
+        <view wx:if='{{play=="stop"}}' class='h5 txt-primary'>正在播放</view>
+      </view>
+
+      <view class='flex-1'></view>
+
+      <view></view>
+
 
     </view>
 
-    <view class='h5 flex-row flex-center'>
-      <view   class='h5 txt-primary'>点击开始录音</view>
-      <!-- <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="start">录音</button>
-      <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="stop">暂停</button>
-      <button style='width:150rpx;height:50rpx;line-height:50rpx;' class='h5' bindtap="play">播放</button> -->
-      
+
+
+  </view>
+
+
+  <view class='' animation='{{animationData}}' hidden='{{open!=1||activitieslist.length==0}}'>
+    <view class='bg' bindtap='bindclosedetails' style='height:100%'>
+
     </view>
 
-<view></view>
+    <!-- <image class='under ' src='{{uploadpath}}indexbanner/{{indexbanner[0].img}}'> -->
+    <view class='under padding-20' bindtap=''>
+      <view bindtap='zt' class='txt-white'>暂停</view>
+      <navigator wx:for='{{bgmlist}}' wx:key='k' class='margin-20 ' wx:for-index="idx" data-index='{{idx}}' bindtap='playbgm' data-src='{{item.music}}' data-id='{{item.id}}' data-music_name='{{item.music_name}}' style=''>
+       
 
+<scroll-view scroll-x class='style' ><view style='display:inline-block;' class=' txt-white txt-bold flex-row flex-center'>{{item.music_name}}</view></scroll-view>
+
+      </navigator>
+    </view>
+
+    <!-- <image class='refuse icon-25 ' bindtap='bindclosedetails' src='{{uploadpath}}resource/{{res.refuse}}'></image> -->
 
   </view>
-
-  <view class='bgm' bindtap='btnopendetails'>
-    <image class='icon-30' src='{{uploadpath}}resource/{{res.xuanzeyinyue}}'></image>
-
-  </view>
-
-</view>
-
-
-<view class='' animation='{{animationData}}' hidden='{{open!=1||activitieslist.length==0}}'>
-  <view class='bg' bindtap='bindclosedetails' style='height:100%'>
-  
-  </view>
-
-  <!-- <image class='under ' src='{{uploadpath}}indexbanner/{{indexbanner[0].img}}'> -->
-  <view class='under padding-20' bindtap=''>
-  <view bindtap='zt' class='txt-white'>暂停</view>
-    <navigator wx:for='{{bgmlist}}' wx:key='k' class='margin-20 '  wx:for-index="idx" data-index='{{idx}}'  bindtap='playbgm' data-src='{{item.music}}' data-id='{{item.id}}' style=''>
-      <view class=' txt-white txt-bold flex-row flex-center '  style='height:80rpx;'>{{item.music_name}}</view>
-    </navigator>
-  </view>
-
-  <!-- <image class='refuse icon-25 ' bindtap='bindclosedetails' src='{{uploadpath}}resource/{{res.refuse}}'></image> -->
-
-</view>
 
 </form>

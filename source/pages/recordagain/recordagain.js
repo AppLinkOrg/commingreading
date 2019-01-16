@@ -1,4 +1,3 @@
-// pages/recordagain/recordagain.js
 // pages/readaloud/readaloud.js
 import {
   AppBase
@@ -12,43 +11,50 @@ import {
 import {
   BookApi
 } from "../../apis/book.api.js";
+import { ApiUtil } from "../../apis/apiutil.js";
 
 class Content extends AppBase {
   constructor() {
     super();
   }
   innerAudioContext = null;
-
+  recorderManager = null;
+  timer = '';
   onLoad(options) {
     this.Base.Page = this;
-    //options.bookid = 2;
-    //options.id=25;
+    //options.id = 2;
     super.onLoad(options);
+
+
     this.Base.setMyData({
       open: 2,
       isplay: false,
-      play: "begin"
+      play: "begin",
+      bg1: 2,
+      date: ApiUtil.updatetime(new Date()),
+      precord: "N"
     })
 
     var tempFilePath;
+    var recorderManager = wx.getRecorderManager()
+    var myaudio = wx.createInnerAudioContext();
 
     var innerAudioContext = wx.createInnerAudioContext()
+
     innerAudioContext.onPlay(this.bgmOnPlay)
     innerAudioContext.onStop(() => {
-      console.log('播放暂停')
-      innerAudioContext.stop()
+      console.log('播放停止')
+      //innerAudioContext.stop()
       //播放结束，销毁该实例
-      innerAudioContext.destroy()
+      //innerAudioContext.destroy()
     })
+
     innerAudioContext.onEnded(() => {
       console.log('播放结束')
-      bgmlist[index].audioStatus = false;
-      this.Base.setMyData({
-        bgmlist: bgmlist,
-      })
       //播放结束，销毁该实例
-      innerAudioContext.destroy()
+      //innerAudioContext.destroy()
     })
+
 
     innerAudioContext.onError((res) => {
       console.log(res.errMsg)
@@ -56,20 +62,57 @@ class Content extends AppBase {
       //播放错误，销毁该实例
       innerAudioContext.destroy()
     })
+    innerAudioContext.onTimeUpdate((res) => {
+
+      var that = this;
+      that.Base.setMyData({
+        audio_duration: innerAudioContext.duration,
+        audio_duration_str: dtime(innerAudioContext.duration),
+        audio_value: innerAudioContext.currentTime,
+        audio_value_str: dtime(innerAudioContext.currentTime)
+
+      });
+
+    })
 
     this.Base.innerAudioContext = innerAudioContext;
 
-
   }
 
+  onUnload() {
+    var innerAudioContext = this.Base.innerAudioContext;
+
+    innerAudioContext.stop();
+    console.log("暂停播放")
+    console.log("88888888888888888888888");
+
+  }
   bgmOnPlay() {
 
     console.log('开始播放')
 
   }
 
+  qweqwe(e) {
+    console.log(e.currentTarget.id);
+
+    wx.getImageInfo({
+      src: e.currentTarget.id, success(qwe) {
+        console.log(qwe);
+        console.log(12313);
+      }
+    }
+
+
+    );
+  }
   onMyShow() {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var that = this;
+
     var bookapi = new BookApi();
     //const myaudio = wx.createInnerAudioContext();
     bookapi.bookinfo({
@@ -85,66 +128,73 @@ class Content extends AppBase {
       this.Base.setMyData({
         bgmlist
       });
+      wx.hideLoading();
     });
   }
 
   begin(e) {
-
     this.Base.setMyData({ play: "suspend" })
+
+    var that = this;
+
+
+
+    //return;
+
+
     wx.showToast({
       title: '录音开始',
       mask: false,
       icon: 'none',
     })
-
     var that = this;
-
     var uploadpath = that.Base.getMyData().uploadpath;
-    var bgmlist = this.Base.getMyData().bgmlist;
-    for (var i = 0; i < bgmlist.length; i++) {
-      var src = this.Base.getMyData().bgmlist[i].music;
-    }
-    var index = e.currentTarget.dataset.index;
-    var innerAudioContext = this.Base.innerAudioContext;
-
-    console.log("111111")
-    innerAudioContext.obeyMuteSwitch = false;
-    innerAudioContext.src = uploadpath + "bgm_file/" + src;
-    innerAudioContext.play();
-    console.log(innerAudioContext.src);
-    for (var i = 0; i < bgmlist.length; i++) {
-      bgmlist[i].audioStatus = false
-    }
-
-    bgmlist[0].audioStatus = true;
-    console.log("序号" + index)
-
     const recorderManager = wx.getRecorderManager()
     const myaudio = wx.createInnerAudioContext();
     const options = {
       duration: 600000, //指定录音的时长，单位 ms
       sampleRate: 16000, //采样率
-
       numberOfChannels: 1, //录音通道数
       encodeBitRate: 96000, //编码码率
       format: 'mp3', //音频格式，有效值 aac/mp3
       frameSize: 50, //指定帧大小，单位 KB
     }
     //开始录音
-    recorderManager.start(options);
+    var countDownNum = 0;
+    //var now = dtime();
+    recorderManager.start(
+
+      that.setData({
+        timer: setInterval(function () {
+          countDownNum++;
+          that.setData({ countDownNum: countDownNum })
+          console.log(countDownNum);
+
+        }, 1000)
+      })
+
+
+
+    );
+
     recorderManager.onStart(() => {
       console.log('录音开始')
+
+
+
+
     });
 
     //错误回调
     recorderManager.onError((res) => {
       console.log(res);
     })
+
   }
 
   suspend(e) {
-    this.Base.setMyData({ play: "play" })
-
+    this.Base.setMyData({ play: "play", bg1: 2 })
+    var that = this;
     wx.showToast({
       title: '录音结束',
       mask: false,
@@ -158,10 +208,15 @@ class Content extends AppBase {
 
     var innerAudioContext = this.Base.innerAudioContext;
 
-    innerAudioContext.pause();
+    innerAudioContext.stop(this.Base.setMyData({ bg1: 2, music_name: null, precord: "S" }));
     console.log("暂停播放")
 
-    recorderManager.stop();
+    recorderManager.stop(
+      //录音停止清除计时器
+
+      clearInterval(that.data.timer)
+
+    );
     recorderManager.onStop((res) => {
       this.tempFilePath = res.tempFilePath;
       console.log('停止录音', res.tempFilePath)
@@ -179,27 +234,29 @@ class Content extends AppBase {
       mask: false,
       icon: 'none',
     })
-    const recorderManager = wx.getRecorderManager()
+    //const recorderManager = wx.getRecorderManager()
     var innerAudioContext = this.Base.innerAudioContext;
     innerAudioContext.autoplay = true
-
+    innerAudioContext.loop = true
     innerAudioContext.src = this.tempFilePath,
-      innerAudioContext.onPlay(() => {
-        console.log('开始播放')
-      })
-    innerAudioContext.onError((res) => {
-      console.log(res.errMsg)
-      console.log(res.errCode)
-    })
+      innerAudioContext.play(this.Base.setMyData({ precord: "Y" }));
+
   }
+
+
+
   luyinstop(e) {
     this.Base.setMyData({ play: "play" })
     var innerAudioContext = this.Base.innerAudioContext;
     innerAudioContext.pause();
     console.log("暂停")
   }
+
   againrecord(e) {
     var that = this;
+
+    //innerAudioContext.destroy();
+
     wx.showModal({
       title: '',
       content: '确认重新录制？',
@@ -211,44 +268,25 @@ class Content extends AppBase {
       confirmColor: '#2699EC',
       success: function (res) {
         if (res.confirm) {
-          that.Base.setMyData({ play: "begin" })
+          that.Base.setMyData({ play: "begin", bg1: 2, music_name: null, precord: "N" })
+
+          var innerAudioContext = that.Base.innerAudioContext;
+          innerAudioContext.stop();
+
+          wx.showToast({
+            title: '请点击录音重新录制',
+            mask: false,
+            icon: 'none',
+          })
           that.onMyShow();
         }
-        wx.showToast({
-          title: '请点击重新录制',
-          mask: false,
-          icon: 'none',
-        })
+
       }
     });
 
   }
 
-  submit(e) {
-    var id = e.currentTarget.id;
-    wx.showModal({
-      title: '提交',
-      content: '确认提交并保存录音？',
-      showCancel: true,
-      cancelText: '取消',
-      cancelColor: '#EE2222',
-      confirmText: '确定',
-      confirmColor: '#2699EC',
-      success: function (res) {
-        if (res.confirm) {
-          wx.navigateTo({
-            url: '/pages/endreading/endreading?id=' + id,
-          }),
-
-            wx.showToast({
-              title: '保存成功',
-              mask: false
-            })
-        }
-      }
-    });
-  }
-
+ 
   bindclosedetails(e) {
     this.Base.setMyData({
       open: 2
@@ -256,19 +294,28 @@ class Content extends AppBase {
 
   }
   btnopendetails() {
-    this.Base.setMyData({
-      open: 1
-    })
+    var precord = this.Base.getMyData().precord;
+    if (precord == "Y") {
+      wx.showToast({
+        title: '播放录音中',
+        icon: 'none'
+      })
+      return;
+    }
+    if (precord == "S") {
+      wx.showToast({
+        title: '录音已完成',
+        icon: 'none'
+      })
+      return;
+    }
+    else {
+      this.Base.setMyData({
+        open: 1
+      })
+    }
+
   }
-
-
-  shangchuan(e) {
-
-  }
-
-
-
-
 
 
   playbgm(e) {
@@ -277,18 +324,23 @@ class Content extends AppBase {
     var uploadpath = that.Base.getMyData().uploadpath;
     var bgmlist = this.Base.getMyData().bgmlist;
     var index = e.currentTarget.dataset.index;
+    var name = e.currentTarget.dataset.music_name;
     var innerAudioContext = this.Base.innerAudioContext;
 
     innerAudioContext.pause();
     console.log("暂停")
-    console.log("111111")
+
     innerAudioContext.obeyMuteSwitch = false;
     innerAudioContext.src = uploadpath + "bgm_file/" + src;
-    innerAudioContext.play();
+    innerAudioContext.play(this.Base.setMyData({ bg1: 1 }));
+
     console.log(innerAudioContext.src);
+    this.Base.setMyData({ music_name: name });
+
     for (var i = 0; i < bgmlist.length; i++) {
       bgmlist[i].audioStatus = false
     }
+
     bgmlist[index].audioStatus = true;
     console.log("序号" + index)
 
@@ -297,7 +349,7 @@ class Content extends AppBase {
   zt(e) {
     var that = this;
     var innerAudioContext = this.Base.innerAudioContext;
-    innerAudioContext.stop();
+    innerAudioContext.pause(this.Base.setMyData({ bg1: 2 }));
 
   }
 
@@ -346,12 +398,13 @@ class Content extends AppBase {
             }, (ret) => {
               console.log(666666666666666);
               var book_id = that.Base.getMyData().bookinfo.id;
+              var time = that.Base.getMyData().audio_duration_str;
               console.log("辣椒炒肉" + that.Base.getMyData().vonice);
               if (ret.code == 0) {
                 console.log('提交成功');
 
                 wx.reLaunch({
-                  url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return,
+                  url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return + '&time=' + time,
                 })
 
                 wx.showToast({
@@ -367,7 +420,6 @@ class Content extends AppBase {
 
           });
 
-
         }
       }
     });
@@ -381,6 +433,16 @@ class Content extends AppBase {
 
 }
 //var innerAudioContext = null;
+function dtime(t) {
+  var t = parseInt(t);
+  var minute = parseInt(t / 60);
+  var second = parseInt(t % 60);
+  minute = minute <= 9 ? "0" + minute.toString() : minute.toString();
+  second = second <= 9 ? "0" + second.toString() : second.toString();
+
+  return minute + ":" + second;
+}
+
 var content = new Content();
 var body = content.generateBodyJson();
 body.onLoad = content.onLoad;
@@ -406,5 +468,5 @@ body.shangchuan = content.shangchuan;
 body.confirm = content.confirm;
 body.uploadvonice = content.uploadvonice;
 body.bgmOnPlay = content.bgmOnPlay;
-
+body.qweqwe = content.qweqwe;
 Page(body)

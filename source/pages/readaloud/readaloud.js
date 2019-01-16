@@ -105,6 +105,10 @@ class Content extends AppBase {
     );
   }
   onMyShow() {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var that = this;
    
     var bookapi = new BookApi();
@@ -122,6 +126,7 @@ class Content extends AppBase {
       this.Base.setMyData({
         bgmlist
       });
+      wx.hideLoading();
     });
   }
 
@@ -388,6 +393,7 @@ var that=this;
     var ve = this.tempFilePath;
     
     var book_id = this.Base.getMyData().bookinfo.id;
+    var booktype = this.Base.getMyData.bookinfo.booktype;
     var name = this.Base.getMyData().bookinfo.book_name;
     if (ve == null) {
       this.Base.info("请录音再上传");
@@ -406,7 +412,11 @@ var that=this;
       confirmColor: '#2699EC',
       success: function (res) {
         if (res.confirm) {
-
+          wx.showLoading({
+            title: '加载中',
+            mask: true
+          })
+          
 
           that.Base.uploadFile("readfile", "录音文件《" + name + "》", ve, (ret) => {
             var vonice = that.Base.getMyData().ve;
@@ -426,6 +436,7 @@ var that=this;
               status: "A",
               book_id: book_id,
               member_id: talker.id,
+              booktype: booktype,
               read_file: that.Base.getMyData().vonice
             }, (ret) => {
               console.log(666666666666666);
@@ -441,10 +452,7 @@ var that=this;
                   url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return + '&time=' + time,
                 })
 
-                wx.showToast({
-                  title: '保存成功',
-                  mask: false
-                })
+                
                 //that.onMyShow();
               } else {
                 that.Base.info(ret.result);
@@ -454,6 +462,7 @@ var that=this;
 
           });
 
+          wx.hideLoading();
           
         }
       }
@@ -482,12 +491,11 @@ var content = new Content();
 var body = content.generateBodyJson();
 body.onLoad = content.onLoad;
 body.onMyShow = content.onMyShow;
-body.begin = content.begin; 
+body.begin = content.begin;
 body.suspend = content.suspend;
-body.playrecord = content.playrecord; 
+body.playrecord = content.playrecord;
 body.luyinstop = content.luyinstop;
-body.againrecord = content.againrecord; 
-
+body.againrecord = content.againrecord;
 body.submit = content.submit;
 body.cutmusic = content.cutmusic;
 body.Choice = content.Choice;

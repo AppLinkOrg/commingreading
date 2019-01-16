@@ -1,0 +1,18 @@
+<!--pages/aboutus/aboutus.wxml-->
+
+<view class='flex-row flex-column'>
+  <view class='flex-row flex-center' style='height:400rpx;'>
+    <view class='flex-row flex-column'>
+      <image class='icon-75' src='{{uploadpath}}resource/{{res.gif}}'></image>
+      <view class='margin-top txt-black'>与你共读</view>
+    </view>
+  </view>
+</view>
+
+
+<view wx:for='{{list}}' wx:key='k' wx:for-index='idx'>
+  <view class='flex-row flex-center  padding-40 border_top {{idx==0?"border_top-1":""}} '>
+    <view class='flex-1'>{{item.title_name}}</view>
+    <view>{{item.content}}</view>
+  </view>
+</view>

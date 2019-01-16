@@ -18,6 +18,10 @@ class Content extends AppBase {
 
   }
   onMyShow() {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var that = this;
     var formattime = [];
     var bookapi = new BookApi();
@@ -27,7 +31,7 @@ class Content extends AppBase {
       
       talkapi.messagelist({ company_id:bookinfo.id }, (messagelist) => {
         this.Base.setMyData({ messagelist });
-        
+        wx.hideLoading();
       });
     }); 
     

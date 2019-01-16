@@ -14,11 +14,19 @@ class Content extends AppBase {
     //options.id=5;
     super.onLoad(options);
     this.Base.setMyData({ctt:1})
+    
   }
   onMyShow() {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+
     var that = this;
     var bookapi = new BookApi();
     var memberapi = new MemberApi();
+    
+    
     bookapi.booklist({ orderby: 'r_main.id desc'}, (monthlist) => {
       this.Base.setMyData({ monthlist });
     });
@@ -30,14 +38,19 @@ class Content extends AppBase {
     });
     memberapi.getall({ orderby: 'r_main.id desc' }, (weekgetall) => {
       this.Base.setMyData({ weekgetall });
+      wx.hideLoading(
+      )
     });
+    
   }
   
   bindwaitcompleted(e) {
-    this.Base.setMyData({ ctt: 2 })
+    this.Base.setMyData({ ctt: 2 });
+    this.onMyShow();
   }
   bindcontact(e) {
-    this.Base.setMyData({ ctt: 1 })
+    this.Base.setMyData({ ctt: 1 });
+    this.onMyShow();
   }
 }
 var content = new Content();

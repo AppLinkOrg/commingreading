@@ -1,0 +1,7 @@
+/* pages/aboutus/aboutus.wxss */
+.border_top{
+  border-top: 1rpx solid #CECFCE;
+}
+.border_top-1{
+  border-top: 6rpx solid #CECFCE;
+}

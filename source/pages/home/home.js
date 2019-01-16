@@ -14,11 +14,20 @@ class Content extends AppBase {
     this.Base.setMyData({
       ctt:1
     })
+    
   }
   
   onMyShow() {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var that = this;
     var instapi = new InstApi();
+    
+    // setTimeout(function () {
+      
+    // }, 500)
     instapi.indexbanner({}, (indexbanner) => {
       this.Base.setMyData({ indexbanner });
     }); 
@@ -33,21 +42,28 @@ class Content extends AppBase {
 
     bookapi.booklist({ booktype: 3 }, (newlist) => {
       this.Base.setMyData({ newlist });
+      wx.hideLoading(
+      )
     });
-
 
   }
 
   bindcompleted(e) {
     this.Base.setMyData({  ctt: 3 })
+    this.onMyShow();
   }
   bindwaitcompleted(e) {
     this.Base.setMyData({ ctt: 2 })
+    this.onMyShow();
   }
   bindcontact(e) {
     this.Base.setMyData({ ctt: 1 })
+    this.onMyShow();
   }
+
 }
+
+
 var content = new Content();
 var body = content.generateBodyJson();
 body.onLoad = content.onLoad;

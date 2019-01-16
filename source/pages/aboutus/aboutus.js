@@ -1,7 +1,8 @@
-// pages/mine/mine.js
+// pages/aboutus/aboutus.js
 import { AppBase } from "../../appbase";
 import { ApiConfig } from "../../apis/apiconfig";
 import { InstApi } from "../../apis/inst.api.js";
+import { AboutusApi } from "../../apis/aboutus.api.js";
 
 class Content extends AppBase {
   constructor() {
@@ -14,7 +15,10 @@ class Content extends AppBase {
   }
   onMyShow() {
     var that = this;
-
+    var aboutusapi=new AboutusApi();
+    aboutusapi.aboutuslist({orderby:'r_main.seq'}, (list) => {
+      this.Base.setMyData({ list });
+      });
   }
 }
 var content = new Content();
