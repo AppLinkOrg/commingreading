@@ -16,9 +16,13 @@ top: 0;
 width: 100%;
 z-index: 100;
 }
+.border-t{
+  border-top:1rpx solid #CECFCE
+}
 /* .catitem{
   width: 250rpx;
 }
+
 
 .catitem .m{
   color:#A9A6AB;

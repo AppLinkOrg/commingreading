@@ -7,13 +7,13 @@
 <view class='flex-row flex-center bg-white top_title'>
 
   <view class='catitem flex-1 flex-row flex-column padding-20' wx:key="k" bindtap='bindcontact'>
-    <view class=' text-center  txt-gray {{ctt==1?"txt-primary":"" }} top text-center h5' bindtap='bindcontact'>今日排行</view>
+    <view class=' text-center  txt-gray {{ctt==1?"txt-primary":"" }} top text-center h5 txt-bold' bindtap='bindcontact'>今日排行</view>
     <view wx:if='{{ctt!=1}}' style='height:4rpx;width:120rpx;' class=''></view>
     <view wx:if='{{ctt==1}}' style='height:4rpx;width:120rpx;' class='bg-primary'></view>
   </view>
 
   <view class='catitem flex-1 flex-row flex-column  padding-20' wx:key="k" bindtap='bindwaitcompleted'>
-    <view class=' text-center  txt-gray {{ctt==2?"txt-primary":""}} top text-center h5' bindtap='bindwaitcompleted'>本周排行</view>
+    <view class=' text-center  txt-gray {{ctt==2?"txt-primary":""}} top text-center h5 txt-bold' bindtap='bindwaitcompleted'>本周排行</view>
     <view wx:if='{{ctt!=2}}' style='height:4rpx;width:120rpx;' class=''></view>
     <view wx:if='{{ctt==2}}' style='height:4rpx;width:120rpx;' class='bg-primary'></view>
   </view>
@@ -34,7 +34,7 @@
     </view>
   </view>
 
-  <view wx:for='{{todaygetall}}' wx:key='k' wx:for-index='idx' class='{{idx%2==0?"bg":""}}'>
+  <view wx:for='{{todaygetall}}' wx:key='k' wx:for-index='idx' wx:if='{{idx+1<=10}}' class='{{idx%2==0?"bg":""}}'>
     <view class='padding-30 flex-row flex-center'>
       <view wx:if='{{idx==0}}' class='flex-row flex-column ico'>
         <image class='icon-30' src='{{uploadpath}}resource/{{res.Top_1}}'></image>
@@ -59,6 +59,7 @@
 
 </view>
 
+
 <view wx:if='{{ctt==2}}'>
   <view class='padding-30 flex-row flex-center ' style='background:#ABDFC6'>
 
@@ -74,7 +75,7 @@
   </view>
 
 
-  <view wx:for='{{weekgetall}}' wx:key='k' wx:for-index='idx' class='{{idx%2==0?"bg":""}}'>
+  <view wx:for='{{weekgetall}}' wx:key='k' wx:for-index='idx' wx:if='{{idx+1<=10}}' class='{{idx%2==0?"bg":""}}'>
     <view class='padding-30 flex-row flex-center'>
       <view wx:if='{{idx==0}}' class='flex-row flex-column ico'>
         <image class='icon-30' src='{{uploadpath}}resource/{{res.Top_1}}'></image>

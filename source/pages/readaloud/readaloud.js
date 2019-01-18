@@ -12,6 +12,8 @@ import {
   BookApi
 } from "../../apis/book.api.js";
 import { ApiUtil } from "../../apis/apiutil.js";
+import { TalkApi } from "../../apis/talk.api.js";
+
 
 class Content extends AppBase {
   constructor() {
@@ -388,12 +390,14 @@ var that=this;
     console.log(e);
     var that = this;
     var api = new BookApi();
-
+    var talkapi=new TalkApi();
     //var vonice = this.tempFilePath;
     var ve = this.tempFilePath;
-    
+    //var bookinfo=this.Base.getMyData().bookinfo;
     var book_id = this.Base.getMyData().bookinfo.id;
-    var booktype = this.Base.getMyData.bookinfo.booktype;
+    var book_type = this.Base.getMyData().bookinfo.booktype;
+    console.log(book_type+"qqqqqqqqqqqqqqqqqqqq");
+    //return;
     var name = this.Base.getMyData().bookinfo.book_name;
     if (ve == null) {
       this.Base.info("请录音再上传");
@@ -417,6 +421,16 @@ var that=this;
             mask: true
           })
           
+          talkapi.addreadcount({ book: book_id,status:"A" }, (ret) => {
+
+            // if (ret.return != "deleted") {
+            //   this.Base.toast("收听成功");
+            // }
+
+          })
+
+
+
 
           that.Base.uploadFile("readfile", "录音文件《" + name + "》", ve, (ret) => {
             var vonice = that.Base.getMyData().ve;
@@ -436,7 +450,7 @@ var that=this;
               status: "A",
               book_id: book_id,
               member_id: talker.id,
-              booktype: booktype,
+              booktype: book_type,
               read_file: that.Base.getMyData().vonice
             }, (ret) => {
               console.log(666666666666666);
@@ -452,27 +466,19 @@ var that=this;
                   url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return + '&time=' + time,
                 })
 
-                
                 //that.onMyShow();
               } else {
                 that.Base.info(ret.result);
               }
-
             });
-
           });
-
           wx.hideLoading();
-          
         }
       }
     });
 
-
-
     //return;this.Base.uploadImage("post",(ret)=>{
     
-
   }
 
 }

@@ -1,12 +1,11 @@
 <!--pages/myreading/myreading.wxml-->
 
-
- <view class='padding-40' wx:for='{{readlist}}' wx:key='k' wx:if='{{readlist.length>0}}' style='border-bottom:1rpx solid #CECFCE'>
+ <navigator url='/pages/others/others?readid={{item.id}}' class='padding-40' wx:for='{{readlist}}' wx:key='k' wx:if='{{readlist.length>0}}' style='border-bottom:1rpx solid #CECFCE'>
     <view class='txt-black h4'>{{item.booktype_name}}</view>
     <view class='margin-top-10'>《{{item.book_id_name}}》</view>
     <view class='flex-row flex-center'>
       <view class='flex-1 margin-top-5'>作者：{{item.bookname_author}}</view>
-      <view class='margin-top-5'>2015-12-12</view>
+      <view class='margin-top-5'>{{item.created_date}}</view>
     </view>
-</view> 
+</navigator>
 

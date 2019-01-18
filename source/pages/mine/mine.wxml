@@ -1,6 +1,6 @@
 <!--pages/mine/mine.wxml-->
 <view class=''>
-<image class='bg' src='{{uploadpath}}resource/{{res.bg_2}}'></image>
+<image class='bg' src='{{uploadpath}}resource/{{res.wodebeijingtu}}'></image>
     <!-- <view class='text-right set_icon' style=''>
       <image class='icon-25' src='{{uploadpath}}resource/{{res.set_icon}}'></image>
     </view> -->

@@ -1,19 +1,19 @@
 <view class='flex-row flex-center top_title'>
 
   <view class='catitem flex-1 bg-white flex-row flex-column padding-20' wx:key="k" bindtap='bindcontact'>
-    <view class=' text-center  txt-gray {{ctt==1?"to-white":"" }} top  h5' bindtap='bindcontact'>热门诗词</view>
+    <view class=' text-center  txt-gray {{ctt==1?"to-white":"" }} top   txt-bold' bindtap='bindcontact'>热门诗词</view>
     <view wx:if='{{ctt!=1}}' style='height:4rpx;width:120rpx;' class=''></view>
     <view wx:if='{{ctt==1}}' style='height:4rpx;width:120rpx;' class='bg-primary'></view>
   </view>
 
   <view class='catitem flex-1 bg-white flex-row flex-column padding-20' wx:key="k" bindtap='bindwaitcompleted'>
-    <view class=' text-center  txt-gray {{ctt==2?"to-white":""}} top  h5' bindtap='bindwaitcompleted'>每日必读</view>
+    <view class=' text-center  txt-gray {{ctt==2?"to-white":""}} top   txt-bold' bindtap='bindwaitcompleted'>每日必读</view>
     <view wx:if='{{ctt!=2}}' style='height:4rpx;width:120rpx;' class=''></view>
     <view wx:if='{{ctt==2}}' style='height:4rpx;width:120rpx;' class='bg-primary'></view>
   </view>
 
   <view class='catitem flex-1 bg-white flex-row flex-column padding-20' wx:key="k" bindtap='bindcompleted'>
-    <view class=' text-center  txt-gray {{ctt==3?"to-white":""}} top  h5' bindtap='bindcompleted'>最新录入</view>
+    <view class=' text-center  txt-gray {{ctt==3?"to-white":""}} top   txt-bold' bindtap='bindcompleted'>最新录入</view>
     <view wx:if='{{ctt!=3}}' style='height:4rpx;width:120rpx;' class=''></view>
     <view wx:if='{{ctt==3}}' style='height:4rpx;width:120rpx;' class='bg-primary'></view>
   </view>
@@ -38,14 +38,15 @@
 
 
 
-<view wx:if='{{ctt==1}}' wx:for='{{booklist}}' wx:key='k'>
+<view wx:if='{{ctt==1}}' wx:for='{{booklist}}' wx:for-index='idx'  wx:key='k'>
 
-  <navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}&type=A' class='padding-30'>
-    <view style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
-      <view class='txt-black'>{{item.book_name}}</view>
-      <view class='flex-row flex-center margin-left-10 margin-top-10'>
-        <view class='flex-1 txt-black h5'>作者：{{item.author}}</view>
-        <view class='flex-1 txt-black h5  text-right'>阅读：0</view>
+  <navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}&type=A' class='padding-20 {{idx!=0?"border-t":""}}' style=''>
+    <view  class='margin-left-10'>
+      <view class='txt-black txt-bold'>{{item.book_name}}</view>
+
+      <view class='flex-row flex-center  margin-top-5'>
+        <view class='flex-1  h5'>作者：{{item.author}}</view>
+        <view class='flex-1  h5  text-right'>阅读：{{item.bcount}}</view>
       </view>
     </view>
   </navigator>
@@ -54,28 +55,29 @@
 
 
 
-<view wx:if='{{ctt==2}}' wx:for='{{everydaylist}}' wx:key='k'>
+<view wx:if='{{ctt==2}}' wx:for='{{everydaylist}}' wx:for-index='idx' wx:key='k'>
 
-  <navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}&type=A' class='padding-30'>
-    <view style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
-      <view class='txt-black'>{{item.book_name}}</view>
-      <view class='flex-row flex-center margin-left-10 margin-top-10'>
-        <view class='flex-1 txt-black h5'>作者：{{item.author}}</view>
-        <view class='flex-1 txt-black h5  text-right'>阅读：0</view>
+  <navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}&type=A' class='padding-20 {{idx!=0?"border-t":""}}' style=''>
+    <view  class='margin-left-10'>
+      <view class='txt-black txt-bold'>{{item.book_name}}</view>
+
+      <view class='flex-row flex-center  margin-top-5'>
+        <view class='flex-1  h5'>作者：{{item.author}}</view>
+        <view class='flex-1  h5  text-right'>阅读：{{item.bcount}}</view>
       </view>
     </view>
   </navigator>
 
 </view>
 
+<view wx:if='{{ctt==3}}' wx:for='{{newlist}}' wx:for-index='idx' wx:key='k'>
+  <navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}&type=A' class='padding-20 {{idx!=0?"border-t":""}}' style=''>
+    <view  class='margin-left-10'>
+      <view class='txt-black txt-bold'>{{item.book_name}}</view>
 
-<view wx:if='{{ctt==3}}' wx:for='{{newlist}}' wx:key='k'>
-  <navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}&type=A' class='padding-30'>
-    <view style='border-bottom:1rpx solid #CECFCE' class='padding-bottom-20'>
-      <view class='txt-black'>{{item.book_name}}</view>
-      <view class='flex-row flex-center margin-left-10 margin-top-10'>
-        <view class='flex-1 txt-black h5'>作者：{{item.author}}</view>
-        <view class='flex-1 txt-black h5  text-right'>阅读：0</view>
+      <view class='flex-row flex-center  margin-top-5'>
+        <view class='flex-1  h5'>作者：{{item.author}}</view>
+        <view class='flex-1  h5  text-right'>阅读：{{item.bcount}}</view>
       </view>
     </view>
   </navigator>

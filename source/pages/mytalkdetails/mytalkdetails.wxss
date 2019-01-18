@@ -35,8 +35,20 @@ Page {
 .pinlun {
   padding-left: 30rpx;
   padding-right: 30rpx;
-  padding-top: 50rpx;
-  padding-bottom: 50rpx;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+}
+.pinlun_t {
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  padding-top: 10rpx;
+  padding-bottom: 30rpx;
+}
+.talker{
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  padding-top: 40rpx;
+  padding-bottom: 10rpx;
 }
 
 .reader {
@@ -58,5 +70,5 @@ Page {
   max-height: 550rpx;
 }
 .border_bottom{
-  border-top: 1rpx solid #D7D5D5;
+  border-top: 1rpx solid rgb(243, 241, 241);
 }

@@ -32,7 +32,7 @@ class Content extends AppBase {
       this.Base.setMyData({ indexbanner });
     }); 
     var bookapi = new BookApi();
-    bookapi.booklist({ booktype:1 }, (booklist) => {
+    bookapi.booklist({ booktype: 1, orderby:'r_main.id' }, (booklist) => {
       this.Base.setMyData({ booklist });
     });
 

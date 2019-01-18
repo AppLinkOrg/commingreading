@@ -12,7 +12,7 @@
   </view>
 
   <view class='margin-left-20  flex-1'>
-
+  
     <view class='flex-row flex-center'>
       <view class='flex-1 txt-black'>{{item.member_id_name}}</view>
       <view class='txt-gary h5 margin-right-10'>{{item.comment_time}}</view>

@@ -1,5 +1,5 @@
 <!--pages/recordagain/recordagain.wxml-->
-<image class='img' mode='scaleToFill' bindtap='Choice' src='{{uploadpath}}resource/{{res.bg_2}}'></image>
+<image class='img' mode='scaleToFill' bindtap='Choice' src='{{uploadpath}}resource/{{res.read_bg}}'></image>
 
 <view class='bgm flex-row flex-center ' bindtap='btnopendetails' style='border-bottom:1rpx solid #009688;height:100rpx'>
  <!-- <view class='flex-row flex-center'>-->
@@ -22,7 +22,6 @@
     <view class='margin-left-20 h5' wx:if='{{music_name!=null}}'>({{audio_value_str}}/{{audio_duration_str}})</view>
   <!--</view>-->
 </view>
-
 
 <form bindsubmit="confirm" bindreset="formReset" report-submit="{{true}}">
   <view>

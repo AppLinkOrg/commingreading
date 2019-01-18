@@ -1,10 +1,10 @@
 {
   "pages":[
     "pages/home/home",
+    "pages/endreading/endreading",
     "pages/mine/mine",
     "pages/search/search",
     "pages/myreading/myreading",
-    "pages/endreading/endreading",
     "pages/aboutus/aboutus",
     "pages/bookshelf/bookshelf",
     "pages/typedetail/typedetail",

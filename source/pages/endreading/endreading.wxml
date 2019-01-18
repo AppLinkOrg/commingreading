@@ -2,7 +2,7 @@
 <view class='flex-row flex-center' style='height:1200rpx;'>
 
   <view class='flex-1'>
-    <image class='img' mode='scaleToFill' src='{{uploadpath}}resource/{{res.bg_2}}'></image>
+    <image class='img' mode='scaleToFill' src='{{uploadpath}}resource/{{res.bg_3}}'></image>
     <view class='flex-row flex-column padding-40' style=''>
 
       <view>
