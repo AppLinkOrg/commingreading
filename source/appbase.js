@@ -245,7 +245,6 @@ export class AppBase {
           url: '/pages/auth/auth',
         })
       }else{
-
         this.Base.setMyData({ memberinfo: info });
         that.onMyShow();
       }
