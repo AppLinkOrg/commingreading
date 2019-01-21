@@ -22,9 +22,10 @@ class Content extends AppBase {
   innerAudioContext = null;
   recorderManager=null;
   timer= '';
+  zimutimer=null;
   onLoad(options) {
     this.Base.Page = this;
-    //options.id = 2;
+    options.id = 2;
     super.onLoad(options);
 
 
@@ -34,16 +35,25 @@ class Content extends AppBase {
       play:"begin",
       bg1: 2, 
       date: ApiUtil.updatetime(new Date()),
-      precord:"N"
+      precord:"N",
+      lines:[],
+      speed:1,
+      zimucount:-1,
+      readcount:0,
+      firstpaly:0
     })
     
     var tempFilePath;
     var recorderManager = wx.getRecorderManager()
     var myaudio = wx.createInnerAudioContext();
+    var that=this;
 
     var innerAudioContext = wx.createInnerAudioContext()
 
-    innerAudioContext.onPlay(this.bgmOnPlay)
+    innerAudioContext.onPlay(this.bgmOnPlay);
+    innerAudioContext.onPause(()=>{
+      console.log("stop here");
+    });
     innerAudioContext.onStop(() => {
       console.log('播放停止')
       //innerAudioContext.stop()
@@ -82,17 +92,37 @@ class Content extends AppBase {
   }
  
   onUnload(){
+
+    var that=this;
     var innerAudioContext = this.Base.innerAudioContext;
 
     innerAudioContext.stop();
     console.log("暂停播放")
     console.log("88888888888888888888888");
 
+
+    clearInterval(that.Base.zimutimer);
+
   }
   bgmOnPlay() {
-
+    var that=this;
     console.log('开始播放')
-
+    var speed = Number(that.Base.getMyData().speed);
+    clearInterval(that.Base.zimutimer);
+    
+    var firstpaly = parseInt(that.Base.getMyData().firstpaly);
+    if (firstpaly==0){
+      that.Base.setMyData({ zimucount: -1, firstpaly:0 });
+    }
+    that.Base.zimutimer = setInterval(() => {
+      var zimucount = parseInt(that.Base.getMyData().zimucount);
+      var readcount = parseInt(that.Base.getMyData().readcount);
+      zimucount++;
+      if (readcount>=zimucount){
+        that.Base.setMyData({ zimucount: zimucount });
+      }
+    }, speed * 1000
+    );
   }
 
   qweqwe(e){
@@ -118,8 +148,21 @@ class Content extends AppBase {
     bookapi.bookinfo({
       id: this.Base.options.id
     }, (bookinfo) => {
+      var book_content =bookinfo.book_content;
+      var lines=book_content.split("\n");
+      var count=0;
+      for(var i=0;i<lines.length;i++){
+        var line=[];
+        for(var j=0;j<lines[i].length;j++){
+          line.push({ num: count++,c:lines[i][j]});
+        }
+        lines[i]=line;
+      }
+      //var lines=
+
       this.Base.setMyData({
-        bookinfo
+        bookinfo,
+        lines: lines
       });
     });
     bookapi.bgmlist({
@@ -179,8 +222,16 @@ class Content extends AppBase {
     
     recorderManager.onStart(() => {
       console.log('录音开始')
+      var speed = Number(that.Base.getMyData().speed);
+      clearInterval(that.Base.zimutimer);
+      that.Base.setMyData({ zimucount:-1});
+      that.Base.zimutimer = setInterval(() => { 
+        var zimucount = parseInt(that.Base.getMyData().zimucount) ;
+        zimucount++;
 
-      
+        that.Base.setMyData({ zimucount: zimucount });
+      }, speed*1000
+      );
 
       
     });
@@ -193,6 +244,7 @@ class Content extends AppBase {
   }
 
   suspend(e) {
+    var that=this;
     this.Base.setMyData({ play: "play" ,bg1:2})
 var that=this;
     wx.showToast({
@@ -222,7 +274,13 @@ var that=this;
       console.log('停止录音', res.tempFilePath)
       const {
         tempFilePath
-      } = res
+      } = res;
+
+      clearInterval(that.Base.zimutimer);
+      //读的字数在这里
+      var readcount=that.Base.getMyData().zimucount;
+      console.log("字数统计读结果在这里，提交就提交这个:" + readcount);
+      that.Base.setMyData({ readcount});
 
     })
   }
@@ -239,8 +297,8 @@ var that=this;
     innerAudioContext.autoplay = true
     innerAudioContext.loop = true
     innerAudioContext.src = this.tempFilePath,
-      innerAudioContext.play(this.Base.setMyData({ precord: "Y"}));
-      
+    innerAudioContext.play(this.Base.setMyData({ precord: "Y"}));
+    
   }
 
 
@@ -249,7 +307,9 @@ var that=this;
     this.Base.setMyData({ play: "play" })
     var innerAudioContext = this.Base.innerAudioContext;
     innerAudioContext.pause();
-    console.log("暂停")
+
+    clearInterval(this.Base.zimutimer);
+    console.log("暂停2")
   }
 
   againrecord(e){
@@ -361,7 +421,7 @@ var that=this;
     var innerAudioContext = this.Base.innerAudioContext;
     
     innerAudioContext.pause();
-    console.log("暂停")
+    console.log("暂停1")
 
     innerAudioContext.obeyMuteSwitch = false;
     innerAudioContext.src = uploadpath + "bgm_file/" + src;
