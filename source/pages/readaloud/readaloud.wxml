@@ -44,6 +44,8 @@
       </scroll-view>
     </view>
 
+
+
     <view class='flex-row flex-column mid padding-top-20 bg-white' style='border-top:1rpx solid #E8E8E8'>
 
       <view wx:if='{{audio_value_str==null||precord=="N"||precord=="S"}}' class='flex-1'></view>

@@ -136,7 +136,6 @@ class Content extends AppBase {
       console.log(12313);
     }}
  
-
     );
   }
   onMyShow() {
@@ -145,7 +144,7 @@ class Content extends AppBase {
       mask: true
     })
     var that = this;
-   
+    
     var bookapi = new BookApi();
     //const myaudio = wx.createInnerAudioContext();
     bookapi.bookinfo({
