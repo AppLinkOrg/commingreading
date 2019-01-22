@@ -3,41 +3,37 @@
   <image class='bg_img' src='{{uploadpath}}resource/{{res.bg_1}}'></image>
 </view>
 
-
-
 <view class='Top padding-20 flex-row '>
   <navigator url='/pages/search/search' class='search flex-row flex-center padding-10 '>
     <view class=''></view>
-     <image class='icon-20' src='{{uploadpath}}resource/{{res.search_icon}}'></image> 
+    <image class='icon-20' src='{{uploadpath}}resource/{{res.search_icon}}'></image>
     <view class='h5 txt-gray'>搜索你想读的文章</view>
     <view class=''></view>
   </navigator>
 </view>
 
-<view class='flex-row' >
+<view class='flex-row'>
 
-<view class='all '>
+  <view class='all '>
+    <view class='txt-primary   padding-10 radius-10 {{ty==0?"bg txt-white":""}}' bindtap='bindall'>全部</view>
+  </view>
+  
+  <view class='flex-row flex-center flex-wrap flex-1'>
+    <view bindtap='bindtypedetail' class='margin-left-10  ' wx:for='{{booktypelist}}' data-type='{{item.id}}' wx:key='k'>
+      <view class='radius-10 {{ty==item.id?"bg txt-white":""}} padding-10'>{{item.name}}</view>
+    </view>
+  </view>
 
-<view class='txt-primary   padding-10 radius-10 {{ty==0?"bg txt-white":""}}' bindtap='bindall'>全部</view>
-
-</view>
-
-
-<view class='flex-row flex-center flex-wrap flex-1' >
-<view bindtap='bindtypedetail'  class='margin-left-10  ' wx:for='{{booktypelist}}' data-type='{{item.id}}' wx:key='k'>
-<view class='radius-10 {{ty==item.id?"bg txt-white":""}} padding-10'>{{item.name}}</view>
-</view>
-</view>
 </view>
 
 
 
 <view wx:if='{{booklist.length==0}}' class='margin-20 padding-20 flex-row flex-column'>
-<image class='icon-75 margin-top-20' src='{{uploadpath}}resource/{{res.book_null}}'></image>
-<view class='h5 margin-top-20'>没有了哦~</view>
+  <image class='icon-75 margin-top-20' src='{{uploadpath}}resource/{{res.book_null}}'></image>
+  <view class='h5 margin-top-20'>没有了哦~</view>
 </view>
 
-<navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}'   wx:for='{{booklist}}' wx:key='k' style='' class='radius-10 bg-white padding-20 margin-20' wx:if='{{booklist.length>0}}'>
+<navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}' wx:for='{{booklist}}' wx:key='k' style='' class='radius-10 bg-white padding-20 margin-20' wx:if='{{booklist.length>0}}'>
   <view class='txt-black'>《{{item.book_name}}》</view>
   <view class='flex-row flex-center  margin-top-10'>
     <view class='h5 flex-1 margin-left-10'>作者：{{item.author}}</view>

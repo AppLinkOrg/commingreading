@@ -1,7 +1,7 @@
 <!--pages/mine/mine.wxml-->
 <view class=''>
-<image class='bg' src='{{uploadpath}}resource/{{res.wodebeijingtu}}'></image>
-    <!-- <view class='text-right set_icon' style=''>
+  <image class='bg' src='{{uploadpath}}resource/{{res.wodebeijingtu}}'></image>
+  <!-- <view class='text-right set_icon' style=''>
       <image class='icon-25' src='{{uploadpath}}resource/{{res.set_icon}}'></image>
     </view> -->
 
@@ -16,24 +16,26 @@
 
 <view class='mid  margin-20 flex-row flex-center padding-40'>
 
-<view class='flex-row flex-column flex-1'>
-<view class='txt-black txt-bold h2'>0</view>
-<view class='txt-bold h5 margin-top-10'>累计朗读篇数</view>
-</view>
+  <view class='flex-row flex-column flex-1'>
+    <view class='txt-black txt-bold h2'>0</view>
+    <view class='txt-bold h5 margin-top-10'>累计朗读篇数</view>
+  </view>
 
-<view style='height:50rpx;width:4rpx' class='bg-white'></view>
+  <view style='height:50rpx;width:4rpx' class='bg-white'></view>
 
-<view class='flex-row flex-column flex-1'>
-<view class='txt-black txt-bold h2'>0</view>
-<view class='txt-bold h5 margin-top-10'>当日朗读字数</view>
-</view>
+  <view class='flex-row flex-column flex-1'>
+    <view wx:if='{{t_sum!=null}}' class='txt-black txt-bold h2'>{{t_sum}}</view>
+    <view wx:if='{{t_sum==null}}' class='txt-black txt-bold h2'>0</view>
+    <view class='txt-bold h5 margin-top-10'>当日朗读字数</view>
+  </view>
 
-<view style='height:50rpx;width:4rpx' class='bg-white'></view>
+  <view style='height:50rpx;width:4rpx' class='bg-white'></view>
 
-<view class='flex-row flex-column flex-1'>
-<view class='txt-black txt-bold h2'>0</view>
-<view class='txt-bold h5 margin-top-10'>累计朗读字数</view>
-</view>
+  <view class='flex-row flex-column flex-1'>
+    <view wx:if='{{sum!=null}}' class='txt-black txt-bold h2'>{{sum}}</view>
+    <view wx:if='{{sum==null}}' class='txt-black txt-bold h2'>0</view>
+    <view class='txt-bold h5 margin-top-10'>累计朗读字数</view>
+  </view>
 
 </view>
 
@@ -71,10 +73,10 @@
 </view> -->
 
 <view class=' margin-30 bg-white '>
-<button  class='bg-white clear-button' open-type='contact' style='border-radius:0;border:0;'>
-<view class='flex-row flex-center '>
-<image class='icon-25' src='{{uploadpath}}resource/{{res.contactcs}}'></image>
-<view class='txt-bold txt-black h5  padding-left-20'>联系我们</view>
-</view>
-</button>
+  <button class='bg-white clear-button' open-type='contact' style='border-radius:0;border:0;'>
+    <view class='flex-row flex-center '>
+      <image class='icon-25' src='{{uploadpath}}resource/{{res.contactcs}}'></image>
+      <view class='txt-bold txt-black h5  padding-left-20'>联系我们</view>
+    </view>
+  </button>
 </view>

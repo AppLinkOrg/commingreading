@@ -41,7 +41,7 @@ export class ApiUtil {
     //日
     var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
 
-    return (Y + "." + M + "." + D)
+    return (Y + "-" + M + "-" + D)
   }
 
   static fixRename(ret){

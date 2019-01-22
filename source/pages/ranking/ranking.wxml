@@ -29,7 +29,7 @@
     </view>
     <view class='flex-1 margin-left-20 txt-black'>我</view>
     <view class='flex-row flex-column'>
-      <view class='txt-black'>0</view>
+      <view class='txt-black'>{{t_sum}}</view>
       <view class='h5'>今日朗读字数</view>
     </view>
   </view>
@@ -70,7 +70,7 @@
     <view class='flex-1 margin-left-20 txt-black'>我</view>
     <view class='flex-row flex-column'>
       <view class='txt-black'>0</view>
-      <view class='h5'>今日朗读次数</view>
+      <view class='h5'>今日朗读字数</view>
     </view>
   </view>
 

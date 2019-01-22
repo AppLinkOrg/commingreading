@@ -1,15 +1,17 @@
 <!--pages/mytalk/mytalk.wxml-->
 
-<view class='bg-white  flex-row flex-column' wx:if='{{messagelist.length==0}}'>
+<view class='bg-white  flex-row flex-column margin-top-60' wx:if='{{messagelist.length==0}}'>
 <image class='icon_null' style='' src='{{uploadpath}}resource/{{res.notalk_icon}}'></image>
 <view class='h5 txt-gray txt-bold margin-top-10 padding-bottom-30'>您还没有任何评论哦，快去评论吧！</view>
 </view>
 
 
-<view class='flex-row   padding-30' wx:for='{{messagelist}}' wx:key='k' wx:if='{{messagelist.length>0}}'>
+<view class='flex-row   padding-30' wx:for='{{messagelist}}' id='{{item.read_id}}' bindtap='todetails' wx:key='k' wx:if='{{messagelist.length>0}}' >
   <view class=''>
     <image class='icon-50 radius-10' src='{{item.member_avatarUrl}}'></image>
   </view>
+
+
 
   <view class='margin-left-20  flex-1'>
   

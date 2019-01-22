@@ -75,7 +75,7 @@
      font-size: 32rpx;
      -webkit-background-clip: text;
      -webkit-text-fill-color: transparent;
-     background-color: red;
+     background-color: gray;
      background-size: 100rpx 140rpx;
      background-image:url(https://images0.cnblogs.com/blog/520134/201409/261849552796315.jpg);
      background-repeat:no-repeat;
@@ -84,6 +84,7 @@
 .text3{
   background-position: -0 0;
 }
+
 .speed_1{
      -webkit-animation:loop 1s linear ;
 }

@@ -38,10 +38,9 @@ class Content extends AppBase {
     
     bookapi.readlist({ book_id: this.Base.options.id, orderby: 'r_main.created_date desc'}, (readlist) => {
       this.Base.setMyData({ readlist });
+      
       for (var i = 0; i < readlist.length; i++) {
         formattime.push(ApiUtil.updatetime(readlist[i].created_date));
-
-        
       }
       
       this.Base.setMyData({

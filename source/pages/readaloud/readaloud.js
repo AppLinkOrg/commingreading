@@ -25,7 +25,7 @@ class Content extends AppBase {
   zimutimer=null;
   onLoad(options) {
     this.Base.Page = this;
-    options.id = 2;
+    //options.id = 2;
     super.onLoad(options);
 
 
@@ -114,6 +114,8 @@ class Content extends AppBase {
     if (firstpaly==0){
       that.Base.setMyData({ zimucount: -1, firstpaly:0 });
     }
+
+
     that.Base.zimutimer = setInterval(() => {
       var zimucount = parseInt(that.Base.getMyData().zimucount);
       var readcount = parseInt(that.Base.getMyData().readcount);
@@ -123,6 +125,7 @@ class Content extends AppBase {
       }
     }, speed * 1000
     );
+
   }
 
   qweqwe(e){
@@ -490,8 +493,6 @@ var that=this;
           })
 
 
-
-
           that.Base.uploadFile("readfile", "录音文件《" + name + "》", ve, (ret) => {
             var vonice = that.Base.getMyData().ve;
             
@@ -501,7 +502,7 @@ var that=this;
             });
             
             var talker = that.Base.getMyData().memberinfo;
-
+            var readcount = that.Base.getMyData().readcount;
             //console.log("wwwwwwwwww" + talker)
 
             //return;
@@ -511,6 +512,7 @@ var that=this;
               book_id: book_id,
               member_id: talker.id,
               booktype: book_type,
+              wordnumber: readcount,
               read_file: that.Base.getMyData().vonice
             }, (ret) => {
               console.log(666666666666666);

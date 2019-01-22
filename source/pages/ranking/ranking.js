@@ -33,9 +33,25 @@ class Content extends AppBase {
     bookapi.booklist({ orderby: 'r_main.id'}, (alllist) => {
       this.Base.setMyData({ alllist });
     });
+
+    bookapi.readlist({ groupby:'r_main.member_id,r_main.read_date' }, (readlist) => {
+      this.Base.setMyData({ readlist });
+      var t_sum = 0;
+      for (var i = 0; i < readlist.length; i++) {
+        var t_num = readlist[i].wordnumber;
+        t_sum += parseFloat(t_num);
+
+        this.Base.setMyData({ t_sum });
+      }
+    });
+
+
+
     memberapi.getall({ }, (todaygetall) => {
       this.Base.setMyData({ todaygetall });
+      
     });
+    
     memberapi.getall({ orderby: 'r_main.id desc' }, (weekgetall) => {
       this.Base.setMyData({ weekgetall });
       wx.hideLoading(
