@@ -18,28 +18,28 @@ class Content extends AppBase {
   }
   onLoad(options) {
     this.Base.Page = this;
-    options.new=1;
+    //options.new=1;
     super.onLoad(options);
     var json = {
       searchrecomm: ""
     };
     
-    // if (options.new != undefined) {
-      // json.newphone = "Y";
-     //}
+     if (options.new != undefined) {
+       json.newphone = "N";
+     }
 
+
+      var bookapi = new BookApi();
+      bookapi.booklist(json, (result) => {
+        this.Base.setMyData({
+          result
+        });
+      });
 
     // var bookapi = new BookApi();
     // bookapi.booklist(json, (result) => {
-    //   this.Base.setMyData({
-    //     result
-    //   });
+    //   this.Base.setMyData({ result });
     // });
-
-    var bookapi = new BookApi();
-    bookapi.booklist(json, (result) => {
-      this.Base.setMyData({ result });
-    });
     
   }
   onMyShow() {
@@ -54,16 +54,16 @@ class Content extends AppBase {
     console.log(e.detail.value);
 
     var json = { };
-     //if (e.detail.value == "") {
-
-       //json.searchrecomm = "Y";
-    // } else {
+     if (e.detail.value == "") {
+       json.searchrecomm = "N";
+     } 
+     else {
       json.searchkeyword = e.detail.value;
-    //}
+    }
 
-    //if (this.Base.options.new != undefined) {
-      //json.newphone = "Y";
-    //}
+     if (this.Base.options.new != undefined) {
+       json.newphone = "N";
+     }
 
 
     var bookapi = new BookApi();
@@ -72,11 +72,18 @@ class Content extends AppBase {
     });
 
   }
+  todetails(e){
+    var id=e.currentTarget.id;
+     wx.navigateTo({
+     url: '/pages/mytalkdetails/mytalkdetails?id=' + id,
+    })
+  }
 }
 var content = new Content();
 var body = content.generateBodyJson();
 body.onLoad = content.onLoad;
 body.onMyShow = content.onMyShow;
 body.bindFocus = content.bindFocus;
-body.search = content.search;
+body.search = content.search; 
+body.todetails = content.todetails; 
 Page(body)

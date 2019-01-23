@@ -38,9 +38,17 @@
       <view class=' margin-top-10'>作者：{{bookinfo.author}}</view>
       <!-- <view class='txt-black margin-top-10'>朗读者:xxx</view>    {{zimucount}} -->
       <scroll-view scroll-y class='text-center margin-top-20' style='height:650rpx;'>
-        <view wx:for="{{lines}}" wx:for-index="lidx" wx:key='k' wx:for-item="litem">
+
+
+        <view  wx:if='{{memberinfo.switch_value=="Y"}}' wx:for="{{lines}}" wx:for-index="lidx" wx:key='k' wx:for-item="litem">
           <text class='text2 {{citem.num==zimucount?"speed_"+speed:""}} {{citem.num<zimucount?"text3":""}}' wx:for="{{litem}}" wx:for-index="cidx" wx:for-item="citem" wx:key='e'>{{citem.c}}</text>
         </view>
+
+
+<text wx:if='{{memberinfo.switch_value=="N"}}' class='content txt-black text-center margin-bottom-40'>
+{{bookinfo.book_content}}
+</text>
+
       </scroll-view>
     </view>
 
@@ -65,9 +73,9 @@
 
           <image wx:if='{{play=="stop"}}' class='icon-40' bindtap='luyinstop' src='{{uploadpath}}resource/{{res.zanting}}'></image>
         </view>
-       
+
         <button form-type='submit' class='text-center h5 flex-row flex-center' id='{{bookinfo.id}}' hover-class='bg-primary txt-white' style='width:120rpx;height:50rpx;border:1rpx solid #79C8C0;border-radius:10rpx'>提交</button>
-       
+
       </view>
 
       <view class='h5 flex-row flex-center'>

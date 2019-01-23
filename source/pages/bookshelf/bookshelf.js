@@ -93,6 +93,12 @@ class Content extends AppBase {
       )
     })
   }
+  totalkdetail(e){
+    var id=e.currentTarget.id;
+    wx.navigateTo({
+      url: '/pages/mytalkdetails/mytalkdetails?id='+id,
+    })
+  }
   
 }
 var content = new Content();
@@ -100,5 +106,6 @@ var body = content.generateBodyJson();
 body.onLoad = content.onLoad;
 body.onMyShow = content.onMyShow; 
 body.bindtypedetail = content.bindtypedetail;
-body.bindall = content.bindall;
+body.bindall = content.bindall; 
+body.totalkdetail = content.totalkdetail;
 Page(body)

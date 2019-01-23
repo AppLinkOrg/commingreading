@@ -5,10 +5,10 @@
     <input class='h5 flex-1 txt-black' focus='true' placeholder='搜索您想要的文章' bindinput='search'></input>
     <view class='padding-left-20 padding-right-10' bindtap=''><image class='prohibit_icon ' src='{{uploadpath}}resource/{{res.prohibit}}'></image></view>
   </view>
-  <navigator class='padding-left-20 h5 txt-primary' bindtap='bindFocus'>取消</navigator>
+  <view class='padding-left-20 h5 txt-primary' bindtap='bindFocus'>取消</view>
 </view>
 
-<navigator url='/pages/problem/problem' class='h5 padding-20 margin-left-40 flex-row flex-center' wx:for="{{result}}" wx:key="k" wx:for-index='idx'>
-  <view>{{item.book_name}}</view>
+<view  bindtap='todetails' class='h5 padding-20 margin-left-40 flex-row flex-center' id='{{item.id}}' wx:for="{{result}}" wx:key="k" wx:for-index='idx'>
+  <view >{{item.book_name}}</view>
   <view class='h6 txt-red margin-left-20'></view>
-</navigator>
+</view>

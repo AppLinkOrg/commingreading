@@ -23,18 +23,31 @@ class Content extends AppBase {
     talkapi.likelist({ member_id: memberinfo.id}, (likelist) => {
       this.Base.setMyData({ likelist });
 
-        
+      for (var i = 0; i < likelist.length;i++){
+        bookapi.readlist({ id: likelist[i].readlike_id}, (readlist) => {
+
+          this.Base.setMyData({ readlist });
+
+        });
+      }
+      
+
     });
     
-    bookapi.readlist({ }, (readlist) => {
-      this.Base.setMyData({ readlist });
-    });
+  
 
+  }
+  todetails(e){
+    var id=e.currentTarget.id;
+    wx.navigateTo({
+      url: '/pages/others/others?readid='+id,
 
+    })
   }
 }
 var content = new Content();
 var body = content.generateBodyJson();
 body.onLoad = content.onLoad;
-body.onMyShow = content.onMyShow;
+body.onMyShow = content.onMyShow; 
+body.todetails = content.todetails; 
 Page(body)

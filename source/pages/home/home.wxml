@@ -40,16 +40,16 @@
 
 <view wx:if='{{ctt==1}}' wx:for='{{booklist}}' wx:for-index='idx'  wx:key='k'>
 
-  <navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}&type=A' class='padding-20 {{idx!=0?"border-t":""}}' style=''>
+  <view bindtap='todetails' id='{{item.id}}' class='padding-20 {{idx!=0?"border-t":""}}' style=''>
     <view  class='margin-left-10'>
       <view class='txt-black txt-bold'>{{item.book_name}}</view>
 
       <view class='flex-row flex-center  margin-top-5'>
         <view class='flex-1  h5'>作者：{{item.author}}</view>
-        <view class='flex-1  h5  text-right'>阅读：{{item.bcount}}</view>
+        <view class='flex-1  h5  text-right'>朗读：{{item.bcount}}</view>
       </view>
     </view>
-  </navigator>
+  </view>
 
 </view>
 
@@ -57,28 +57,27 @@
 
 <view wx:if='{{ctt==2}}' wx:for='{{everydaylist}}' wx:for-index='idx' wx:key='k'>
 
-  <navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}&type=A' class='padding-20 {{idx!=0?"border-t":""}}' style=''>
+  <view bindtap='todetails' id='{{item.id}}' class='padding-20 {{idx!=0?"border-t":""}}' style=''>
     <view  class='margin-left-10'>
       <view class='txt-black txt-bold'>{{item.book_name}}</view>
 
       <view class='flex-row flex-center  margin-top-5'>
         <view class='flex-1  h5'>作者：{{item.author}}</view>
-        <view class='flex-1  h5  text-right'>阅读：{{item.bcount}}</view>
+        <view class='flex-1  h5  text-right'>朗读：{{item.bcount}}</view>
       </view>
     </view>
-  </navigator>
+  </view>
 
 </view>
 
 <view wx:if='{{ctt==3}}' wx:for='{{newlist}}' wx:for-index='idx' wx:key='k'>
-  <navigator url='/pages/mytalkdetails/mytalkdetails?id={{item.id}}&type=A' class='padding-20 {{idx!=0?"border-t":""}}' style=''>
+  <view  bindtap='todetails' id='{{item.id}}' class='padding-20 {{idx!=0?"border-t":""}}' style=''>
     <view  class='margin-left-10'>
       <view class='txt-black txt-bold'>{{item.book_name}}</view>
-
       <view class='flex-row flex-center  margin-top-5'>
         <view class='flex-1  h5'>作者：{{item.author}}</view>
-        <view class='flex-1  h5  text-right'>阅读：{{item.bcount}}</view>
+        <view class='flex-1  h5  text-right'>朗读：{{item.bcount}}</view>
       </view>
     </view>
-  </navigator>
+  </view>
 </view>

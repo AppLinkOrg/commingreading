@@ -60,7 +60,13 @@ class Content extends AppBase {
     this.Base.setMyData({ ctt: 1 })
     this.onMyShow();
   }
-
+  
+  todetails(e){
+    var id=e.currentTarget.id;
+    wx.navigateTo({
+       url: '/pages/mytalkdetails/mytalkdetails?id='+id+'&type=A',
+    })
+  }
 }
 
 
@@ -70,5 +76,6 @@ body.onLoad = content.onLoad;
 body.onMyShow = content.onMyShow;
 body.bindcompleted = content.bindcompleted;
 body.bindwaitcompleted = content.bindwaitcompleted;
-body.bindcontact = content.bindcontact;
+body.bindcontact = content.bindcontact; 
+body.todetails = content.todetails; 
 Page(body)

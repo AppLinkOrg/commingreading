@@ -24,16 +24,16 @@
   <view style='height:50rpx;width:4rpx' class='bg-white'></view>
 
   <view class='flex-row flex-column flex-1'>
-    <view wx:if='{{t_sum!=null}}' class='txt-black txt-bold h2'>{{t_sum}}</view>
-    <view wx:if='{{t_sum==null}}' class='txt-black txt-bold h2'>0</view>
+    <view hidden='{{t_sum==null}}' class='txt-black txt-bold h2'>{{t_sum}}</view>
+    <view hidden='{{t_sum!=null}}' class='txt-black txt-bold h2'>0</view>
     <view class='txt-bold h5 margin-top-10'>当日朗读字数</view>
   </view>
 
   <view style='height:50rpx;width:4rpx' class='bg-white'></view>
 
   <view class='flex-row flex-column flex-1'>
-    <view wx:if='{{sum!=null}}' class='txt-black txt-bold h2'>{{sum}}</view>
-    <view wx:if='{{sum==null}}' class='txt-black txt-bold h2'>0</view>
+    <view hidden='{{sum==null}}' class='txt-black txt-bold h2'>{{sum}}</view>
+    <view hidden='{{sum!=null}}' class='txt-black txt-bold h2'>0</view>
     <view class='txt-bold h5 margin-top-10'>累计朗读字数</view>
   </view>
 

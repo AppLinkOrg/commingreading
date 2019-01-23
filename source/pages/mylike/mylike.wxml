@@ -6,7 +6,7 @@
 
 
 <view wx:if='{{readlist.length>0}}' >
- <view class='flex-row flex-center padding-30' wx:for='{{readlist}}' wx:key='k'>
+ <view class='flex-row flex-center padding-30' wx:for='{{readlist}}' id='{{item.id}}' wx:key='k' bindtap='todetails'>
   <view class=''>
     <image class='icon-50' src='{{item.member_avatarUrl}}'></image>
   </view>

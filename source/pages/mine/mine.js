@@ -20,9 +20,10 @@ class Content extends AppBase {
     var memberinfo = this.Base.getMyData().memberinfo;
     
     
-    bookapi.readlist({ member_id: memberinfo.id}, (readlist) => {
+    bookapi.readlist({ member_id: memberinfo.id, }, (readlist) => {
       this.Base.setMyData({ readlist });
       var sum = 0;
+      
       for (var i = 0; i < readlist.length; i++) {
         var num=readlist[i].wordnumber;
         sum += parseFloat(num);
@@ -32,11 +33,11 @@ class Content extends AppBase {
 
 
 
-    bookapi.readlist({ member_id: memberinfo.id, groupby: 'r_main.read_date' }, (todayreadlist) => {
-      this.Base.setMyData({ todayreadlist });
+    bookapi.readlist({ member_id:memberinfo.id,groupby: 'r_main.member_id,r_main.read_date' }, (readlist) => {
+      this.Base.setMyData({ readlist });
       var t_sum = 0;
-      for (var i = 0; i < todayreadlist.length; i++) {
-        var t_num = todayreadlist[i].wordnumber;
+      for (var i = 0; i < readlist.length; i++) {
+        var t_num = readlist[i].wordnumber;
         t_sum += parseFloat(t_num);
 
         this.Base.setMyData({ t_sum });

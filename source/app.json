@@ -1,24 +1,25 @@
 {
   "pages":[
     "pages/home/home",
-    "pages/ranking/ranking",
+    "pages/search/search",
+    "pages/auth/auth",
+    "pages/mylike/mylike",
     "pages/mine/mine",
+    "pages/subtitles/subtitles",
+    "pages/myreading/myreading",
+    "pages/ranking/ranking",
     "pages/readaloud/readaloud",
     "pages/endreading/endreading",
-    "pages/search/search",
-    "pages/myreading/myreading",
     "pages/aboutus/aboutus",
     "pages/bookshelf/bookshelf",
     "pages/typedetail/typedetail",
-    "pages/mylike/mylike",
     "pages/mytalkdetails/mytalkdetails",
     "pages/others/others",
-    "pages/auth/auth",
     "pages/recordagain/recordagain",
     "pages/readingcompletion/readingcompletion",
-    "pages/mytalk/mytalk",
-    "pages/subtitles/subtitles"
+    "pages/mytalk/mytalk"
   ],
+
   "window":{
     "backgroundTextStyle":"light",
     "enablePullDownRefresh": true,

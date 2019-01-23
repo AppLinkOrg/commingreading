@@ -29,7 +29,7 @@
   </view>
 
 <!-- {{idx>0?"border_bottom ":""}} -->
-  <navigator url='/pages/others/others?readid={{item.id}}' wx:if='{{readlist.length>0}}' class='flex-row flex-center pinlun bg-white {{idx>0?"border_bottom ":""}}  {{idx==0?"pinlun_t":""}}' wx:for='{{readlist}}' wx:key='k' wx:for-index='idx' style=''>
+  <view  bindtap='toothers' id='{{item.id}}' wx:if='{{readlist.length>0}}' class='flex-row flex-center pinlun bg-white {{idx>0?"border_bottom ":""}}  {{idx==0?"pinlun_t":""}}' wx:for='{{readlist}}' wx:key='k' wx:for-index='idx' style=''>
 
     <navigator class=''>
       <image class='icon-30 take' src='{{uploadpath}}resource/{{res.touxiangluyin}}'></image>
@@ -57,7 +57,7 @@
     </view>
 
     <!-- <view class='bg-gray' style='width:100rpx;height:2rpx;'></view> -->
-  </navigator>
+  </view>
 
 
   <view  id='{{bookinfo.id}}' bindtap='toread' class='flex-row flex-column mid' style='background-color:#F3F3F3'>

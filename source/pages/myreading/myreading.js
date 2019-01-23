@@ -19,19 +19,31 @@ class Content extends AppBase {
     var bookapi = new BookApi();
     var memberinfo = this.Base.getMyData().memberinfo;
 
+    
+    bookapi.booktypelist({ }, (booktypelist) => {
+      //this.Base.setMyData({ booktypelist });
       
+      //for (var i = 0; i < booktypelist.length; i++) {
+        
+      
+        bookapi.readlist({ }, (readlist) => {
 
-    bookapi.readlist({ member_id: memberinfo.id }, (readlist) => {
-      this.Base.setMyData({ readlist });
-      //for (var i = 0; i < readlist.length; i++) {
+        this.Base.setMyData({ readlist });
 
-        bookapi.booktypelist({ id: 6}, (booktypelist) => {
-        this.Base.setMyData({ booktypelist });
+        // for (var n = 0; n < readlist.length; n++) {
+        //   mine.push(readlist[n]); 
+        //   mi.push(readlist[n].booktype_name); 
+        // }
         
       });
-      //}
+        
+      
 
     });
+
+
+
+
 
   }
 }

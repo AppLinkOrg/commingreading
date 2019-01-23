@@ -54,10 +54,17 @@ class Content extends AppBase {
       title: "朗读详情",
     })
   }
+
   toread(e){
     var id=e.currentTarget.id;
     wx.navigateTo({
       url: '/pages/readaloud/readaloud?id='+id,
+    })
+  }
+  toothers(e){
+    var id = e.currentTarget.id;
+    wx.navigateTo({
+      url: '/pages/others/others?readid=' + id,
     })
   }
 
@@ -66,5 +73,6 @@ var content = new Content();
 var body = content.generateBodyJson();
 body.onLoad = content.onLoad;
 body.onMyShow = content.onMyShow;
-body.toread = content.toread;
+body.toread = content.toread; 
+body.toothers = content.toothers;
 Page(body)

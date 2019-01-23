@@ -28,7 +28,7 @@ class Content extends AppBase {
     //options.id = 2;
     super.onLoad(options);
 
-
+    
     this.Base.setMyData({
       open: 2,
       isplay: false,
@@ -108,13 +108,13 @@ class Content extends AppBase {
     var that=this;
     console.log('开始播放')
     var speed = Number(that.Base.getMyData().speed);
+    var memberinfo=this.Base.getMyData().memberinfo;
     clearInterval(that.Base.zimutimer);
     
     var firstpaly = parseInt(that.Base.getMyData().firstpaly);
     if (firstpaly==0){
       that.Base.setMyData({ zimucount: -1, firstpaly:0 });
     }
-
 
     that.Base.zimutimer = setInterval(() => {
       var zimucount = parseInt(that.Base.getMyData().zimucount);
@@ -123,7 +123,7 @@ class Content extends AppBase {
       if (readcount>=zimucount){
         that.Base.setMyData({ zimucount: zimucount });
       }
-    }, speed * 1000
+    }, 1000/memberinfo.velocity 
     );
 
   }
@@ -143,16 +143,20 @@ class Content extends AppBase {
       title: '加载中',
       mask: true
     })
+
     var that = this;
     
     var bookapi = new BookApi();
+
     //const myaudio = wx.createInnerAudioContext();
     bookapi.bookinfo({
       id: this.Base.options.id
     }, (bookinfo) => {
       var book_content =bookinfo.book_content;
       var lines=book_content.split("\n");
+      
       var count=0;
+      
       for(var i=0;i<lines.length;i++){
         var line=[];
         for(var j=0;j<lines[i].length;j++){
@@ -160,12 +164,14 @@ class Content extends AppBase {
         }
         lines[i]=line;
       }
-      //var lines=
+
+
 
       this.Base.setMyData({
         bookinfo,
         lines: lines
       });
+
     });
     bookapi.bgmlist({
       orderby: "r_main.id"
@@ -178,14 +184,14 @@ class Content extends AppBase {
   }
 
   begin(e){
+    
+    //return;
+
     this.Base.setMyData({ play: "suspend" })
 
      var that = this;
       
-    
-
     //return;
-
 
     wx.showToast({
       title: '录音开始',
@@ -225,14 +231,19 @@ class Content extends AppBase {
     recorderManager.onStart(() => {
       console.log('录音开始')
       var speed = Number(that.Base.getMyData().speed);
+      var memberinfo = this.Base.getMyData().memberinfo;
+      //console.log(memberinfo.velocity / 1000+"打算离开")
+      //return;
+
       clearInterval(that.Base.zimutimer);
       that.Base.setMyData({ zimucount:-1});
+
       that.Base.zimutimer = setInterval(() => { 
         var zimucount = parseInt(that.Base.getMyData().zimucount) ;
         zimucount++;
 
         that.Base.setMyData({ zimucount: zimucount });
-      }, speed*1000
+      }, 1000/memberinfo.velocity
       );
 
       
