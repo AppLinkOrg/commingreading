@@ -26,9 +26,9 @@ class Content extends AppBase {
       //for (var i = 0; i < booktypelist.length; i++) {
         
       
-        bookapi.readlist({ }, (readlist) => {
+      bookapi.rdlist({member_id:memberinfo.id }, (rdlist) => {
 
-        this.Base.setMyData({ readlist });
+          this.Base.setMyData({ rdlist });
 
         // for (var n = 0; n < readlist.length; n++) {
         //   mine.push(readlist[n]); 

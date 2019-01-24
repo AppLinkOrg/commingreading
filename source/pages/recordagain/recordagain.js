@@ -11,7 +11,12 @@ import {
 import {
   BookApi
 } from "../../apis/book.api.js";
-import { ApiUtil } from "../../apis/apiutil.js";
+import {
+  ApiUtil
+} from "../../apis/apiutil.js";
+import {
+  TalkApi
+} from "../../apis/talk.api.js";
 
 class Content extends AppBase {
   constructor() {
@@ -22,9 +27,9 @@ class Content extends AppBase {
   timer = '';
   onLoad(options) {
     this.Base.Page = this;
+
     //options.id = 2;
     super.onLoad(options);
-
 
     this.Base.setMyData({
       open: 2,
@@ -38,10 +43,14 @@ class Content extends AppBase {
     var tempFilePath;
     var recorderManager = wx.getRecorderManager()
     var myaudio = wx.createInnerAudioContext();
-
+    var that = this;
     var innerAudioContext = wx.createInnerAudioContext()
 
-    innerAudioContext.onPlay(this.bgmOnPlay)
+    innerAudioContext.onPlay(this.bgmOnPlay);
+    innerAudioContext.onPause(() => {
+      console.log("stop here");
+    });
+
     innerAudioContext.onStop(() => {
       console.log('播放停止')
       //innerAudioContext.stop()
@@ -86,10 +95,43 @@ class Content extends AppBase {
     console.log("暂停播放")
     console.log("88888888888888888888888");
 
+    clearInterval(that.Base.zimutimer);
   }
-  bgmOnPlay() {
 
+  bgmOnPlay() {
+    var that = this;
     console.log('开始播放')
+    var speed = Number(that.Base.getMyData().speed);
+    var memberinfo = this.Base.getMyData().memberinfo;
+    if (memberinfo.velocity == 0) {
+      this.Base.setMyData({
+        velocity: 1
+      })
+    } else {
+      this.Base.setMyData({
+        velocity: memberinfo.velocity
+      })
+    }
+    clearInterval(that.Base.zimutimer);
+
+    var firstpaly = parseInt(that.Base.getMyData().firstpaly);
+    if (firstpaly == 0) {
+      that.Base.setMyData({
+        zimucount: -1,
+        firstpaly: 0
+      });
+    }
+
+    that.Base.zimutimer = setInterval(() => {
+      var zimucount = parseInt(that.Base.getMyData().zimucount);
+      var readcount = parseInt(that.Base.getMyData().readcount);
+      zimucount++;
+      if (readcount >= zimucount) {
+        that.Base.setMyData({
+          zimucount: zimucount
+        });
+      }
+    }, 1000 / this.Base.getMyData().velocity);
 
   }
 
@@ -97,11 +139,12 @@ class Content extends AppBase {
     console.log(e.currentTarget.id);
 
     wx.getImageInfo({
-      src: e.currentTarget.id, success(qwe) {
-        console.log(qwe);
-        console.log(12313);
+        src: e.currentTarget.id,
+        success(qwe) {
+          console.log(qwe);
+          console.log(12313);
+        }
       }
-    }
 
 
     );
@@ -116,12 +159,35 @@ class Content extends AppBase {
     var bookapi = new BookApi();
     //const myaudio = wx.createInnerAudioContext();
     bookapi.bookinfo({
-      id: this.Base.options.bookid
+      id: this.Base.options.id
     }, (bookinfo) => {
+      var book_content = bookinfo.book_content;
+
+      var lines = book_content.split("\n");
+
+      var count = 0;
+
+      for (var i = 0; i < lines.length; i++) {
+        var line = [];
+        for (var j = 0; j < lines[i].length; j++) {
+          line.push({
+            num: count++,
+            c: lines[i][j]
+          });
+        }
+        lines[i] = line;
+      }
+
+
+
       this.Base.setMyData({
-        bookinfo
+        bookinfo,
+        lines: lines
       });
+
     });
+
+
     bookapi.bgmlist({
       orderby: "r_main.id"
     }, (bgmlist) => {
@@ -133,15 +199,12 @@ class Content extends AppBase {
   }
 
   begin(e) {
-    this.Base.setMyData({ play: "suspend" })
-
-    var that = this;
-
-
-
     //return;
-
-
+    this.Base.setMyData({
+      play: "suspend"
+    })
+    var that = this;
+    //return;
     wx.showToast({
       title: '录音开始',
       mask: false,
@@ -165,23 +228,45 @@ class Content extends AppBase {
     recorderManager.start(
 
       that.setData({
-        timer: setInterval(function () {
+        timer: setInterval(function() {
           countDownNum++;
-          that.setData({ countDownNum: countDownNum })
+          that.setData({
+            countDownNum: dtime(countDownNum)
+          })
           console.log(countDownNum);
 
         }, 1000)
       })
-
-
-
     );
 
     recorderManager.onStart(() => {
       console.log('录音开始')
+      var speed = Number(that.Base.getMyData().speed);
+      var memberinfo = this.Base.getMyData().memberinfo;
+      //console.log(memberinfo.velocity / 1000+"打算离开")
+      //return;
+      if (memberinfo.velocity == 0) {
+        this.Base.setMyData({
+          velocity: 1
+        })
+      } else {
+        this.Base.setMyData({
+          velocity: memberinfo.velocity
+        })
+      }
+      clearInterval(that.Base.zimutimer);
+      that.Base.setMyData({
+        zimucount: -1
+      });
 
+      that.Base.zimutimer = setInterval(() => {
+        var zimucount = parseInt(that.Base.getMyData().zimucount);
+        zimucount++;
 
-
+        that.Base.setMyData({
+          zimucount: zimucount
+        });
+      }, 1000 / this.Base.getMyData().velocity);
 
     });
 
@@ -193,7 +278,11 @@ class Content extends AppBase {
   }
 
   suspend(e) {
-    this.Base.setMyData({ play: "play", bg1: 2 })
+    var that = this;
+    this.Base.setMyData({
+      play: "play",
+      bg1: 2
+    })
     var that = this;
     wx.showToast({
       title: '录音结束',
@@ -208,7 +297,11 @@ class Content extends AppBase {
 
     var innerAudioContext = this.Base.innerAudioContext;
 
-    innerAudioContext.stop(this.Base.setMyData({ bg1: 2, music_name: null, precord: "S" }));
+    innerAudioContext.stop(this.Base.setMyData({
+      bg1: 2,
+      music_name: null,
+      precord: "S"
+    }));
     console.log("暂停播放")
 
     recorderManager.stop(
@@ -222,13 +315,23 @@ class Content extends AppBase {
       console.log('停止录音', res.tempFilePath)
       const {
         tempFilePath
-      } = res
+      } = res;
+
+      clearInterval(that.Base.zimutimer);
+      //读的字数在这里
+      var readcount = that.Base.getMyData().zimucount;
+      console.log("字数统计读结果在这里，提交就提交这个:" + readcount);
+      that.Base.setMyData({
+        readcount
+      });
 
     })
   }
 
   playrecord(e) {
-    this.Base.setMyData({ play: "stop" })
+    this.Base.setMyData({
+      play: "stop"
+    })
     wx.showToast({
       title: '播放录音',
       mask: false,
@@ -239,14 +342,18 @@ class Content extends AppBase {
     innerAudioContext.autoplay = true
     innerAudioContext.loop = true
     innerAudioContext.src = this.tempFilePath,
-      innerAudioContext.play(this.Base.setMyData({ precord: "Y" }));
+      innerAudioContext.play(this.Base.setMyData({
+        precord: "Y"
+      }));
 
   }
 
 
 
   luyinstop(e) {
-    this.Base.setMyData({ play: "play" })
+    this.Base.setMyData({
+      play: "play"
+    })
     var innerAudioContext = this.Base.innerAudioContext;
     innerAudioContext.pause();
     console.log("暂停")
@@ -266,9 +373,14 @@ class Content extends AppBase {
       cancelColor: '#EE2222',
       confirmText: '确定',
       confirmColor: '#2699EC',
-      success: function (res) {
+      success: function(res) {
         if (res.confirm) {
-          that.Base.setMyData({ play: "begin", bg1: 2, music_name: null, precord: "N" })
+          that.Base.setMyData({
+            play: "begin",
+            bg1: 2,
+            music_name: null,
+            precord: "N"
+          })
 
           var innerAudioContext = that.Base.innerAudioContext;
           innerAudioContext.stop();
@@ -286,13 +398,13 @@ class Content extends AppBase {
 
   }
 
- 
+
   bindclosedetails(e) {
     this.Base.setMyData({
       open: 2
     })
-
   }
+
   btnopendetails() {
     var precord = this.Base.getMyData().precord;
     if (precord == "Y") {
@@ -308,8 +420,7 @@ class Content extends AppBase {
         icon: 'none'
       })
       return;
-    }
-    else {
+    } else {
       this.Base.setMyData({
         open: 1
       })
@@ -328,14 +439,18 @@ class Content extends AppBase {
     var innerAudioContext = this.Base.innerAudioContext;
 
     innerAudioContext.pause();
-    console.log("暂停")
+    console.log("暂停1")
 
     innerAudioContext.obeyMuteSwitch = false;
     innerAudioContext.src = uploadpath + "bgm_file/" + src;
-    innerAudioContext.play(this.Base.setMyData({ bg1: 1 }));
+    innerAudioContext.play(this.Base.setMyData({
+      bg1: 1
+    }));
 
     console.log(innerAudioContext.src);
-    this.Base.setMyData({ music_name: name });
+    this.Base.setMyData({
+      music_name: name
+    });
 
     for (var i = 0; i < bgmlist.length; i++) {
       bgmlist[i].audioStatus = false
@@ -349,7 +464,9 @@ class Content extends AppBase {
   zt(e) {
     var that = this;
     var innerAudioContext = this.Base.innerAudioContext;
-    innerAudioContext.pause(this.Base.setMyData({ bg1: 2 }));
+    innerAudioContext.pause(this.Base.setMyData({
+      bg1: 2
+    }));
 
   }
 
@@ -378,8 +495,23 @@ class Content extends AppBase {
       cancelColor: '#EE2222',
       confirmText: '确定',
       confirmColor: '#2699EC',
-      success: function (res) {
+      success: function(res) {
         if (res.confirm) {
+          wx.showLoading({
+            title: '加载中',
+            mask: true
+          })
+
+          talkapi.addreadcount({
+            book: book_id,
+            status: "A"
+          }, (ret) => {
+
+            // if (ret.return != "deleted") {
+            //   this.Base.toast("收听成功");
+            // }
+
+          })
 
 
           that.Base.uploadFile("readfile", "录音文件《" + name + "》", ve, (ret) => {
@@ -390,11 +522,16 @@ class Content extends AppBase {
               vonice: ret
             });
             var book_id = that.Base.getMyData().bookinfo.id;
+            var talker = that.Base.getMyData().memberinfo;
+            var readcount = that.Base.getMyData().readcount;
+
             //console.log("MMMMMMMMMMMMMMMMM" + book_id)
             //return;
+
             api.recordagain({
               id: that.Base.options.id,
-              read_file: that.Base.getMyData().vonice
+              read_file: that.Base.getMyData().vonice,
+              wordnumber: readcount
             }, (ret) => {
               console.log(666666666666666);
               var book_id = that.Base.getMyData().bookinfo.id;
@@ -404,7 +541,7 @@ class Content extends AppBase {
                 console.log('提交成功');
 
                 wx.reLaunch({
-                  url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return + '&time=' + time,
+                  url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return+'&time=' + time,
                 })
 
                 wx.showToast({

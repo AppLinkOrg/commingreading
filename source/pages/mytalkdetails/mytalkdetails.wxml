@@ -18,24 +18,23 @@
 
 
   <view class=' txt-black txt-bold  bg-white  talker' >
-    朗读者({{readlist.length}})：
+    朗读者({{rdlist.length}})：
   </view>
 
 
 
-  <view wx:if='{{readlist.length==0}}' class='bg-white  flex-row flex-column'>
+  <view wx:if='{{rdlist.length==0}}' class='bg-white  flex-row flex-column'>
     <image class='icon-100' src='{{uploadpath}}resource/{{res.noreader_icon}}'></image>
     <view class='h5 txt-gray txt-bold margin-top-10 padding-bottom-30'>还没有人朗读哦，快来体验一下吧</view>
   </view>
 
 <!-- {{idx>0?"border_bottom ":""}} -->
-  <view  bindtap='toothers' id='{{item.id}}' wx:if='{{readlist.length>0}}' class='flex-row flex-center pinlun bg-white {{idx>0?"border_bottom ":""}}  {{idx==0?"pinlun_t":""}}' wx:for='{{readlist}}' wx:key='k' wx:for-index='idx' style=''>
+  <view  bindtap='toothers' id='{{item.id}}' wx:if='{{rdlist.length>0}}' class='flex-row flex-center pinlun bg-white {{idx>0?"border_bottom ":""}}  {{idx==0?"pinlun_t":""}}' wx:for='{{rdlist}}' wx:key='k' wx:for-index='idx' style=''>
 
     <navigator class=''>
       <image class='icon-30 take' src='{{uploadpath}}resource/{{res.touxiangluyin}}'></image>
       <image class='icon-50' src='{{item.member_avatarUrl}}'></image>
     </navigator>
-
 
     <view class='margin-left-20  flex-1 padding-bottom-10'>
       <view class='flex-row flex-center '>

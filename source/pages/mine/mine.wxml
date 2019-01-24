@@ -17,23 +17,24 @@
 <view class='mid  margin-20 flex-row flex-center padding-40'>
 
   <view class='flex-row flex-column flex-1'>
-    <view class='txt-black txt-bold h2'>0</view>
+    <view class='txt-black txt-bold h2'>{{rdlist.length}}</view>
+    <view hidden='{{true}}' class='txt-black txt-bold h2'>0</view>
     <view class='txt-bold h5 margin-top-10'>累计朗读篇数</view>
   </view>
 
   <view style='height:50rpx;width:4rpx' class='bg-white'></view>
 
   <view class='flex-row flex-column flex-1'>
-    <view hidden='{{t_sum==null}}' class='txt-black txt-bold h2'>{{t_sum}}</view>
-    <view hidden='{{t_sum!=null}}' class='txt-black txt-bold h2'>0</view>
+    <view hidden='{{item.id!=memberinfo.id}}' wx:for='{{list}}' wx:key='k' class='txt-black txt-bold h2'>{{item.zishu}}</view>
+     <view hidden='{{true}}' class='txt-black txt-bold h2'>0</view>
     <view class='txt-bold h5 margin-top-10'>当日朗读字数</view>
   </view>
 
-  <view style='height:50rpx;width:4rpx' class='bg-white'></view>
+  <view style='height:50rpx;width:4rpx'  class='bg-white'></view>
 
   <view class='flex-row flex-column flex-1'>
-    <view hidden='{{sum==null}}' class='txt-black txt-bold h2'>{{sum}}</view>
-    <view hidden='{{sum!=null}}' class='txt-black txt-bold h2'>0</view>
+    <view hidden='{{item.id!=memberinfo.id}}' wx:for='{{readlist}}' wx:key='k' class='txt-black txt-bold h2'>{{item.zishu}}</view>
+     <view hidden='{{true}}' class='txt-black txt-bold h2'>0</view> 
     <view class='txt-bold h5 margin-top-10'>累计朗读字数</view>
   </view>
 

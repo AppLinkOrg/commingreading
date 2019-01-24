@@ -1,3 +1,4 @@
+/* pages/readaloud/readaloud.wxss */
 
 .bgm {
   /* position: fixed;
@@ -62,4 +63,28 @@
   opacity: 0.8;
   height: 55%;
   bottom: 0;
+}
+
+@-webkit-keyframes loop{
+     0%{background-position: -100rpx 0;}
+     100%{background-position: -0 0;}
+}
+.text2{
+     width: 100rpx;
+     height:140rpx;
+     font-size: 32rpx;
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-color: gray;
+     background-size: 100rpx 140rpx;
+     background-image:url(https://images0.cnblogs.com/blog/520134/201409/261849552796315.jpg);
+     background-repeat:no-repeat;
+     background-position: -100rpx 0;
+}
+.text3{
+  background-position: -0 0;
+}
+
+.speed_1{
+     -webkit-animation:loop 1s linear ;
 }

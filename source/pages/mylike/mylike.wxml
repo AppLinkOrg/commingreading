@@ -6,28 +6,28 @@
 
 
 <view wx:if='{{readlist.length>0}}' >
- <view class='flex-row flex-center padding-30' wx:for='{{readlist}}' id='{{item.id}}' wx:key='k' bindtap='todetails'>
+ <view class='flex-row flex-center padding-30' wx:for='{{readlist}}' id='{{item.readlike_id}}' wx:key='k' bindtap='todetails'>
   <view class=''>
-    <image class='icon-50' src='{{item.member_avatarUrl}}'></image>
+    <image class='icon-50' src='{{item.touxian}}'></image>
   </view>
 
   <view class='margin-left-20  flex-1'>
-    <view class=' margin-bottom-20'>{{item.member_id_name}}</view>
+    <view class=' margin-bottom-20'>{{item.nickName}}</view>
 
 
     <view class='flex-row flex-center '>
 
       <view class='flex-1 flex-row flex-center'>
         <image class='icon-20' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
-        <view class='margin-left-10'>{{item.lstcount}}</view>
+        <view class='margin-left-10'>{{item.count1}}</view>
       </view>
 
       <view class='flex-1 flex-row flex-center'>
         <image class='icon-20' src='{{uploadpath}}resource/{{res.shouting}}'></image>
-        <view class='margin-left-10'>{{item.count1}}</view>
+        <view class='margin-left-10'>{{item.lstcount}}</view>
       </view>
 
-      <view class='flex-1 txt-gray'>2018-12-25</view>
+      <view class='flex-1 txt-gray'>{{item.created_date}}</view>
 
     </view>
   </view>

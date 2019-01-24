@@ -67,6 +67,9 @@ class Content extends AppBase {
   }
 
   tobookshelf(e){
+    var that = this;
+    var innerAudioContext = this.Base.innerAudioContext;
+    innerAudioContext.stop();
     wx.reLaunch({
       url: '/pages/bookshelf/bookshelf',
     })

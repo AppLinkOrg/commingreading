@@ -20,19 +20,11 @@ class Content extends AppBase {
     var talkapi = new TalkApi();
     var bookapi=new BookApi();
     var memberinfo=this.Base.getMyData().memberinfo;
-    talkapi.likelist({ member_id: memberinfo.id}, (likelist) => {
-      this.Base.setMyData({ likelist });
 
-      for (var i = 0; i < likelist.length;i++){
-        bookapi.readlist({ id: likelist[i].readlike_id}, (readlist) => {
-
-          this.Base.setMyData({ readlist });
-
-        });
-      }
-      
-
+    talkapi.likelist({ member_id: memberinfo.id }, (readlist) => {
+      this.Base.setMyData({ readlist });
     });
+    
     
   
 

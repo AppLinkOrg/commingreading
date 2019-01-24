@@ -40,19 +40,16 @@
       <scroll-view scroll-y class='text-center margin-top-20' style='height:650rpx;'>
 
 
-        <view  wx:if='{{memberinfo.switch_value=="Y"}}' wx:for="{{lines}}" wx:for-index="lidx" wx:key='k' wx:for-item="litem">
+        <view wx:if='{{memberinfo.switch_value=="Y"}}' wx:for="{{lines}}" wx:for-index="lidx" wx:key='k' wx:for-item="litem">
           <text class='text2 {{citem.num==zimucount?"speed_"+speed:""}} {{citem.num<zimucount?"text3":""}}' wx:for="{{litem}}" wx:for-index="cidx" wx:for-item="citem" wx:key='e'>{{citem.c}}</text>
         </view>
 
-
-<text wx:if='{{memberinfo.switch_value=="N"}}' class='content txt-black text-center margin-bottom-40'>
+        <text wx:if='{{memberinfo.switch_value=="N"||memberinfo.switch_value==""}}' class='content txt-black text-center margin-bottom-40'>
 {{bookinfo.book_content}}
 </text>
 
       </scroll-view>
     </view>
-
-
 
     <view class='flex-row flex-column mid padding-top-20 bg-white' style='border-top:1rpx solid #E8E8E8'>
 
@@ -80,8 +77,8 @@
 
       <view class='h5 flex-row flex-center'>
         <view wx:if='{{play=="begin"}}' class='h5 txt-primary'>点击开始录音</view>
-        <view wx:if='{{play=="suspend"&&countDownNum!=null}}' class='h5 txt-primary'>录音中：{{countDownNum}}s</view>
-        <view wx:if='{{play=="suspend"&&countDownNum==null}}' class='h5 txt-primary'>录音中：0s</view>
+        <view wx:if='{{play=="suspend"&&countDownNum!=null}}' class='h5 txt-primary'>录音中：{{countDownNum}}</view>
+        <view wx:if='{{play=="suspend"&&countDownNum==null}}' class='h5 txt-primary'>录音中：00:00</view>
         <view wx:if='{{play=="play"}}' class='h5 txt-primary'>播放录音</view>
         <view wx:if='{{play=="stop"}}' class='h5 txt-primary'>正在播放</view>
       </view>

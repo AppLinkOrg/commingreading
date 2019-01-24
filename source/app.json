@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/home/home",
+    "pages/endreading/endreading",
     "pages/search/search",
     "pages/auth/auth",
     "pages/mylike/mylike",
@@ -9,7 +10,6 @@
     "pages/myreading/myreading",
     "pages/ranking/ranking",
     "pages/readaloud/readaloud",
-    "pages/endreading/endreading",
     "pages/aboutus/aboutus",
     "pages/bookshelf/bookshelf",
     "pages/typedetail/typedetail",

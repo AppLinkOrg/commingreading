@@ -1,6 +1,6 @@
 <!--pages/myreading/myreading.wxml-->
 
- <navigator url='/pages/others/others?readid={{item.id}}' class='padding-40' wx:for='{{readlist}}' wx:key='k' wx:if='{{readlist.length>0}}' style='border-bottom:1rpx solid #CECFCE'>
+ <navigator url='/pages/others/others?readid={{item.id}}' class='padding-40' wx:for='{{rdlist}}' wx:key='k' wx:if='{{rdlist.length>0}}' style='border-bottom:1rpx solid #CECFCE'>
     <view class='txt-black h4'>{{item.booktype_name}}</view>
     <view class='margin-top-10'>《{{item.book_id_name}}》</view>
     <view class='flex-row flex-center'>
