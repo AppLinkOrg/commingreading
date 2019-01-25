@@ -26,7 +26,7 @@
 
   <view class='flex-row flex-column flex-1'>
     <view hidden='{{item.id!=memberinfo.id}}' wx:for='{{list}}' wx:key='k' class='txt-black txt-bold h2'>{{item.zishu}}</view>
-     <view hidden='{{true}}' class='txt-black txt-bold h2'>0</view>
+     <view hidden='{{item.id==memberinfo.id}}' class='txt-black txt-bold h2'>0</view>
     <view class='txt-bold h5 margin-top-10'>当日朗读字数</view>
   </view>
 

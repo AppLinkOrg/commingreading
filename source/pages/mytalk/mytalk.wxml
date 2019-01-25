@@ -14,8 +14,10 @@
 
 
   <view class='margin-left-20  flex-1'>
-
+    <view class='flex-1 txt-black'>《{{item.book_name}}》</view>
     <view class='flex-row flex-center'>
+
+
       <view class='flex-1 txt-black'>{{item.nickName}}</view>
 
 
