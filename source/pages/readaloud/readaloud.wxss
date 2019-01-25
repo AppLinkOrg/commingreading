@@ -77,7 +77,7 @@
      -webkit-text-fill-color: transparent;
      background-color: gray;
      background-size: 100rpx 140rpx;
-     background-image:url(https://images0.cnblogs.com/blog/520134/201409/261849552796315.jpg);
+     
      background-repeat:no-repeat;
      background-position: -100rpx 0;
 }
@@ -86,5 +86,17 @@
 }
 
 .speed_1{
+     -webkit-animation:loop 2s linear ;
+}
+.speed_2{
+     -webkit-animation:loop 1.5s linear ;
+}
+.speed_3{
      -webkit-animation:loop 1s linear ;
+}
+.speed_4{
+     -webkit-animation:loop 0.5s linear ;
+}
+.speed_5{
+     -webkit-animation:loop 0.25s linear ;
 }

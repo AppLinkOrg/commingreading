@@ -10,7 +10,7 @@
 <view class=" ">
   <text class="section__title txt-black">字幕速度</text>
   <view class="body-view"> 
-    <slider bindchange="slider4change"  value='{{memberinfo.velocity}}' activeColor='#009688' block-size='12' block-color='#009688' min="1" max="6" show-value />
+    <slider bindchange="slider4change"  value='{{memberinfo.velocity}}' activeColor='#009688' block-size='12' block-color='#009688' min="1" max="5" show-value />
   </view>
 </view>
 </view>

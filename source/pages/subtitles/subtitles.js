@@ -15,6 +15,10 @@ class Content extends AppBase {
   }
   onMyShow() {
     var that = this;
+    var memberinfo = this.Base.getMyData().memberinfo;
+    if (memberinfo.velocity==0){
+      memberinfo.velocity=3;
+    }
     
   }
   slider4change(e){
