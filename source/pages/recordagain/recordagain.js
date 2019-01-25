@@ -89,6 +89,7 @@ class Content extends AppBase {
   }
 
   onUnload() {
+    var that=this;
     var innerAudioContext = this.Base.innerAudioContext;
 
     innerAudioContext.stop();
@@ -159,7 +160,7 @@ class Content extends AppBase {
     var bookapi = new BookApi();
     //const myaudio = wx.createInnerAudioContext();
     bookapi.bookinfo({
-      id: this.Base.options.id
+      id: this.Base.options.bookid
     }, (bookinfo) => {
       var book_content = bookinfo.book_content;
 
@@ -474,7 +475,7 @@ class Content extends AppBase {
     console.log(e);
     var that = this;
     var api = new BookApi();
-
+    var talkapi = new TalkApi();
     //var vonice = this.tempFilePath;
     var ve = this.tempFilePath;
     var talker = this.Base.getMyData().memberinfo.id;

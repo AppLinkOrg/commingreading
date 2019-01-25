@@ -25,9 +25,8 @@ class Content extends AppBase {
       
     });
 
-    bookapi.readlist({ member_id: memberinfo.id, tiaojian:"Y" }, (list) => {
+    bookapi.readlist({ member_id: memberinfo.id, tiaojian: "Y" }, (list) => {
       this.Base.setMyData({ list });
-      
     });
 
     bookapi.rdlist({ member_id: memberinfo.id}, (rdlist) => {
