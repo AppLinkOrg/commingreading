@@ -174,6 +174,7 @@ export class AppBase {
       wx.login({
         success: res => {
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
+          console.log("res");
           console.log(res);
           wx.getUserInfo({
             success: userres => {
@@ -204,17 +205,30 @@ export class AppBase {
                 //that.Base.getAddress();
               });
             },
-            fail: res => {
+            fail: userloginres => {
               console.log("auth fail");
+              console.log(userloginres);
               console.log(res);
-              //that.Base.gotoOpenUserInfoSetting();
-              if (this.Base.needauth == true) {
-                wx.redirectTo({
-                  url: '/pages/auth/auth',
-                })
-              } else {
-                that.onMyShow();
-              }
+              var memberapi = new MemberApi();
+              memberapi.getuserinfo({ code: res.code, grant_type: "authorization_code" }, data => {
+                console.log("here");
+                console.log(data);
+                AppBase.UserInfo.openid = data.openid;
+                AppBase.UserInfo.session_key = data.session_key;
+                console.log(AppBase.UserInfo);
+                ApiConfig.SetToken(data.openid);
+                console.log("goto update info");
+
+
+                //that.Base.gotoOpenUserInfoSetting();
+                if (this.Base.needauth == true) {
+                  wx.redirectTo({
+                    url: '/pages/auth/auth',
+                  })
+                } else {
+                  that.onMyShow();
+                }
+              });
               //that.getAddress();
             }
           });
@@ -304,10 +318,10 @@ export class AppBase {
     console.log(e);
     var api = new WechatApi();
     var data = this.Base.getMyData();
-    console.log(data);
+    console.log("aaa?");
 
-    e.detail.session_key = AppBase.session_key;
-    e.detail.openid = AppBase.openid;
+    e.detail.session_key = AppBase.UserInfo.session_key;
+    e.detail.openid = AppBase.UserInfo.openid;
     console.log(e.detail);
     api.decrypteddata(e.detail, (ret) => {
       console.log(ret);
