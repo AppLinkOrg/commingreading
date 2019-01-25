@@ -115,7 +115,7 @@ class Content extends AppBase {
     var memberinfo = this.Base.getMyData().memberinfo;
     if (memberinfo.velocity == 0) {
       this.Base.setMyData({
-        velocity: 1
+        velocity: 3
       })
     } else {
       this.Base.setMyData({
@@ -259,7 +259,7 @@ class Content extends AppBase {
       //return;
       if (memberinfo.velocity == 0) {
         this.Base.setMyData({
-          velocity: 1
+          velocity: 3
         })
       } else {
         this.Base.setMyData({
@@ -271,6 +271,24 @@ class Content extends AppBase {
         zimucount: -1
       });
 
+      var velocity = this.Base.getMyData().velocity;
+      var speed=1000;
+      if(velocity==1){
+        speed=2000;
+      }
+      if (velocity == 2) {
+        speed = 1500;
+      }
+      if (velocity == 3) {
+        speed = 1000;
+      }
+      if (velocity == 4) {
+        speed = 500;
+      }
+      if (velocity == 5) {
+        speed = 250;
+      }
+
       that.Base.zimutimer = setInterval(() => {
         var zimucount = parseInt(that.Base.getMyData().zimucount);
         zimucount++;
@@ -278,7 +296,7 @@ class Content extends AppBase {
         that.Base.setMyData({
           zimucount: zimucount
         });
-      }, 1000 / this.Base.getMyData().velocity);
+      }, speed);
 
     });
 
