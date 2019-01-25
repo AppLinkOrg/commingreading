@@ -43,11 +43,12 @@ class Content extends AppBase {
     var data = this.Base.getMyData();
     var memberapi = new MemberApi();
     memberapi.updatemobile({ mobile: data.mobile }, () => {
-      wx.navigateBack({
-
-      })
+      
     })
     //updatemobile
+    wx.reLaunch({
+      url: '/pages/home/home',
+    })
   }
 }
 var content = new Content();
