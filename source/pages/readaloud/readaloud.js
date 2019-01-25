@@ -119,9 +119,11 @@ class Content extends AppBase {
       })
     } else {
       this.Base.setMyData({
-        velocity: memberinfo.velocity
+        velocity: memberinfo.velocity 
       })
     }
+
+    /*
     clearInterval(that.Base.zimutimer);
 
     var firstpaly = parseInt(that.Base.getMyData().firstpaly);
@@ -142,7 +144,7 @@ class Content extends AppBase {
         });
       }
     }, 1000 / this.Base.getMyData().velocity);
-
+    */
   }
 
   qweqwe(e) {

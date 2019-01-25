@@ -77,7 +77,7 @@
      -webkit-text-fill-color: transparent;
      background-color: gray;
      background-size: 100rpx 140rpx;
-     background-image:url(https://images0.cnblogs.com/blog/520134/201409/261849552796315.jpg);
+     
      background-repeat:no-repeat;
      background-position: -100rpx 0;
 }
