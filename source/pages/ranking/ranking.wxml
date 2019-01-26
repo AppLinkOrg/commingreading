@@ -69,7 +69,7 @@
     </view>
     <view class='flex-1 margin-left-20 txt-black'>我</view>
     <view class='flex-row flex-column'>
-      <view class='txt-black' wx:for='{{todaygetall}}' wx:key='k' wx:for-index='idx' wx:if='{{item.id==memberinfo.id}}'>{{item.zishu}}</view>
+      <view class='txt-black' wx:for='{{weekgetall}}' wx:key='k' wx:for-index='idx' wx:if='{{item.id==memberinfo.id}}'>{{item.zishu}}</view>
       <view class='h5'>累计朗读字数</view>
     </view>
   </view>

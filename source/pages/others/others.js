@@ -27,7 +27,7 @@ class Content extends AppBase {
       console.log('播放结束')
       //var bgmlist = this.Base.getMyData().bgmlist;
       //播放结束，销毁该实例
-      innerAudioContext.destroy()
+      //innerAudioContext.destroy()
     })
 
     innerAudioContext.onError((res) => {
@@ -126,10 +126,11 @@ class Content extends AppBase {
       //setTimeout(()=>{
       //innerAudioContext.autoplay = true;
       console.log("111111")
-    innerAudioContext.loop = true
+      innerAudioContext.loop = true
+      innerAudioContext.autoplay = true
       innerAudioContext.obeyMuteSwitch = false;
 
-    innerAudioContext.src = uploadpath + "readfile/" + readinfo.read_file;
+       innerAudioContext.src = uploadpath + "readfile/" + readinfo.read_file;
       innerAudioContext.play();
       console.log(innerAudioContext.src);
 
