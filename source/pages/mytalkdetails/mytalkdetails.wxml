@@ -18,7 +18,7 @@
 
 
   <view class=' txt-black txt-bold  bg-white  talker' >
-    朗读者({{rdlist.length}})：
+    朗读数({{rdlist.length}})：
   </view>
 
 

@@ -19,15 +19,17 @@ class Content extends AppBase {
     innerAudioContext.onPlay(this.bgmOnPlay)
     innerAudioContext.onStop(() => {
       console.log('播放暂停')
+
       innerAudioContext.stop()
       //播放结束，销毁该实例
-      innerAudioContext.destroy()
+      //innerAudioContext.destroy()
     })
     innerAudioContext.onEnded(() => {
       console.log('播放结束')
       //var bgmlist = this.Base.getMyData().bgmlist;
       //播放结束，销毁该实例
       //innerAudioContext.destroy()
+      this.Base.setMyData({ status: "play" })
     })
 
     innerAudioContext.onError((res) => {
@@ -119,14 +121,14 @@ class Content extends AppBase {
       // });
     })
 
-      innerAudioContext.pause();
+    innerAudioContext.pause();
       //console.log("暂停")
 
       //innerAudioContext.play();
       //setTimeout(()=>{
       //innerAudioContext.autoplay = true;
       console.log("111111")
-      innerAudioContext.loop = true
+      //innerAudioContext.loop = true
       innerAudioContext.autoplay = true
       innerAudioContext.obeyMuteSwitch = false;
 

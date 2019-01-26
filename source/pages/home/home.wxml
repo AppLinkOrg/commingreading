@@ -46,7 +46,7 @@
 
       <view class='flex-row flex-center  margin-top-5'>
         <view class='flex-1  h5'>作者：{{item.author}}</view>
-        <view class='flex-1  h5  text-right'>朗读：{{item.bcount}}</view>
+        <view class='flex-1  h5  text-right'>朗读者：{{item.bcount}}</view>
       </view>
     </view>
   </view>
