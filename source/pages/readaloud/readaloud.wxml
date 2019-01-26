@@ -40,8 +40,10 @@
       <scroll-view scroll-y class='text-center margin-top-20' style='height:650rpx;'>
 
 
-        <view wx:if='{{memberinfo.switch_value=="Y"}}' wx:for="{{lines}}" wx:for-index="lidx" wx:key='k' wx:for-item="litem">
+        <view wx:if='{{memberinfo.switch_value=="Y"}}' wx:for="{{lines}}" wx:for-index="lidx" wx:key='k' wx:for-item="litem" style='min-height:42rpx;'>
+
           <text class='text2 {{citem.num==zimucount?"speed_"+velocity:""}} {{citem.num<zimucount?"text3":""}}' style="background-image:url({{uploadpath}}resource/{{res.zimuyanse}});" wx:for="{{litem}}" wx:for-index="cidx" wx:for-item="citem" wx:key='e'>{{citem.c}}</text>
+
         </view>
 
         <text wx:if='{{memberinfo.switch_value=="N"||memberinfo.switch_value==""}}' class='content txt-black text-center margin-bottom-40'>

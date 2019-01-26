@@ -175,6 +175,7 @@ class Content extends AppBase {
     bookapi.bookinfo({
       id: this.Base.options.id
     }, (bookinfo) => {
+      
       var book_content = bookinfo.book_content;
 
       var lines = book_content.split("\n");
@@ -192,7 +193,7 @@ class Content extends AppBase {
         lines[i] = line;
       }
 
-
+console.log(lines);
 
       this.Base.setMyData({
         bookinfo,
@@ -592,11 +593,43 @@ class Content extends AppBase {
 
             var talker = that.Base.getMyData().memberinfo;
             var readcount = that.Base.getMyData().readcount;
-
+            
+            var book_id = that.Base.getMyData().bookinfo.id;
             //console.log("wwwwwwwwww" + talker)
 
             //return;
 
+if(that.Base.options.type=="A"){
+  api.addlangdu({
+    again:"Y",
+    status: "A",
+    id: that.Base.options.retid,
+    member_id: talker.id,
+    book_id: book_id,
+    booktype: book_type,
+    wordnumber: readcount,
+    read_file: that.Base.getMyData().vonice
+  }, (ret) => {
+    console.log(666666666666666);
+    var book_id = that.Base.getMyData().bookinfo.id;
+    var time = that.Base.getMyData().countDownNum;
+    console.log(time + '666666666666666');
+    //return
+    console.log("辣椒炒肉" + that.Base.getMyData().vonice);
+    if (ret.code == 0) {
+      console.log('提交成功');
+      
+      wx.reLaunch({
+        url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return + '&time=' + time,
+      })
+
+      //that.onMyShow();
+    } else {
+      that.Base.info(ret.result);
+    }
+  });
+}
+else(
             api.addlangdu({
               status: "A",
               book_id: book_id,
@@ -622,7 +655,11 @@ class Content extends AppBase {
               } else {
                 that.Base.info(ret.result);
               }
-            });
+            })
+)
+
+
+
           });
           wx.hideLoading();
         }

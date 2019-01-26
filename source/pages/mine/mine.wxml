@@ -30,6 +30,8 @@
       <!-- <view hidden='{{item.id==memberinfo.id&&item.zishu!=null}}'  class='txt-black txt-bold h2'>0</view> -->
     
     <view class='txt-bold h5 margin-top-10'>当日朗读字数</view>
+
+    
   </view>
 
   <view style='height:50rpx;width:4rpx'  class='bg-white'></view>

@@ -3,7 +3,7 @@
 <view class='flex-row flex-column'>
   <view class='flex-row flex-center' style='height:400rpx;'>
     <view class='flex-row flex-column'>
-      <image class='icon-75' src='{{uploadpath}}resource/{{res.gif}}'></image>
+      <image class='icon-75' src='{{uploadpath}}resource/{{res.aboutus_icon}}'></image>
       <view class='margin-top txt-black'>与你共读吧</view>
     </view>
   </view>

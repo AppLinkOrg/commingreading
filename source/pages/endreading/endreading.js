@@ -113,10 +113,13 @@ class Content extends AppBase {
     var bookinfo = this.Base.getMyData().bookinfo;
     console.log(bookinfo.id+"第一");
     console.log(this.Base.options.retid+"第二");
-    //return;
+    
+    // wx.reLaunch({
+    //   url: '/pages/recordagain/recordagain?id=' + this.Base.options.retid + '&bookid=' + bookinfo.id,
+    // })
     wx.reLaunch({
-      url: '/pages/recordagain/recordagain?id=' + this.Base.options.retid + '&bookid=' + bookinfo.id,
-    })
+      url: '/pages/readaloud/readaloud?retid=' + this.Base.options.retid + '&id=' + bookinfo.id+'&type=A',
+     })
 
   }
 

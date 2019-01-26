@@ -31,15 +31,15 @@
       <view class='flex-row  flex-1 '>
 
 
-        <button open-type="share" class='flex-row flex-center clear-button' bindtap=''>
+        <!-- <button open-type="share" class='flex-row flex-center clear-button' bindtap=''>
           <image class='icon-25' src='{{uploadpath}}resource/{{res.fenxiang}}'></image>
           <view class=' margin-left-10 txt-black'>分享</view>
-        </button>
+        </button> -->
 
-          <!-- <navigator class='flex-row flex-center' bindtap='viewPhoto' id='{{uploadpath}}resource/{{res.gif}}'>
+           <navigator class='flex-row flex-center' bindtap='viewPhoto' id='{{uploadpath}}resource/{{res.gif}}'>
           <image class='icon-25' src='{{uploadpath}}resource/{{res.fenxiang}}'></image>
           <view class=' margin-left-10 txt-black'>分享</view>
-        </navigator> -->
+        </navigator> 
 
 
       </view>

@@ -514,14 +514,13 @@ class Content extends AppBase {
 
           })
 
-
           that.Base.uploadFile("readfile", "录音文件《" + name + "》", ve, (ret) => {
             var vonice = that.Base.getMyData().ve;
-
 
             that.Base.setMyData({
               vonice: ret
             });
+            
             var book_id = that.Base.getMyData().bookinfo.id;
             var talker = that.Base.getMyData().memberinfo;
             var readcount = that.Base.getMyData().readcount;
