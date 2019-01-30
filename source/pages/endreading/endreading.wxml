@@ -36,10 +36,11 @@
           <view class=' margin-left-10 txt-black'>分享</view>
         </button> -->
 
-           <navigator class='flex-row flex-center' bindtap='viewPhoto' id='{{uploadpath}}resource/{{res.gif}}'>
+           <navigator class='flex-row flex-center' >
           <image class='icon-25' src='{{uploadpath}}resource/{{res.fenxiang}}'></image>
           <view class=' margin-left-10 txt-black'>分享</view>
         </navigator> 
+          <button class='clear-button' style='width:130rpx;height:50rpx;position:absolute;' open-type="share"></button>
 
 
       </view>
