@@ -37,6 +37,6 @@
   <view class='txt-black'>《{{item.book_name}}》</view>
   <view class='flex-row flex-center  margin-top-10'>
     <view class='h5 flex-1 margin-left-10'>作者：{{item.author}}</view>
-    <view class='h5'>2018-01-02</view>
+    <view class='h5'>朗读者：{{item.bcount}}</view>
   </view>
 </view>
