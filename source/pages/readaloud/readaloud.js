@@ -263,7 +263,8 @@ console.log(lines);
     recorderManager.onError((res) => {
       console.log(res);
     })
-
+    recorderManager.stop();
+    that.tempFilePath = null;
     recorderManager.start({ duration: 600000 });
     console.log('录音开始')
     that.Base.setMyData({ "kkt": "0" });
@@ -425,7 +426,7 @@ console.log(lines);
             bg1: 2,
             music_name: null,
             precord: "N"
-          })
+          });
 
           clearInterval(that.Base.zimutimer);
           that.Base.setMyData({
@@ -433,7 +434,9 @@ console.log(lines);
           });
           var innerAudioContext = that.Base.innerAudioContext;
           innerAudioContext.stop();
-
+          setTimeout(()=>{
+            that.tempFilePath = null;
+          },1000);
           wx.showToast({
             title: '请点击录音重新录制',
             mask: false,
@@ -460,6 +463,8 @@ console.log(lines);
       confirmColor: '#2699EC',
       success: function(res) {
         if (res.confirm) {
+
+          that.onUnload();
           wx.navigateTo({
               url: '/pages/endreading/endreading?id=' + id,
             }),
@@ -636,7 +641,7 @@ if(that.Base.options.type=="A"){
     console.log("辣椒炒肉" + that.Base.getMyData().vonice);
     if (ret.code == 0) {
       console.log('提交成功');
-      
+      that.onUnload();
       wx.navigateTo({
         url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return + '&time=' + time,
       })
@@ -665,6 +670,7 @@ else(
               if (ret.code == 0) {
                 console.log('提交成功');
 
+                that.onUnload();
                 wx.navigateTo({
                   url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return+'&time=' + time,
                 })
