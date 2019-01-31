@@ -238,67 +238,25 @@ console.log(lines);
     //开始录音
     var countDownNum = 0;
     //var now = dtime();
-    recorderManager.start(
+    var timer=this.Base.getMyData().timer;
+    clearInterval(timer);
+    that.setData({
+      timer: setInterval(function () {
+        countDownNum++;
+        that.setData({
+          countDownNum: dtime(countDownNum)
+        })
+        console.log(countDownNum);
 
-      that.setData({
-        timer: setInterval(function() {
-          countDownNum++;
-          that.setData({
-            countDownNum: dtime(countDownNum)
-          })
-          console.log(countDownNum);
-
-        }, 1000)
-      })
-    );
+      }, 1000)
+    });
+    that.Base.setMyData({
+      zimucount: -1
+    });
+    that.Base.setMyData({ "kkt": "vj" });
 
     recorderManager.onStart(() => {
-      console.log('录音开始')
-      var speed = Number(that.Base.getMyData().speed);
-      var memberinfo = this.Base.getMyData().memberinfo;
-      //console.log(memberinfo.velocity / 1000+"打算离开")
-      //return;
-      if (memberinfo.velocity == 0) {
-        this.Base.setMyData({
-          velocity: 3
-        })
-      } else {
-        this.Base.setMyData({
-          velocity: memberinfo.velocity
-        })
-      }
-      clearInterval(that.Base.zimutimer);
-      that.Base.setMyData({
-        zimucount: -1
-      });
-
-      var velocity = this.Base.getMyData().velocity;
-      var speed=1000;
-      if(velocity==1){
-        speed=2000;
-      }
-      if (velocity == 2) {
-        speed = 1500;
-      }
-      if (velocity == 3) {
-        speed = 1000;
-      }
-      if (velocity == 4) {
-        speed = 500;
-      }
-      if (velocity == 5) {
-        speed = 250;
-      }
-
-      that.Base.zimutimer = setInterval(() => {
-        var zimucount = parseInt(that.Base.getMyData().zimucount);
-        zimucount++;
-
-        that.Base.setMyData({
-          zimucount: zimucount
-        });
-      }, speed);
-
+      
     });
 
     //错误回调
@@ -306,6 +264,60 @@ console.log(lines);
       console.log(res);
     })
 
+    recorderManager.start({ duration: 600000 });
+    console.log('录音开始')
+    that.Base.setMyData({ "kkt": "0" });
+    var speed = Number(that.Base.getMyData().speed);
+    that.Base.setMyData({ "kkt": "01" });
+    var memberinfo = that.Base.getMyData().memberinfo;
+
+    //console.log(memberinfo.velocity / 1000+"打算离开")
+    //return;
+    that.Base.setMyData({ "kkt": "1" });
+    if (memberinfo.velocity == 0) {
+      this.Base.setMyData({
+        velocity: 3
+      })
+    } else {
+      this.Base.setMyData({
+        velocity: memberinfo.velocity
+      })
+    }
+    that.Base.setMyData({ "kkt": "2" });
+    clearInterval(that.Base.zimutimer);
+    that.Base.setMyData({
+      zimucount: -1
+    });
+
+    that.Base.setMyData({ "kkt": "3" });
+    var velocity = this.Base.getMyData().velocity;
+    var speed = 1000;
+    if (velocity == 1) {
+      speed = 600;
+    }
+    if (velocity == 2) {
+      speed = 500;
+    }
+    if (velocity == 3) {
+      speed = 400;
+    }
+    if (velocity == 4) {
+      speed = 300;
+    }
+    if (velocity == 5) {
+      speed = 200;
+    }
+    that.Base.setMyData({ "kkt": "4" });
+    that.Base.zimutimer = setInterval(() => {
+      var zimucount = parseInt(that.Base.getMyData().zimucount);
+      zimucount++;
+
+      that.Base.setMyData({
+        zimucount: zimucount
+      });
+    }, speed);
+
+    that.Base.setMyData({ "kkt": "5" });
   }
 
   suspend(e) {
@@ -415,6 +427,10 @@ console.log(lines);
             precord: "N"
           })
 
+          clearInterval(that.Base.zimutimer);
+          that.Base.setMyData({
+            zimucount: -1
+          });
           var innerAudioContext = that.Base.innerAudioContext;
           innerAudioContext.stop();
 
@@ -422,7 +438,8 @@ console.log(lines);
             title: '请点击录音重新录制',
             mask: false,
             icon: 'none',
-          })
+          });
+
           that.onMyShow();
         }
 
@@ -543,6 +560,7 @@ console.log(lines);
     var talkapi = new TalkApi();
     //var vonice = this.tempFilePath;
     var ve = this.tempFilePath;
+    console.log(ve);
     //var bookinfo=this.Base.getMyData().bookinfo;
     var book_id = this.Base.getMyData().bookinfo.id;
     var book_type = this.Base.getMyData().bookinfo.booktype;
@@ -619,7 +637,7 @@ if(that.Base.options.type=="A"){
     if (ret.code == 0) {
       console.log('提交成功');
       
-      wx.reLaunch({
+      wx.navigateTo({
         url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return + '&time=' + time,
       })
 
@@ -647,7 +665,7 @@ else(
               if (ret.code == 0) {
                 console.log('提交成功');
 
-                wx.reLaunch({
+                wx.navigateTo({
                   url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return+'&time=' + time,
                 })
 

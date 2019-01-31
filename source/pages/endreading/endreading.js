@@ -29,7 +29,8 @@ class Content extends AppBase {
       
       //播放结束，销毁该实例
       innerAudioContext.destroy()
-    })
+    });
+
 
     innerAudioContext.onError((res) => {
       console.log(res.errMsg)
@@ -59,11 +60,15 @@ class Content extends AppBase {
     });
 
     bookapi.readinfo({ id: this.Base.options.retid}, (readinfo) => {
+      var uploadpath = this.Base.getMyData().uploadpath;
+      this.Base.innerAudioContext.src = uploadpath + "readfile/" + readinfo.read_file;
        this.Base.setMyData({ readinfo });
      });
   }
   bgmOnPlay(e){
-   console.log("播放")
+   console.log("播放");
+    wx.hideLoading();
+    this.Base.setMyData({ status: "stop" })
   }
 
   tobookshelf(e){
@@ -75,7 +80,9 @@ class Content extends AppBase {
     })
   }
    Play(e) {
-     this.Base.setMyData({ status: "stop" })
+     wx.showLoading({
+       title: '加载中',
+     });
 
      var that = this;
      var readinfo = this.Base.getMyData().readinfo;
@@ -83,14 +90,18 @@ class Content extends AppBase {
     var bgmlist = this.Base.getMyData().bgmlist;
      var index = e.currentTarget.dataset.index;
      var innerAudioContext = this.Base.innerAudioContext;
+     try{
 
-     innerAudioContext.pause();
+       innerAudioContext.pause();
+     }catch(e){
+
+     }
      console.log("暂停")
 
      innerAudioContext.play();
      //setTimeout(()=>{
      //innerAudioContext.autoplay = true;
-     console.log("111111")
+     console.log("111111");
      innerAudioContext.loop = true
      innerAudioContext.obeyMuteSwitch = false;
 
@@ -121,6 +132,12 @@ class Content extends AppBase {
       url: '/pages/readaloud/readaloud?retid=' + this.Base.options.retid + '&id=' + bookinfo.id+'&type=A',
      })
 
+  }
+
+  onUnload(){
+
+    var innerAudioContext = this.Base.innerAudioContext;
+    innerAudioContext.stop();
   }
 
   

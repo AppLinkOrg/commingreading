@@ -22,7 +22,7 @@
   <view wx:if='{{audio_value_str==null}}' class='margin-left-10'>00:00</view>
 <view wx:if='{{audio_value_str!=null}}' class='margin-left-10'>{{audio_value_str}}</view>
   <view class="body-view flex-1">
-    <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="1" max="100" />
+    <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688'  min="0" max="{{audio_duration}}" value='{{audio_value}}' disabled='true'  />
   </view>
   <view wx:if='{{audio_duration_str==null}}' class='margin-left-10'>00:00</view>
 <view wx:if='{{audio_duration_str!=null}}' class='margin-left-10'>{{audio_duration_str}}</view>
