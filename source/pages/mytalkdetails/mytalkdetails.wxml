@@ -8,8 +8,8 @@
     <view class=' margin-top-10'>作者：{{bookinfo.author}}</view>
     <!-- <view class='txt-black margin-top-10'>朗读者:xxx</view> -->
 
-    <scroll-view scroll-y class='text-center ' style='height:670rpx;'>
-      <text class='content txt-black text-center margin-bottom-40'>
+    <scroll-view scroll-y class='text-center ' style='height:600rpx;padding:40rpx;'>
+      <text class='content txt-black text-center margin-bottom-40 h4'>
 {{bookinfo.book_content}}
 </text>
     </scroll-view>

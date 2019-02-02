@@ -21,7 +21,7 @@
       <view wx:if='{{audio_value_str!=null}}' class='margin-left-10 txt-black'>{{audio_value_str}}</view>
       
       <view class="body-view flex-1">
-        <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="0" max="{{audio_duration}}" value='{{audio_value}}' disabled='true' />
+        <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="0" max="{{audio_duration}}" value='{{audio_value}}'  bindchange='changetotime' />
       </view>
 
       <view class='txt-black'>{{time}}</view>

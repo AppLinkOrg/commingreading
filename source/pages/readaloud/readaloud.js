@@ -91,7 +91,7 @@ class Content extends AppBase {
     })
 
     this.Base.innerAudioContext = innerAudioContext;
-
+    this.loadingdata();
   }
 
   onUnload() {
@@ -160,7 +160,7 @@ class Content extends AppBase {
 
     );
   }
-  onMyShow() {
+  loadingdata() {
     wx.showLoading({
       title: '加载中',
       mask: true
@@ -443,7 +443,7 @@ console.log(lines);
             icon: 'none',
           });
 
-          that.onMyShow();
+          that.loadingdata();
         }
 
       }
@@ -528,7 +528,7 @@ console.log(lines);
 
     innerAudioContext.pause();
     console.log("暂停1")
-
+    innerAudioContext.loop=true;
     innerAudioContext.obeyMuteSwitch = false;
     innerAudioContext.src = uploadpath + "bgm_file/" + src;
     innerAudioContext.play(this.Base.setMyData({
@@ -729,6 +729,7 @@ body.zt = content.zt;
 body.shangchuan = content.shangchuan;
 body.confirm = content.confirm;
 body.uploadvonice = content.uploadvonice;
-body.bgmOnPlay = content.bgmOnPlay;
+body.bgmOnPlay = content.bgmOnPlay; 
 body.qweqwe = content.qweqwe;
+body.loadingdata = content.loadingdata;
 Page(body)

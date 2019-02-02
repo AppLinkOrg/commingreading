@@ -199,6 +199,14 @@ class Content extends AppBase {
     });
   }
 
+  changetotime(e){
+    console.log(e);
+
+    var innerAudioContext = this.Base.innerAudioContext;
+    console.log(innerAudioContext);
+    innerAudioContext.seek(parseInt(e.detail.value));
+  }
+
 }
 
 
@@ -221,6 +229,7 @@ body.Stop = content.Stop;
 body.sendComment = content.sendComment;
 body.changeComment = content.changeComment; 
 body.dianzan = content.dianzan;
-body.bgmOnPlay = content.bgmOnPlay;
+body.bgmOnPlay = content.bgmOnPlay; 
 body.toread = content.toread;
+body.changetotime = content.changetotime;
 Page(body)

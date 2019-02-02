@@ -37,7 +37,7 @@
       <view class='txt-black  txt-bold'>《{{bookinfo.book_name}}》</view>
       <view class=' margin-top-10'>作者：{{bookinfo.author}}</view>
       <!-- <view class='txt-black margin-top-10'>朗读者:xxx</view>    {{zimucount}} -->
-      <scroll-view scroll-y class='text-center margin-top-20' style='height:650rpx;'>
+      <scroll-view scroll-y class='text-center margin-top-20' style='height:600rpx;'>
 
 
         <view wx:if='{{memberinfo.switch_value=="Y"}}' wx:for="{{lines}}" wx:for-index="lidx" wx:key='k' wx:for-item="litem" style='min-height:42rpx;'>

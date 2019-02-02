@@ -1,6 +1,7 @@
 <!--pages/search/search.wxml-->
 <view class='Top padding-20 flex-row flex-center'>
   <view class='search flex-row flex-center padding-5 '>
+    <view style='width:20rpx;'></view>
     <image class='search_icon' src='{{uploadpath}}resource/{{res.search_icon}}'></image>
     <input class='h5 flex-1 txt-black' focus='true' placeholder='搜索您想要的文章' bindinput='search'></input>
     <view class='padding-left-20 padding-right-10' bindtap=''><image class='prohibit_icon ' src='{{uploadpath}}resource/{{res.prohibit}}'></image></view>

@@ -3,14 +3,7 @@
   <image class='bg_img' src='{{uploadpath}}resource/{{res.bg_1}}'></image>
 </view>
 
-<view class='Top padding-20 flex-row '>
-  <navigator url='/pages/search/search' class='search flex-row flex-center padding-10 '>
-    <view class=''></view>
-    <image class='icon-20' src='{{uploadpath}}resource/{{res.search_icon}}'></image>
-    <view class='h5 txt-gray'>搜索你想读的文章</view>
-    <view class=''></view>
-  </navigator>
-</view>
+
 
 <view class='flex-row'>
 

@@ -140,7 +140,14 @@ class Content extends AppBase {
     innerAudioContext.stop();
   }
 
-  
+
+  changetotime(e) {
+    console.log(e);
+
+    var innerAudioContext = this.Base.innerAudioContext;
+    console.log(innerAudioContext);
+    innerAudioContext.seek(parseInt(e.detail.value));
+  }
 
 }
 
@@ -162,4 +169,5 @@ body.recordagain = content.recordagain;
 body.bgmOnPlay = content.bgmOnPlay; 
 body.Play = content.Play;
 body.Stop = content.Stop;
+body.changetotime = content.changetotime;
 Page(body)
