@@ -12,37 +12,30 @@ class Content extends AppBase {
     this.Base.Page = this;
     //options.id=5;
     super.onLoad(options);
-    this.Base.setMyData({ty:0})
-    
-  }
-  onMyShow() {
     wx.showLoading({
       title: '加载中',
       mask: true
     })
-    var that = this;
     var bookapi = new BookApi();
-    
-    // setTimeout(function () {
-     
-    // }, 500)
     this.Base.setMyData({ ty: 0 })
     var memberinfo = this.Base.getMyData().memberinfo;
-    // bookapi.readlist({ member_id: memberinfo.id}, (readlist) => {
-    //   this.Base.setMyData({ readlist });
-    //   for (var i = 0; i < readlist.length; i++) {
-        bookapi.booklist({ }, (booklist) => {
-          this.Base.setMyData({ booklist });
-        });
-    //   }
-    // });
 
-    bookapi.booktypelist({ }, (booktypelist) => {
+    bookapi.booklist({}, (booklist) => {
+      this.Base.setMyData({ booklist });
+    });
+    
+    bookapi.booktypelist({}, (booktypelist) => {
       this.Base.setMyData({ booktypelist });
       wx.hideLoading(
       )
     });
     
+  }
+  onMyShow() {
+    
+    var that = this;
+    
+
   }
   bindtypedetail(e){
     var bookapi = new BookApi();

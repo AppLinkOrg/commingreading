@@ -3,20 +3,31 @@
   <image class='bg_img' src='{{uploadpath}}resource/{{res.bg_1}}'></image>
 </view>
 
-
+<view class='Top  '>
+  <view class='padding-20'>
+    <view class=' flex-row '>
+      <navigator url='/pages/search/search' class='search flex-1 flex-row flex-center padding-10 '>
+      <view style='width:20rpx;'></view>
+        <image class='icon-20' src='{{uploadpath}}resource/{{res.search_icon}}'></image>
+        <view class='h5 txt-gray'>搜索你想读的文章</view>
+        <view class=''></view>
+      </navigator>
+    </view>
+  </view>
+</view>
 
 <view class='flex-row'>
 
   <view class='all '>
-    <view class='txt-primary   padding-10 radius-10 {{ty==0?"bg txt-white":""}}' bindtap='bindall'>全部</view>
+    <view class='txt-primary margin-top-5   padding-10 radius-10 {{ty==0?"bg txt-white":""}}' bindtap='bindall'>全部</view>
   </view>
   
   <view class='flex-row flex-center flex-wrap flex-1'>
-    <view bindtap='bindtypedetail' class='margin-left-10  ' wx:for='{{booktypelist}}' data-type='{{item.id}}' wx:key='k'>
-      <view class='radius-10 {{ty==item.id?"bg txt-white":""}} padding-10'>{{item.name}}</view>
+    <view bindtap='bindtypedetail' class='margin-left-5 margin-top-5  ' wx:for='{{booktypelist}}' data-type='{{item.id}}' wx:key='k'>
+      <view class='radius-10 {{ty==item.id?"bg txt-white":""}} padding-10' style='border:1rpx solid #CECFCE;'>{{item.name}}</view>
     </view>
   </view>
-
+  
 </view>
 
 

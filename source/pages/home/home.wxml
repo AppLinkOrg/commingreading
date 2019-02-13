@@ -10,6 +10,7 @@
     </view>
   </view>
 </view>
+
 <view class='flex-row flex-center top_title'>
 
   <view class='catitem flex-1 bg-white flex-row flex-column padding-20' wx:key="k" bindtap='bindcontact'>

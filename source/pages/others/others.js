@@ -17,13 +17,16 @@ class Content extends AppBase {
 
     var innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.onPlay(this.bgmOnPlay)
+
     innerAudioContext.onStop(() => {
       console.log('播放暂停')
-
+      
       innerAudioContext.stop()
+      this.Base.setMyData({ status: "play" })
       //播放结束，销毁该实例
       //innerAudioContext.destroy()
     })
+
     innerAudioContext.onEnded(() => {
       console.log('播放结束')
       //var bgmlist = this.Base.getMyData().bgmlist;
@@ -77,12 +80,11 @@ class Content extends AppBase {
     }); 
 
     
-
   }
 
   onUnload() {
     var innerAudioContext = this.Base.innerAudioContext;
-
+    
     innerAudioContext.stop();
     console.log("暂停播放")
     console.log("88888888888888888888888");
@@ -131,7 +133,6 @@ class Content extends AppBase {
       //innerAudioContext.loop = true
       innerAudioContext.autoplay = true
       innerAudioContext.obeyMuteSwitch = false;
-
        innerAudioContext.src = uploadpath + "readfile/" + readinfo.read_file;
       innerAudioContext.play();
       console.log(innerAudioContext.src);

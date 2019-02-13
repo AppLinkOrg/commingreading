@@ -26,3 +26,8 @@ z-index: 100;
 .ico{
   width: 110rpx;
 }
+.text{
+    overflow:hidden; 
+    text-overflow:ellipsis;
+    white-space:nowrap; 
+}

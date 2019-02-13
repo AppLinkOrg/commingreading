@@ -1,9 +1,10 @@
 {
   "pages":[
     "pages/home/home",
+    "pages/bookshelf/bookshelf",
+    "pages/auth/auth",
     "pages/endreading/endreading",
     "pages/search/search",
-    "pages/auth/auth",
     "pages/mylike/mylike",
     "pages/mine/mine",
     "pages/subtitles/subtitles",
@@ -11,7 +12,6 @@
     "pages/ranking/ranking",
     "pages/readaloud/readaloud",
     "pages/aboutus/aboutus",
-    "pages/bookshelf/bookshelf",
     "pages/typedetail/typedetail",
     "pages/mytalkdetails/mytalkdetails",
     "pages/others/others",
