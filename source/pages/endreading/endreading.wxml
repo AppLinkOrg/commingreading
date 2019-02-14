@@ -10,7 +10,7 @@
       </view>
       <view class='txt-black h4'>《{{bookinfo.book_name}}》</view>
 
-      <view class='txt-black margin-top-10'>朗读者：{{memberinfo.nickName}}</view>
+      <view class='txt-black margin-top-10'>朗读者：{{readinfo.member_id_name}}</view>
     </view>
 
 

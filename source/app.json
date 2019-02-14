@@ -1,9 +1,9 @@
 {
   "pages":[
     "pages/home/home",
+    "pages/endreading/endreading",
     "pages/bookshelf/bookshelf",
     "pages/auth/auth",
-    "pages/endreading/endreading",
     "pages/search/search",
     "pages/mylike/mylike",
     "pages/mine/mine",
@@ -29,7 +29,7 @@
   "tabBar": {
     "color": "#bfbfbf",
     "selectedColor": "#4C556E",
-    "borderStyle": "#4C556E",
+    "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
       {

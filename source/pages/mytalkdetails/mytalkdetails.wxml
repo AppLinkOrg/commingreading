@@ -22,7 +22,6 @@
   </view>
 
 
-
   <view wx:if='{{rdlist.length==0}}' class='bg-white  flex-row flex-column'>
     <image class='icon-100' src='{{uploadpath}}resource/{{res.noreader_icon}}'></image>
     <view class='h5 txt-gray txt-bold margin-top-10 padding-bottom-30'>还没有人朗读哦，快来体验一下吧</view>

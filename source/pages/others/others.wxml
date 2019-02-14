@@ -34,6 +34,7 @@
     <view class='flex-row flex-center ' bindtap=''>
       <!-- <image  bindtap='dianzan' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image> -->
      <image bindtap='dianzan' wx:if='{{readinfo.qwe==""}}' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
+     
 <image wx:if='{{readinfo.qwe!=""}}' bindtap='dianzan' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzancolor}}'></image>
       <view wx:if='{{readinfo.count1>0}}' class=' margin-left-10' id='' bindtap='dianzan'>点赞{{readinfo.count1}}</view>
       <view wx:if='{{readinfo.count1==0}}' class=' margin-left-10' id='' bindtap='dianzan'>点赞</view>
@@ -51,7 +52,6 @@
 <!-- <button open-type="share" class='clear-button margin-10' style='width:55rpx;height:55rpx'>
         <image class='icon-25' src='{{uploadpath}}resource/{{res.share}}' bindtap='share'> </image>
       </button> -->
-
   <view class='flex-row flex-column flex-1 ' bindtap=''>
     <button open-type="share" class='flex-row flex-center clear-button' style='border:0rpx;'>
       <image class='icon-25' src='{{uploadpath}}resource/{{res.bierenfenxiang}}'></image>
@@ -61,11 +61,9 @@
 
 </view>
 
-
 <view class='padding-30 txt-black txt-bold'>
   评论({{messagelist.length}})：
 </view>
-
 
 <view class='padding-30 flex-row flex-column' wx:if='{{messagelist.length==0}}'>
 <image src='{{uploadpath}}resource/{{res.talknull_icon}}' class='icon-50'></image>
@@ -92,7 +90,6 @@
 
 </view>
 
-
 <!-- <view class='flex-row flex-column ' style='background-color:#F8F8F8'>
   <view class='padding-20 flex-row flex-center' style=''>
     <image class='icon-30' src='{{uploadpath}}resource/{{res.woyaolangdu}}'></image>
@@ -107,7 +104,7 @@
 
   <view class='padding-comment flex-1 margin-left-10'>
     <view>
-      <textarea class='h5 white-block pdg txt-white' style='border-radius:40rpx;background:#A5E8D0' auto-height='{{true}}' placeholder-class='txt-white' placeholder='发表评论' fixed="{{true}}" value='{{comment}}' bindinput='changeComment' bindconfirm='sendComment'></textarea>
+      <textarea class='h5 white-block pdg txt-white' style='border-radius:40rpx;background:#A5E8D0;min-height:48rpx;' auto-height='{{true}}' placeholder-class='txt-white' placeholder='发表评论' fixed="{{true}}" value='{{comment}}' bindinput='changeComment' bindconfirm='sendComment'></textarea>
     </view>
   </view>
 </view>

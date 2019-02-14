@@ -5,11 +5,9 @@
       <image class='icon-25' src='{{uploadpath}}resource/{{res.set_icon}}'></image>
     </view> -->
 
-
-
   <view class=' flex-row flex-column  margin-top ' style='height:170rpx;width:100%'>
-    <image class='icon-60 radius-50  ' style='border:4rpx solid #CECFCE' src='{{UserInfo.avatarUrl}}'></image>
-    <view class='txt-black margin-left-5'>{{UserInfo.nickName}}</view>
+    <image class='icon-60 radius-50  ' style='border:4rpx solid #CECFCE' src='{{memberinfo.avatarUrl}}'></image>
+    <view class='txt-black margin-left-5'>{{memberinfo.nickName}}</view>
   </view>
 
 </view>

@@ -90,7 +90,7 @@
       <view class='margin-left-40'>
         <image class='icon-40 radius-50' src='{{item.avatarUrl}}'></image>
       </view>
-      <view class='flex-1 margin-left-20 txt-black'>{{item.nickName}}</view>
+      <view class='flex-1 margin-left-20 txt-black text'>{{item.nickName}}</view>
       <view class='flex-row flex-column'>
         <view class='txt-black'>{{item.zishu}}</view>
         <view class='h5'>累计朗读字数</view>

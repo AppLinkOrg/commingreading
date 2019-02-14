@@ -289,7 +289,6 @@ export class AppBase {
   }
   onShareAppMessage() {
 
-
   }
 
   dataReturn(data){

@@ -18,9 +18,14 @@ class Content extends AppBase {
     var innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.onPlay(this.bgmOnPlay)
 
+    innerAudioContext.onPause(() => {
+      console.log('给我暂停')
+      innerAudioContext.pause();
+      this.Base.setMyData({ status: "play" })
+    })
+
     innerAudioContext.onStop(() => {
-      console.log('播放暂停')
-      
+      console.log('播放停止')
       innerAudioContext.stop()
       this.Base.setMyData({ status: "play" })
       //播放结束，销毁该实例
@@ -54,18 +59,19 @@ class Content extends AppBase {
     })
 
     this.Base.innerAudioContext = innerAudioContext;
-
-  }
-  
-  onMyShow() {
-    var that = this;
+    var talkapi = new TalkApi();
     var bookapi = new BookApi();
-    bookapi.readinfo({ id: this.Base.options.readid, member_id: this.Base.getMyData().memberinfo.id}, (readinfo) => {
+    var that = this;
+
+    bookapi.readinfo({ id: this.Base.options.readid }, (readinfo) => {
       this.Base.setMyData({ readinfo });
-
       var talkapi = new TalkApi();
+      var uploadpath = that.Base.getMyData().uploadpath;
+      this.Base.innerAudioContext.autoplay = false;
+      this.Base.innerAudioContext.obeyMuteSwitch = false;
+      this.Base.innerAudioContext.src = uploadpath + "readfile/" + readinfo.read_file;
 
-      talkapi.messagelist({ read: readinfo.id}, (messagelist) => {
+      talkapi.messagelist({ read: readinfo.id }, (messagelist) => {
         this.Base.setMyData({ messagelist });
       });
 
@@ -73,45 +79,56 @@ class Content extends AppBase {
         this.Base.setMyData({ bookinfo });
       });
 
-      talkapi.likelist({ }, (likelist) => {
+      talkapi.likelist({}, (likelist) => {
         this.Base.setMyData({ likelist });
       });
 
-    }); 
+    });
+  }
 
-    
+  onMyShow() {
+    var bookapi = new BookApi();
+    //member_id: this.Base.getMyData().memberinfo.id
+
+
   }
 
   onUnload() {
     var innerAudioContext = this.Base.innerAudioContext;
-    
     innerAudioContext.stop();
-    console.log("暂停播放")
+    console.log("停止播放");
     console.log("88888888888888888888888");
+  }
 
+  onHide() {
+    var innerAudioContext = this.Base.innerAudioContext;
+    innerAudioContext.pause();
+    console.log("暂停啦")
+    console.log("5555555555666666666");
   }
 
 
   bgmOnPlay() {
-
     console.log('开始播放')
-
+    // var that=this;
+    // var readinfo = this.Base.getMyData().readinfo;
+    // var uploadpath = this.Base.getMyData().uploadpath;
+    // wx.playBackgroundAudio({
+    //   dataUrl: uploadpath + "readfile/" + readinfo.read_file,
+    // })
   }
 
-  Play(e){
-       this.Base.setMyData({ status:"stop"})
 
+  Play(e){
+      this.Base.setMyData({ status:"stop"})
       var that = this;
       var talkapi = new TalkApi();
       var readinfo = this.Base.getMyData().readinfo;
       var uploadpath = that.Base.getMyData().uploadpath;
       var bgmlist = this.Base.getMyData().bgmlist;
-      
       var innerAudioContext = this.Base.innerAudioContext;
-
-    
-    //var expertsfavid = this.Base.getMyData().info.id;
-    talkapi.addlisten({ listen: readinfo.id }, (ret) => {
+      //var expertsfavid = this.Base.getMyData().info.id;
+      talkapi.addlisten({ listen: readinfo.id }, (ret) => {
 
       if (ret.return != "deleted") {
         this.Base.toast("收听成功");
@@ -125,20 +142,14 @@ class Content extends AppBase {
 
     innerAudioContext.pause();
       //console.log("暂停")
-
       //innerAudioContext.play();
       //setTimeout(()=>{
       //innerAudioContext.autoplay = true;
       console.log("111111")
       //innerAudioContext.loop = true
-      innerAudioContext.autoplay = true
-      innerAudioContext.obeyMuteSwitch = false;
-       innerAudioContext.src = uploadpath + "readfile/" + readinfo.read_file;
       innerAudioContext.play();
       console.log(innerAudioContext.src);
-
       //bgmlist[i].audioStatus = false
-      
   }
 
   //addlisten
@@ -152,7 +163,7 @@ class Content extends AppBase {
   }
   changeComment(e) {
     this.Base.setMyData({ comment: e.detail.value });
-  } 
+  }
 
   sendComment() {
     var that = this;
@@ -185,11 +196,16 @@ class Content extends AppBase {
       } else {
         this.Base.toast("点赞成功");
       }
-      this.onMyShow();
-      // var talkapi = new TalkApi();
-      // talkapi.likelist({ readlike: readinfo.id }, (likelist) => {
-      //   this.Base.setMyData({ likelist });
-      // });
+
+      //this.onMyShow();
+      
+
+       var talkapi = new TalkApi();
+       talkapi.likelist({ }, (likelist) => {
+         this.Base.setMyData({ likelist });
+       });
+
+
     })
   }
 
