@@ -2,7 +2,7 @@
   <view class='padding-20'>
     <view class=' flex-row '>
       <navigator url='/pages/search/search' class='search flex-1 flex-row flex-center padding-10 '>
-      <view style='width:20rpx;'></view>
+        <view style='width:20rpx;'></view>
         <image class='icon-20' src='{{uploadpath}}resource/{{res.search_icon}}'></image>
         <view class='h5 txt-gray'>搜索你想读的文章</view>
         <view class=''></view>
@@ -10,6 +10,9 @@
     </view>
   </view>
 </view>
+
+
+
 
 <view class='flex-row flex-center top_title'>
 
@@ -33,6 +36,7 @@
 
 </view>
 
+<view style='height:180rpx;'></view>
 
 <view class='bnk'>
   <swiper indicator-dots='true' autoplay='false' interval='2000' duration='200' circular='true' style='width:750rpx;height:320rpx;'>
@@ -44,7 +48,8 @@
     </swiper-item>
   </swiper>
 </view>
-<view style='height:512rpx;'></view>
+
+
 <view class=''>
   <image class='bg_img' src='{{uploadpath}}resource/{{res.bg_2}}'></image>
 </view>

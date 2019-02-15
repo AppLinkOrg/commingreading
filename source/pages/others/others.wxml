@@ -13,7 +13,6 @@
 </scroll-view>
 </view>
 
-
 <view class='bg-white'>
 <view class='padding-30 flex-row flex-center ' style='border-bottom:1rpx solid #F3F3F3'>
   <image wx:if='{{status=="play"}}' bindtap='Play' class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
@@ -61,6 +60,9 @@
 
 </view>
 
+ <video class='pos' style='width:4rpx;height:4rpx' objectFit="fill" muted='true' autoplay='true' loop='true' controls="ture" src='{{uploadpath}}inst/{{instinfo.video}}'>
+ </video>
+
 <view class='padding-30 txt-black txt-bold'>
   评论({{messagelist.length}})：
 </view>
@@ -89,6 +91,11 @@
 </view>
 
 </view>
+
+
+
+
+
 
 <!-- <view class='flex-row flex-column ' style='background-color:#F8F8F8'>
   <view class='padding-20 flex-row flex-center' style=''>

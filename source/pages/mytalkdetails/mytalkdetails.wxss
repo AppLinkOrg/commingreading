@@ -1,7 +1,7 @@
 /* pages/mytalkdetails/mytalkdetails.wxss */
 
 Page {
-   padding-bottom: 100rpx; 
+   padding-bottom: 100rpx;
 }
 
 .content {
@@ -12,7 +12,7 @@ Page {
 .img {
   position: absolute;
   width: 100%;
-  height: 90%;
+  height: 95%;
   top: 0;
   bottom: 0;
   z-index: -1;
@@ -38,16 +38,19 @@ Page {
   padding-top: 30rpx;
   padding-bottom: 30rpx;
 }
+
 .pinlun_t {
   padding-left: 30rpx;
   padding-right: 30rpx;
   padding-top: 10rpx;
   padding-bottom: 30rpx;
 }
+
 .talker{
   padding-left: 30rpx;
   padding-right: 30rpx;
   padding-top: 40rpx;
+  margin-top: 19%;
   padding-bottom: 10rpx;
 }
 
@@ -60,6 +63,7 @@ Page {
   width: 100%;
   bottom: 0;
 }
+
 .ld{
   position: fixed;
   bottom: 100rpx;
@@ -69,6 +73,12 @@ Page {
 .hid {
   max-height: 550rpx;
 }
+
 .border_bottom{
   border-top: 1rpx solid rgb(243, 241, 241);
+}
+
+.po{
+  position: relative;
+  bottom: 40rpx;
 }

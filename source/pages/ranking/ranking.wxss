@@ -31,3 +31,6 @@ z-index: 100;
     text-overflow:ellipsis;
     white-space:nowrap; 
 }
+.txt{
+  color: #1EA296;
+}

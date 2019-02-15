@@ -7,13 +7,13 @@
 <view class='flex-row flex-center bg-white top_title'>
 
   <view class='catitem flex-1 flex-row flex-column padding-20' wx:key="k" bindtap='bindcontact'>
-    <view class=' text-center  txt-gray {{ctt==1?"txt-primary":"" }} top text-center h5 txt-bold' bindtap='bindcontact'>今日排行</view>
+    <view class=' text-center  txt-gray {{ctt==1?"txt":"" }} top text-center  txt-bold' bindtap='bindcontact'>今日排行</view>
     <view wx:if='{{ctt!=1}}' style='height:4rpx;width:120rpx;' class=''></view>
     <view wx:if='{{ctt==1}}' style='height:4rpx;width:120rpx;' class='bg-primary'></view>
   </view>
 
   <view class='catitem flex-1 flex-row flex-column  padding-20' wx:key="k" bindtap='bindwaitcompleted'>
-    <view class=' text-center  txt-gray {{ctt==2?"txt-primary":""}} top text-center h5 txt-bold' bindtap='bindwaitcompleted'>本周排行</view>
+    <view class=' text-center  txt-gray {{ctt==2?"txt":""}} top text-center  txt-bold' bindtap='bindwaitcompleted'>本周排行</view>
     <view wx:if='{{ctt!=2}}' style='height:4rpx;width:120rpx;' class=''></view>
     <view wx:if='{{ctt==2}}' style='height:4rpx;width:120rpx;' class='bg-primary'></view>
   </view>

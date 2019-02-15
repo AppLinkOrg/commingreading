@@ -1,7 +1,7 @@
 /* pages/search/search.wxss */
 .search{
   width:620rpx;
-  border-radius: 50rpx;
+  border-radius: 7rpx;
   background-color: rgb(240, 240, 240);
 }
 .search_icon{

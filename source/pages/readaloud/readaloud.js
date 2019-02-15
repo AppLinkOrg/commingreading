@@ -95,18 +95,14 @@ class Content extends AppBase {
   }
 
   onUnload() {
-
     var that = this;
     var innerAudioContext = this.Base.innerAudioContext;
-
     innerAudioContext.stop();
     console.log("暂停播放")
     console.log("88888888888888888888888");
-
-
     clearInterval(that.Base.zimutimer);
-
   }
+  
   
   bgmOnPlay() {
     var that = this;

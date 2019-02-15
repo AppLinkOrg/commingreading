@@ -9,26 +9,31 @@
 .top{
  border-bottom: 4rpx solid white;
 } 
-.search{
+/* .search{
   background: #f2f2f2;
   border-radius: 50rpx;
+} */
+.search{
+  width:100%;
+  border-radius: 7rpx;
+  background-color: #f2f2f2;
 }
-.bnk{
-  
+/* .bnk{
   position: fixed;
   top: 192rpx;
   width:750rpx;
-}
+} */
 .Top{
   background: white;
   position: fixed;
+  z-index: 100;
   top: 0px;
   width:750rpx;
 }
 
 .top_title{
 position: fixed;
-top: 100rpx;
+top: 95rpx;
 width: 100%;
 z-index: 100;
 }

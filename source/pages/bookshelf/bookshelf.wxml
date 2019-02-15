@@ -19,12 +19,12 @@
 <view class='flex-row'>
 
   <view class='all '>
-    <view class='txt-primary margin-top-5   padding-10 radius-10 {{ty==0?"bg txt-white":""}}' bindtap='bindall'>全部</view>
+    <view class='txt-black margin-top-10 h5  padding-10 radius-10 {{ty==0?"bg txt-white":""}}' bindtap='bindall'>全部</view>
   </view>
   
   <view class='flex-row flex-center flex-wrap flex-1'>
-    <view bindtap='bindtypedetail' class='margin-left-5 margin-top-5  ' wx:for='{{booktypelist}}' data-type='{{item.id}}' wx:key='k'>
-      <view class='radius-10 {{ty==item.id?"bg txt-white":""}} padding-10' style='border:1rpx solid #CECFCE;'>{{item.name}}</view>
+    <view bindtap='bindtypedetail' class='margin-left-20 margin-top-10  ' wx:for='{{booktypelist}}' data-type='{{item.id}}' wx:key='k'>
+      <view class='radius-10 {{ty==item.id?"bg txt-white":""}} padding-10 h5' style='border:3rpx solid #ABDFC6;'>{{item.name}}</view>
     </view>
   </view>
   

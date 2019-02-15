@@ -30,11 +30,11 @@ class Content extends AppBase {
 
 
       var bookapi = new BookApi();
-      bookapi.booklist(json, (result) => {
-        this.Base.setMyData({
-          result
-        });
-      });
+      // bookapi.booklist(json, (result) => {
+      //   this.Base.setMyData({
+      //     result
+      //   });
+      // });
 
     // var bookapi = new BookApi();
     // bookapi.booklist(json, (result) => {
@@ -45,31 +45,32 @@ class Content extends AppBase {
   onMyShow() {
     var that = this;
   }
-  bindFocus() {
-    wx.navigateBack({
-      delta: -1
-    });
+  skey(e) {
+    var keyword = e.detail.value;
+    console.log(keyword);
+    this.Base.setMyData({
+      keyword: e.detail.value
+    })
   }
+
   search(e) {
-    console.log(e.detail.value);
+    //console.log(e.detail.value);
+    wx.showLoading({
+      title: '加载中...',
+    })
+    setTimeout(()=>{
+    var json = {};
+      json.searchkeyword=this.Base.getMyData().keyword;
 
-    var json = { };
-     if (e.detail.value == "") {
-       json.searchrecomm = "N";
-     } 
-     else {
-      json.searchkeyword = e.detail.value;
-    }
-
-     if (this.Base.options.new != undefined) {
-       json.newphone = "N";
-     }
 
 
     var bookapi = new BookApi();
     bookapi.booklist(json, (result) => {
       this.Base.setMyData({ result });
+
+      wx.hideLoading();
     });
+    }, 1000);
 
   }
   todetails(e){
@@ -78,12 +79,13 @@ class Content extends AppBase {
      url: '/pages/mytalkdetails/mytalkdetails?id=' + id,
     })
   }
+
 }
 var content = new Content();
 var body = content.generateBodyJson();
 body.onLoad = content.onLoad;
 body.onMyShow = content.onMyShow;
-body.bindFocus = content.bindFocus;
+body.skey = content.skey;
 body.search = content.search; 
 body.todetails = content.todetails; 
 Page(body)
