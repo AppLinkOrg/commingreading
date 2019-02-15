@@ -10,7 +10,12 @@
   margin-top: 40rpx;
   padding-bottom: 10rpx;
 }
-
+.pos{
+  position: fixed;
+  top: 80%;
+  z-index: -1;
+  right: 0;
+}
 .content {
   padding-left: 70rpx;
 }
@@ -25,7 +30,7 @@
 .img {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 95%;
   top: 0;
   bottom: 0;
   z-index: -1;
