@@ -1,5 +1,7 @@
 /* pages/readaloud/readaloud.wxss */
-
+/* Page{
+  padding-bottom: 30rpx;
+} */
 .bgm {
   /* position: fixed;
   left: 20rpx;

@@ -26,6 +26,7 @@
       <view style='display:inline-block;' class='h5'>暂停播放—《{{music_name}}》</view>
     </scroll-view>
   </view>
+  
   <!-- <view wx:if='{{music_name!=null&&bg1==1}}' class='txt-black margin-left-20 flex-1'>正在播放—《{{music_name}}》</view>
     <view wx:if='{{music_name!=null&&bg1==2}}' class='txt-black margin-left-20 flex-1'>暂停播放—《{{music_name}}》</view> -->
 
@@ -39,8 +40,7 @@
       <view class='txt-black  txt-bold'>《{{bookinfo.book_name}}》</view>
       <view class=' margin-top-10'>作者：{{bookinfo.author}}</view>
       <!-- <view class='txt-black margin-top-10'>朗读者:xxx</view>    {{zimucount}} -->
-      <scroll-view scroll-y class='text-center margin-top-20' style='height:650rpx;'>
-
+      <scroll-view scroll-y class='text-center margin-top-20' style='height:550rpx;'>
 
         <view wx:if='{{memberinfo.switch_value=="Y"}}' class='padding-bottom-20' wx:for="{{lines}}" wx:for-index="lidx" wx:key='k' wx:for-item="litem" style='min-height:42rpx;'>
 
