@@ -67,6 +67,12 @@ class Content extends AppBase {
        url: '/pages/mytalkdetails/mytalkdetails?id='+id+'&type=A',
     })
   }
+
+  tocontent(e){
+    wx.navigateTo({
+      url: '/pages/news/news',
+    })
+  }
 }
 
 
@@ -78,4 +84,5 @@ body.bindcompleted = content.bindcompleted;
 body.bindwaitcompleted = content.bindwaitcompleted;
 body.bindcontact = content.bindcontact; 
 body.todetails = content.todetails; 
+body.tocontent = content.tocontent;
 Page(body)

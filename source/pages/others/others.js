@@ -134,22 +134,10 @@ class Content extends AppBase {
         this.Base.toast("收听成功");
       } 
       
-      // var talkapi = new TalkApi();
-      // talkapi.likelist({ readlike: readinfo.id }, (likelist) => {
-      //   this.Base.setMyData({ likelist });
-      // });
     })
 
     innerAudioContext.pause();
-      //console.log("暂停")
-      //innerAudioContext.play();
-      //setTimeout(()=>{
-      //innerAudioContext.autoplay = true;
-      console.log("111111")
-      //innerAudioContext.loop = true
-      innerAudioContext.play();
-      console.log(innerAudioContext.src);
-      //bgmlist[i].audioStatus = false
+    innerAudioContext.play();
   }
 
   //addlisten

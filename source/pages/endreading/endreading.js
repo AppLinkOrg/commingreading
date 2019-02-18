@@ -21,16 +21,23 @@ class Content extends AppBase {
 
     var innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.onPlay(this.bgmOnPlay)
-    innerAudioContext.onStop(() => {
-     
+
+    innerAudioContext.onPause(() => {
+      console.log('给我暂停')
+      innerAudioContext.pause();
+      this.Base.setMyData({ status: "play" })
     })
+
+    innerAudioContext.onStop(() => {
+      this.Base.setMyData({ status: "play" })
+    })
+
     innerAudioContext.onEnded(() => {
       console.log('播放结束')
-      
+      this.Base.setMyData({ status: "play" })
       //播放结束，销毁该实例
-      innerAudioContext.destroy()
+      //innerAudioContext.destroy()
     });
-
 
     innerAudioContext.onError((res) => {
       console.log(res.errMsg)
@@ -38,7 +45,6 @@ class Content extends AppBase {
       //播放错误，销毁该实例
       innerAudioContext.destroy()
     })
-
 
     innerAudioContext.onTimeUpdate((res) => {
       var that = this;
@@ -51,20 +57,48 @@ class Content extends AppBase {
     })
 
     this.Base.innerAudioContext = innerAudioContext;
-  }
-  onMyShow() {
-    var that = this;
     var bookapi = new BookApi();
     bookapi.bookinfo({ id: this.Base.options.id }, (bookinfo) => {
       this.Base.setMyData({ bookinfo });
     });
 
-    bookapi.readinfo({ id: this.Base.options.retid}, (readinfo) => {
+    bookapi.readinfo({ id: this.Base.options.retid }, (readinfo) => {
       var uploadpath = this.Base.getMyData().uploadpath;
       this.Base.innerAudioContext.src = uploadpath + "readfile/" + readinfo.read_file;
-       this.Base.setMyData({ readinfo });
-     });
+      innerAudioContext.loop = true
+      innerAudioContext.obeyMuteSwitch = false;
+      this.Base.setMyData({ readinfo });
+    });
+
   }
+  onMyShow() {
+    var that = this;
+
+  }
+  showimg(e){
+    var img = e.currentTarget.dataset.img;
+  }
+
+  onShareAppMessage(e) {
+    var id = this.Base.getMyData().id;
+    var title = this.Base.getMyData().readinfo.book_id_name;
+    var name = this.Base.getMyData().readinfo.member_id_name;
+    var share_icon = this.Base.getMyData().res.share_icon;
+    //var read_bg = data;
+    var myposter = this.Base.getMyData().myposter;
+    //var read_bg = this.Base.getMyData().img;
+    //var img = e.currentTarget.dataset.img;
+    //console.log(read_bg+"000000000");
+    //return;
+    return {
+      title: "《" + title +"》\n  朗读者: "+name,
+      imageUrl: "https://alioss.app-link.org/alucard263096/yngd/resource/" + share_icon
+
+      //path: "/pages/info/info?id=" + this.Base.options.id
+    };
+
+  }
+
   bgmOnPlay(e){
    console.log("播放");
     wx.hideLoading();
@@ -75,8 +109,8 @@ class Content extends AppBase {
     var that = this;
     var innerAudioContext = this.Base.innerAudioContext;
     innerAudioContext.stop();
-    wx.reLaunch({
-      url: '/pages/bookshelf/bookshelf',
+    wx.navigateBack({
+      delta:2
     })
   }
    Play(e) {
@@ -91,7 +125,6 @@ class Content extends AppBase {
      var index = e.currentTarget.dataset.index;
      var innerAudioContext = this.Base.innerAudioContext;
      try{
-
        innerAudioContext.pause();
      }catch(e){
 
@@ -101,13 +134,8 @@ class Content extends AppBase {
      innerAudioContext.play();
      //setTimeout(()=>{
      //innerAudioContext.autoplay = true;
-     console.log("111111");
-     innerAudioContext.loop = true
-     innerAudioContext.obeyMuteSwitch = false;
-
-     innerAudioContext.src = uploadpath + "readfile/" + readinfo.read_file;
-     innerAudioContext.play();
-   console.log(innerAudioContext.src);
+     //console.log("111111");
+     //console.log(innerAudioContext.src);
 
      //bgmlist[i].audioStatus = false
 
@@ -170,4 +198,6 @@ body.bgmOnPlay = content.bgmOnPlay;
 body.Play = content.Play;
 body.Stop = content.Stop;
 body.changetotime = content.changetotime;
+body.onShareAppMessage = content.onShareAppMessage; 
+body.showimg = content.showimg;
 Page(body)

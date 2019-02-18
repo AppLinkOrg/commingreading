@@ -1,7 +1,9 @@
 /* pages/endreading/endreading.wxss */
+
 /* Page{
   padding-bottom: 100rpx;
 } */
+
 .content{
   padding-left:70rpx;
   padding-right: 70rpx;
@@ -33,12 +35,21 @@
   padding-left: 22rpx;
   padding-right: 22rpx;
 }
+
 .padding-comment textarea{
   width: 92%;
 }
+
 .pdg{
   padding-left: 20rpx;
   padding-top: 10rpx;
   padding-right: 20rpx;
   padding-bottom: 10rpx;
+}
+
+.pos{
+  position: fixed;
+  top: 80%;
+  z-index: -1;
+  right: 0;
 }

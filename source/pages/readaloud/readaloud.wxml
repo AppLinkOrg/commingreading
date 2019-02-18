@@ -1,5 +1,5 @@
 <!--pages/readaloud/readaloud.wxml-->
-<image class='img' mode='scaleToFill' bindtap='Choice' src='{{uploadpath}}resource/{{res.read_bg}}'></image>
+<image class='img' mode='scaleToFill' bindtap='Choice' src='{{uploadpath}}resource/{{res.bg_read}}'></image>
 
 
 <view class='bgm flex-row flex-center ' bindtap='btnopendetails' style='border-bottom:1rpx solid #009688;height:100rpx'>

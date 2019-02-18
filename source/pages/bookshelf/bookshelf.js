@@ -92,7 +92,13 @@ class Content extends AppBase {
       url: '/pages/mytalkdetails/mytalkdetails?id='+id,
     })
   }
-  
+  backtotop() {
+    var that=this;
+    this.Base.setMyData({
+      top: 0
+    });
+    super.backtotop();
+  }
 }
 var content = new Content();
 var body = content.generateBodyJson();
@@ -101,4 +107,5 @@ body.onMyShow = content.onMyShow;
 body.bindtypedetail = content.bindtypedetail;
 body.bindall = content.bindall; 
 body.totalkdetail = content.totalkdetail;
+body.backtotop = content.backtotop;
 Page(body)

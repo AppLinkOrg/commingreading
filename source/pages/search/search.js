@@ -23,6 +23,7 @@ class Content extends AppBase {
     var json = {
       searchrecomm: ""
     };
+    this.Base.setMyData({show:0});
     
      if (options.new != undefined) {
        json.newphone = "N";
@@ -53,30 +54,44 @@ class Content extends AppBase {
     })
   }
 
+
+
   search(e) {
     //console.log(e.detail.value);
+    this.Base.setMyData({ show: 1 });
     wx.showLoading({
       title: '加载中...',
     })
     setTimeout(()=>{
     var json = {};
-      json.searchkeyword=this.Base.getMyData().keyword;
-
-
+    var data=e.detail.value;
+    this.Base.setMyData({ value: data});
+    json.searchkeyword=data;
 
     var bookapi = new BookApi();
-    bookapi.booklist(json, (result) => {
+    bookapi.keywordlist(json, (result) => {
       this.Base.setMyData({ result });
-
       wx.hideLoading();
     });
-    }, 1000);
+    }, 100);
 
   }
+
+  tosearch(e) {
+    var word = this.Base.getMyData().value;
+    //console.log(word + "LLLLLLL");
+    //return;
+    if (word!=null){
+      wx.navigateTo({
+        url: '/pages/searchbook/searchbook?keyword=' + word,
+      })
+    }
+  }
+
   todetails(e){
-    var id=e.currentTarget.id;
+    var name=e.currentTarget.id;
      wx.navigateTo({
-     url: '/pages/mytalkdetails/mytalkdetails?id=' + id,
+       url: '/pages/searchbook/searchbook?keyword=' + name,
     })
   }
 
@@ -87,5 +102,6 @@ body.onLoad = content.onLoad;
 body.onMyShow = content.onMyShow;
 body.skey = content.skey;
 body.search = content.search; 
+body.tosearch = content.tosearch; 
 body.todetails = content.todetails; 
 Page(body)

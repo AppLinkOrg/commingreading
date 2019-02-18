@@ -1,0 +1,14 @@
+/* pages/searchbook/searchbook.wxss */
+.search{
+  width:620rpx;
+  border-radius: 7rpx;
+  background-color: rgb(240, 240, 240);
+}
+.search_icon{
+  height:40rpx;
+  width:40rpx;
+}
+.prohibit_icon{
+  height:30rpx;
+  width:30rpx;
+}

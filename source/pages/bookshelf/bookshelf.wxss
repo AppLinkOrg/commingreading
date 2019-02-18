@@ -21,3 +21,11 @@ Page{
 .bg{
   background: #ABDFC6;
 }
+.backtotop{
+  position: fixed;
+  right:30rpx;
+  bottom: 40rpx;
+}
+.img{
+  opacity: 0.8;
+}

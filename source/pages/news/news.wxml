@@ -1,0 +1,9 @@
+<!--pages/news/news.wxml-->
+<view>{{mobilebrand}}</view>
+<view>{{mobileModel}}</view>
+<view>{{mobileePixelRatio}}</view>
+<view>{{windowWidth}}</view>
+<view>{{system}}</view>
+<view>{{language}}</view>
+<view>{{platform}}</view>
+<view>{{benchmarkLevel}}</view>

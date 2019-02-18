@@ -44,3 +44,7 @@
     <view class='h5'>朗读者：{{item.bcount}}</view>
   </view>
 </view>
+
+<view class='backtotop'>
+  <image class='icon-40 img' src='{{uploadpath}}resource/{{res.backtotop}}' bindtap='backtotop'></image>
+</view>

@@ -1,10 +1,11 @@
 {
   "pages":[
     "pages/home/home",
+    "pages/news/news",
+    "pages/searchbook/searchbook",
     "pages/endreading/endreading",
     "pages/bookshelf/bookshelf",
     "pages/auth/auth",
-    "pages/search/search",
     "pages/mylike/mylike",
     "pages/mine/mine",
     "pages/subtitles/subtitles",

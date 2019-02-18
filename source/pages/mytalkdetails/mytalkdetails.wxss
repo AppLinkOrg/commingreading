@@ -82,3 +82,8 @@ Page {
   position: relative;
   bottom: 40rpx;
 }
+.text{
+    overflow:hidden; 
+    text-overflow:ellipsis;
+    white-space:nowrap; 
+}
