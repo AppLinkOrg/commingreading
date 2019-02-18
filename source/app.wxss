@@ -3,6 +3,7 @@
 
 page{
   background: white;
+  
 }
 .clear-contact{
   position: absolute;  
@@ -36,11 +37,13 @@ page{
 }
 .btn-primary-line::after {
   border-color: #2699EC;
-} 
+}
 view,navigator,input,text,textarea{
   font-size: 32rpx;
   font-weight: 350;
   color: #5a5a5a;
+  word-wrap:break-word;
+  word-break: keep-all;
 }
 .flex-row{
   display: flex;

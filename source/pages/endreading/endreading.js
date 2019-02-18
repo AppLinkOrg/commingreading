@@ -91,7 +91,7 @@ class Content extends AppBase {
     //console.log(read_bg+"000000000");
     //return;
     return {
-      title: "《" + title +"》\n  朗读者: "+name,
+      title: "文章名:《" + title +"》\n朗读者: "+name,
       imageUrl: "https://alioss.app-link.org/alucard263096/yngd/resource/" + share_icon
 
       //path: "/pages/info/info?id=" + this.Base.options.id
