@@ -55,7 +55,7 @@
       <view class='flex-row  flex-1 padding-left-20'>
         <navigator class='flex-row flex-center' bindtap='tobookshelf'>
           <image class='icon-25' src='{{uploadpath}}resource/{{res.fanhuishujia}}'></image>
-          <view class=' margin-left-10 txt-black'>返回文章</view>
+          <view class=' margin-left-10 txt-black'>返回首页</view>
         </navigator>
       </view>
 
@@ -66,8 +66,6 @@
           <view class=' margin-left-10 txt-black'>我要朗读</view>
         </navigator>
       </view>
-
-
 
 
     </view>

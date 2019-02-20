@@ -17,7 +17,7 @@ class Content extends AppBase {
     this.Base.Page = this;
     //options.id=5;
     super.onLoad(options);
-    this.Base.needauth = false;
+    this.Base.needauth = true;
     this.Base.setMyData({ isgrantuser: false });
     this.Base.setMyData({ isgrantphonenumber: false, mobile: "" });
   }

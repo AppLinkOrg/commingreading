@@ -10,10 +10,12 @@
   <view class='padding-left-10 h5 txt-primary' bindtap='search' >确定</view>
 </view> -->
 
-<view class='flex-row flex-column' wx:if='{{result==null||result.length==0}}'>
+
+<view class='flex-row flex-column' hidden='{{result!=null&&result.length>0}}'>
   <view class='margin-top-20'><image class='icon-75' src='{{uploadpath}}resource/{{res.book_null}}'></image></view>
   <view class='margin-top-10'>抱歉，我们已经很努力在寻找了</view>
 </view>
+
 
 <view  bindtap='todetails' class='h5 padding-20 margin-left-40 flex-row flex-center' id='{{item.id}}' wx:for="{{result}}" wx:key="k" wx:for-index='idx'>
   <view >{{item.book_name}}</view>

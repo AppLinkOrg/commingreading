@@ -109,8 +109,11 @@ class Content extends AppBase {
     var that = this;
     var innerAudioContext = this.Base.innerAudioContext;
     innerAudioContext.stop();
-    wx.navigateBack({
-      delta:2
+    // wx.navigateBack({
+    //   delta:2
+    // })
+    wx.reLaunch({
+      url: '/pages/home/home',
     })
   }
    Play(e) {
