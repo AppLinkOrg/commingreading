@@ -4,11 +4,13 @@ import { ApiConfig } from "../../apis/apiconfig";
 import { InstApi } from "../../apis/inst.api.js";
 import { BookApi } from "../../apis/book.api.js";
 import { TalkApi } from "../../apis/talk.api.js";
+import { PostApi } from "../../apis/post.api.js";
 
 class Content extends AppBase {
   constructor() {
     super();
   }
+
   onLoad(options) {
     this.Base.Page = this;
     //options.readid=2;
@@ -46,7 +48,6 @@ class Content extends AppBase {
       //播放错误，销毁该实例
       innerAudioContext.destroy()
     })
-
 
     innerAudioContext.onTimeUpdate((res) => {
       var that = this;
@@ -89,7 +90,8 @@ class Content extends AppBase {
   onMyShow() {
     var bookapi = new BookApi();
     //member_id: this.Base.getMyData().memberinfo.id
-
+    var api = new PostApi();
+    api.poster({ post_id: this.Base.options.id });
 
   }
 
@@ -212,6 +214,42 @@ class Content extends AppBase {
     innerAudioContext.seek(parseInt(e.detail.value));
   }
 
+
+  poster() {
+
+    var that = this;
+    var url = 'https://cmsdev.app-link.org/Users/alucard263096/carpost/upload/post/' + this.Base.options.readid + '_c.png';
+
+    that.Base.viewPhoto({ currentTarget: { id: url } });
+
+    return;
+    wx.downloadFile({
+      url: 'https://cmsdev.app-link.org/Users/alucard263096/carpost/upload/post/' + this.Base.options.id + '.png', //仅为示例，并非真实的资源
+      success: function (res) {
+        // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
+        if (res.statusCode === 200) {
+          wx.saveImageToPhotosAlbum({
+            filePath: res.tempFilePath,
+          });
+          wx.showToast({
+            title: '下载分享图片成功',
+            icon: "none"
+          })
+        } else {
+          wx.showToast({
+            title: '下载分享图片失败',
+            icon: "none"
+          })
+        }
+      }
+    })
+    
+  }
+
+
+
+
+
 }
 
 
@@ -237,4 +275,5 @@ body.dianzan = content.dianzan;
 body.bgmOnPlay = content.bgmOnPlay; 
 body.toread = content.toread;
 body.changetotime = content.changetotime;
+body.poster = content.poster;
 Page(body)
