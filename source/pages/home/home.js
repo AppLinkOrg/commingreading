@@ -32,15 +32,15 @@ class Content extends AppBase {
       this.Base.setMyData({ indexbanner });
     }); 
     var bookapi = new BookApi();
-    bookapi.booklist({ booktype: 1, orderby:'r_main.id' }, (booklist) => {
+    bookapi.booklist({ ishot:"Y" }, (booklist) => {
       this.Base.setMyData({ booklist });
     });
 
-    bookapi.booklist({ booktype: 2}, (everydaylist) => {
+    bookapi.booklist({ isday: "Y"}, (everydaylist) => {
       this.Base.setMyData({ everydaylist });
     });
 
-    bookapi.booklist({ booktype: 3 }, (newlist) => {
+    bookapi.booklist({ isnew: "Y" }, (newlist) => {
       this.Base.setMyData({ newlist });
       wx.hideLoading(
       )
@@ -67,6 +67,12 @@ class Content extends AppBase {
        url: '/pages/mytalkdetails/mytalkdetails?id='+id+'&type=A',
     })
   }
+
+  tocontent(e){
+    wx.navigateTo({
+      url: '/pages/news/news',
+    })
+  }
 }
 
 
@@ -78,4 +84,5 @@ body.bindcompleted = content.bindcompleted;
 body.bindwaitcompleted = content.bindwaitcompleted;
 body.bindcontact = content.bindcontact; 
 body.todetails = content.todetails; 
+body.tocontent = content.tocontent;
 Page(body)

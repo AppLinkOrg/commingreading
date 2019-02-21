@@ -4,93 +4,99 @@
 <view class='flex-row flex-column padding-40' style=''>
   <view class='txt-black h4'>{{bookinfo.book_name}}</view>
   <view class='txt-black margin-top-10'>作者：{{bookinfo.author}}</view>
-  <view  class='txt-black margin-top-10'>朗读者:{{readinfo.member_id_name}}</view>
+  <view class='txt-black margin-top-10'>朗读者:{{readinfo.member_id_name}}</view>
 
-<scroll-view scroll-y class='text-center margin-top-20'	 style='height:530rpx;'>
-  <text class='content txt-black text-center margin-bottom-40'>
+  <scroll-view scroll-y class='text-center margin-top-20' style='height:530rpx;'>
+    <text class='content txt-black text-center margin-bottom-40 h4'>
 {{bookinfo.book_content}}
 </text>
-</scroll-view>
+  </scroll-view>
 </view>
-
 
 <view class='bg-white'>
-<view class='padding-30 flex-row flex-center ' style='border-bottom:1rpx solid #F3F3F3'>
-  <image wx:if='{{status=="play"}}' bindtap='Play' class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
-  <image wx:if='{{status=="stop"}}' bindtap='Stop' class='icon-25' src='{{uploadpath}}resource/{{res.zanting}}'></image>
+  <view class='padding-30 flex-row flex-center ' style='border-bottom:1rpx solid #F3F3F3'>
+    <image wx:if='{{status=="play"}}' bindtap='Play' class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
+    <image wx:if='{{status=="stop"}}' bindtap='Stop' class='icon-25' src='{{uploadpath}}resource/{{res.zanting}}'></image>
 
-  <view wx:if='{{audio_value_str==null}}' class='margin-left-10'>00:00</view>
-<view wx:if='{{audio_value_str!=null}}' class='margin-left-10'>{{audio_value_str}}</view>
-  <view class="body-view flex-1">
-    <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="1" max="100" />
-  </view>
-  <view wx:if='{{audio_duration_str==null}}' class='margin-left-10'>00:00</view>
-<view wx:if='{{audio_duration_str!=null}}' class='margin-left-10'>{{audio_duration_str}}</view>
-</view>
-
-<view class=' padding-30   flex-row flex-center' style='border-bottom:4rpx solid #E8E8E8'>
-
-  <view class='flex-row flex-column flex-1 '>
-    <view class='flex-row flex-center ' bindtap=''>
-      <!-- <image  bindtap='dianzan' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image> -->
-     <image bindtap='dianzan' wx:if='{{readinfo.qwe==""}}' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
-<image wx:if='{{readinfo.qwe!=""}}' bindtap='dianzan' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzancolor}}'></image>
-      <view wx:if='{{readinfo.count1>0}}' class=' margin-left-10' id='' bindtap='dianzan'>点赞{{readinfo.count1}}</view>
-      <view wx:if='{{readinfo.count1==0}}' class=' margin-left-10' id='' bindtap='dianzan'>点赞</view>
+    <view wx:if='{{audio_value_str==null}}' class='margin-left-10'>00:00</view>
+    <view wx:if='{{audio_value_str!=null}}' class='margin-left-10'>{{audio_value_str}}</view>
+    <view class="body-view flex-1">
+      <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="0" max="{{audio_duration}}" value='{{audio_value}}' bindchange='changetotime' />
     </view>
+    <view wx:if='{{audio_duration_str==null}}' class='margin-left-10'>00:00</view>
+    <view wx:if='{{audio_duration_str!=null}}' class='margin-left-10'>{{audio_duration_str}}</view>
   </view>
 
-  <view class='flex-row flex-column flex-1 '>
-    <view class='flex-row flex-center' url=''>
-      <image class='icon-25' src='{{uploadpath}}resource/{{res.shouting}}'></image>
-      <view wx:if='{{readinfo.lstcount>0}}' class=' margin-left-10'>收听{{readinfo.lstcount}}</view>
-      <view wx:if='{{readinfo.lstcount==0}}' class=' margin-left-10'>收听</view>
-    </view>
-  </view>
+  <view class=' padding-30   flex-row flex-center' style='border-bottom:4rpx solid #E8E8E8'>
 
-<!-- <button open-type="share" class='clear-button margin-10' style='width:55rpx;height:55rpx'>
-        <image class='icon-25' src='{{uploadpath}}resource/{{res.share}}' bindtap='share'> </image>
-      </button> -->
+    <view class='flex-row flex-column flex-1 '>
+      <view class='flex-row flex-center ' bindtap=''>
+        <!-- <image  bindtap='dianzan' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image> -->
+        <image bindtap='dianzan' wx:if='{{readinfo.qwe==""}}' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
 
-  <view class='flex-row flex-column flex-1 ' bindtap=''>
-    <button open-type="share" class='flex-row flex-center clear-button' style='border:0rpx;'>
-      <image class='icon-25' src='{{uploadpath}}resource/{{res.bierenfenxiang}}'></image>
-      <view class=' margin-left-10'>分享</view>
-    </button>
-  </view>
-
-</view>
-
-
-<view class='padding-30 txt-black txt-bold'>
-  评论({{messagelist.length}})：
-</view>
-
-
-<view class='padding-30 flex-row flex-column' wx:if='{{messagelist.length==0}}'>
-<image src='{{uploadpath}}resource/{{res.talknull_icon}}' class='icon-50'></image>
-<view class='h5 margin-top-10'>还没有人评论，快去评论吧</view>
-</view>
-
-<view class='flex-row   padding-30' wx:for='{{messagelist}}' wx:key='k' wx:if='{{messagelist.length>0}}'>
-  <view class=''>
-    <image class='icon-50 radius-10' src='{{item.member_avatarUrl}}'></image>
-  </view>
-  <view class='margin-left-20  flex-1'>
-    <view class='flex-row column'>
-      <view class='flex-1 txt-black'>{{item.member_id_name}}</view>
-      <view class='flex-row flex-center margin-top-10'>
-        <view class='txt-gary h5 margin-right-20'>{{item.comment_time}}</view>
-        <!-- <view class='txt-gary h5'>12:00</view> -->
+        <image wx:if='{{readinfo.qwe!=""}}' bindtap='dianzan' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzancolor}}'></image>
+        <view wx:if='{{readinfo.count1>0}}' class=' margin-left-10' id='' bindtap='dianzan'>点赞{{readinfo.count1}}</view>
+        <view wx:if='{{readinfo.count1==0}}' class=' margin-left-10' id='' bindtap='dianzan'>点赞</view>
       </view>
     </view>
-    <view class='h5 txt-black margin-top-10 padding-bottom-30'>
-      评论：{{item.comment}}
+
+    <view class='flex-row flex-column flex-1 '>
+      <view class='flex-row flex-center' url=''>
+        <image class='icon-25' src='{{uploadpath}}resource/{{res.shouting}}'></image>
+        <view wx:if='{{readinfo.lstcount>0}}' class=' margin-left-10'>收听{{readinfo.lstcount}}</view>
+        <view wx:if='{{readinfo.lstcount==0}}' class=' margin-left-10'>收听</view>
+      </view>
+    </view>
+
+    <!-- <button open-type="share" class='clear-button margin-10' style='width:55rpx;height:55rpx'>
+        <image class='icon-25' src='{{uploadpath}}resource/{{res.share}}' bindtap='share'> </image>
+      </button> -->
+    <view class='flex-row flex-column flex-1 ' bindtap='poster'>
+      <!-- <button open-type="share" class='flex-row flex-center clear-button' style='border:0rpx;'> -->
+        <view class='flex-row flex-center'>
+          <image class='icon-25' src='{{uploadpath}}resource/{{res.bierenfenxiang}}'></image>
+          <view class=' margin-left-10'>分享</view>
+        </view>
+      <!-- </button> -->
+    </view>
+
+  </view>
+
+  <video class='pos' style='width:4rpx;height:4rpx' objectFit="fill" muted='true' autoplay='true' loop='true' controls="ture" src='{{uploadpath}}inst/{{instinfo.video}}'>
+  </video>
+
+  <view class='padding-30 txt-black txt-bold'>
+    评论({{messagelist.length}})：
+  </view>
+
+  <view class='padding-30 flex-row flex-column' wx:if='{{messagelist.length==0}}'>
+    <image src='{{uploadpath}}resource/{{res.talknull_icon}}' class='icon-50'></image>
+    <view class='h5 margin-top-10'>还没有人评论，快去评论吧</view>
+  </view>
+
+  <view class='flex-row   padding-30' wx:for='{{messagelist}}' wx:key='k' wx:if='{{messagelist.length>0}}'>
+    <view class=''>
+      <image class='icon-50 radius-10' src='{{item.member_avatarUrl}}'></image>
+    </view>
+    <view class='margin-left-20  flex-1'>
+      <view class='flex-row column'>
+        <view class='flex-1 txt-black'>{{item.member_id_name}}</view>
+        <view class='flex-row flex-center margin-top-10'>
+          <view class='txt-gary h5 margin-right-20'>{{item.comment_time}}</view>
+          <!-- <view class='txt-gary h5'>12:00</view> -->
+        </view>
+      </view>
+      <view class='h5 txt-black margin-top-10 padding-bottom-30'>
+        评论：{{item.comment}}
+      </view>
     </view>
   </view>
-</view>
 
 </view>
+
+
+
+
 
 
 <!-- <view class='flex-row flex-column ' style='background-color:#F8F8F8'>
@@ -107,8 +113,7 @@
 
   <view class='padding-comment flex-1 margin-left-10'>
     <view>
-      <textarea class='h5 white-block pdg txt-white' style='border-radius:40rpx;background:#A5E8D0' auto-height='{{true}}' placeholder-class='txt-white' placeholder='发表评论' fixed="{{true}}" value='{{comment}}' bindinput='changeComment' bindconfirm='sendComment'></textarea>
+      <textarea class='h5 white-block pdg txt-white' style='border-radius:40rpx;background:#A5E8D0;min-height:48rpx;' auto-height='{{true}}' placeholder-class='txt-white' placeholder='发表评论' fixed="{{true}}" value='{{comment}}' bindinput='changeComment' bindconfirm='sendComment'></textarea>
     </view>
   </view>
 </view>
-

@@ -4,6 +4,7 @@ import { ApiConfig } from "../../apis/apiconfig";
 import { InstApi } from "../../apis/inst.api.js";
 import { BookApi } from "../../apis/book.api.js";
 import { ApiUtil } from "../../apis/apiutil.js";
+import { MemberApi } from "../../apis/member.api.js";
 
 class Content extends AppBase {
   constructor() {
@@ -17,15 +18,30 @@ class Content extends AppBase {
   onMyShow() {
     var that = this;
     var bookapi = new BookApi();
+    var memberapi = new MemberApi();
+
     var memberinfo = this.Base.getMyData().memberinfo;
     
 
-    bookapi.readlist({ member_id:memberinfo.id }, (readlist) => {
-      this.Base.setMyData({ readlist });
-      
+    memberapi.info({ }, (info) => {
+      this.Base.setMyData({ info });
+      console.log(info.zishu+"MKMKMKMKMK");
+      if (info.zishu>10000){
+        this.Base.setMyData({ todaynum: (info.zishu / 10000).toFixed(1) + '万' })
+      }
+      else{
+        this.Base.setMyData({ todaynum: info.zishu })
+      }
+      if (info.zongzishu>10000){
+        this.Base.setMyData({ allnum: (info.zongzishu/10000).toFixed(1) + '万' })
+      }
+      else{
+        this.Base.setMyData({ allnum: info.zongzishu })
+        //this.Base.setMyData({ allnum: ((info.zongzishu / 10000) + 100).toFixed(1) + '万' })
+      }
     });
 
-    bookapi.readlist({ member_id: memberinfo.id, tiaojian:"Y" }, (list) => {
+    bookapi.readlist({ member_id: memberinfo.id, tiaojian: "Y" }, (list) => {
       this.Base.setMyData({ list });
       
     });

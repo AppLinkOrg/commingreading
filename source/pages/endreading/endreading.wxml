@@ -10,57 +10,62 @@
       </view>
       <view class='txt-black h4'>《{{bookinfo.book_name}}》</view>
 
-      <view class='txt-black margin-top-10'>朗读者：{{memberinfo.nickName}}</view>
+      <view class='txt-black margin-top-10'>朗读者：{{readinfo.member_id_name}}</view>
     </view>
+
+
+
+    <video class='pos' style='width:4rpx;height:4rpx' objectFit="fill" muted='true' autoplay='true' loop='true' controls="ture" src='{{uploadpath}}inst/{{instinfo.video}}'>
+    </video>
 
 
     <view class='padding-30 flex-row flex-center' style=''>
       <image wx:if='{{status=="play"}}' bindtap='Play' class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
-      <image wx:if='{{status=="stop"}}' bindtap='Stop'Play class='icon-25' src='{{uploadpath}}resource/{{res.zanting}}'></image>
+      <image wx:if='{{status=="stop"}}' bindtap='Stop' class='icon-25' src='{{uploadpath}}resource/{{res.zanting}}'></image>
       <view wx:if='{{audio_value_str==null}}' class='margin-left-10 txt-black'>00:00</view>
       <view wx:if='{{audio_value_str!=null}}' class='margin-left-10 txt-black'>{{audio_value_str}}</view>
-      
+
       <view class="body-view flex-1">
-        <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="1" max="100" />
+        <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="0" max="{{audio_duration}}" value='{{audio_value}}' bindchange='changetotime' />
       </view>
 
       <view class='txt-black'>{{time}}</view>
     </view>
 
     <view class=' padding-30   flex-row flex-center' style=''>
-      <view class='flex-row  flex-1 '>
 
 
+      <view class='flex-row  flex-1 padding-left-20'>
         <!-- <button open-type="share" class='flex-row flex-center clear-button' bindtap=''>
           <image class='icon-25' src='{{uploadpath}}resource/{{res.fenxiang}}'></image>
           <view class=' margin-left-10 txt-black'>分享</view>
         </button> -->
 
-          <navigator class='flex-row flex-center' bindtap='viewPhoto' id='{{uploadpath}}resource/{{res.gif}}'>
+        <navigator class='flex-row flex-center' bindtap='poster'>
           <image class='icon-25' src='{{uploadpath}}resource/{{res.fenxiang}}'></image>
-          <view class=' margin-left-10 txt-black'>分享</view>
+          <view class=' margin-left-10 txt-black'>朗读分享</view>
         </navigator>
+
+        <!-- <button class='clear-button' style='width:130rpx;height:50rpx;position:absolute;'   data-img='{{res.read_bg}}' bindtap='poster'></button> -->
 
 
       </view>
 
 
-      <view class='flex-row  flex-1 '>
+      <view class='flex-row  flex-1 padding-left-20'>
         <navigator class='flex-row flex-center' bindtap='tobookshelf'>
           <image class='icon-25' src='{{uploadpath}}resource/{{res.fanhuishujia}}'></image>
-          <view class=' margin-left-10 txt-black'>返回书架</view>
+          <view class=' margin-left-10 txt-black'>返回首页</view>
         </navigator>
       </view>
 
 
-      <view class='flex-row  flex-1 ' bindtap=''>
+      <view class='flex-row  flex-1 padding-left-20' bindtap=''>
         <navigator bindtap='recordagain' class='flex-row flex-center'>
           <image class='icon-25' src='{{uploadpath}}resource/{{res.chongxinluzhi}}'></image>
-          <view class=' margin-left-10 txt-black'>重新录制</view>
+          <view class=' margin-left-10 txt-black'>我要朗读</view>
         </navigator>
       </view>
-
-
 
 
     </view>

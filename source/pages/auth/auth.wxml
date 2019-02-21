@@ -14,13 +14,11 @@
   </view> -->
 <checkbox-group bindchange="" class='margin-top-10 '>
   <label class="flex-row column" >
-    <view class='h5'><checkbox value="" readonly checked="{{isgrantuser}}" color='#4C556E'/>获得你的公开信息（昵称、头像等）
-    <button  class='clear-button' open-type="getUserInfo" bindgetuserinfo="getUserInfo" style='width:550rpx;height:40rpx;margin-top:-40rpx;margin-left:-120rpx;' ></button></view>
-    <view class='margin-top-10 h5'><checkbox readonly value=""  checked="{{isgrantphonenumber}}" color='#4C556E'/>获得你的手机号码<button  class='clear-button' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNo" style='width:500rpx;height:40rpx;margin-top:-40rpx;margin-left:-120rpx;' ></button></view>
+    <view class='h5'>获得你的公开信息（昵称、头像等）</view>
   </label>
 </checkbox-group>
 
-<view class='margin-top'>  <button disabled='{{isgrantuser==false||isgrantphonenumber==false}}' type='bak_ble' class='h5 margin-top txt-white' bindtap='gotoLogin' >授权并登录</button>
+<view class='margin-top'>  <button  open-type="getUserInfo" bindgetuserinfo="getUserInfo"  type='bak_ble' class='h5 margin-top txt-white'  >授权并登录</button>
   </view>
 
 </view>

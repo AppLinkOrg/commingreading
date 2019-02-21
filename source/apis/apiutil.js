@@ -80,15 +80,16 @@ export class ApiUtil {
     return val.getFullYear() + "-" + (val.getMonth() + 1) + "-" + val.getDate() +
       " " + val.getHours() + ":" + val.getMinutes() + ":" + val.getSeconds();
   }
+
   static FormatDate(val) {
     return val.getFullYear() + "-" + (val.getMonth() + 1) + "-" + val.getDate() ;
   }
 
   static IsMobileNo(str) {
-
     var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
     return myreg.test(str);
   }
+  
   static FormatPercent(val) {
     val = val * 100.0;
     return val.toFixed(2) + '%';

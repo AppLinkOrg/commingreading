@@ -7,13 +7,13 @@
 <view class='flex-row flex-center bg-white top_title'>
 
   <view class='catitem flex-1 flex-row flex-column padding-20' wx:key="k" bindtap='bindcontact'>
-    <view class=' text-center  txt-gray {{ctt==1?"txt-primary":"" }} top text-center h5 txt-bold' bindtap='bindcontact'>今日排行</view>
+    <view class=' text-center  txt-gray {{ctt==1?"txt":"" }} top text-center  txt-bold' bindtap='bindcontact'>今日排行</view>
     <view wx:if='{{ctt!=1}}' style='height:4rpx;width:120rpx;' class=''></view>
     <view wx:if='{{ctt==1}}' style='height:4rpx;width:120rpx;' class='bg-primary'></view>
   </view>
 
   <view class='catitem flex-1 flex-row flex-column  padding-20' wx:key="k" bindtap='bindwaitcompleted'>
-    <view class=' text-center  txt-gray {{ctt==2?"txt-primary":""}} top text-center h5 txt-bold' bindtap='bindwaitcompleted'>本周排行</view>
+    <view class=' text-center  txt-gray {{ctt==2?"txt":""}} top text-center  txt-bold' bindtap='bindwaitcompleted'>本周排行</view>
     <view wx:if='{{ctt!=2}}' style='height:4rpx;width:120rpx;' class=''></view>
     <view wx:if='{{ctt==2}}' style='height:4rpx;width:120rpx;' class='bg-primary'></view>
   </view>
@@ -23,13 +23,18 @@
 <view wx:if='{{ctt==1}}'>
   <view class='padding-30 flex-row flex-center ' style='background:#ABDFC6'>
 
-    <view class='text-center h5 txt-black ico' wx:for='{{todaygetall}}' wx:key='k' wx:for-index='idx' wx:if='{{item.id==memberinfo.id}}'>第{{idx+1}}名</view>
+    <view class='text-center h5 txt-black ico' wx:if='{{memberinfo.zishu==""}}'>未上榜</view>
+
+    <view class='text-center h5 txt-black ico' wx:for='{{todaygetall}}' wx:key='k' wx:for-index='idx' wx:if='{{item.id==memberinfo.id&&memberinfo.zishu!=""}}'>第{{idx+1}}名</view>
+
     <view class='margin-left-40 '>
       <image class='icon-40 radius-50' src='{{memberinfo.avatarUrl}}'></image>
     </view>
     <view class='flex-1 margin-left-20 txt-black'>我</view>
-    <view class='flex-row flex-column'>
-      <view class='txt-black' wx:for='{{todaygetall}}' wx:key='k' wx:for-index='idx' wx:if='{{item.id==memberinfo.id}}'>{{item.zishu}}</view>
+    <view class='flex-row flex-column flex-2'>
+
+      <view class='txt-black' wx:if='{{memberinfo.zishu==""}}'>0</view>
+      <view class='txt-black' wx:if='{{memberinfo.zishu!=""}}'>{{memberinfo.zishu}}</view>
       <view class='h5'>今日朗读字数</view>
     </view>
   </view>
@@ -49,11 +54,13 @@
       <view class='margin-left-40'>
         <image class='icon-40 radius-50' src='{{item.avatarUrl}}'></image>
       </view>
-      <view class='flex-1 margin-left-20 txt-black'>{{item.nickName}}</view>
-      <view class='flex-row flex-column'>
+      <view class='flex-1 margin-left-20 txt-black text'>{{item.nickName}}</view>
+
+      <view class='flex-row flex-column padding-right-40 flex-2'>
         <view class='txt-black'>{{item.zishu}}</view>
         <view class='h5'>今日朗读字数</view>
       </view>
+
     </view>
   </view>
 
@@ -62,18 +69,21 @@
 
 <view wx:if='{{ctt==2}}'>
   <view class='padding-30 flex-row flex-center ' style='background:#ABDFC6'>
-
-    <view class='text-center h5 txt-black ico' wx:for='{{weekgetall}}' wx:key='k' wx:for-index='idx' wx:if='{{item.id==memberinfo.id}}'>第{{idx+1}}名</view>
+    
+    <view class='text-center h5 txt-black ico' wx:if='{{memberinfo.zongzishu==""}}'>未上榜</view>
+    <view class='text-center h5 txt-black ico' wx:for='{{weekgetall}}' wx:key='k' wx:for-index='idx' wx:if='{{item.id==memberinfo.id&&memberinfo.zongzishu!=""}}'>第{{idx+1}}名</view>
+    
     <view class='margin-left-40 '>
       <image class='icon-40 radius-50' src='{{memberinfo.avatarUrl}}'></image>
     </view>
+    
     <view class='flex-1 margin-left-20 txt-black'>我</view>
-    <view class='flex-row flex-column'>
-      <view class='txt-black' wx:for='{{todaygetall}}' wx:key='k' wx:for-index='idx' wx:if='{{item.id==memberinfo.id}}'>{{item.zishu}}</view>
-      <view class='h5'>今日朗读字数</view>
+    <view class='flex-row flex-column flex-2'>
+      <view class='txt-black' wx:if='{{memberinfo.zongzishu==""}}'>0</view>
+      <view class='txt-black' wx:if='{{memberinfo.zongzishu!=""}}'>{{memberinfo.zongzishu}}</view>
+      <view class='h5'>累计朗读字数</view>
     </view>
   </view>
-
 
   <view wx:for='{{weekgetall}}' wx:key='k' wx:for-index='idx' wx:if='{{idx+1<=10}}' class='{{idx%2==0?"bg":""}}'>
     <view class='padding-30 flex-row flex-center'>
@@ -90,10 +100,10 @@
       <view class='margin-left-40'>
         <image class='icon-40 radius-50' src='{{item.avatarUrl}}'></image>
       </view>
-      <view class='flex-1 margin-left-20 txt-black'>{{item.nickName}}</view>
-      <view class='flex-row flex-column'>
+      <view class='flex-1 margin-left-20 txt-black text'>{{item.nickName}}</view>
+      <view class='flex-row flex-column flex-2'>
         <view class='txt-black'>{{item.zishu}}</view>
-        <view class='h5'>今日朗读字数</view>
+        <view class='h5'>累计朗读字数</view>
       </view>
     </view>
   </view>

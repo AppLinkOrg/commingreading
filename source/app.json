@@ -1,9 +1,11 @@
 {
   "pages":[
     "pages/home/home",
-    "pages/endreading/endreading",
-    "pages/search/search",
     "pages/auth/auth",
+    "pages/news/news",
+    "pages/searchbook/searchbook",
+    "pages/endreading/endreading",
+    "pages/bookshelf/bookshelf",
     "pages/mylike/mylike",
     "pages/mine/mine",
     "pages/subtitles/subtitles",
@@ -11,7 +13,6 @@
     "pages/ranking/ranking",
     "pages/readaloud/readaloud",
     "pages/aboutus/aboutus",
-    "pages/bookshelf/bookshelf",
     "pages/typedetail/typedetail",
     "pages/mytalkdetails/mytalkdetails",
     "pages/others/others",
@@ -29,7 +30,7 @@
   "tabBar": {
     "color": "#bfbfbf",
     "selectedColor": "#4C556E",
-    "borderStyle": "#4C556E",
+    "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
       {

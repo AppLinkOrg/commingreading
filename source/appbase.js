@@ -102,7 +102,8 @@ export class AppBase {
       contactweixin: base.contactweixin, 
       download: base.download,
       checkPermission: base.checkPermission,
-      recorderManager: base.recorderManager
+      recorderManager: base.recorderManager, 
+      backtotop: base.backtotop
 
 
       
@@ -288,7 +289,6 @@ export class AppBase {
     console.log("onReachBottom");
   }
   onShareAppMessage() {
-
 
   }
 
@@ -892,6 +892,13 @@ export class AppBase {
     wx.showToast({
       title: msg,
       icon:"none"
+    })
+  }
+  backtotop() {
+    console.log("backtotop");
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 300
     })
   }
 } 

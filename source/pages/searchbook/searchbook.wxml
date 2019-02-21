@@ -1,0 +1,23 @@
+<!--pages/searchbook/searchbook.wxml-->
+
+<!-- <view class='Top padding-20 flex-row flex-center'>
+  <view class='search flex-row flex-center padding-10 '>
+    <view style='width:20rpx;'></view>
+    <image class='search_icon' src='{{uploadpath}}resource/{{res.search_icon}}'></image>
+    <input class='h5 flex-1 txt-black' focus='true' placeholder='搜索您想要的文章' bindinput='skey'></input>
+    <view class='padding-left-20 padding-right-10' bindtap=''><image class='prohibit_icon ' src='{{uploadpath}}resource/{{res.prohibit}}'></image></view>
+  </view>
+  <view class='padding-left-10 h5 txt-primary' bindtap='search' >确定</view>
+</view> -->
+
+
+<view class='flex-row flex-column' hidden='{{result!=null&&result.length>0}}'>
+  <view class='margin-top-20'><image class='icon-75' src='{{uploadpath}}resource/{{res.book_null}}'></image></view>
+  <view class='margin-top-10'>抱歉，我们已经很努力在寻找了</view>
+</view>
+
+
+<view  bindtap='todetails' class='h5 padding-20 margin-left-40 flex-row flex-center' id='{{item.id}}' wx:for="{{result}}" wx:key="k" wx:for-index='idx'>
+  <view >{{item.book_name}}</view>
+  <view class='h6 txt-red margin-left-20'></view>
+</view>

@@ -1,36 +1,36 @@
 <!--pages/mylike/mylike.wxml-->
 <view class='bg-white  flex-row flex-column' wx:if='{{readlist.length==0}}'>
-<image class='icon-100' style='opacity:0.6' src='{{uploadpath}}resource/{{res.nolike_icon}}'></image>
-<view class='h5 txt-gray txt-bold margin-top-10 padding-bottom-30'>您还没有任何点赞哦，快给作品点赞吧！</view>
+  <image class='icon-100' style='opacity:0.6' src='{{uploadpath}}resource/{{res.nolike_icon}}'></image>
+  <view class='h5 txt-gray txt-bold margin-top-10 padding-bottom-30'>您还没有任何点赞哦，快给作品点赞吧！</view>
 </view>
 
 
-<view wx:if='{{readlist.length>0}}' >
- <view class='flex-row flex-center padding-30' wx:for='{{readlist}}' id='{{item.readlike_id}}' wx:key='k' bindtap='todetails'>
-  <view class=''>
-    <image class='icon-50' src='{{item.touxian}}'></image>
-  </view>
-
-  <view class='margin-left-20  flex-1'>
-    <view class=' margin-bottom-20'>{{item.nickName}}</view>
-
-
-    <view class='flex-row flex-center '>
-
-      <view class='flex-1 flex-row flex-center'>
-        <image class='icon-20' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
-        <view class='margin-left-10'>{{item.count1}}</view>
-      </view>
-
-      <view class='flex-1 flex-row flex-center'>
-        <image class='icon-20' src='{{uploadpath}}resource/{{res.shouting}}'></image>
-        <view class='margin-left-10'>{{item.lstcount}}</view>
-      </view>
-
-      <view class='flex-1 txt-gray'>{{item.created_date}}</view>
-
+<view wx:if='{{readlist.length>0}}'>
+  <view class='flex-row flex-center padding-30' wx:for='{{readlist}}' id='{{item.readlike_id}}' wx:key='k' bindtap='todetails'>
+    <view class=''>
+      <image class='icon-50 radius-10' src='{{item.touxian}}'></image>
     </view>
-  </view>
 
-</view> 
+    <view class='margin-left-20  flex-1 flex-row column'>
+      <view class=' txt-black'>《{{item.book_name}}》</view>
+      <view class=' h5 margin-left-20 margin-top-10'>{{item.nickName}}</view>
+
+      <view class='flex-row flex-center margin-top-10 margin-left-20'>
+
+        <view class=' flex-row flex-center'>
+          <image class='icon-20' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
+          <view class='margin-left-10'>{{item.count1}}</view>
+        </view>
+
+        <view class='flex-1 flex-row flex-center margin-left-20'>
+          <image class='icon-20' src='{{uploadpath}}resource/{{res.shouting}}'></image>
+          <view class='margin-left-10'>{{item.lstcount}}</view>
+        </view>
+
+        <view class=' txt-gray h5'>{{item.created_date}}</view>
+
+      </view>
+    </view>
+
+  </view>
 </view>

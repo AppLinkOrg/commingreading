@@ -1,4 +1,4 @@
-/* pages/search/search.wxss */
+/* pages/searchbook/searchbook.wxss */
 .search{
   width:620rpx;
   border-radius: 7rpx;

@@ -23,6 +23,7 @@ class Content extends AppBase {
     var json = {
       searchrecomm: ""
     };
+    this.Base.setMyData({show:0});
     
      if (options.new != undefined) {
        json.newphone = "N";
@@ -30,11 +31,11 @@ class Content extends AppBase {
 
 
       var bookapi = new BookApi();
-      bookapi.booklist(json, (result) => {
-        this.Base.setMyData({
-          result
-        });
-      });
+      // bookapi.booklist(json, (result) => {
+      //   this.Base.setMyData({
+      //     result
+      //   });
+      // });
 
     // var bookapi = new BookApi();
     // bookapi.booklist(json, (result) => {
@@ -45,45 +46,62 @@ class Content extends AppBase {
   onMyShow() {
     var that = this;
   }
-  bindFocus() {
-    wx.navigateBack({
-      delta: -1
-    });
-  }
-  search(e) {
-    console.log(e.detail.value);
-
-    var json = { };
-     if (e.detail.value == "") {
-       json.searchrecomm = "N";
-     } 
-     else {
-      json.searchkeyword = e.detail.value;
-    }
-
-     if (this.Base.options.new != undefined) {
-       json.newphone = "N";
-     }
-
-
-    var bookapi = new BookApi();
-    bookapi.booklist(json, (result) => {
-      this.Base.setMyData({ result });
-    });
-
-  }
-  todetails(e){
-    var id=e.currentTarget.id;
-     wx.navigateTo({
-     url: '/pages/mytalkdetails/mytalkdetails?id=' + id,
+  skey(e) {
+    var keyword = e.detail.value;
+    console.log(keyword);
+    this.Base.setMyData({
+      keyword: e.detail.value
     })
   }
+
+
+
+  search(e) {
+    //console.log(e.detail.value);
+    this.Base.setMyData({ show: 1 });
+    wx.showLoading({
+      title: '加载中...',
+    })
+    setTimeout(()=>{
+    var json = {};
+    var data=e.detail.value;
+    this.Base.setMyData({ value: data});
+    json.searchkeyword=data;
+
+    var bookapi = new BookApi();
+    bookapi.keywordlist(json, (result) => {
+      this.Base.setMyData({ result });
+      wx.hideLoading();
+    });
+    }, 100);
+
+  }
+
+  tosearch(e) {
+    var word = this.Base.getMyData().value;
+    //console.log(word + "LLLLLLL");
+    //return;
+    if (word!=null){
+      wx.navigateTo({
+        url: '/pages/searchbook/searchbook?keyword=' + word,
+      })
+    }
+  }
+
+  todetails(e){
+    var name=e.currentTarget.id;
+     wx.navigateTo({
+       url: '/pages/searchbook/searchbook?keyword=' + name,
+    })
+  }
+
 }
 var content = new Content();
 var body = content.generateBodyJson();
 body.onLoad = content.onLoad;
 body.onMyShow = content.onMyShow;
-body.bindFocus = content.bindFocus;
+body.skey = content.skey;
 body.search = content.search; 
+body.tosearch = content.tosearch; 
 body.todetails = content.todetails; 
 Page(body)

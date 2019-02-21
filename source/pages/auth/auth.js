@@ -33,7 +33,9 @@ class Content extends AppBase {
     //  url: '/pages/home/home',
     //});
     //open-type="getUserInfo" bindgetuserinfo="getUserInfo"
-    this.Base.setMyData({ isgrantuser: true });
+    wx.reLaunch({
+      url: '/pages/home/home',
+    })
   }
   phonenoCallback(phoneno, e) {
     console.log(phoneno);
