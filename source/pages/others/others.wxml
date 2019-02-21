@@ -53,7 +53,7 @@
       </button> -->
     <view class='flex-row flex-column flex-1 ' bindtap=''>
       <!-- <button open-type="share" class='flex-row flex-center clear-button' style='border:0rpx;'> -->
-        <view class='flex-row flex-center' bindtap='poster'>
+        <view class='flex-row flex-center' bindtap='viewPhoto' id='{{uploadpath}}resource/{{res.xiaoguotu}}'>
           <image class='icon-25' src='{{uploadpath}}resource/{{res.bierenfenxiang}}'></image>
           <view class=' margin-left-10'>分享</view>
         </view>

@@ -215,36 +215,35 @@ class Content extends AppBase {
   }
 
 
-  poster() {
+  // poster() {
 
-    var that = this;
-    var url = 'https://cmsdev.app-link.org/Users/alucard263096/carpost/upload/post/' + this.Base.options.readid + '_c.png';
+  //   var that = this;
+  //   var url = 'http://applinkupload.oss-cn-shenzhen.aliyuncs.com/alucard263096/yngd/resource/189b364a11aaf3ed013510d7941090fa_19022018023.jpg';
+  //   that.Base.viewPhoto({ currentTarget: { id: url } });
 
-    that.Base.viewPhoto({ currentTarget: { id: url } });
-
-    return;
-    wx.downloadFile({
-      url: 'https://cmsdev.app-link.org/Users/alucard263096/carpost/upload/post/' + this.Base.options.id + '.png', //仅为示例，并非真实的资源
-      success: function (res) {
-        // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
-        if (res.statusCode === 200) {
-          wx.saveImageToPhotosAlbum({
-            filePath: res.tempFilePath,
-          });
-          wx.showToast({
-            title: '下载分享图片成功',
-            icon: "none"
-          })
-        } else {
-          wx.showToast({
-            title: '下载分享图片失败',
-            icon: "none"
-          })
-        }
-      }
-    })
+  //   return;
+  //   wx.downloadFile({
+  //     url: 'https://cmsdev.app-link.org/Users/alucard263096/carpost/upload/post/' + this.Base.options.id + '.png', //仅为示例，并非真实的资源
+  //     success: function (res) {
+  //       // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
+  //       if (res.statusCode === 200) {
+  //         wx.saveImageToPhotosAlbum({
+  //           filePath: res.tempFilePath,
+  //         });
+  //         wx.showToast({
+  //           title: '下载分享图片成功',
+  //           icon: "none"
+  //         })
+  //       } else {
+  //         wx.showToast({
+  //           title: '下载分享图片失败',
+  //           icon: "none"
+  //         })
+  //       }
+  //     }
+  //   })
     
-  }
+  // }
 
 
 
