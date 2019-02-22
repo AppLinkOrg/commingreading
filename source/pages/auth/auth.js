@@ -33,6 +33,7 @@ class Content extends AppBase {
     //  url: '/pages/home/home',
     //});
     //open-type="getUserInfo" bindgetuserinfo="getUserInfo"
+    AppBase.UserInfo.openid = undefined;
     wx.reLaunch({
       url: '/pages/home/home',
     })
@@ -48,6 +49,7 @@ class Content extends AppBase {
       
     })
     //updatemobile
+    AppBase.UserInfo.openid=undefined;
     wx.reLaunch({
       url: '/pages/home/home',
     })
