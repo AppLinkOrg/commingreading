@@ -5,14 +5,15 @@ Page {
 }
 
 .content {
-  padding-left: 70rpx;
+  /* padding-left: 70rpx; */
+  /* padding-right: 70rpx; */
   /* padding-right: 70rpx; */
 }
 
 .img {
   position: absolute;
   width: 100%;
-  height: 95%;
+  height: 100%;
   top: 0;
   bottom: 0;
   z-index: -1;
@@ -50,7 +51,7 @@ Page {
   padding-left: 30rpx;
   padding-right: 30rpx;
   padding-top: 40rpx;
-  margin-top: 19%;
+  /* margin-top: 19%; */
   padding-bottom: 10rpx;
 }
 
@@ -79,11 +80,37 @@ Page {
 }
 
 .po{
-  position: relative;
-  bottom: 40rpx;
+  /* position: relative;
+  bottom: 40rpx; */
 }
 .text{
     overflow:hidden; 
     text-overflow:ellipsis;
     white-space:nowrap; 
+}
+/* miniprogram/pages/index/index.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chinese {
+  font-size: 40rpx;
+  margin-bottom: 10px;
+}
+
+.pinyin {
+  text-align: center;
+}
+.content_item{
+  display: flex;
+  flex-direction: row;
+}
+
+.bottom{
+  margin-top: 36rpx;
+}
+.right{
+  margin-right: 4rpx;
 }

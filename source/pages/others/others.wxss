@@ -55,3 +55,29 @@
   z-index: -1;
   right: 0;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chinese {
+  font-size: 40rpx;
+  margin-bottom: 10px;
+}
+
+.pinyin {
+  text-align: center;
+}
+.content_item{
+  display: flex;
+  flex-direction: row;
+}
+
+.bottom{
+  margin-top: 36rpx;
+}
+.right{
+  margin-right: 4rpx;
+}

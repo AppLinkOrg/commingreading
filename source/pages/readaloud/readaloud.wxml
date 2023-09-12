@@ -1,5 +1,8 @@
 <!--pages/readaloud/readaloud.wxml-->
-<image class='img' mode='scaleToFill' bindtap='Choice' src='{{uploadpath}}resource/{{res.bg_read}}'></image>
+
+
+<view>
+  <image class='img' mode='scaleToFill' bindtap='Choice' src='{{uploadpath}}resource/{{res.bg_read}}'></image>
 
 
 <view class='bgm flex-row flex-center ' bindtap='btnopendetails' style='border-bottom:1rpx solid #009688;height:100rpx'>
@@ -19,14 +22,14 @@
       <view style='display:inline-block;' class='h5'>正在播放—《{{music_name}}》</view>
     </scroll-view>
 
- <video class='pos' style='width:4rpx;height:4rpx' objectFit="fill" muted='true' autoplay='true' loop='true' controls="ture" src='{{uploadpath}}inst/{{instinfo.video}}'>
- </video>
+    <video class='pos' style='width:4rpx;height:4rpx' objectFit="fill" muted='true' autoplay='true' loop='true' controls="ture" src='{{uploadpath}}inst/{{instinfo.video}}'>
+    </video>
 
     <scroll-view scroll-x wx:if='{{music_name!=null&&bg1==2}}' class='txt-black margin-left-20   style'>
       <view style='display:inline-block;' class='h5'>暂停播放—《{{music_name}}》</view>
     </scroll-view>
   </view>
-  
+
   <!-- <view wx:if='{{music_name!=null&&bg1==1}}' class='txt-black margin-left-20 flex-1'>正在播放—《{{music_name}}》</view>
     <view wx:if='{{music_name!=null&&bg1==2}}' class='txt-black margin-left-20 flex-1'>暂停播放—《{{music_name}}》</view> -->
 
@@ -36,20 +39,37 @@
 
 <form bindsubmit="confirm" bindreset="formReset" report-submit="{{true}}">
   <view>
-    <view class='flex-row flex-column padding-40' style=''>
+    <view class='flex-row flex-column padding-40' style='height: calc(100vh - 460rpx);'>
       <view class='txt-black  txt-bold'>《{{bookinfo.book_name}}》</view>
       <view class=' margin-top-10'>作者：{{bookinfo.author}}</view>
       <!-- <view class='txt-black margin-top-10'>朗读者:xxx</view>    {{zimucount}} -->
-      <scroll-view scroll-y class='text-center margin-top-20' style='height:550rpx;'>
+      <scroll-view scroll-y class='text-center margin-top-20' style='height:90%;' id="scrollView" scroll-top="{{scrollnum}}">
 
-        <view wx:if='{{memberinfo.switch_value=="Y"}}' class='padding-bottom-20' wx:for="{{lines}}" wx:for-index="lidx" wx:key='k' wx:for-item="litem" style='min-height:42rpx;'>
+        <view id="content" wx:if='{{memberinfo.switch_value=="Y" && isEnglish}}'>
+          <view  class='padding-bottom-20' wx:for="{{lines}}" wx:for-index="lidx" wx:key='k' wx:for-item="litem" style='min-height:42rpx;'>
 
-          <text class='text2 h4  {{citem.num==zimucount?"speed_"+velocity:""}} {{citem.num<zimucount?"text3":""}}' style="background-image:url({{uploadpath}}resource/{{res.zimuyanse}});" wx:for="{{litem}}" wx:for-index="cidx" wx:for-item="citem" wx:key='e'>{{citem.c}}</text>
+            <text class='text2e h4 {{citem.num==zimucount?"speed_"+velocity:""}}  {{citem.num<zimucount?"text3":""}}' style="background-image:url({{uploadpath}}resource/{{res.zimuyanse}});" wx:for="{{litem}}" wx:for-index="cidx" wx:for-item="citem" wx:key='e'>{{citem.c}}</text>
+          </view>
         </view>
 
-        <text wx:if='{{memberinfo.switch_value=="N"||memberinfo.switch_value==""}}' class='h4 content txt-black text-center margin-bottom-40'>
-{{bookinfo.book_content}}
-</text>
+
+        <text wx:if='{{(memberinfo.switch_value=="N"||memberinfo.switch_value=="")&& isEnglish}}' id="content" class='h4 content1 txt-black text-center margin-bottom-40'>
+          {{bookinfo.book_content}}
+        </text>
+
+        <view class=" flex-row" style="flex-wrap: wrap;" wx:if='{{memberinfo.switch_value=="Y" && isEnglish==false}}' id="content">
+          <view wx:for="{{contentList}}" wx:for-item="items" class="{{items.pinyin==''?'bottom':''}} flex-row flex-column" style="width:calc(100% / {{type==1?typeNum:9}}) " wx:if="{{type==1 && items.content=='a'?false:true}}">
+            <text class='text2 pinyin h5 txt-black {{items.num==zimucount?"speed_"+velocity:""}} {{items.num<zimucount?"text3":""}}' wx:if="{{items.pinyin!=''}}" style="background-image:url({{uploadpath}}resource/{{res.zimuyanse}});">{{ items.pinyin }}</text>
+            <text style="background-image:url({{uploadpath}}resource/{{res.zimuyanse}});" class='text2 pinyin h4 txt-black {{items.num==zimucount?"speed_"+velocity:""}} {{items.num<zimucount?"text3":""}}'>{{ items.content =='a'?'':items.content}}</text>
+          </view>
+        </view>
+
+        <view class=" flex-row" style="flex-wrap: wrap;" wx:if='{{(memberinfo.switch_value=="N"||memberinfo.switch_value=="")&& isEnglish==false}}' id="content">
+          <view wx:for="{{contentList}}" wx:for-item="items" class="{{items.pinyin==''?'bottom':''}} flex-row flex-column" style="width:calc(100% / {{type==1?typeNum:9}}) " wx:if="{{type==1 && items.content=='a'?false:true}}">
+            <text class="pinyin h5 txt-black " wx:if="{{items.pinyin!=''}}">{{ items.pinyin }}</text>
+            <text class="pinyin h4 txt-black ">{{ items.content =='a'?'':items.content}}</text>
+          </view>
+        </view>
 
       </scroll-view>
     </view>
@@ -114,3 +134,5 @@
   </view>
 
 </form>
+<cover-view style="position: absolute;top: 0; height: 500px;width: 100%;z-index: 999;" wx:if="{{scrollable}}"></cover-view>
+</view>

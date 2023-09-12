@@ -17,7 +17,7 @@ import {
 import {
   TalkApi
 } from "../../apis/talk.api.js";
-
+import getContent from "../../utils/getcontent"
 
 class Content extends AppBase {
   constructor() {
@@ -27,6 +27,7 @@ class Content extends AppBase {
   recorderManager = null;
   timer = '';
   zimutimer = null;
+
   onLoad(options) {
     this.Base.Page = this;
     //options.id = 2;
@@ -44,7 +45,13 @@ class Content extends AppBase {
       speed: 1,
       zimucount: -1,
       readcount: 0,
-      firstpaly: 0
+      firstpaly: 0,
+      contentList: [],
+      type: 1,
+      typeNum: 0,
+      scrollnum: 0,
+      isEnglish: false,
+      scrollable: false
     })
 
     var tempFilePath;
@@ -53,7 +60,7 @@ class Content extends AppBase {
     var that = this;
 
     var innerAudioContext = wx.createInnerAudioContext()
-
+    // innerAudioContext.src="https://alioss.app-link.org/alucard263096/yngd/bgm_file/1884a18d36edb96866d20944dddfb3fb_19012910006.mp3"
     innerAudioContext.onPlay(this.bgmOnPlay);
     innerAudioContext.onPause(() => {
       console.log("stop here");
@@ -71,13 +78,16 @@ class Content extends AppBase {
       //innerAudioContext.destroy()
     })
 
-
     innerAudioContext.onError((res) => {
       console.log(res.errMsg)
       console.log(res.errCode)
+      // wx.showToast({
+      //   title: res.errMsg,
+      // })
       //播放错误，销毁该实例
       innerAudioContext.destroy()
     })
+
     innerAudioContext.onTimeUpdate((res) => {
 
       var that = this;
@@ -99,11 +109,13 @@ class Content extends AppBase {
     var innerAudioContext = this.Base.innerAudioContext;
     innerAudioContext.stop();
     console.log("暂停播放")
-    console.log("88888888888888888888888");
+    console.log(that.Base.zimutimer);
     clearInterval(that.Base.zimutimer);
+    clearInterval(that.data.timer)
+    this.suspend();
   }
-  
-  
+
+
   bgmOnPlay() {
     var that = this;
     console.log('开始播放')
@@ -115,7 +127,7 @@ class Content extends AppBase {
       })
     } else {
       this.Base.setMyData({
-        velocity: memberinfo.velocity 
+        velocity: memberinfo.velocity
       })
     }
 
@@ -141,6 +153,7 @@ class Content extends AppBase {
       }
     }, 1000 / this.Base.getMyData().velocity);
     */
+
   }
 
   qweqwe(e) {
@@ -163,7 +176,7 @@ class Content extends AppBase {
     })
 
     var that = this;
-
+    var isEnglish = this.Base.getMyData().isEnglish;
     var bookapi = new BookApi();
 
     //const myaudio = wx.createInnerAudioContext();
@@ -171,30 +184,77 @@ class Content extends AppBase {
     bookapi.bookinfo({
       id: this.Base.options.id
     }, (bookinfo) => {
-      
-      var book_content = bookinfo.book_content;
+      //判断是否为英文诗
+      var englishPattern = /^[A-Za-z]+$/;
+      if (englishPattern.test(bookinfo.book_content[0])) {
+        this.Base.setMyData({
+          isEnglish: true
+        })
 
-      var lines = book_content.split("\n");
+        var book_content = bookinfo.book_content;
 
-      var count = 0;
+        var lines = book_content.split("\n");
 
-      for (var i = 0; i < lines.length; i++) {
-        var line = [];
-        for (var j = 0; j < lines[i].length; j++) {
-          line.push({
-            num: count++,
-            c: lines[i][j]
-          });
+        var count1 = 0;
+
+        for (var i = 0; i < lines.length; i++) {
+          var line = [];
+          var resultArray = lines[i].split(/(\s|,)/g);
+          var result = resultArray.map(item => item.trim());
+          for (var j = 0; j < result.length; j++) {
+            if (result[j] == "") {
+              result[j] = " ";
+            }
+            line.push({
+              num: count1++,
+              c: result[j]
+            });
+          }
+          lines[i] = line;
         }
-        lines[i] = line;
+
+        console.log(lines);
+
+        this.Base.setMyData({
+          bookinfo,
+          lines: lines
+        });
+      } else {
+        var datastr = bookinfo.book_content;
+        var list = [];
+        var count = 0;
+        for (var i = 0; i < datastr.length; i++) {
+          var pinyin = getContent.getPinyinChar(datastr[i]);
+          var symbolPattern = /^[~`!@#$%^&*()\-_=+[\]{}|;:'",.<>/?\\！￥……（）——【】｛｝；：‘’“”，《。》、？]+$/; //去除符号
+          if (symbolPattern.test(pinyin)) {
+            pinyin = '';
+          }
+          var content = "a";
+          if (datastr[i] != '\n') {
+            content = datastr[i];
+          }
+
+          var jihe = {
+            content: content,
+            pinyin: pinyin,num:count++
+          }
+          // if(datastr[i]!='\n'){
+          list.push(jihe);
+          // }
+        }
+        this.getType(list);
+        if (this.Base.getMyData().type == 2) { //添加换行
+          var jihe={content:'',pinyin:''}
+             list.splice(0, 0, jihe)
+          var list = this.AddList(list);
+        }
+        this.Base.setMyData({
+          bookinfo,
+          contentList: list
+        });
       }
 
-console.log(lines);
 
-      this.Base.setMyData({
-        bookinfo,
-        lines: lines
-      });
 
     });
     bookapi.bgmlist({
@@ -206,7 +266,66 @@ console.log(lines);
       wx.hideLoading();
     });
   }
+  // 判断一行显示8个还是小于8个
+  getType(list) {
+    var contentlist = list;
+    var num = 0;
+    console.log(contentlist)
+    for (var i = 0; i < contentlist.length; i++) {
+      var symbolPattern = /^[~`!@#$%^&*()\-_=+[\]{}|;:'",.<>/?\\！￥……（）——【】｛｝；：‘’“”，《。》、？]+$/; //去除符号
+      // if(symbolPattern.test(contentlist[i].content)){
+      if (contentlist[i].content == '，' || contentlist[i].content == '。' || contentlist[i].content == '？' || contentlist[i].content == '！') {
+      console.log(num)
+      if (num >= 6) {
+        //type==2的时候，一行显示8个
+        this.Base.setMyData({
+          type: 2
+        })
+        break;
+      }
 
+      this.Base.setMyData({
+        typeNum: num + 1
+      })
+      num = 0;
+    } else {
+      if (contentlist[i].content != 'a') {
+        num = num + 1;
+      }
+
+    }
+  }
+}
+  //逗号的时候，换行
+  AddList(list){
+    
+    for(var j=0;j<list.length;j++){
+      if(list[j].content=='a'){
+       var num=(j+1)%9;//要添加几个的空白数据
+       if(num==1){//如果换行符处于一行的首个，就删除
+         list.splice(j,1);
+         if(list[j].content=='a'){
+           list.splice(j,1);
+         }
+         var jihe={content:'',pinyin:''}
+         list.splice(j, 0, jihe)
+       }else{
+         if(num!=0){
+           for(var i=1;i<=(10-num);i++){
+             var jihe={content:'',pinyin:''}
+             list.splice(j + i, 0, jihe)
+           }
+         }else{
+          var jihe={content:'',pinyin:''}
+          list.splice(j+1, 0, jihe)
+         }
+       }
+      
+      }
+    }
+    
+    return list;
+   }
   begin(e) {
     //return;
     this.Base.setMyData({
@@ -221,6 +340,7 @@ console.log(lines);
     })
     var that = this;
     var uploadpath = that.Base.getMyData().uploadpath;
+    var isEnglish = that.Base.getMyData().isEnglish;
     const recorderManager = wx.getRecorderManager()
     const myaudio = wx.createInnerAudioContext();
     const options = {
@@ -231,10 +351,16 @@ console.log(lines);
       format: 'mp3', //音频格式，有效值 aac/mp3
       frameSize: 50, //指定帧大小，单位 KB
     }
+    this.Base.setMyData({
+      scrollable: true
+    })
+    setTimeout(() => {
+      this.startScroll();
+    }, 3000);
     //开始录音
     var countDownNum = 0;
     //var now = dtime();
-    var timer=this.Base.getMyData().timer;
+    var timer = this.Base.getMyData().timer;
     clearInterval(timer);
     that.setData({
       timer: setInterval(function () {
@@ -242,17 +368,18 @@ console.log(lines);
         that.setData({
           countDownNum: dtime(countDownNum)
         })
-        console.log(countDownNum);
 
       }, 1000)
     });
     that.Base.setMyData({
       zimucount: -1
     });
-    that.Base.setMyData({ "kkt": "vj" });
+    that.Base.setMyData({
+      "kkt": "vj"
+    });
 
     recorderManager.onStart(() => {
-      
+
     });
 
     //错误回调
@@ -261,16 +388,24 @@ console.log(lines);
     })
     recorderManager.stop();
     that.tempFilePath = null;
-    recorderManager.start({ duration: 600000 });
+    recorderManager.start({
+      duration: 600000
+    });
     console.log('录音开始')
-    that.Base.setMyData({ "kkt": "0" });
+    that.Base.setMyData({
+      "kkt": "0"
+    });
     var speed = Number(that.Base.getMyData().speed);
-    that.Base.setMyData({ "kkt": "01" });
+    that.Base.setMyData({
+      "kkt": "01"
+    });
     var memberinfo = that.Base.getMyData().memberinfo;
 
     //console.log(memberinfo.velocity / 1000+"打算离开")
     //return;
-    that.Base.setMyData({ "kkt": "1" });
+    that.Base.setMyData({
+      "kkt": "1"
+    });
     if (memberinfo.velocity == 0) {
       this.Base.setMyData({
         velocity: 3
@@ -280,13 +415,17 @@ console.log(lines);
         velocity: memberinfo.velocity
       })
     }
-    that.Base.setMyData({ "kkt": "2" });
+    that.Base.setMyData({
+      "kkt": "2"
+    });
     clearInterval(that.Base.zimutimer);
     that.Base.setMyData({
       zimucount: -1
     });
 
-    that.Base.setMyData({ "kkt": "3" });
+    that.Base.setMyData({
+      "kkt": "3"
+    });
     var velocity = this.Base.getMyData().velocity;
     var speed = 1000;
     if (velocity == 1) {
@@ -304,19 +443,124 @@ console.log(lines);
     if (velocity == 5) {
       speed = 200;
     }
-    that.Base.setMyData({ "kkt": "4" });
+    that.Base.setMyData({
+      "kkt": "4"
+    });
+
     that.Base.zimutimer = setInterval(() => {
       var zimucount = parseInt(that.Base.getMyData().zimucount);
       zimucount++;
-
       that.Base.setMyData({
         zimucount: zimucount
       });
     }, speed);
 
-    that.Base.setMyData({ "kkt": "5" });
+    that.Base.setMyData({
+      "kkt": "5"
+    });
   }
 
+  startScroll() {
+
+    var memberinfo = this.Base.getMyData().memberinfo;
+    var velocity = memberinfo.velocity;
+
+    var type = this.Base.getMyData().type;
+    var list = this.Base.getMyData().contentList;
+    var isEnglish = this.Base.getMyData().isEnglish;
+    var duration = 0;
+
+    if (type == 1) {
+      if (velocity <= 3) {
+        duration = (list.length / 6) * 1800; // 滚动持续时间（毫秒）
+      }
+      if (velocity == 4) {
+        duration = (list.length / 9) * 1800; // 滚动持续时间（毫秒）
+      }
+      if (velocity == 5) {
+        duration = (list.length / 11) * 1800; // 滚动持续时间（毫秒）
+      }
+
+      if (isEnglish) {
+        var index = 0;
+        var lines = this.Base.getMyData().lines;
+        for (var i = 0; i < lines.length; i++) {
+          index += lines[i].length;
+        }
+        if (velocity <= 3) {
+          duration = (index / 4) * 2000; // 滚动持续时间（毫秒）
+        }
+        if (velocity == 4) {
+          duration = (index / 7) * 2000; // 滚动持续时间（毫秒）
+        }
+        if (velocity == 5) {
+          duration = (index / 12) * 2000; // 滚动持续时间（毫秒）
+        }
+      }
+    } else {
+      if (velocity <= 3) {
+        duration = (list.length / 8) * 3000; // 滚动持续时间（毫秒）
+      }
+      if (velocity == 4) {
+        duration = (list.length / 11) * 2200; // 滚动持续时间（毫秒）
+      }
+      if (velocity == 5) {
+        duration = (list.length / 16) * 2000; // 滚动持续时间（毫秒）
+      }
+
+    }
+    console.log(duration)
+    var interval = 44; // 每次滚动的时间间隔（毫秒）
+    if (isEnglish) {
+      interval = 100; // 每次滚动的时间间隔（毫秒）
+      if (velocity == 2) {
+        interval = 44;
+      }
+    }
+    const distance = 1; // 每次滚动的距离
+
+    const query = wx.createSelectorQuery();
+    query.select('#scrollView').boundingClientRect();
+    query.select('#content').boundingClientRect();
+    query.exec((res) => {
+      const scrollViewRect = res[0];
+      const contentRect = res[1];
+
+      if (scrollViewRect && contentRect) {
+        const maxScrollTop = contentRect.height - scrollViewRect.height;
+        console.log(maxScrollTop)
+        let scrollTop = 0;
+        const startTime = Date.now();
+
+        const scrollStep = () => {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTime;
+
+          if (elapsedTime >= duration) {
+
+            // 滚动到底部完成
+            this.setData({
+              scrollnum: maxScrollTop,
+              scrollable: false
+            });
+          } else {
+            const progress = elapsedTime / duration;
+            const scrollDistance = Math.round(progress * maxScrollTop);
+            scrollTop = Math.min(scrollDistance, maxScrollTop);
+
+            this.setData({
+              scrollnum: scrollTop
+            });
+
+            setTimeout(scrollStep, interval);
+          }
+        };
+
+        scrollStep();
+      }
+    });
+
+  }
   suspend(e) {
     var that = this;
     this.Base.setMyData({
@@ -329,7 +573,8 @@ console.log(lines);
       mask: false,
       icon: 'none',
     })
-
+    var timer = this.Base.getMyData().timer;
+    clearInterval(timer);
     const recorderManager = wx.getRecorderManager()
 
     const myaudio = wx.createInnerAudioContext();
@@ -366,6 +611,9 @@ console.log(lines);
       });
 
     })
+
+    clearInterval(that.Base.zimutimer);
+    clearInterval(that.data.timer)
   }
 
   playrecord(e) {
@@ -415,7 +663,7 @@ console.log(lines);
       cancelColor: '#EE2222',
       confirmText: '确定',
       confirmColor: '#2699EC',
-      success: function(res) {
+      success: function (res) {
         if (res.confirm) {
           that.Base.setMyData({
             play: "begin",
@@ -430,9 +678,9 @@ console.log(lines);
           });
           var innerAudioContext = that.Base.innerAudioContext;
           innerAudioContext.stop();
-          setTimeout(()=>{
+          setTimeout(() => {
             that.tempFilePath = null;
-          },1000);
+          }, 1000);
           wx.showToast({
             title: '请点击录音重新录制',
             mask: false,
@@ -457,7 +705,7 @@ console.log(lines);
       cancelColor: '#EE2222',
       confirmText: '确定',
       confirmColor: '#2699EC',
-      success: function(res) {
+      success: function (res) {
         if (res.confirm) {
 
           that.onUnload();
@@ -500,18 +748,12 @@ console.log(lines);
         open: 1
       })
     }
-
   }
 
 
   shangchuan(e) {
 
   }
-
-
-
-
-
 
   playbgm(e) {
     var that = this;
@@ -521,19 +763,21 @@ console.log(lines);
     var index = e.currentTarget.dataset.index;
     var name = e.currentTarget.dataset.music_name;
     var innerAudioContext = this.Base.innerAudioContext;
-
-    innerAudioContext.pause();
+    console.log(innerAudioContext)
+    // innerAudioContext.pause();
     console.log("暂停1")
-    innerAudioContext.loop=true;
+    innerAudioContext.loop = true;
     innerAudioContext.obeyMuteSwitch = false;
     innerAudioContext.src = uploadpath + "bgm_file/" + src;
-    innerAudioContext.play(this.Base.setMyData({
-      bg1: 1
-    }));
+    setTimeout(() => {
+      innerAudioContext.play(this.Base.setMyData({
+        bg1: 1
+      }));
+    }, 200);
 
-    console.log(innerAudioContext.src);
     this.Base.setMyData({
-      music_name: name
+      music_name: name,
+      open: 2
     });
 
     for (var i = 0; i < bgmlist.length; i++) {
@@ -583,7 +827,7 @@ console.log(lines);
       cancelColor: '#EE2222',
       confirmText: '确定',
       confirmColor: '#2699EC',
-      success: function(res) {
+      success: function (res) {
         if (res.confirm) {
           wx.showLoading({
             title: '加载中',
@@ -612,71 +856,70 @@ console.log(lines);
 
             var talker = that.Base.getMyData().memberinfo;
             var readcount = that.Base.getMyData().readcount;
-            
+
             var book_id = that.Base.getMyData().bookinfo.id;
             //console.log("wwwwwwwwww" + talker)
 
             //return;
 
-if(that.Base.options.type=="A"){
-  api.addlangdu({
-    again:"Y",
-    status: "A",
-    id: that.Base.options.retid,
-    member_id: talker.id,
-    book_id: book_id,
-    booktype: book_type,
-    wordnumber: readcount,
-    read_file: that.Base.getMyData().vonice
-  }, (ret) => {
-    console.log(666666666666666);
-    var book_id = that.Base.getMyData().bookinfo.id;
-    var time = that.Base.getMyData().countDownNum;
-    console.log(time + '666666666666666');
-    //return
-    console.log("辣椒炒肉" + that.Base.getMyData().vonice);
-    if (ret.code == 0) {
-      console.log('提交成功');
-      that.onUnload();
-      wx.navigateTo({
-        url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return + '&time=' + time,
-      })
+            if (that.Base.options.type == "A") {
+              api.addlangdu({
+                again: "Y",
+                status: "A",
+                id: that.Base.options.retid,
+                member_id: talker.id,
+                book_id: book_id,
+                booktype: book_type,
+                wordnumber: readcount,
+                read_file: that.Base.getMyData().vonice
+              }, (ret) => {
+                console.log(666666666666666);
+                var book_id = that.Base.getMyData().bookinfo.id;
+                var time = that.Base.getMyData().countDownNum;
+                console.log(time + '666666666666666');
+                //return
+                console.log("辣椒炒肉" + that.Base.getMyData().vonice);
+                if (ret.code == 0) {
+                  console.log('提交成功');
+                  that.onUnload();
+                  wx.navigateTo({
+                    url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return+'&time=' + time,
+                  })
 
-      //that.onMyShow();
-    } else {
-      that.Base.info(ret.result);
-    }
-  });
-}
-else(
-            api.addlangdu({
-              status: "A",
-              book_id: book_id,
-              member_id: talker.id,
-              booktype: book_type,
-              wordnumber: readcount,
-              read_file: that.Base.getMyData().vonice
-            }, (ret) => {
-              console.log(666666666666666);
-              var book_id = that.Base.getMyData().bookinfo.id;
-              var time = that.Base.getMyData().countDownNum;
-              console.log(time + '666666666666666');
-              //return
-              console.log("辣椒炒肉" + that.Base.getMyData().vonice);
-              if (ret.code == 0) {
-                console.log('提交成功');
+                  //that.onMyShow();
+                } else {
+                  that.Base.info(ret.result);
+                }
+              });
+            } else(
+              api.addlangdu({
+                status: "A",
+                book_id: book_id,
+                member_id: talker.id,
+                booktype: book_type,
+                wordnumber: readcount,
+                read_file: that.Base.getMyData().vonice
+              }, (ret) => {
+                console.log(666666666666666);
+                var book_id = that.Base.getMyData().bookinfo.id;
+                var time = that.Base.getMyData().countDownNum;
+                console.log(time + '666666666666666');
+                //return
+                console.log("辣椒炒肉" + that.Base.getMyData().vonice);
+                if (ret.code == 0) {
+                  console.log('提交成功');
 
-                that.onUnload();
-                wx.navigateTo({
-                  url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return+'&time=' + time,
-                })
+                  that.onUnload();
+                  wx.navigateTo({
+                    url: '/pages/endreading/endreading?id=' + book_id + '&retid=' + ret.return+'&time=' + time,
+                  })
 
-                //that.onMyShow();
-              } else {
-                that.Base.info(ret.result);
-              }
-            })
-)
+                  //that.onMyShow();
+                } else {
+                  that.Base.info(ret.result);
+                }
+              })
+            )
 
 
 
@@ -725,7 +968,10 @@ body.zt = content.zt;
 body.shangchuan = content.shangchuan;
 body.confirm = content.confirm;
 body.uploadvonice = content.uploadvonice;
-body.bgmOnPlay = content.bgmOnPlay; 
+body.bgmOnPlay = content.bgmOnPlay;
 body.qweqwe = content.qweqwe;
 body.loadingdata = content.loadingdata;
+body.getType = content.getType;
+body.AddList = content.AddList;
+body.startScroll = content.startScroll;
 Page(body)

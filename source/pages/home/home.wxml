@@ -43,7 +43,7 @@
     <swiper-item wx:for="{{indexbanner}}" wx:key="k">
       <view>
         <!-- mode="aspectFill"  bindtap='viewPhoto' -->
-        <image src='{{uploadpath}}indexbanner/{{item.img}}' bindtap='viewPhoto'  id='{{uploadpath}}indexbanner/{{item.img}}' style='width:750rpx;height:350rpx;'></image>
+        <image src='{{uploadpath}}indexbanner/{{item.img}}' id='{{uploadpath}}indexbanner/{{item.img}}' data-url="{{item.url}}" style='width:750rpx;height:350rpx;' bindtap="tiaozhuan"></image>
       </view>
     </swiper-item>
   </swiper>

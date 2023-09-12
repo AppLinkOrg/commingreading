@@ -15,7 +15,7 @@ export class ApiUtil {
 
 
     s = s.replace(new RegExp("</p>", "gm"), "</p><br />");
-    s = s.replace(new RegExp("\"/alucard263096/carpost/upload/", "gm"), "\"" + "https://cmsdev.app-link.org/alucard263096/carpost/upload/");
+    s = s.replace(new RegExp("\"/alucard263096/yngd/upload/", "gm"), "\"" + "https://cmsdev.app-link.org/alucard263096/yngd/upload/");
 
 
     return s;

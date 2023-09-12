@@ -3,6 +3,7 @@ import { AppBase } from "../../appbase";
 import { ApiConfig } from "../../apis/apiconfig";
 import { InstApi } from "../../apis/inst.api.js";
 import { BookApi } from "../../apis/book.api.js";
+
 class Content extends AppBase {
   constructor() {
     super();
@@ -14,7 +15,6 @@ class Content extends AppBase {
     this.Base.setMyData({
       ctt:1
     })
-    
   }
   
   onMyShow() {
@@ -73,6 +73,14 @@ class Content extends AppBase {
       url: '/pages/news/news',
     })
   }
+  tiaozhuan(e){
+    console.log(e);
+    var url = e.currentTarget.dataset.url;
+    wx.navigateTo({
+      url: `/${url}`
+    })
+   
+  }
 }
 
 
@@ -85,4 +93,5 @@ body.bindwaitcompleted = content.bindwaitcompleted;
 body.bindcontact = content.bindcontact; 
 body.todetails = content.todetails; 
 body.tocontent = content.tocontent;
+body.tiaozhuan=content.tiaozhuan;
 Page(body)

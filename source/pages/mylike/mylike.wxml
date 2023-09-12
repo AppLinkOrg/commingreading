@@ -8,7 +8,7 @@
 <view wx:if='{{readlist.length>0}}'>
   <view class='flex-row flex-center padding-30' wx:for='{{readlist}}' id='{{item.readlike_id}}' wx:key='k' bindtap='todetails'>
     <view class=''>
-      <image class='icon-50 radius-10' src='{{item.touxian}}'></image>
+      <image class='icon-50 radius-10' src="{{uploadpath}}member/{{item.touxian}}"></image>
     </view>
 
     <view class='margin-left-20  flex-1 flex-row column'>

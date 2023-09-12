@@ -1,5 +1,10 @@
 <!--pages/myreading/myreading.wxml-->
 
+<view wx:if='{{rdlist.length==0}}' class='bg-white  flex-row flex-column'>
+  <image class='icon-100' src='{{uploadpath}}resource/{{res.noreader_icon}}'></image>
+  <view class='h5 txt-gray txt-bold margin-top-10 padding-bottom-30'>还没有朗读哦，快来体验一下吧</view>
+</view>
+
 <view url='/pages/others/others?readid={{item.id}}' class='padding-40' wx:for='{{rdlist}}' wx:key='k' wx:if='{{rdlist.length>0}}' style='border-bottom:1rpx solid #CECFCE'>
   <view class='flex-row flex-center'>
     <navigator url='/pages/others/others?readid={{item.id}}' class='flex-1'>

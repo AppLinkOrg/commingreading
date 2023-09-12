@@ -8,7 +8,7 @@
 
 <view class='flex-row   padding-30' wx:for='{{messagelist}}' id='{{item.read_id}}' bindtap='todetails' wx:key='k' wx:if='{{messagelist.length>0}}'>
   <view class=''>
-    <image class='icon-50 radius-10' src='{{item.touxian}}'></image>
+    <image class='icon-50 radius-10' src="{{uploadpath}}member/{{item.touxian}}"></image>
   </view>
 
 
@@ -27,7 +27,7 @@
 <view class='txt-gary h5  margin-left-20 margin-top-10'>{{item.comment_time}}</view>
 
     <view class='flex-row flex-center margin-top-10 margin-left-10'>
-      <image class='icon-25 radius-50' src='{{item.member_avatarUrl}}'></image>
+      <image class='icon-25 radius-50' src="{{uploadpath}}member/{{item.member_avatarUrl}}"></image>
       <view class='h5 txt-black margin-left-10 '>
         ：{{item.comment}}
       </view>

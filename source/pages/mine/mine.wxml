@@ -4,11 +4,15 @@
   <!-- <view class='text-right set_icon' style=''>
       <image class='icon-25' src='{{uploadpath}}resource/{{res.set_icon}}'></image>
     </view> -->
+  <navigator url='/pages/edit/edit'>
+    <view class=' flex-row flex-column  margin-top ' style='height:170rpx;width:100%'>
+      <!-- <image class='icon-60 radius-50  ' style='border:4rpx solid #CECFCE' src='{{memberinfo.avatarUrl}}'></image> -->
+      <image wx:if="{{memberinfo.avatarUrl==''}}" src="{{uploadpath}}resource/{{res.tx}}" class="icon-60 radius-50" style="border:4rpx solid #CECFCE"></image>
+      <image wx:if="{{memberinfo.avatarUrl!=''}}" src="{{uploadpath}}member/{{memberinfo.avatarUrl}}" class="icon-60 radius-50" style="border:4rpx solid #CECFCE"></image>
+      <view class='txt-black margin-left-5'>{{memberinfo.nickName}}</view>
+    </view>
+  </navigator>
 
-  <view class=' flex-row flex-column  margin-top ' style='height:170rpx;width:100%'>
-    <image class='icon-60 radius-50  ' style='border:4rpx solid #CECFCE' src='{{memberinfo.avatarUrl}}'></image>
-    <view class='txt-black margin-left-5'>{{memberinfo.nickName}}</view>
-  </view>
 
 </view>
 
@@ -24,19 +28,19 @@
 
   <view class='flex-row flex-column flex-1'>
     <view wx:if='{{info.zishu!=""}}' class='txt-black txt-bold h3'>{{todaynum}}</view>
-    
-    <view wx:if='{{info.zishu==""}}'  class='txt-black txt-bold h3'>0</view>
-    
+
+    <view wx:if='{{info.zishu==""}}' class='txt-black txt-bold h3'>0</view>
+
     <view class='txt-bold h6 margin-top-10'>当日朗读字数</view>
 
-    
+
   </view>
 
-  <view style='height:50rpx;width:4rpx'  class='bg-white'></view>
+  <view style='height:50rpx;width:4rpx' class='bg-white'></view>
 
   <view class='flex-row flex-column flex-1'>
-    <view  wx:if='{{info.zongzishu!=""&&info.zongzishu!=0}}' class='txt-black txt-bold h3'>{{allnum}}</view>
-     <view wx:if='{{info.zongzishu==""||info.zongzishu==0}}' class='txt-black txt-bold h3'>0</view> 
+    <view wx:if='{{info.zongzishu!=""&&info.zongzishu!=0}}' class='txt-black txt-bold h3'>{{allnum}}</view>
+    <view wx:if='{{info.zongzishu==""||info.zongzishu==0}}' class='txt-black txt-bold h3'>0</view>
     <view class='txt-bold h6 margin-top-10'>累计朗读字数</view>
   </view>
 
@@ -48,6 +52,11 @@
 <navigator url='/pages/myreading/myreading' class='flex-row flex-center margin-30 bg-white border_bottom padding-bottom-20' style=''>
   <image class='icon-25' src='{{uploadpath}}resource/{{res.tlakcount}}'></image>
   <view class='margin-left-20 txt-bold txt-black h5'>我的朗读</view>
+</navigator>
+
+<navigator url='/pages/myactivity/myactivity' class='flex-row flex-center margin-30 bg-white border_bottom padding-bottom-20'>
+  <image class='icon-25' src='{{uploadpath}}resource/{{res.myactivity}}'></image>
+  <view class='margin-left-20 txt-bold txt-black h5'>我的活动</view>
 </navigator>
 
 <navigator url='/pages/mylike/mylike' class='flex-row flex-center margin-30 bg-white border_bottom padding-bottom-20'>

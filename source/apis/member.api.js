@@ -328,4 +328,163 @@ export class MemberApi{
             }
         })
     }
+
+    updatemember(json, callback, showLoading = true) {
+
+        if (showLoading)
+            ApiConfig.ShowLoading();
+
+        var header = ApiConfig.GetHeader();
+        console.log(header);
+        console.log(json);
+        wx.request({
+            url: ApiConfig.GetApiUrl() + 'member/updatemember',
+            data: json,
+            method: 'POST',
+            dataType: 'json',
+            header: header,
+            success: function (res) {
+                if (callback != null) {
+                    callback(res.data);
+                }
+            },
+            fail: function (res) {
+                console.log(res);
+                callback(false);
+            },
+            complete: function (res) {
+                console.log(res);
+            
+                if (showLoading)
+                    ApiConfig.CloseLoading();
+            }
+        })
+    }
+    addmember(json, callback, showLoading = true) {
+
+        if (showLoading)
+            ApiConfig.ShowLoading();
+
+        var header = ApiConfig.GetHeader();
+        console.log(header);
+        console.log(json);
+        wx.request({
+            url: ApiConfig.GetApiUrl() + 'member/addmember',
+            data: json,
+            method: 'POST',
+            dataType: 'json',
+            header: header,
+            success: function (res) {
+                if (callback != null) {
+                    callback(res.data);
+                }
+            },
+            fail: function (res) {
+                console.log(res);
+                callback(false);
+            },
+            complete: function (res) {
+                console.log(res);
+            
+                if (showLoading)
+                    ApiConfig.CloseLoading();
+            }
+        })
+    }
+
+    entrantinfor(json, callback, showLoading = true) {
+
+      if (showLoading)
+          ApiConfig.ShowLoading();
+
+      var header = ApiConfig.GetHeader();
+      console.log(header);
+      console.log(json);
+      wx.request({
+          url: ApiConfig.GetApiUrl() + 'member/entrantinfor',
+          data: json,
+          method: 'POST',
+          dataType: 'json',
+          header: header,
+          success: function (res) {
+              if (callback != null) {
+                  callback(res.data);
+              }
+          },
+          fail: function (res) {
+              console.log(res);
+              callback(false);
+          },
+          complete: function (res) {
+              console.log(res);
+          
+              if (showLoading)
+                  ApiConfig.CloseLoading();
+          }
+      })
+  }
+
+  getmyactivity(json, callback, showLoading = true) {
+
+    if (showLoading)
+        ApiConfig.ShowLoading();
+
+    var header = ApiConfig.GetHeader();
+    console.log(header);
+    console.log(json);
+    wx.request({
+        url: ApiConfig.GetApiUrl() + 'member/getmyactivity',
+        data: json,
+        method: 'POST',
+        dataType: 'json',
+        header: header,
+        success: function (res) {
+            if (callback != null) {
+                callback(res.data);
+            }
+        },
+        fail: function (res) {
+            console.log(res);
+            callback(false);
+        },
+        complete: function (res) {
+            console.log(res);
+        
+            if (showLoading)
+                ApiConfig.CloseLoading();
+        }
+    })
+}
+
+myactivitydetail(json, callback, showLoading = true) {
+
+  if (showLoading)
+      ApiConfig.ShowLoading();
+
+  var header = ApiConfig.GetHeader();
+  console.log(header);
+  console.log(json);
+  wx.request({
+      url: ApiConfig.GetApiUrl() + 'member/myactivitydetail',
+      data: json,
+      method: 'POST',
+      dataType: 'json',
+      header: header,
+      success: function (res) {
+          if (callback != null) {
+              callback(res.data);
+          }
+      },
+      fail: function (res) {
+          console.log(res);
+          callback(false);
+      },
+      complete: function (res) {
+          console.log(res);
+      
+          if (showLoading)
+              ApiConfig.CloseLoading();
+      }
+  })
+}
 }

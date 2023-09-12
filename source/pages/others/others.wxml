@@ -1,119 +1,129 @@
 <!--pages/others/others.wxml-->
-<image class='img' mode='scaleToFill' src='{{uploadpath}}resource/{{res.bg_1}}'></image>
 
-<view class='flex-row flex-column padding-40' style=''>
-  <view class='txt-black h4'>{{bookinfo.book_name}}</view>
-  <view class='txt-black margin-top-10'>作者：{{bookinfo.author}}</view>
-  <view class='txt-black margin-top-10'>朗读者:{{readinfo.member_id_name}}</view>
+<view style="position: relative;">
+  <image class='img' mode='scaleToFill' src='{{uploadpath}}resource/{{res.bg_1}}'></image>
 
-  <scroll-view scroll-y class='text-center margin-top-20' style='height:530rpx;'>
-    <text class='content txt-black text-center margin-bottom-40 h4'>
-{{bookinfo.book_content}}
-</text>
-  </scroll-view>
-</view>
+  <view class='flex-row flex-column padding-40' style=''>
+    <view class='txt-black h4'>{{bookinfo.book_name}}</view>
+    <view class='txt-black margin-top-10'>作者：{{bookinfo.author}}</view>
+    <view class='txt-black margin-top-10'>朗读者:{{readinfo.member_id_name}}</view>
 
-<view class='bg-white'>
-  <view class='padding-30 flex-row flex-center ' style='border-bottom:1rpx solid #F3F3F3'>
-    <image wx:if='{{status=="play"}}' bindtap='Play' class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
-    <image wx:if='{{status=="stop"}}' bindtap='Stop' class='icon-25' src='{{uploadpath}}resource/{{res.zanting}}'></image>
-
-    <view wx:if='{{audio_value_str==null}}' class='margin-left-10'>00:00</view>
-    <view wx:if='{{audio_value_str!=null}}' class='margin-left-10'>{{audio_value_str}}</view>
-    <view class="body-view flex-1">
-      <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="0" max="{{audio_duration}}" value='{{audio_value}}' bindchange='changetotime' />
-    </view>
-    <view wx:if='{{audio_duration_str==null}}' class='margin-left-10'>00:00</view>
-    <view wx:if='{{audio_duration_str!=null}}' class='margin-left-10'>{{audio_duration_str}}</view>
+    <scroll-view scroll-y class='text-center margin-top-20' style='height:530rpx;' id="scrollView" scroll-top="{{scrollnum}}">
+      <text class='content txt-black text-center margin-bottom-40 h4' id="content" wx:if="{{isEnglish}}">
+        {{bookinfo.book_content}}
+      </text>
+      <view class=" flex-row" style="flex-wrap: wrap;" id="content" wx:if="{{isEnglish==false}}">
+        <view wx:for="{{contentList}}" wx:for-item="items" class="{{items.pinyin==''?'bottom':''}} flex-row flex-column" style="width:calc(100% / {{type==1?typeNum:9}}) " wx:if="{{type==1 && items.content=='a'?false:true}}">
+          <text class="pinyin h5 txt-black " wx:if="{{items.pinyin!='' }}">{{ items.pinyin }}</text>
+          <text class="pinyin h4 txt-black ">{{ items.content =='a'?'':items.content}}</text>
+        </view>
+      </view>
+    </scroll-view>
   </view>
+  <cover-view style="position: absolute;top: 0; height: 500px;width: 100%;z-index: 999;" wx:if="{{scrollable}}"></cover-view>
+  <view class='bg-white'>
+    <view class='padding-30 flex-row flex-center ' style='border-bottom:1rpx solid #F3F3F3'>
+      <image wx:if='{{status=="play"}}' bindtap='Play' class='icon-25' src='{{uploadpath}}resource/{{res.bofangluyin}}'></image>
+      <image wx:if='{{status=="stop"}}' bindtap='Stop' class='icon-25' src='{{uploadpath}}resource/{{res.zanting}}'></image>
 
-  <view class=' padding-30   flex-row flex-center' style='border-bottom:4rpx solid #E8E8E8'>
-
-    <view class='flex-row flex-column flex-1 '>
-      <view class='flex-row flex-center ' bindtap=''>
-        <!-- <image  bindtap='dianzan' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image> -->
-        <image bindtap='dianzan' wx:if='{{readinfo.qwe==""}}' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
-
-        <image wx:if='{{readinfo.qwe!=""}}' bindtap='dianzan' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzancolor}}'></image>
-        <view wx:if='{{readinfo.count1>0}}' class=' margin-left-10' id='' bindtap='dianzan'>点赞{{readinfo.count1}}</view>
-        <view wx:if='{{readinfo.count1==0}}' class=' margin-left-10' id='' bindtap='dianzan'>点赞</view>
+      <view wx:if='{{audio_value_str==null}}' class='margin-left-10'>00:00</view>
+      <view wx:if='{{audio_value_str!=null}}' class='margin-left-10'>{{audio_value_str}}</view>
+      <view class="body-view flex-1">
+        <slider bindchange="slider4change" activeColor='#009688' block-size='12' block-color='#009688' min="0" max="{{audio_duration}}" value='{{audio_value}}' bindchange='changetotime' />
       </view>
+      <view wx:if='{{audio_duration_str==null}}' class='margin-left-10'>00:00</view>
+      <view wx:if='{{audio_duration_str!=null}}' class='margin-left-10'>{{audio_duration_str}}</view>
     </view>
 
-    <view class='flex-row flex-column flex-1 '>
-      <view class='flex-row flex-center' url=''>
-        <image class='icon-25' src='{{uploadpath}}resource/{{res.shouting}}'></image>
-        <view wx:if='{{readinfo.lstcount>0}}' class=' margin-left-10'>收听{{readinfo.lstcount}}</view>
-        <view wx:if='{{readinfo.lstcount==0}}' class=' margin-left-10'>收听</view>
-      </view>
-    </view>
+    <view class=' padding-30   flex-row flex-center' style='border-bottom:4rpx solid #E8E8E8'>
 
-    <!-- <button open-type="share" class='clear-button margin-10' style='width:55rpx;height:55rpx'>
+      <view class='flex-row flex-column flex-1 '>
+        <view class='flex-row flex-center ' bindtap=''>
+          <!-- <image  bindtap='dianzan' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image> -->
+          <image bindtap='dianzan' wx:if='{{readinfo.qwe==""}}' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
+
+          <image wx:if='{{readinfo.qwe!=""}}' bindtap='dianzan' class='icon-25' class='icon-25' src='{{uploadpath}}resource/{{res.dianzancolor}}'></image>
+          <view wx:if='{{readinfo.count1>0}}' class=' margin-left-10' id='' bindtap='dianzan'>点赞{{readinfo.count1}}</view>
+          <view wx:if='{{readinfo.count1==0}}' class=' margin-left-10' id='' bindtap='dianzan'>点赞</view>
+        </view>
+      </view>
+
+      <view class='flex-row flex-column flex-1 '>
+        <view class='flex-row flex-center' url=''>
+          <image class='icon-25' src='{{uploadpath}}resource/{{res.shouting}}'></image>
+          <view wx:if='{{readinfo.lstcount>0}}' class=' margin-left-10'>收听{{readinfo.lstcount}}</view>
+          <view wx:if='{{readinfo.lstcount==0}}' class=' margin-left-10'>收听</view>
+        </view>
+      </view>
+
+      <!-- <button open-type="share" class='clear-button margin-10' style='width:55rpx;height:55rpx'>
         <image class='icon-25' src='{{uploadpath}}resource/{{res.share}}' bindtap='share'> </image>
       </button> -->
-    <view class='flex-row flex-column flex-1 ' bindtap='poster'>
-      <!-- <button open-type="share" class='flex-row flex-center clear-button' style='border:0rpx;'> -->
+      <view class='flex-row flex-column flex-1 ' bindtap='poster'>
+        <!-- <button open-type="share" class='flex-row flex-center clear-button' style='border:0rpx;'> -->
         <view class='flex-row flex-center'>
           <image class='icon-25' src='{{uploadpath}}resource/{{res.bierenfenxiang}}'></image>
           <view class=' margin-left-10'>分享</view>
         </view>
-      <!-- </button> -->
+        <!-- </button> -->
+      </view>
+
     </view>
 
-  </view>
+    <video class='pos' style='width:4rpx;height:4rpx' objectFit="fill" muted='true' autoplay='true' loop='true' controls="ture" src='{{uploadpath}}inst/{{instinfo.video}}'>
+    </video>
 
-  <video class='pos' style='width:4rpx;height:4rpx' objectFit="fill" muted='true' autoplay='true' loop='true' controls="ture" src='{{uploadpath}}inst/{{instinfo.video}}'>
-  </video>
-
-  <view class='padding-30 txt-black txt-bold'>
-    评论({{messagelist.length}})：
-  </view>
-
-  <view class='padding-30 flex-row flex-column' wx:if='{{messagelist.length==0}}'>
-    <image src='{{uploadpath}}resource/{{res.talknull_icon}}' class='icon-50'></image>
-    <view class='h5 margin-top-10'>还没有人评论，快去评论吧</view>
-  </view>
-
-  <view class='flex-row   padding-30' wx:for='{{messagelist}}' wx:key='k' wx:if='{{messagelist.length>0}}'>
-    <view class=''>
-      <image class='icon-50 radius-10' src='{{item.member_avatarUrl}}'></image>
+    <view class='padding-30 txt-black txt-bold'>
+      评论({{messagelist.length}})：
     </view>
-    <view class='margin-left-20  flex-1'>
-      <view class='flex-row column'>
-        <view class='flex-1 txt-black'>{{item.member_id_name}}</view>
-        <view class='flex-row flex-center margin-top-10'>
-          <view class='txt-gary h5 margin-right-20'>{{item.comment_time}}</view>
-          <!-- <view class='txt-gary h5'>12:00</view> -->
+
+    <view class='padding-30 flex-row flex-column' wx:if='{{messagelist.length==0}}'>
+      <image src='{{uploadpath}}resource/{{res.talknull_icon}}' class='icon-50'></image>
+      <view class='h5 margin-top-10'>还没有人评论，快去评论吧</view>
+    </view>
+
+    <view class='flex-row   padding-30' wx:for='{{messagelist}}' wx:key='k' wx:if='{{messagelist.length>0}}'>
+      <view class=''>
+        <image class='icon-50 radius-10' src="{{uploadpath}}member/{{item.member_avatarUrl}}"></image>
+      </view>
+      <view class='margin-left-20  flex-1'>
+        <view class='flex-row column'>
+          <view class='flex-1 txt-black'>{{item.member_id_name}}</view>
+          <view class='flex-row flex-center margin-top-10'>
+            <view class='txt-gary h5 margin-right-20'>{{item.comment_time}}</view>
+            <!-- <view class='txt-gary h5'>12:00</view> -->
+          </view>
+        </view>
+        <view class='h5 txt-black margin-top-10 padding-bottom-30'>
+          评论：{{item.comment}}
         </view>
       </view>
-      <view class='h5 txt-black margin-top-10 padding-bottom-30'>
-        评论：{{item.comment}}
-      </view>
     </view>
+
   </view>
 
-</view>
 
 
 
 
 
-
-<!-- <view class='flex-row flex-column ' style='background-color:#F8F8F8'>
+  <!-- <view class='flex-row flex-column ' style='background-color:#F8F8F8'>
   <view class='padding-20 flex-row flex-center' style=''>
     <image class='icon-30' src='{{uploadpath}}resource/{{res.woyaolangdu}}'></image>
     <view class='txt-bold'>我要朗读</view>
   </view>
 </view> -->
 
-<view class='fixedbottom bg-gray flex-row flex-center padding-left-20'>
+  <view class='fixedbottom bg-gray flex-row flex-center padding-left-20'>
 
-  <image class='icon-30' src='{{uploadpath}}resource/{{res.luyin}}' bindtap='toread'> </image>
-  <view class='h5 margin-left-10' style='width:60rpx;' bindtap='toread'>我也试试</view>
+    <image class='icon-30' src='{{uploadpath}}resource/{{res.luyin}}' bindtap='toread'> </image>
+    <view class='h5 margin-left-10' style='width:60rpx;' bindtap='toread'>我也试试</view>
 
-  <view class='padding-comment flex-1 margin-left-10'>
-    <view>
-      <textarea class='h5 white-block pdg txt-white' style='border-radius:40rpx;background:#A5E8D0;min-height:48rpx;' auto-height='{{true}}' placeholder-class='txt-white' placeholder='发表评论' fixed="{{true}}" value='{{comment}}' bindinput='changeComment' bindconfirm='sendComment'></textarea>
+    <view class='padding-comment flex-1 margin-left-10'>
+      <view>
+        <textarea class='h5 white-block pdg txt-white' style='border-radius:40rpx;background:#A5E8D0;min-height:48rpx;' auto-height='{{true}}' placeholder-class='txt-white' placeholder='发表评论' fixed="{{true}}" value='{{comment}}' bindinput='changeComment' bindconfirm='sendComment'></textarea>
+      </view>
     </view>
   </view>
+
 </view>

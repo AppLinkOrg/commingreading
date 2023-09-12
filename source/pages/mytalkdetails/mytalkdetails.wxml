@@ -1,69 +1,90 @@
 <!--pages/mytalkdetails/mytalkdetails.wxml-->
 
-<image class='img' mode='scaleToFill' src='{{uploadpath}}resource/{{res.read_bg}}'></image>
-
-<view class='margin-top-20'>
-  <view class='flex-row flex-column padding-40' style=''>
+<image class='img' mode='widthFix  ' src='{{uploadpath}}resource/{{res.read_bg}}'></image>
+<view class='' style="position: relative;height: 100%;">
+  <view class='flex-row flex-column padding-40'>
     <view class='txt-black txt-bold'>《{{bookinfo.book_name}}》</view>
-    <view class=' margin-top-10'>作者：{{bookinfo.author}}</view>
+    <view class=' margin-top-10 margin-bottom-20'>作者：{{bookinfo.author}}</view>
     <!-- <view class='txt-black margin-top-10'>朗读者:xxx</view> -->
 
-    <scroll-view scroll-y class='text-center ' style='height:650rpx;padding:40rpx;'>
-      <text class='content txt-black text-center margin-bottom-40 h4'>
-{{bookinfo.book_content}}
-</text>
+    <scroll-view scroll-y class='text-center ' style='height: 80vh;' id="scrollView" scroll-top="{{scrollnum}}">
+      <text class='content txt-black text-center margin-bottom-40 h4' id="content" wx:if="{{isEnglish}}">
+        {{bookinfo.book_content}}
+      </text>
+      <view class=" flex-row" id="content" style="flex-wrap: wrap;" wx:if="{{isEnglish==false}}">
+        <view wx:for="{{contentList}}" wx:for-item="items" class="{{items.pinyin==''?'bottom':''}} flex-row flex-column" style="width:calc(100% / {{type==1?typeNum:9}}) " wx:if="{{type==1 && items.content=='a'?false:true}}">
+          <text class="pinyin h5 txt-black " wx:if="{{items.pinyin!=''}}">{{ items.pinyin }}</text>
+          <text class="pinyin h4 txt-black ">{{ items.content =='a'?'':items.content}}</text>
+        </view>
+      </view>
     </scroll-view>
   </view>
-
-  <view class='po'>
-    <view class=' txt-black txt-bold  bg-white  talker'>
-      朗读数({{rdlist.length}})：
-    </view>
-
-    <view wx:if='{{rdlist.length==0}}' class='bg-white  flex-row flex-column'>
-      <image class='icon-100' src='{{uploadpath}}resource/{{res.noreader_icon}}'></image>
-      <view class='h5 txt-gray txt-bold margin-top-10 padding-bottom-30'>还没有人朗读哦，快来体验一下吧</view>
-    </view>
-    
-    <!-- {{idx>0?"border_bottom ":""}} -->
-    
-    <view bindtap='toothers' id='{{item.id}}' wx:if='{{rdlist.length>0}}' class='flex-row flex-center pinlun bg-white {{idx>0?"border_bottom ":""}}  {{idx==0?"pinlun_t":""}}' wx:for='{{rdlist}}' wx:key='k' wx:for-index='idx' style=''>
-
-      <navigator class=''>
-        <image class='icon-30 take' src='{{uploadpath}}resource/{{res.touxiangluyin}}'></image>
-        <image class='icon-50' src='{{item.member_avatarUrl}}'></image>
-      </navigator>
-
-      <view class='margin-left-20  flex-1 padding-bottom-10'>
-        <view class='flex-row flex-center '>
-          <view class='flex-1 txt-black text'>{{item.member_id_name}}</view>
-        </view>
-        <view class=' txt-gray margin-top-10 h5'>{{item.created_date}}</view>
+  <cover-view style="position: absolute;top: 0; height: 500px;width: 100%;z-index: 999;" wx:if="{{scrollable}}"></cover-view>
+  <view wx:if="{{islandu==true}}" style="position: absolute;top:0;;width: 100%;height: 100vh;">
+    <view style="height:50vh;" bindtap="openlist"></view>
+    <view style="height: 50vh;background-color: white;">
+      <view class=' txt-black txt-bold  bg-white  talker'>
+        朗读数({{rdlist.length}})：
       </view>
 
-      <view class='flex-row flex-center'>
-        <view class=' flex-row flex-center margin-left-10'>
-          <image class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
-          <view class='margin-left-5'>{{item.count1}}</view>
-        </view>
-
-        <view class=' flex-row flex-center margin-left-30'>
-          <image class='icon-25' src='{{uploadpath}}resource/{{res.shouting}}'></image>
-          <view class='margin-left-5'>{{item.lstcount}}</view>
-        </view>
+      <view wx:if='{{rdlist.length==0}}' class='bg-white  flex-row flex-column'>
+        <image class='icon-100' src='{{uploadpath}}resource/{{res.noreader_icon}}'></image>
+        <view class='h5 txt-gray txt-bold margin-top-10 padding-bottom-30'>还没有人朗读哦，快来体验一下吧</view>
       </view>
 
-      <!-- <view class='bg-gray' style='width:100rpx;height:2rpx;'></view> -->
+      <!-- {{idx>0?"border_bottom ":""}} -->
 
-    </view>
+      <scroll-view scroll-y style="height:38vh;margin-top: 20rpx;">
+        <view bindtap='toothers' id='{{item.id}}' wx:if='{{rdlist.length>0}}' class='flex-row flex-center pinlun bg-white {{idx>0?"border_bottom ":""}}  {{idx==0?"pinlun_t":""}}' wx:for='{{rdlist}}' wx:key='k' wx:for-index='idx' style=''>
 
-  </view>
+          <navigator class=''>
+            <image class='icon-30 take' src='{{uploadpath}}resource/{{res.touxiangluyin}}'></image>
+            <image class='icon-50' src="{{uploadpath}}member/{{item.member_avatarUrl}}"></image>
+          </navigator>
 
-  <view id='{{bookinfo.id}}' bindtap='toread' class='flex-row flex-column mid' style='background-color:#F3F3F3'>
-    <view class='padding-20 flex-row flex-center' style=''>
-      <image class='icon-30' src='{{uploadpath}}resource/{{res.woyaolangdu}}'></image>
-      <view class='txt-bold'>我要朗读</view>
-    </view>
+          <view class='margin-left-20  flex-1 padding-bottom-10'>
+            <view class='flex-row flex-center '>
+              <view class='flex-1 txt-black text'>{{item.member_id_name}}</view>
+            </view>
+            <view class=' txt-gray margin-top-10 h5'>{{item.created_date}}</view>
+          </view>
+
+          <view class='flex-row flex-center'>
+            <view class=' flex-row flex-center margin-left-10'>
+              <image class='icon-25' src='{{uploadpath}}resource/{{res.dianzangray}}'></image>
+              <view class='margin-left-5'>{{item.count1}}</view>
+            </view>
+
+            <view class=' flex-row flex-center margin-left-30'>
+              <image class='icon-25' src='{{uploadpath}}resource/{{res.shouting}}'></image>
+              <view class='margin-left-5'>{{item.lstcount}}</view>
+            </view>
+          </view>
+
+          <!-- <view class='bg-gray' style='width:100rpx;height:2rpx;'></view> -->
+
+        </view>
+      </scroll-view>
+    </view>>
   </view>
 
 </view>
+
+<image class='icon-40' src='{{uploadpath}}resource/{{res.langdulist}}' style="position: absolute;bottom: 150rpx;right: 30rpx;" bindtap="openlist"></image>
+<image class='icon-40' src='{{uploadpath}}resource/{{res.wyld}}' style="position: absolute;bottom: 50rpx;right: 30rpx;" id='{{bookinfo.id}}' bindtap='toread'></image>
+
+
+
+
+
+
+
+
+
+
+<!-- <view id='{{bookinfo.id}}' bindtap='toread' class='flex-row flex-column mid' style='background-color:#F3F3F3'>
+  <view class='padding-20 flex-row flex-center' style=''>
+    <image class='icon-30' src='{{uploadpath}}resource/{{res.woyaolangdu}}'></image>
+    <view class='txt-bold'>我要朗读</view>
+  </view>
+</view> -->

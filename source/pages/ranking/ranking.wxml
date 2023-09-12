@@ -28,7 +28,7 @@
     <view class='text-center h5 txt-black ico' wx:for='{{todaygetall}}' wx:key='k' wx:for-index='idx' wx:if='{{item.id==memberinfo.id&&memberinfo.zishu!=""}}'>第{{idx+1}}名</view>
 
     <view class='margin-left-40 '>
-      <image class='icon-40 radius-50' src='{{memberinfo.avatarUrl}}'></image>
+      <image class='icon-40 radius-50' src="{{uploadpath}}member/{{memberinfo.avatarUrl}}" ></image>
     </view>
     <view class='flex-1 margin-left-20 txt-black'>我</view>
     <view class='flex-row flex-column flex-2'>
@@ -52,7 +52,7 @@
       </view>
       <view class='flex-row flex-column ico h4 ' wx:if='{{idx>2}}'>{{idx+1}}</view>
       <view class='margin-left-40'>
-        <image class='icon-40 radius-50' src='{{item.avatarUrl}}'></image>
+        <image class='icon-40 radius-50' src="{{uploadpath}}member/{{item.avatarUrl}}"></image>
       </view>
       <view class='flex-1 margin-left-20 txt-black text'>{{item.nickName}}</view>
 
@@ -74,7 +74,7 @@
     <view class='text-center h5 txt-black ico' wx:for='{{weekgetall}}' wx:key='k' wx:for-index='idx' wx:if='{{item.id==memberinfo.id&&memberinfo.zongzishu!=""}}'>第{{idx+1}}名</view>
     
     <view class='margin-left-40 '>
-      <image class='icon-40 radius-50' src='{{memberinfo.avatarUrl}}'></image>
+      <image class='icon-40 radius-50' src="{{uploadpath}}member/{{memberinfo.avatarUrl}}" ></image>
     </view>
     
     <view class='flex-1 margin-left-20 txt-black'>我</view>
@@ -98,7 +98,7 @@
       </view>
       <view class='flex-row flex-column ico h4 ' wx:if='{{idx>2}}'>{{idx+1}}</view>
       <view class='margin-left-40'>
-        <image class='icon-40 radius-50' src='{{item.avatarUrl}}'></image>
+        <image class='icon-40 radius-50' src="{{uploadpath}}member/{{item.avatarUrl}}"></image>
       </view>
       <view class='flex-1 margin-left-20 txt-black text'>{{item.nickName}}</view>
       <view class='flex-row flex-column flex-2'>

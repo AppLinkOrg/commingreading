@@ -109,10 +109,16 @@ view,navigator,input,text,textarea{
   background: #009688;
 }
 .bg-green{
-  background: #26C68B;
+  background: #1EA296;
 }
 .bg-blue{
   background: #3c78d8;
+}
+.bg-3599D5{
+  background: #3599D5;
+}
+.bg-fcfc{
+  background: #fcfcfc;
 }
 .bg-orange{
 
@@ -142,7 +148,7 @@ view,navigator,input,text,textarea{
   color:rgb(150, 149, 148);
 }
 .txt-blue{
-  color:#3c78d8;
+  color:#3599D5;
 }
 .txt-light{
   color: #fcfcfc;
@@ -163,6 +169,15 @@ view,navigator,input,text,textarea{
 }
 .txt-bold{
   font-weight: bolder;
+}
+.txt-66{
+  color: #666666;
+}
+.txt-99{
+  color: #999999;
+}
+.txt-33{
+  color: #333333;
 }
 .nowrap{
   word-break:keep-all;           /* 不换行 */
@@ -240,6 +255,10 @@ button[disabled][type=primary] {
 .input{
   border-bottom:1rpx solid #ddd;
   padding-bottom:20rpx;
+}
+.input1{
+  border-bottom:1rpx solid #ddd;
+  padding-bottom:40rpx;
 }
 
 .padding-5{
@@ -329,6 +348,9 @@ button[disabled][type=primary] {
 .padding-bottom-70{
   padding-bottom: 70rpx;
 }
+.padding-bottom-100{
+  padding-bottom: 100rpx;
+}
 .padding-right-5{
   padding-right: 5rpx;
 }
@@ -375,14 +397,23 @@ button[disabled][type=primary] {
 .margin-top-80{
   margin-top:80rpx;
 }
+.margin-top-100{
+  margin-top:300rpx;
+}
 .margin-bottom-10{
   margin-bottom:10rpx;
 }
 .margin-bottom-20{
   margin-bottom:20rpx;
 }
+.margin-bottom-30{
+  margin-bottom:30rpx;
+}
 .margin-bottom-40{
   margin-bottom:40rpx;
+}
+.margin-bottom-100{
+  margin-bottom:100rpx;
 }
 .height-40{
   height: 40rpx;
@@ -419,6 +450,9 @@ button[disabled][type=primary] {
 }
 .margin-right-20{
   margin-right:20rpx;
+}
+.margin-right-30{
+  margin-right:30rpx;
 }
 .margin-right-40{
   margin-right:40rpx;
@@ -473,9 +507,16 @@ button[disabled][type=primary] {
 .radius-10{
   border-radius: 10rpx;
 }
+.radius-80{
+  border-radius: 80rpx;
+}
 .icon-10{
   width: 20rpx;
   height: 20rpx;
+}
+.icon-12{
+  width: 24rpx;
+  height: 24rpx;
 }
 .icon-15{
   width: 30rpx;
@@ -571,4 +612,17 @@ button[disabled][type=primary] {
 }
 .clear-button::after {
   border: 0;
+}
+
+.flex-liangbian{
+  display:flex;
+  justify-content:space-between;
+}
+.margin-auto{
+  margin: auto;
+}
+.juzhong{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

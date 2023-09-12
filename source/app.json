@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/home/home",
     "pages/auth/auth",
     "pages/news/news",
@@ -18,13 +18,20 @@
     "pages/others/others",
     "pages/recordagain/recordagain",
     "pages/readingcompletion/readingcompletion",
-    "pages/mytalk/mytalk"
+    "pages/mytalk/mytalk",
+    "pages/search/search",
+    "pages/edit/edit",
+    "pages/activity/activity",
+    "pages/activitydetail/activitydetail",
+    "pages/activitybaoming/activitybaoming",
+    "pages/success/success",
+    "pages/myactivity/myactivity",
+    "pages/myactivitydetail/myactivitydetail"
   ],
-
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "enablePullDownRefresh": true,
-    "navigationBarBackgroundColor": "white",
+    "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
@@ -46,6 +53,12 @@
         "selectedIconPath": "images/icons/book.png"
       },
       {
+        "text": "活动",
+        "pagePath": "pages/activity/activity",
+        "iconPath": "images/icons/activity.png",
+        "selectedIconPath": "images/icons/activity-a.png"
+      },
+      {
         "text": "排名",
         "pagePath": "pages/ranking/ranking",
         "iconPath": "images/icons/paiming-a.png",
@@ -57,7 +70,7 @@
         "iconPath": "images/icons/mine-a.png",
         "selectedIconPath": "images/icons/mine.png"
       }
-      
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

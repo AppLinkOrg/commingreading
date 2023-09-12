@@ -168,7 +168,7 @@ export class AppBase {
 
       }
     }, false);
-
+console.log(AppBase.UserInfo.openid)
     if (AppBase.UserInfo.openid == undefined) {
       // 登录
       console.log("onShow");
@@ -192,16 +192,19 @@ export class AppBase {
                 ApiConfig.SetToken(data.openid);
                 console.log("goto update info");
                 //this.loadtabtype();
+                memberapi.addmember({openid:data.openid,session_key:data.session_key},data=>{
+                      console.log(data)
+                })
 
 
-                memberapi.update(AppBase.UserInfo, () => { 
+                // memberapi.update(AppBase.UserInfo, () => { 
 
-                  console.log(AppBase.UserInfo);
-                  that.Base.setMyData({ UserInfo: AppBase.UserInfo });
+                //   console.log(AppBase.UserInfo);
+                //   that.Base.setMyData({ UserInfo: AppBase.UserInfo });
                   
                   that.checkPermission();
 
-                });
+                // });
 
                 //that.Base.getAddress();
               });
@@ -309,19 +312,45 @@ export class AppBase {
   getMyData() {
     return this.Page.data;
   }
+//   getPhoneNo(e) {
+//     var that = this;
+//     console.log(e);
+//     var api = new WechatApi();
+//     var data = this.Base.getMyData();
+//     console.log("aaa?");
+
+//     e.detail.session_key = AppBase.UserInfo.session_key;
+//     e.detail.openid = AppBase.UserInfo.openid;
+//     console.log(e.detail);
+//     api.decrypteddata(e.detail, (ret) => {
+//       console.log(ret);
+//       that.phonenoCallback(ret.return.phoneNumber, e);
+//     });
+//   }
   getPhoneNo(e) {
     var that = this;
-    console.log(e);
+    console.log(e,'e====');
     var api = new WechatApi();
-    var data = this.Base.getMyData();
-    console.log("aaa?");
-
+  
     e.detail.session_key = AppBase.UserInfo.session_key;
     e.detail.openid = AppBase.UserInfo.openid;
-    console.log(e.detail);
-    api.decrypteddata(e.detail, (ret) => {
-      console.log(ret);
-      that.phonenoCallback(ret.return.phoneNumber, e);
+  
+    api.decrypteddata1(e.detail, (ret) => {
+      console.log(ret, '最最最');
+      AppBase.usmobile = ret.return.phoneNumber
+      this.Base.setMyData({mobile:AppBase.usmobile})
+  
+  
+      that.phonenoCallback(ret.return.phoneNumber, e, ret.code);
+      console.log(ret.return.phoneNumber,'phoneNumber')
+      if (ret.return.phoneNumber==undefined) {
+        wx.showToast({
+          title: '获取手机号失败，请刷新一下页面',
+          icon:'none'
+        })
+        
+      }
+  
     });
   }
   phonenoCallback(phoneno, e) {
